@@ -1,18 +1,18 @@
 ---
-title: Thinking in React
+title: ຄິດແບບ React
 ---
 
 <Intro>
 
-React can change how you think about the designs you look at and the apps you build. When you build a user interface with React, you will first break it apart into pieces called *components*. Then, you will describe the different visual states for each of your components. Finally, you will connect your components together so that the data flows through them. In this tutorial, we’ll guide you through the thought process of building a searchable product data table with React.
+React ສາມາດປ່ຽນວິທີຄິດຂອງທ່ານກ່ຽວກັບການອອກແບບທີ່ທ່ານເບິ່ງ ແລະ ແອັບທີ່ທ່ານສ້າງ. ເມືອທ່ານສ້າງ user interface ດ້ວຍ React, ທຳອິດທ່ານຕ້ອງໄດ້ແຍກມັນອອກໃຫ້ເປັນຊີ້ນສ່ວນນ້ອຍໆທີ່ເອີ້ນວ່າ: *components*. ຈາກນັ້ນທ່ານຈະອະທິບາຍພາບທີ່ມີສະຖານະທີ່ແຕກຕ່າງກັນຂອງແຕ່ລະຊີ້ນສ່ວນ component ຂອງທ່ານ. ສຸດທ້າຍ, ທ່ານຈະເຊື່ອມຕໍ່ component ຂອງທ່ານເຂົ້າລວມກັນເພື່ອໃຫ້ຂໍ້ມູນຕ່າງໆໄຫຼຜ່ານ. ໃນບົດສອນນີ້, ພວກເຮົາຈະແນະນຳທ່ານຕະຫຼອດຮອດຂະບວນການຄິດໃນການສ້າງຕາຕະລາງຂໍ້ມູນຜະລິດຕະພັນດ້ວຍ React.
 
 </Intro>
 
-## Start with the mockup {/*start-with-the-mockup*/}
+## ເລີ່ມຕົ້ນດ້ວຍແບບຈຳລອງ {/*start-with-the-mockup*/}
 
-Imagine that you already have a JSON API and a mockup from a designer.
+ຈິນຕະນາການວ່າທ່ານໄດ້ມີ JSON API ແລະ ແບບຈຳລອງຈາກ designer ແລ້ວ.
 
-The JSON API returns some data that looks like this:
+JSON API ສົ່ງບາງຂໍ້ມູນທີ່ມີລັກສະນະແບບນີ້:
 
 ```json
 [
@@ -25,25 +25,25 @@ The JSON API returns some data that looks like this:
 ]
 ```
 
-The mockup looks like this:
+ແບບຈຳລອງໜ້າຕາປະມານນີ້:
 
 <img src="/images/docs/s_thinking-in-react_ui.png" width="300" style={{margin: '0 auto'}} />
 
-To implement a UI in React, you will usually follow the same five steps.
+ໃນການ implement UI ໃນ React, ທ່ານຈະປະຕິບັດຕາມ 5 ຂັ້ນຕອນຄືກັນ.
 
-## Step 1: Break the UI into a component hierarchy {/*step-1-break-the-ui-into-a-component-hierarchy*/}
+## ຂັ້ນຕອນທີ 1: ແຕກ UI ໄປເປັນ component hierarchy {/*step-1-break-the-ui-into-a-component-hierarchy*/}
 
-Start by drawing boxes around every component and subcomponent in the mockup and naming them. If you work with a designer, they may have already named these components in their design tool. Ask them!
+ເລີ່ມຈາກແຕ້ມກ່ອງອ້ອມທຸກໆ component ແລະ subcomponent ໃນແບບຈຳລອງ ແລະ ຕັ້ງຊື່ໃຫ້ມັນ. ຖ້າທ່ານເຮັດວຽກກັບ designer, ເຂົາເຈົ້າອາດຈະຕັ້ງຊື່ໃຫ້ component ພວກນັ້ນແລ້ວໃນເຄື່ອງມືອອກແບບຂອງພວກເຂົາ. ຖາມເຂົາເຈົ້າ!
 
-Depending on your background, you can think about splitting up a design into components in different ways:
+ຂຶ້ນນຳພື້ນຖານຂອງທ່ານ, ທ່ານສາມາດຄິດກ່ຽວກັບການແຍກ design ໄປເປັນ component ໄດ້ໃນຫຼາຍແບບ:
 
-* **Programming**--use the same techniques for deciding if you should create a new function or object. One such technique is the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), that is, a component should ideally only do one thing. If it ends up growing, it should be decomposed into smaller subcomponents. 
-* **CSS**--consider what you would make class selectors for. (However, components are a bit less granular.)
-* **Design**--consider how you would organize the design's layers.
+* **Programming**--ໃຊ້ເທັກນິກດຽວກັບສຳລັບການຕັດສິນໃຈວ່າທ່ານຄວນຈະສ້າງຟັງຊັ່ນໃໝ່ ຫຼື ອອບເຈັກ. ໜຶ່ງເທັກນິກແມ່ນ [ຫຼັກການໜຶ່ງຄວາມຮັບຜິດຊອບ](https://en.wikipedia.org/wiki/Single_responsibility_principle), ນັ້ນແຫຼະ, component ຄວນເຮັດແຕ່ສິ່ງດຽວເທົ່ານັ້ນ. ຖ້າມັນໃຫຍ່ຂຶ້ນ, ມັນຄວນຈະຖືກແຕກຍ່ອຍໄປເປັນສ່ວນນ້ອຍໆເປັນ subcomponent.
+* **CSS**--ຂຶ້ນກັບວ່າທ່ານຕ້ອງການສ້າງ class selector ສະເພາະ. (ເຖິງຢ່າງໃດກໍ່ຕາມ, component ມີລາຍລະອຽດນ້ອຍກວ່າໜ້ອຍໜຶ່ງ)
+* **Design**--ຂຶ້ນກັບວ່າທ່ານຕ້ອງການຈັດການຊັ້ນການອອກແບບແນວໃດ.
 
-If your JSON is well-structured, you'll often find that it naturally maps to the component structure of your UI. That's because UI and data models often have the same information architecture--that is, the same shape. Separate your UI into components, where each component matches one piece of your data model.
+ຖ້າ JSON ຂອງທ່ານມີໂຄ່ງສ້າງທີ່ດີ, ທ່ານຈະພົບວ່າມັນຈະ map ກັບ ໂຄ່ງສ້າງ component ຂອງ UI ທ່ານໄດ້ຢ່າງເປັນທຳມະຊາດ. ນັ້ນເປັນເພາະວ່າ UI ແລະ data model ມີສະຖາປັດຕະຍະກຳຂໍ້ມູນອັນດຽວກັນ, ໂຄງດຽວກັນ. ແຍກ UI ຂອງທ່ານໄປເປັນ component, ໂດຍທີ່ແຕ່ລະ component ຈະໄປກົງກັບຊີ້ນສ່ວນ data model ຂອງທ່ານ.
 
-There are five components on this screen:
+ມີ 5 components ເທິງໜ້າຈໍນີ້:
 
 <FullWidth>
 
@@ -51,19 +51,19 @@ There are five components on this screen:
 
 <img src="/images/docs/s_thinking-in-react_ui_outline.png" width="500" style={{margin: '0 auto'}} />
 
-1. `FilterableProductTable` (grey) contains the entire app.
-2. `SearchBar` (blue) receives the user input.
-3. `ProductTable` (lavender) displays and filters the list according to the user input.
-4. `ProductCategoryRow` (green) displays a heading for each category.
-5. `ProductRow`	(yellow) displays a row for each product.
+1. `FilterableProductTable` (ສີເທົາ) ປະກອບດ້ວຍແອັບທັງໝົດ.
+2. `SearchBar` (ສີຟ້າ) ຮັບ user input.
+3. `ProductTable` (ສີມ່ວງ) ສະແດງ ແລະ filter ລາຍການຕາມ user input.
+4. `ProductCategoryRow` (ສີຂຽວ) ສະແດງ heading ໃນແຕ່ລະປະເພດ.
+5. `ProductRow`	(ສີເຫຼືອງ) ສະແດງແຖວໃນແຕ່ລະຜະລິດຕະພັນ.
 
 </CodeDiagram>
 
 </FullWidth>
 
-If you look at `ProductTable` (lavender), you'll see that the table header (containing the "Name" and "Price" labels) isn't its own component. This is a matter of preference, and you could go either way. For this example, it is a part of `ProductTable` because it appears inside the `ProductTable`'s list. However, if this header grows to be complex (e.g., if you add sorting), you can move it into its own `ProductTableHeader` component.
+ຖ້າທ່ານເບິ່ງທີ່ `ProductTable` (ສີມ່ວງ), ທ່ານຈະເຫັນສ່ວນຫົວຂອງຕາຕະລາງ (ປະກອບມີ "Name" ແລະ "Price" ກຳກັບ) ບໍ່ແມ່ນ component ຂອງມັນເອງ. ນີ້ເປັນເລື່ອງຂອງຄວາມມັກ ແລະ ທ່ານສາມາດເລືອກທາງໃດໜຶ່ງກໍໄດ້. ສຳລັບຕົວຢ່າງນີ້, ເປັນສ່ວນໜຶ່ງຂອງ `ProductTable` ເພາະວ່າມັນສະແດງຢູ່ໃນ `ProductTable` list. ເຖິງຢ່າງໃດກໍຕາມ, ຖ້າຫາກສ່ວນຫົວຂອງຕາຕະລາງມີຄວາມຊັບຊ້ອນຫຼາຍຂຶ້ນ (ຕົວຢ່າງ: ຖ້າທ່ານເພີ່ມການຈັດຮຽງ), ທ່ານສາມາດແຍກມັນໄປເປັນ component `ProductTableHeader` ມັນເອງໄດ້.
 
-Now that you've identified the components in the mockup, arrange them into a hierarchy. Components that appear within another component in the mockup should appear as a child in the hierarchy:
+ຕອນນີ້ທ່ານໄດ້ຮູ້ກ່ຽວກັບ component ໃນແບບຈຳລອງແລ້ວ, ໃຫ້ຈັດຮຽນມັນໃຫ້ເປັນລຳດັບຊັ້ນ. Component ທີ່ສະແດງໃນ component ອື່ນໃນແບບຈຳລອງຄວນຈະສະແດງເປັນລຳດັບຊັ້ນຍ່ອຍ.
 
 * `FilterableProductTable`
     * `SearchBar`
@@ -71,13 +71,13 @@ Now that you've identified the components in the mockup, arrange them into a hie
         * `ProductCategoryRow`
         * `ProductRow`
 
-## Step 2: Build a static version in React {/*step-2-build-a-static-version-in-react*/}
+## ຂັ້ນຕອນທີ 2: ສ້າງ static version ໃນ React {/*step-2-build-a-static-version-in-react*/}
 
-Now that you have your component hierarchy, it's time to implement your app. The most straightforward approach is to build a version that renders the UI from your data model without adding any interactivity... yet! It's often easier to build the static version first and add interactivity later. Building a static version requires a lot of typing and no thinking, but adding interactivity requires a lot of thinking and not a lot of typing.
+ຕອນນີ້ທ່ານມີ component ທີ່ເປັນລຳດັບຊັ້ນແລ້ວ, ເຖິງເວລາສ້າງແອັບຂອງທ່ານເອງແລ້ວ. ວິທີການທີ່ກົງໄປກົງມາທີ່ສຸດຄືການສ້າງແອັບເວີຊັນທີ່ສະແດງຜົນ UI ຈາກ data model ຂອງທ່ານໂດຍບໍ່ຕ້ອງເພີ່ມການຕອບໂຕ້ໃດໆ... ແຕ່! ສ່ວນຫຼາຍການສ້າງເວີຊັນ static ກ່ອນແມ່ນງ່າຍແລ້ວຄ່ອຍໄປເພີ່ມການຕອບໂຕ້ນຳຫຼັງ. ເຮັດແບບເວີຊັນ static ແມ່ນຕ້ອງໄດ້ພິມຫຼາຍ ແລະ ບໍ່ຕ້ອງຄິດ ແຕ່ການເພີ່ມການຕອບໂຕ້ແມ່ນຕ້ອງໄດ້ໃຊ້ຄວາມຄິດຫຼາຍ ແລະ ບໍ່ຕ້ອງພິມຫຼາຍ.
 
-To build a static version of your app that renders your data model, you'll want to build [components](/learn/your-first-component) that reuse other components and pass data using [props.](/learn/passing-props-to-a-component) Props are a way of passing data from parent to child. (If you're familiar with the concept of [state](/learn/state-a-components-memory), don't use state at all to build this static version. State is reserved only for interactivity, that is, data that changes over time. Since this is a static version of the app, you don't need it.)
+ເພື່ອສ້າງເວີຊັນ static ແອັບຂອງທ່ານທີ່ຕ້ອງ render data model ຂອງທ່ານ, ທ່ານຢາກສ້າງ [components](/learn/your-first-component) ທີ່ສາມາດ reuse ກັບ component ອື່ນ ແລະ ສົ່ງຂໍ້ມູນໂດຍໃຊ້ [props.](/learn/passing-props-to-a-component) Props ແມ່ນວິທີການສົ່ງຂໍ້ມູນຈາກພໍ່ແມ່ໄປຫາລູກ. (ຖ້າທ່ານຄຸ້ນເຄີຍກັບແນວຄິດຂອງ [state](/learn/state-a-components-memory), ຢ່າໃຊ້ state ເພື່ອສ້າງເວີຊັນ static ນີ້. State ແມ່ນສະຫງວນໄວ້ສຳລັບການໂຕ້ຕອບເທົ່ານັ້ນ, ນັ້ນແມ່ນ, ຂໍ້ມູນທີ່ຖືກປ່ຽນແປງຕະຫຼອດເວລາ. ສະເພາະເວີຊັນ static ແອັບນີ້ຂອງທ່ານ, ທ່ານບໍ່ຕ້ອງການມັນ.)
 
-You can either build "top down" by starting with building the components higher up in the hierarchy (like `FilterableProductTable`) or "bottom up" by working from components lower down (like `ProductRow`). In simpler examples, it’s usually easier to go top-down, and on larger projects, it’s easier to go bottom-up.
+ທ່ານສາມາດສ້າງ "ແຕ່ເທິງລົງລຸ່ມ" ໂດຍການເລີ່ມສ້າງຈາກ component ໃຫ້ສູງຂຶ້ນໃນລຳດັບຊັ້ນ (ເຊັ່ນ: `FilterableProductTable`) ຫຼື "ແຕ່ລຸ່ມຂຶ້ນເທິງ" ໂດຍການເຮັດວຽກຈາກ component ທີ່ຢູ່ທາງລຸ່ມ (ເຊັ່ນ: `ProductRow`). ໃນຕົວຢ່າງທີ່ງ່າຍກວ່າ, ໂດຍປົກະຕິແລ້ວການເຮັດແບບແຕ່ເທິງລົງລຸ່ມຈະງ່າຍກວ່າ ແລະ ສຳລັບ project ຂະໜາດໃຫຍ່, ການເຮັດແບບແຕ່ລຸ່ມຂຶ້ນເທິງຈະງ່າຍກວ່າ.
 
 <Sandpack>
 
@@ -195,85 +195,85 @@ td {
 
 </Sandpack>
 
-(If this code looks intimidating, go through the [Quick Start](/learn/) first!)
+(ຖ້າ code ນີ້ມັນເບິ່ງຄືຍາກ, ໄປເບິ່ງ [ເລີ່ມຕົ້ນຢ່າງໄວ](/learn/) ກ່ອນ!)
 
-After building your components, you'll have a library of reusable components that render your data model. Because this is a static app, the components will only return JSX. The component at the top of the hierarchy (`FilterableProductTable`) will take your data model as a prop. This is called _one-way data flow_ because the data flows down from the top-level component to the ones at the bottom of the tree.
+ຫຼັງຈາກການສ້າງ component ຂອງທ່ານ, ທ່ານຈະມີ library ຂອງ reusable component ທີ່ render data model ຂອງທ່ານ. ເພາະວ່ານີ້ເປັນ static app, component ຈະ return ແຕ່ JSX ເທົ່ານັ້ນ. Component ທີ່ຢູທາງເທິງສຸດຂອງລຳດັບຊັ້ນ (`FilterableProductTable`) ຈະໃຊ້ data model ຜ່ານ props. ນີ້ເອີ້ນວ່າ _one-way data flow_ ເພາະວ່າຂໍ້ມູນຖືກສົ່ງຈາກ component ຊັ້ນເທິງສຸດ ຫາ ຊັ້ນລຸ່ມສຸດຂອງໂຄ່ງສ້າງ.
 
 <Pitfall>
 
-At this point, you should not be using any state values. That’s for the next step!
+ໃນຈຸດນີ້, ທ່ານບໍ່ຄວນໃຊ້ຄ່າໃດໆຂອງ state ເທື່ອ. ນັ້ນແມ່ນສຳລັບຂັ້ນຕອນຕໍ່ໄປ!
 
 </Pitfall>
 
-## Step 3: Find the minimal but complete representation of UI state {/*step-3-find-the-minimal-but-complete-representation-of-ui-state*/}
+## ຂັ້ນຕອນທີ 3: ຄົ້ນຫາສິ່ງທີ່ນ້ອຍທີ່ສຸດແຕ່ສະແດງ UI state ຢ່າງສົມບູນ {/*step-3-find-the-minimal-but-complete-representation-of-ui-state*/}
 
-To make the UI interactive, you need to let users change your underlying data model. You will use *state* for this.
+ໃນການເຮັດໃຫ້ UI ສາມາດໂຕ້ຕອບໄດ້, ທ່ານຕ້ອງອະນຸຍາດໃຫ້ user ສາມາດປ່ຽນແປງ data model ພື້ນຖານໄດ້. ທ່ານຈະໄດ້ໃຊ້ *state* ສຳລັບສິ່ງນີ້.
 
-Think of state as the minimal set of changing data that your app needs to remember. The most important principle for structuring state is to keep it [DRY (Don't Repeat Yourself).](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) Figure out the absolute minimal representation of the state your application needs and compute everything else on-demand. For example, if you're building a shopping list, you can store the items as an array in state. If you want to also display the number of items in the list, don't store the number of items as another state value--instead, read the length of your array.
+ຄິດວ່າ state ເປັນຊຸດຂໍ້ມູນການປ່ຽນແປງຂັ້ນຕໍ່າທີ່ແອັບຂອງທ່ານຈຳເປັນຕ້ອງຈື່. ຫຼັກການສຳຄັນຂອງການຈັດໂຄ່ງສ້າງ state ແມ່ນຮັກສາໃຫ້ມັນ [DRY (ຢ່າເຮັດຊໍ້າ).](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) ພິຈາລະນາການສະແດງ state ຂັ້ນຕໍ່າສຸດຂອງແອັບພິເຄຊັ່ນຕ້ອງການ ແລະ ຄຳນວນທຸກຢ່າງຕາມຄວາມຕ້ອງການ. ຕົວຢ່າງ, ຖ້າທ່ານເຮັດ shopping list, ທ່ານສາມາດເກັບ item ເຂົ້າເປັນຮູບແບບ array ໃນ state. ຖ້າທ່ານຕ້ອງການສະແດງຈຳນວນ item ໃນ list, ບໍ່ຕ້ອງເກັບຕົວເລກເປັນ item ໃໝ່ໃນ state, ໃຫ້ອ່ານຄວາມຍາວຂອງ array ແທນ.
 
-Now think of all of the pieces of data in this example application:
+ຕອນນີ້ໃຫ້ຄິດຫາຂໍ້ມູນທັງໝົດໃນແອັບພິເຄຊັ່ນຕົວຢ່າງນີ້:
 
-1. The original list of products
-2. The search text the user has entered
-3. The value of the checkbox
-4. The filtered list of products
+1. ລາຍການຕົ້ນສະບັບຂອງສິນຄ້າ 
+2. ຂໍ້ຄວາມຄົ້ນຫາທີ່ user ປ້ອນ
+3. ຄ່າຂອງ checkbox
+4. ລາຍການຂອງສິນຄ້າທີ່ຜ່ານການ filter ແລ້ວ
 
-Which of these are state? Identify the ones that are not:
+ຂໍ້ໃດຄື state? ລະບຸສິ່ງທີ່ບໍ່ແມ່ນ:
 
-* Does it **remain unchanged** over time? If so, it isn't state.
-* Is it **passed in from a parent** via props? If so, it isn't state.
-* **Can you compute it** based on existing state or props in your component? If so, it *definitely* isn't state!
+* ມັນ **ຍັງຄົງບໍ່ປ່ຽນແປງ** ເມື່ອເວລາຜ່ານໄປ ຫຼື ບໍ່? ຖ້າແມ່ນ, ມັນບໍ່ແມ່ນ state.
+* ມັນ **ຮັບຄ່າມາຈາກ parent** ຜ່ານ props ຫຼື ບໍ່? ຖ້າແມ່ນ, ມັນບໍ່ແມ່ນ state.
+* **ທ່ານສາມາດຄຳນວນມັນໄດ້** ອີງຕາມ state ຫຼື props ປັດຈຸບັນໃນ component ຂອງທ່ານແມ່ນບໍ່? ຖ້າແມ່ນ, ມັນບໍ່ແມ່ນ state *ແນ່ນອນ*!
 
-What's left is probably state.
+ແມ່ນຫຍັງທີ່ນ່າຈະເປັນ state ໄດ້.
 
-Let's go through them one by one again:
+ມາເບິ່ງກັນໃນແຕ່ລະຂໍ້ອີກຄັ້ງ:
 
-1. The original list of products is **passed in as props, so it's not state.** 
-2. The search text seems to be state since it changes over time and can't be computed from anything.
-3. The value of the checkbox seems to be state since it changes over time and can't be computed from anything.
-4. The filtered list of products **isn't state because it can be computed** by taking the original list of products and filtering it according to the search text and value of the checkbox.
+1. ລາຍການດັ່ງເດີ່ມຂອງ products ແມ່ນ **ຖືກສົ່ງເຂົ້າມາຜ່ານ props, ສະນັ້ນ ມັນຈິງບໍ່ແມ່ນ state.** 
+2. ຂໍ້ຄວາມຄົ້ນຫາເບິ່ງຄືຈະເປັນ state ໄດ້ເນື່ອງຈາກມັນມີການປ່ຽນແປງຕະຫຼອດເວລາ ແລະ ບໍ່ສາມາດຄຳນວນໄດ້ຈາກສິ່ງໃດ.
+3. ຄ່າຂອງ checkbox ເບິ່ງຄືຈະເປັນ state ໄດ້ເນື່ອງຈາກມັນມີການປ່ຽນແປງຕະຫຼອດເວລາ ແລະ ບໍ່ສາມາດຄຳນວນໄດ້ຈາກສິ່ງໃດ.
+4. ລາຍການຂອງ products ທີ filter ແລ້ວ **ບໍ່ແມ່ນ state ເພາະວ່າມັນສາມາດຄຳນວນໄດ້** ໂດຍນຳລາຍການ products ດັ່ງເດີມມາ filter ຕາມຂໍ້ຄວາມຄົ້ນຫາ ແລະ ຄ່າຂອງ checkbox.
 
-This means only the search text and the value of the checkbox are state! Nicely done!
+ນີ້ໝາຍຄວາມວ່າ ຂໍ້ຄວາມຄົ້ນຫາ ແລະ ຄ່າຂອງ checkbox ແມ່ນ state! ເກັ່ງຫຼາຍ!
 
 <DeepDive>
 
-#### Props vs State {/*props-vs-state*/}
+#### Props ທຽບກັບ State {/*props-vs-state*/}
 
-There are two types of "model" data in React: props and state. The two are very different:
+ມີສອງປະເພດ "model" data ໃນ React ຄື: props ແລະ stae. ສອງສິ່ງນີ້ແມ່ນມີຄວາມແຕກຕ່າງກັນຫຼາຍ:
 
-* [**Props** are like arguments you pass](/learn/passing-props-to-a-component) to a function. They let a parent component pass data to a child component and customize its appearance. For example, a `Form` can pass a `color` prop to a `Button`.
-* [**State** is like a component’s memory.](/learn/state-a-components-memory) It lets a component keep track of some information and change it in response to interactions. For example, a `Button` might keep track of `isHovered` state.
+* [**Props** ເປັນເໝືອນ arguments ທີ່ທ່ານສົ່ງຜ່ານ](/learn/passing-props-to-a-component) ໄປຍັງ function. ມັນເຮັດໃຫ້ parent component ສາມາດສົ່ງ data ໄປຍັງ child component ແລະ ປັບແຕ່ງລັກສະນະທີ່ສະແດງ. ຕົວຢ່າງ, `Form` ສາມາດສົ່ງ prop ທີ່ເປັນຄ່າ `color` ໄປຍັງ `Button` ໄດ້.
+* [**State** ແມ່ນ memory ຂອງ component.](/learn/state-a-components-memory) ມັນເຮັດໃຫ້ component ສາມາດຕິດຕາມຂໍ້ມູນບາງຢ່າງ ແລະ ປ່ຽນແປງຕາມການໂຕ້ຕອບໄດ້. ຕົວຢ່າງ, `Button` ອາດຈະຕິດຕາມ state ຂອງ `isHovered`.
 
-Props and state are different, but they work together. A parent component will often keep some information in state (so that it can change it), and *pass it down* to child components as their props. It's okay if the difference still feels fuzzy on the first read. It takes a bit of practice for it to really stick!
+Props ແລະ state ແມ່ນແຕກຕ່າງກັນ, ແຕ່ພວກເຂົາເຮັດວຽກຮ່ວມກັນ. parent component ມັກຈະເກັບຂໍ້ມູນບາງຢ່າງໄວ້ໃນ state (ສະນັ້ນ ຈິງສາມາດປ່ຽນແປງມັນໄດ້), ແລະ *ສົ່ງຕໍ່* ຫາ child component ເພື່ອເປັນ props. ບໍ່ເປັນຢ່າງຫາກຄວາມແຕກຕ່າງຍັງເບິ່ງຄືຊິສັບສົນໃນການອ່ານເທື່ອທຳອິດ. ລອງໃຊ້ເວລາຝຶກມັນນ້ອຍໜຶ່ງແລ້ວທ່ານຈະຕິດໃຈ!
 
 </DeepDive>
 
-## Step 4: Identify where your state should live {/*step-4-identify-where-your-state-should-live*/}
+## ຂັ້ນຕອນທີ 4: ກຳນົດວ່າ state ຂອງທ່ານຄວນຈະຢູ່ບ່ອນໃດ {/*step-4-identify-where-your-state-should-live*/}
 
-After identifying your app’s minimal state data, you need to identify which component is responsible for changing this state, or *owns* the state. Remember: React uses one-way data flow, passing data down the component hierarchy from parent to child component. It may not be immediately clear which component should own what state. This can be challenging if you’re new to this concept, but you can figure it out by following these steps!
+ຫຼັງຈາກກຳນົດ state ນ້ອຍສຸດຂອງ ແອັບຯ, ທ່ານຈະຕ້ອງກຳນົດວ່າ component ໃດມີສ່ວນໃນການປ່ຽນແປງຂອງ state , ຫຼື *ເປັນເຈົ້າຂອງ* state. ຈືໄວ້ວ່າ: React ໃຊ້ one-way data flow, ສົ່ງຂໍ້ມູນຫາ component ເປັນລຳດັບຊັ້ນ ຈາກ parent ຫາ child component. ມັນອາດຈະບໍ່ຊັດເຈນທີ່ວ່າ component ໃດຄວນເປັນເຈົ້າຂອງ state. ນີ້ສາມາດເປັນຄວາມທ້າທາຍຖ້າມັນແມ່ນແນວຄວາມຄິດໃໝ່ຂອງທ່ານ, ແຕ່ທ່ານຈະຄົ້ນພົບຄຳຕອບໂດຍການເຮັດຕາມເທື່ອລະຂັ້ນຕອນນີ້!
 
-For each piece of state in your application:
+ສຳລັບແຕ່ລະ state ໃນແອັບພິເຄຊັ່ນຂອງທ່ານ:
 
-1. Identify *every* component that renders something based on that state.
-2. Find their closest common parent component--a component above them all in the hierarchy.
-3. Decide where the state should live:
-    1. Often, you can put the state directly into their common parent.
-    2. You can also put the state into some component above their common parent.
-    3. If you can't find a component where it makes sense to own the state, create a new component solely for holding the state and add it somewhere in the hierarchy above the common parent component.
+1. ກຳນົດ *ແຕ່ລະ* component ທີ່ renders ບາງຢ່າງອີງຕາມ state.
+2. ຄົ້ນຫາ parent component ທີ່ໃກ້ຄຽງທີ່ສຸດ --component ທີ່ຢູ່ເທິງສຸດຂອງລຳດັບຊັ້ນ.
+3. ຕັດສິນໃຈວ່າ state ຄວນຈະຢູ່ບ່ອນໃດແນ່:
+    1. ສ່ວນຫຼາຍ, ທ່ານສາມາດໃສ່ state ລົງໃນ parent ທົ່ວໄປໄດ້ໂດຍກົງ.
+    2. ທ່ານຍັງສາມາດໃສ່ state ລົງໃນບາງ component ເໜືອ parent ທົ່ວໄປ.
+    3. ຖ້າທ່ານບໍ່ສາມາດຫາ component ທີ່ເໝາະສົມໃນການເປັນເຈົ້າຂອງ state ໄດ້, ໃຫ້ສ້າງ component ໃໝ່ສຳລັບການຖື state ໄວ້ພຽງຢ່າງດຽວ ແລະ ເພີ່ມມັນໄວ້ໃນບ່ອນໃດໜຶ່ງໃນລຳດັບຊັ້ນເໜືອ parent component ທົ່ວໄປ.
 
-In the previous step, you found two pieces of state in this application: the search input text, and the value of the checkbox. In this example, they always appear together, so it makes sense to put them into the same place.
+ໃນຂັ້ນຕອນກ່ອນໜ້ານີ້, ທ່ານເຫັນ 2 state ໃນແອັບພິເຄຊັ່ນນີ້: input ຂໍ້ຄວາມຄົ້ນຫາ ແລະ ຄ່າຂອງ checkbox. ໃນຕົວຢ່າງນີ້, ພວກມັນຈະສະແດງພ້ອມກັນ, ດັ່ງນັ້ນມັນຈິງສົມຄວນທີ່ຈະເອົາໄປໄວ້ບ່ອນດຽວກັນ.
 
-Now let's run through our strategy for them:
+ບາດນີ້ມາປັບໃສ່ວິທີການຂອງພວກເຮົາ: 
 
-1. **Identify components that use state:**
-    * `ProductTable` needs to filter the product list based on that state (search text and checkbox value). 
-    * `SearchBar` needs to display that state (search text and checkbox value).
-1. **Find their common parent:** The first parent component both components share is `FilterableProductTable`.
-2. **Decide where the state lives**: We'll keep the filter text and checked state values in `FilterableProductTable`.
+1. **ກຳນົດ component ທີ່ໃຊ້ state:**
+    * `ProductTable` ຕ້ອງການ filter ລາຍການ product ອີງຕາມ state (ຂໍ້ຄວາມຄົ້ນຫາ ແລະ ຄ່າຂອງ checkbox). 
+    * `SearchBar` ຕ້ອງການສະແດງ state ນັ້ນ (ຂໍ້ຄວາມຄົ້ນຫາ ແລະ ຄ່າຂອງ checkbox).
+1. **ຄົ້ນຫາ common parent ຂອງພວກເຂົາ:** parent component ທຳອິດທີ່ສອງ component ໃຊ້ຮ່ວມກັນແມ່ນ `FilterableProductTable`.
+2. **ຕັດສິນໃຈວ່າ state ຈະຢູ່ໃສ**: ພວກເຮົາຈະຮັກສາ filter text ແລະ checked ເປັນ state ໃນ `FilterableProductTable`.
 
-So the state values will live in `FilterableProductTable`. 
+ສະນັ້ນຄ່າຂອງ state ຈະຢູ່ໃນ `FilterableProductTable`. 
 
-Add state to the component with the [`useState()` Hook.](/reference/react/useState) Hooks are special functions that let you "hook into" React. Add two state variables at the top of `FilterableProductTable` and specify their initial state:
+ເພີ່ມ state ໃສ່ໃນ component ດ້ວຍ [`useState()` Hook.](/reference/react/useState) Hooks ແມ່ນ function ພິເສດທີ່ທ່ານສາມາດ "ຂໍເຂົ້າໄປໃນ" React. ເພີ່ມຕົວແປ state 2 ອັນ ໃນດ້ານເທິງຂອງ `FilterableProductTable` ແລະ ລະບຸ state ເລີ່ມຕົ້ນ:
 
 ```js
 function FilterableProductTable({ products }) {
@@ -281,7 +281,7 @@ function FilterableProductTable({ products }) {
   const [inStockOnly, setInStockOnly] = useState(false);  
 ```
 
-Then, pass `filterText` and `inStockOnly` to `ProductTable` and `SearchBar` as props:
+ຈາກນັ້ນ, ສົ່ງ `filterText` ແລະ `inStockOnly` ໄປຍັງ `ProductTable` ແລະ `SearchBar` ເປັນ props:
 
 ```js
 <div>
@@ -295,7 +295,7 @@ Then, pass `filterText` and `inStockOnly` to `ProductTable` and `SearchBar` as p
 </div>
 ```
 
-You can start seeing how your application will behave. Edit the `filterText` initial value from `useState('')` to `useState('fruit')` in the sandbox code below. You'll see both the search input text and the table update:
+ທ່ານສາມາດເລີ່ມເບິ່ງໄດ້ວ່າແອັບພິເຄຊັ່ນຂອງທ່ານເປັນແນວໃດ. ແກ້ໄຂຄ່າເລີ່ມຕົ້ນຂອງ `filterText` ຈາກ `useState('')` ໄປເປັນ `useState('fruit')` ໃນ sandbox code ດ້ານລຸ່ມ. ທ່ານຈະເຫັນວ່າ input ຂໍ້ຄວາມຄົ້ນຫາ ແລະ ຕາຕະລາງ ແມ່ນມີການອັບເດດ:
 
 <Sandpack>
 
@@ -437,7 +437,7 @@ td {
 
 </Sandpack>
 
-Notice that editing the form doesn't work yet. There is a console error in the sandbox above explaining why:
+ສັງເກດວ່າການແກ້ໄຂຟອມຍັງບໍ່ທັນໄດ້ຜົນເທື່ອ. ມັນມີ console error ໃນ sandbox ຂ້າງເທິງເພື່ອອະທິບາຍສາເຫດ:
 
 <ConsoleBlock level="error">
 
@@ -445,7 +445,7 @@ You provided a \`value\` prop to a form field without an \`onChange\` handler. T
 
 </ConsoleBlock>
 
-In the sandbox above, `ProductTable` and `SearchBar` read the `filterText` and `inStockOnly` props to render the table, the input, and the checkbox. For example, here is how `SearchBar` populates the input value:
+ໃນ sandbox ດ້ານເທິງ, `ProductTable` ແລະ `SearchBar` ອ່ານ props `filterText` ແລະ `inStockOnly` ເພື່ອ render ຕາຕະລາງ, input ແລະ checkbox. ຕົວຢ່າງ, ນີ້ແມ່ນວິທີທີ່ `SearchBar `ຕື່ມຄ່າ input:
 
 ```js {1,6}
 function SearchBar({ filterText, inStockOnly }) {
@@ -457,16 +457,16 @@ function SearchBar({ filterText, inStockOnly }) {
         placeholder="Search..."/>
 ```
 
-However, you haven't added any code to respond to the user actions like typing yet. This will be your final step.
+ເຖິງຢ່າງໃດກໍຕາມ, ທ່ານຍັງບໍ່ທັນໄດ້ເພີ່ມ code ໃດໆເພື່ອຕອບສະໜອງຕໍ່ການກະທຳຂອງ user ເຊັ່ນ: ການພີມ. ນີ້ຈະເປັນຂັ້ນຕອນສຸດທ້າຍຂອງທ່ານ.
 
 
-## Step 5: Add inverse data flow {/*step-5-add-inverse-data-flow*/}
+## Step 5: ເພີ່ມການໄຫຂໍ້ມູນແບບ inverse {/*step-5-add-inverse-data-flow*/}
 
-Currently your app renders correctly with props and state flowing down the hierarchy. But to change the state according to user input, you will need to support data flowing the other way: the form components deep in the hierarchy need to update the state in `FilterableProductTable`. 
+ຕອນນີ້ແອັບຂອງທ່ານສະແດງຜົນຢ່າງຖືກຕ້ອງດ້ວຍ props ແລະ state ໄຫຼລົງມາຕາມລຳດັບຊັ້ນ. ແຕ່ຫາກຕ້ອງການປ່ຽນ state ໃຫ້ອີງຕາມ user input, ທ່ານຈະຕ້ອງສະໜັບສະໜູນການໄຫຼຂໍ້ມູນໄປວິທີອື່ນ: form component ທີ່ຢູ່ເລິກລົງໄປໃນລຳດັບຊັ້ນຈຳເປັນຕ້ອງໄດ້ອັບເດດ state ໃນ `FilterableProductTable`.
 
-React makes this data flow explicit, but it requires a little more typing than two-way data binding. If you try to type or check the box in the example above, you'll see that React ignores your input. This is intentional. By writing `<input value={filterText} />`, you've set the `value` prop of the `input` to always be equal to the `filterText` state passed in from `FilterableProductTable`. Since `filterText` state is never set, the input never changes.
+React ເຮັດໃຫ້ການໄຫຼຂໍ້ມູນນີ້ຊັດເຈນ, ແຕ່ຕ້ອງອາໄສການພິມທີ່ຫຼາຍກວ່າ two-way data binding ນ້ອຍໜຶ່ງ. ຖ້າທ່ານພະຍາຍາມພິມ ຫຼື ໝາຍຕິກໃສ່ກ່ອງໃນຕົວຢ່າງດ້ານເທິງ, ທ່ານຈະເຫັນວ່າ React ບໍ່ໄດ້ສົນໃຈຂໍ້ຄວາມທີ່ທ່ານປ້ອນ. ນີ້ແມ່ນຄວາມຕັ້ງໃຈ, ການຂຽນ `<input value={filterText} />`, ທ່ານໄດ້ຕັ້ງ prop `value` ຂອງ `input` ທີໃຫ້ເທົ່າກັບຄ່າ `filterText` ທີ່ສົ່ງ state ຜ່ານ `FilterableProductTable`ຕະຫຼອດ. ນັບແຕ່ `filterText` staet ຍັງບໍ່ຖືກຕັ້ງ, ຄ່າ input ແມ່ນບໍ່ມີການປ່ຽນແປງ.
 
-You want to make it so whenever the user changes the form inputs, the state updates to reflect those changes. The state is owned by `FilterableProductTable`, so only it can call `setFilterText` and `setInStockOnly`. To let `SearchBar` update the `FilterableProductTable`'s state, you need to pass these functions down to `SearchBar`:
+ທ່ານຕ້ອງການເຮັດ ໃຫ້ຕອນໃດທີ່ user ປ່ຽນແປງ form input, state ຈະອັບເດດເພື່ອສະແດງການປ່ຽນແປງເຫຼົ່ານັ້ນ. state ເປັນຂອງ `FilterableProductTable`, ດັ່ງນັ້ນ ຈິງມີພຽງມັນເທົ່ານັ້ນທີ່ສາມາດເອີ້ນໃຊ້ `setFilterText` ແລະ `setInStockOnly`. ເພື່ອເຮັດໃຫ້ `SearchBar` ອັບເດດ state ຂອງ `FilterableProductTable`, ທ່ານຕ້ອງໄດ້ສົ່ງ function ເຫຼົ່ານີ້ລົງໄປ `SearchBar`:
 
 ```js {2,3,10,11}
 function FilterableProductTable({ products }) {
@@ -482,7 +482,7 @@ function FilterableProductTable({ products }) {
         onInStockOnlyChange={setInStockOnly} />
 ```
 
-Inside the `SearchBar`, you will add the `onChange` event handlers and set the parent state from them:
+ພາຍໃນ `SearchBar`, ທ່ານຈະເພີ່ມ `onChange` event handler ແລະ ຕັ້ງຄ່າ parent state ຈາກຕົວຈັດການເຫຼົ່ານີ້:
 
 ```js {5}
 <input 
@@ -492,7 +492,7 @@ Inside the `SearchBar`, you will add the `onChange` event handlers and set the p
   onChange={(e) => onFilterTextChange(e.target.value)} />
 ```
 
-Now the application fully works!
+ຕອນນີ້ແອັບພິເຄຊັ່ນເຮັດວຽກໄດ້ຢ່າງສົມບູນແບບ!
 
 <Sandpack>
 
@@ -642,8 +642,8 @@ td {
 
 </Sandpack>
 
-You can learn all about handling events and updating state in the [Adding Interactivity](/learn/adding-interactivity) section.
+ທ່ານສາມາດຮຽນຮູ້ທັງໝົດກ່ຽວກັບການ handling events ແລະ ການອັບເດດ state ໄດ້ໃນຫົວຂໍ້ [ເພີ່ມການໂຕ້ຕອບ](/learn/adding-interactivity).
 
-## Where to go from here {/*where-to-go-from-here*/}
+## ໄປຕໍ່ໃສຈາກນີ້ {/*where-to-go-from-here*/}
 
-This was a very brief introduction to how to think about building components and applications with React. You can [start a React project](/learn/installation) right now or [dive deeper on all the syntax](/learn/describing-the-ui) used in this tutorial.
+ນີ້ເປັນການແນະນຳສັ້ນໆ ກ່ຽວກັບວິທີຄິດກ່ຽວກັບການສ້າງ component ແລະ ແອັບພິເຄຊັ່ນດ້ວຍ React. ທ່ານສາມາດ [ສ້າງ project React](/learn/installation)ດຽວນີ້ ຫຼື [ລົງເລິກກ່ຽວກັບ syntax ທັງໝົດ](/learn/describing-the-ui) ທີ່ໃຊ້ໃນບົດຮຽນນີ້.
