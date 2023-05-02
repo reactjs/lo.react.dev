@@ -4,30 +4,31 @@ title: React Developer Tools
 
 <Intro>
 
-Use React Developer Tools to inspect React [components](/learn/your-first-component), edit [props](/learn/passing-props-to-a-component) and [state](/learn/state-a-components-memory), and identify performance problems.
+ໃຊ້ React Developer Tools ເພື່ອ ກວດ React [components](/learn/your-first-component), ແກ້ໄຂ [props](/learn/passing-props-to-a-component) ແລະ [state](/learn/state-a-components-memory), ແລະ ລະບຸບັນຫາດ້ານປະສິດທິພາບ.
+
 
 </Intro>
 
 <YouWillLearn>
 
-* How to install React Developer Tools
+* ວິທີຕິດຕັ້ງ React Developer Tools
 
 </YouWillLearn>
 
 ## Browser extension {/*browser-extension*/}
 
-The easiest way to debug websites built with React is to install the React Developer Tools browser extension. It is available for several popular browsers:
+ວິທີການທີ່ງ່າຍທີ່ສຸດໃນການ debug ເວັບໄຊທີ່ເຮັດດ້ວຍ React ແມ່ນຕິດຕັ້ງ React Developer Tools browser extension. ໃຊ້ໄດ້ກັບ browser ທີ່ນິຍົມກັນຫຼາຍໂຕ:
 
-* [Install for **Chrome**](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
-* [Install for **Firefox**](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/)
-* [Install for **Edge**](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil)
+* [ຕິດຕັ້ງສຳລັບ **Chrome**](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+* [ຕິດຕັ້ງສຳລັບ **Firefox**](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/)
+* [ຕິດຕັ້ງສຳລັບ **Edge**](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil)
 
-Now, if you visit a website **built with React,** you will see the _Components_ and _Profiler_ panels.
+ປັດຈຸບັນ, ຖ້າທ່ານເຂົ້າເວັບໄຊ **built with React,** ທ່ານຈະເຫັນ _Components_ ແລະ _Profiler_ panels.
 
 ![React Developer Tools extension](/images/docs/react-devtools-extension.png)
 
-### Safari and other browsers {/*safari-and-other-browsers*/}
-For other browsers (for example, Safari), install the [`react-devtools`](https://www.npmjs.com/package/react-devtools) npm package:
+### Safari ແລະ browser ອື່ນ {/*safari-and-other-browsers*/}
+ສຳລັບ browser ອື່ນ (ຕົວຢ່າງ, Safari), ຕິດຕັ້ງ [`react-devtools`](https://www.npmjs.com/package/react-devtools) npm package:
 ```bash
 # Yarn
 yarn global add react-devtools
@@ -36,26 +37,26 @@ yarn global add react-devtools
 npm install -g react-devtools
 ```
 
-Next open the developer tools from the terminal:
+ຈາກນັ້ນເປີດ developer tools ຜ່ານ terminal:
 ```bash
 react-devtools
 ```
 
-Then connect your website by adding the following `<script>` tag to the beginning of your website's `<head>`:
+ຕໍ່ໄປແມ່ນເຊື່ອມຕໍ່ເວັບໄຊໂດຍການເພີ່ມ `<script>` tag ໃນບ່ອນເລີ່ມຕົ້ນ `<head>` ຂອງເວັບໄຊທ່ານ:
 ```html {3}
 <html>
   <head>
     <script src="http://localhost:8097"></script>
 ```
 
-Reload your website in the browser now to view it in developer tools.
+ໂຫຼດເວັບໄຊຂອງທ່ານຄືນໃໝ່ໃນ browser ຕອນນີ້ ເພື່ອເບິ່ງໃນ developer tools.
 
 ![React Developer Tools standalone](/images/docs/react-devtools-standalone.png)
 
-## Mobile (React Native) {/*mobile-react-native*/}
-React Developer Tools can be used to inspect apps built with [React Native](https://reactnative.dev/) as well.
+## ມືຖື (React Native) {/*mobile-react-native*/}
+React Developer Tools ສາມາດໃຊ້ກວດແອັບຯທີ່ສ້າງດ້ວຍ [React Native](https://reactnative.dev/) ໄດ້ຄືກັນ.
 
-The easiest way to use React Developer Tools is to install it globally:
+ວິທີການທີ່ງ່າຍທີ່ສຸດແມ່ນໃຊ້ React Developer Tools ທີ່ຕິດຕັ້ງມັນໃນທົ່ວເຄື່ອງທ່ານ:
 ```bash
 # Yarn
 yarn global add react-devtools
@@ -64,13 +65,13 @@ yarn global add react-devtools
 npm install -g react-devtools
 ```
 
-Next open the developer tools from the terminal.
+ຈາກນັ້ນເປີດ developer tools ຜ່ານ terminal.
 ```bash
 react-devtools
 ```
 
-It should connect to any local React Native app that's running.
+ມັນຄວນເຊື່ອມຕໍ່ກັບແອັບ React Native ໃນເຄື່ອງທີ່ກຳລັງເຮັດວຽກຢູ່.
 
-> Try reloading the app if developer tools doesn't connect after a few seconds.
+> ລອງໂຫຼດແອັບໃໝ່ຖ້າ developer tools ບໍ່ມີການເຊື່ອມຕໍ່ໃນໄລຍະເວລາຕໍ່ມາ. 
 
-[Learn more about debugging React Native.](https://reactnative.dev/docs/debugging)
+[ຮຽນຮູ້ເພີ່ມເຕີມກ່ຽວກັບ debug ໃນ React Native.](https://reactnative.dev/docs/debugging)
