@@ -1,62 +1,63 @@
 ---
-title: Editor Setup
+title: ການຕັ້ງຄ່າ Editor
 ---
 
 <Intro>
 
-A properly configured editor can make code clearer to read and faster to write. It can even help you catch bugs as you write them! If this is your first time setting up an editor or you're looking to tune up your current editor, we have a few recommendations.
+ການຕັ້ງຄ່າ editor ທີ່ເໝາະສົມສາມາດເຮັດໃຫ້ code ອ່ານໄດ້ຊັດເຈນຂຶ້ນ ແລະ ຂຽນໄດ້ໄວຂຶ້ນ. ມັນສາມາດຊ່ວຍທ່ານໃຫ້ສາມາດຫາ bugs ໄດ້ໃນຂະນະກຳລັງຂຽນມັນ! ຖ້ານີ້ແມ່ນຄັ້ງທຳອິດຂອງທ່ານໃນການຕັ້ງຄ່າ editor ຫຼື ທ່ານກຳລັງຫາວິທີປັບ editor ປັດຈຸບັນຂອງທ່ານ, ພວກເຮົາມີຄຳແນະນຳສອງສາມຂໍ້.
 
 </Intro>
 
 <YouWillLearn>
 
-* What the most popular editors are
-* How to format your code automatically
+* Editor ທີ່ໄດ້ຮັບຄວາມນິຍົມສຸດແມ່ນໂຕໃດ
+* ວິທີ format code ຂອງທ່ານໂດຍອັດຕະໂນມັດ
 
 </YouWillLearn>
 
-## Your editor {/*your-editor*/}
+## Editor ຂອງທ່ານ {/*your-editor*/}
 
-[VS Code](https://code.visualstudio.com/) is one of the most popular editors in use today. It has a large marketplace of extensions and integrates well with popular services like GitHub. Most of the features listed below can be added to VS Code as extensions as well, making it highly configurable!
+[VS Code](https://code.visualstudio.com/) ເປັນໜຶ່ງໃນ editor ທີ່ໄດ້ຮັບຄວາມນິຍົມສູງສຸດໃນປັດຈຸບັນ. ມັນມີຕະຫຼາດຂອງ extension ທີ່ໃຫຍ່ ແລະ ສາມາດເຮັດວຽກຮ່ວມກັນໄດ້ດີກັບບໍລິການທີ່ໄດ້ຮັບຄວາມນິຍົມຢ່າງເຊັນ Github. ຄຸນສົມບັດສ່ວນໃຫຍ່ທີ່ສະແດງດ້ານລຸ່ມແມ່ນສາມາດເພີ່ມລົງໃນ VS Code ໃນຮູບແບບ extension ໄດ້ຄືກັນ, ເຮັດໃຫ້ມັນສາມາດປັບແຕ່ງໄດ້ສູງສຸດ!
 
-Other popular text editors used in the React community include:
+Editor ອື່ນທີ່ໄດ້ຮັບຄວາມນິຍົມໃນ React community ປະກອບມີ:
 
-* [WebStorm](https://www.jetbrains.com/webstorm/) is an integrated development environment designed specifically for JavaScript.
-* [Sublime Text](https://www.sublimetext.com/) has support for JSX and TypeScript, [syntax highlighting](https://stackoverflow.com/a/70960574/458193) and autocomplete built in.
-* [Vim](https://www.vim.org/) is a highly configurable text editor built to make creating and changing any kind of text very efficient. It is included as "vi" with most UNIX systems and with Apple OS X.
+* [WebStorm](https://www.jetbrains.com/webstorm/) ເປັນ integrated development environment ທີ່ອອກແບບມາສຳລັບ JavaScript ໂດຍສະເພາະ.
+* [Sublime Text](https://www.sublimetext.com/) ແມ່ນ support ສຳລັບ JSX ແລະ TypeScript, [syntax highlighting](https://stackoverflow.com/a/70960574/458193) ແລະ autocomplete ໃນໂຕ.
+* [Vim](https://www.vim.org/) ແມ່ນ text editor ທີ່ສາມາດປັບແຕ່ງໄດ້ສູງ ຊື່ງສ້າງຂຶ້ນມາສຳລັບການສ້າງ ແລະ ແກ້ໄຂ text ທີ່ມີປະສິດທິພາບຫຼາຍ. ມັນລວມມີ "vi" ກັບລະບົບ UNIX ເປັນສ່ວນໃຫຍ່ ແລະ ກັບ Apple OS X.
 
-## Recommended text editor features {/*recommended-text-editor-features*/}
+## ແນະນຳຄຸນສົມບັດຂອງ text editor {/*recommended-text-editor-features*/}
 
+ບາງ editor ມາພ້ອມກັບຄຸນສົມບັດເຫຼົ່ານີ້ໃນໂຕ, ແຕ່ໂຕອື່ນອາດຈະຕ້ອງໄດ້ລົງ extension. ກວດສອບເບິ່ງສິ່ງທີ່ editor ທີ່ທ່ານເລືອກ support ຫຍັງແນ່!
 Some editors come with these features built in, but others might require adding an extension. Check to see what support your editor of choice provides to be sure!
 
 ### Linting {/*linting*/}
 
-Code linters find problems in your code as you write, helping you fix them early. [ESLint](https://eslint.org/) is a popular, open source linter for JavaScript. 
+Code linters ຄົ້ນຫາບັນຫາໃນ code ຂອງທ່ານໃນຂະນະທີ່ທ່ານກຳລັງຂຽນ, ຊ່ວຍທ່ານແກ້ໄຂໄດ້ແຕ່ເນີ້ນໆ. [ESLint](https://eslint.org/) ແມ່ນໄດ້ຮັບຄວາມນິຍົມ, ເປັນ open source linter ສຳລັບ JavaScript. 
 
-* [Install ESLint with the recommended configuration for React](https://www.npmjs.com/package/eslint-config-react-app) (be sure you have [Node installed!](https://nodejs.org/en/download/current/))
-* [Integrate ESLint in VSCode with the official extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+* [ຕິດຕັ້ງ ESLintr ພ້ອມກັບຄຳແນະນຳການຕັ້ງຄ່າສຳລັບ React](https://www.npmjs.com/package/eslint-config-react-app) (ໃຫ້ແນ່ໃຈວ່າທ່ານໄດ້ [ຕິດຕັ້ງ Node ແລ້ວ!](https://nodejs.org/en/download/current/))
+* [Integrate ESLint ໃນ VSCode ກັບ extension ທາງການ](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
-**Make sure that you've enabled all the [`eslint-plugin-react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) rules for your project.** They are essential and catch the most severe bugs early. The recommended [`eslint-config-react-app`](https://www.npmjs.com/package/eslint-config-react-app) preset already includes them.
+**ໃຫ້ໝັ້ນໃຈວ່າທ່ານໄດ້ເປີດ[`eslint-plugin-react-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) rules ທັງໝົດສຳລັບ project ທ່ານ.** ພວກມັນມີຄວາມສຳຄັນ ແລະ ກວດຫາ bug ໄດ້ແຕ່ເນີ້ນໆ. [`eslint-config-react-app`](https://www.npmjs.com/package/eslint-config-react-app) ທີ່ແນະນຳແມ່ນໄດ້ລວມໄວ້ແລ້ວ.
 
 ### Formatting {/*formatting*/}
 
-The last thing you want to do when sharing your code with another contributor is get into an discussion about [tabs vs spaces](https://www.google.com/search?q=tabs+vs+spaces)! Fortunately, [Prettier](https://prettier.io/) will clean up your code by reformatting it to conform to preset, configurable rules. Run Prettier, and all your tabs will be converted to spaces—and your indentation, quotes, etc will also all be changed to conform to the configuration. In the ideal setup, Prettier will run when you save your file, quickly making these edits for you.
+ສິ່ງສຸດທ້າຍທີ່ທ່ານຕ້ອງເຮັດເມື່ອ share code ຮ່ວມກັບຜູ້ມີສ່ວນຮ່ວມອື່ນໆແມ່ນໃຫ້ລົມກັນກ່ຽວກັບ [tabs vs spaces](https://www.google.com/search?q=tabs+vs+spaces)! ໂຊກດີທີ່, [Prettier](https://prettier.io/) ຈະ clean up code ຂອງທ່ານ ໂດຍການ reformat ມັນເພື່ອໃຫ້ສອດຄ່ອງກັບ ກົດຂອງການຕັ້ງຄ່າ. ແລ່ນ Prettier, tab ທັງໝົດຂອງທ່ານຈະຖືກປ່ຽນເປັນ space ແລະ ການຍະຫ່າງຂອງທ່ານ, ເຄື່ອງໝາຍຂີດ ແລະ ອື່ນໆ ຈະຖືກປ່ຽນແປງໃຫ້ສອດຄ່ອງກັບ ກົດຂອງການຕັ້ງຄ່າ. ໃນການຕັ້ງຄ່າທີ່ເໝາະສົມທີ່ສຸດ, Prettier ຈະແລ່ນຟາຍຂອງທ່ານເມື່ອທ່ານບັນທຶກ ແລະ ທຳການແກ້ໄຂເຫຼົ່ານີ້ໃຫ້ທ່ານໄດ້ຢ່າງວ່ອງໄວ.
 
-You can install the [Prettier extension in VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) by following these steps:
+ທ່ານສາມາດຕິດຕັ້ງ [Prettier extension ໃນ VSCode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) ໂດຍການປະຕິບັດຕາມຂັ້ນຕອນດັ່ງນີ້:
 
-1. Launch VS Code
-2. Use Quick Open (press Ctrl/Cmd+P)
-3. Paste in `ext install esbenp.prettier-vscode`
-4. Press Enter
+1. ເປີດ VS Code
+2. ໃຊ້ Quick Open (ກົດ Ctrl/Cmd+P)
+3. Paste ນີ້ `ext install esbenp.prettier-vscode`
+4. ກົດ Enter
 
-#### Formatting on save {/*formatting-on-save*/}
+#### Formatting ຕອນບັນທຶກ {/*formatting-on-save*/}
 
-Ideally, you should format your code on every save. VS Code has settings for this!
+ຕາມຫຼັການແລ້ວ, ທ່ານຄວນຈະ format code ຂອງທ່ານທຸກໆຄັ້ງຕອນບັນທຶກ. VS Code ມີການຕັ້ງຄ່າສຳລັບສິ່ງນີ້!
 
-1. In VS Code, press `CTRL/CMD + SHIFT + P`.
-2. Type "settings"
-3. Hit Enter
-4. In the search bar, type "format on save"
-5. Be sure the "format on save" option is ticked!
+1. ໃນ VS Code, ກົດ `CTRL/CMD + SHIFT + P`.
+2. ພິມ "settings"
+3. ກົດ Enter
+4. ໃນ search bar, ພິມ "format on save"
+5. ໃຫ້ແນ່ໃຈວ່າຕົວເລືອກ "format on save" ຖືກຕິກແລ້ວ!
 
-> If your ESLint preset has formatting rules, they may conflict with Prettier. We recommend disabling all formatting rules in your ESLint preset using [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier) so that ESLint is *only* used for catching logical mistakes. If you want to enforce that files are formatted before a pull request is merged, use [`prettier --check`](https://prettier.io/docs/en/cli.html#--check) for your continuous integration.
+> ຖ້າຄ່າ ESLint ຂອງທ່ານມີກ format rule, ພວກມັນອາດຈະມີບັນຫາກັບ Prettier. ພວກເຮົາແນະນຳໃຫ້ທ່ານປິດ format rule ທັງໝົດໃນການຕັ້ງຄ່າ ESLint preset ໂດຍໃຊ້ [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier) ດັ່ງນັ້ນ ESLint ຈຶ່ງຈະໃຊ້ສຳລັບຈັບຫາຂໍ້ຜິດພາດເຊີງຕັກກະ*ເທົ່ານັ້ນ*. ຖ້າທ່ານຕ້ອງການບັງຄັບໃຫ້ format file ກ່ອນ pull request ຈະຖືກ merged, ໃຊ້[`prettier --check`](https://prettier.io/docs/en/cli.html#--check) ສຳລັບ continuous integration ຂອງທ່ານ.
