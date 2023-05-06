@@ -1,54 +1,54 @@
 ---
-title: Quick Start
+title: ເລີ່ມຕົ້ນຢ່າງໄວ
 ---
 
 <Intro>
 
-Welcome to the React documentation! This page will give you an introduction to the 80% of React concepts that you will use on a daily basis.
+ຍິນດີຕ້ອນຮັບສູ່ເອກະສານ React! ໜ້ານີ້ຈະໃຫ້ຂໍ້ມູນເບື້ອງຕົ້ນກ່ຽວກັບ 80% ຂອງແນວຄິດ React ທີ່ທ່ານຈະນຳໃຊ້ໃນຊີວິດປະຈຳວັນ.
 
 </Intro>
 
 <YouWillLearn>
 
-- How to create and nest components
-- How to add markup and styles
-- How to display data
-- How to render conditions and lists
-- How to respond to events and update the screen
-- How to share data between components
+- ວິທີສ້າງ ແລະ nest components
+- ວິທີເພີ່ມ markup ແລະ styles
+- ວິທີສະແດງຂໍ້ມູນ
+- ວິທີ render ເງື່ອນໄຂ ແລະ lists
+- ວິທີ respond ເປັນ events ແລະ ອັບເດດໜ້າຈໍ
+- ວິທີ share ຂໍ້ມູນລະຫວ່າງ components
 
 </YouWillLearn>
 
-## Creating and nesting components {/*components*/}
+## ວິທີສ້າງ ແລະ nest components {/*components*/}
 
-React apps are made out of *components*. A component is a piece of the UI (user interface) that has its own logic and appearance. A component can be as small as a button, or as large as an entire page.
+ແອັບ React ສ້າງຂຶ້ນຈາກ *components*. Component ເປັນຊີ້ນສ່ວນຂອງ UI (user interface) ທີປະກອບມີຕັກກະ ແລະ ຮູບລັກສະນະເປັນຂອງໂຕເອງ. Component ສາມາດເປັນປຸ່ມນ້ອຍໆ ຫຼື ໃຫຍ່ເທົ່າກັບໝົດ page.
 
-React components are JavaScript functions that return markup:
+React components ແມ່ນ JavaScript functions ທີ່ return markup:
 
 ```js
 function MyButton() {
   return (
-    <button>I'm a button</button>
+    <button>ຂ້ອຍແມ່ນປຸ່ມກົດ</button>
   );
 }
 ```
 
-Now that you've declared `MyButton`, you can nest it into another component:
+ຕອນນີ້ທ່ານໄດ້ປະກາດ `MyButton`, ທ່ານສາມາດເອົາມັນໄປຢູ່ໃນ component ອື່ນໄດ້:
 
 ```js {5}
 export default function MyApp() {
   return (
     <div>
-      <h1>Welcome to my app</h1>
+      <h1>ຍິນດີຕ້ອນຮັບສູ່ແອັບຂອງຂ້ອຍ</h1>
       <MyButton />
     </div>
   );
 }
 ```
 
-Notice that `<MyButton />` starts with a capital letter. That's how you know it's a React component. React component names must always start with a capital letter, while HTML tags must be lowercase.
+ສັງເກດວ່າ `<MyButton />` ເລີ່ມຕົ້ນດ້ວຍອັກສອນໂຕໃຫຍ່. ນີ້ເປັນວິທີການທີ່ເຮັດໃຫ້ທ່ານຮູ້ວ່າມັນເປັນ React component. ຊື່ຂອງ React component ຕ້ອງເລີ່ມຕົ້ນດ້ວຍອັກສອນໂຕໃຫຍ່ສະເໝີ, ໃນຂະນະທີ່ HTML tags ຕ້ອງເປັນໂຕອັກສອນນ້ອຍ.
 
-Have a look at the result:
+ເບິ່ງຜົນລັບ:
 
 <Sandpack>
 
@@ -56,7 +56,7 @@ Have a look at the result:
 function MyButton() {
   return (
     <button>
-      I'm a button
+      ຂ້ອຍແມ່ນປຸ່ມກົດ
     </button>
   );
 }
@@ -64,7 +64,7 @@ function MyButton() {
 export default function MyApp() {
   return (
     <div>
-      <h1>Welcome to my app</h1>
+      <h1>ຍິນດີຕ້ອນຮັບສູ່ແອັບຂອງຂ້ອຍ</h1>
       <MyButton />
     </div>
   );
@@ -73,49 +73,49 @@ export default function MyApp() {
 
 </Sandpack>
 
-The `export default` keywords specify the main component in the file. If you're not familiar with some piece of JavaScript syntax, [MDN](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export) and [javascript.info](https://javascript.info/import-export) have great references.
+ຄຳວ່າ `export default` ແມ່ນລະບຸວ່າເປັນ component ຫຼັກໃນຟາຍ. ຖ້າທ່ານຍັງບໍ່ຄຸ້ນເຄີຍກັບບາງ JavaScript syntax [MDN](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export) ແລະ [javascript.info](https://javascript.info/import-export) ມີການອ້າງອີງທີ່ດີຫຼາຍ.
 
-## Writing markup with JSX {/*writing-markup-with-jsx*/}
+## ການຂຽນ markup ດ້ວຍ JSX {/*writing-markup-with-jsx*/}
 
-The markup syntax you've seen above is called *JSX*. It is optional, but most React projects use JSX for its convenience. All of the [tools we recommend for local development](/learn/installation) support JSX out of the box.
+Markup syntax ທີ່ທ່ານໄດ້ເຫັນດ້ານເທິງແມ່ນເອີ້ນວ່າ *JSX*. ມັນເປັນທາງເລືອກ, ແຕ່ project React ສ່ວນຫຼາຍແມ່ນໃຊ້ JSX ເພື່ອຄວາມສະດວກ. [ເຄື່ອງມືທີ່ເຮົາແນະນຳສຳລັບ local development](/learn/installation) ທັງໝົດແມ່ນຮອງຮັບ JSX ທັນທີ.
 
-JSX is stricter than HTML. You have to close tags like `<br />`. Your component also can't return multiple JSX tags. You have to wrap them into a shared parent, like a `<div>...</div>` or an empty `<>...</>` wrapper:
+JSX ເຂັ້ມງວດກວ່າ HTML. ທ່ານຕ້ອງໄດ້ປິດ tag ຄື `<br />`. Component ຂອງທ່ານບໍ່ສາມາດ return ຫຼາຍ JSX tags ໄດ້. ທ່ານຕ້ອງໄດ້ລວມມັນເຂົ້າໄປໃນ shared parent ຄືກັບ `<div>...</div>` ຫຼື `<>...</>` ທີ່ວ່າງເປົ່າ: 
 
 ```js {3,6}
 function AboutPage() {
   return (
     <>
-      <h1>About</h1>
-      <p>Hello there.<br />How do you do?</p>
+      <h1>ກ່ຽວກັບ</h1>
+      <p>ສະບາຍດີ.<br />ເຈົ້າສະບາຍດີບໍ່?</p>
     </>
   );
 }
 ```
 
-If you have a lot of HTML to port to JSX, you can use an [online converter.](https://transform.tools/html-to-jsx)
+ຖ້າທ່ານມີຫຼາຍ HTML ທີ່ຈະປ່ຽນເປັນ JSX, ທ່ານສາມາດໃຊ້ [online converter.](https://transform.tools/html-to-jsx)
 
-## Adding styles {/*adding-styles*/}
+## ການເພີ່ມ styles {/*adding-styles*/}
 
-In React, you specify a CSS class with `className`. It works the same way as the HTML [`class`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class) attribute:
+ໃນ React, ທ່ານກຳນົດ CSS class ດ້ວຍ `className`. ມັນເຮັດວຽກແບບດຽວກັບ HTML [`class`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class) attribute:
 
 ```js
 <img className="avatar" />
 ```
 
-Then you write the CSS rules for it in a separate CSS file:
+ຕໍ່ມາທ່ານຂຽນ CSS rule ໃຫ້ມັນໃນຟາຍ CSS ແຍກຕ່າງຫາກ:
 
 ```css
-/* In your CSS */
+/* ໃນ CSS ຂອງທ່ານ */
 .avatar {
   border-radius: 50%;
 }
 ```
 
-React does not prescribe how you add CSS files. In the simplest case, you'll add a [`<link>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) tag to your HTML. If you use a build tool or a framework, consult its documentation to learn how to add a CSS file to your project.
+React ບໍ່ໄດ້ກຳນົດວິທີການເພີ່ມຟາຍ CSS. ໃນກໍລະນີງ່າຍສຸດ, ທ່ານຈະເພີ່ມ [`<link>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) tag ໃສ່ HTML ຂອງທ່ານ. ຖ້າທ່ານໃຊ້ build tool ຫຼື framework, ໃຫ້ເບິ່ງເອກະສານຂອງມັນເພື່ອຮຽນຮູ້ວິທີເພີ່ມຟາຍ CSS ໃສ່ໃນ project ຂອງທ່ານ.
 
-## Displaying data {/*displaying-data*/}
+## ການສະແດງຂໍ້ມູນ {/*displaying-data*/}
 
-JSX lets you put markup into JavaScript. Curly braces let you "escape back" into JavaScript so that you can embed some variable from your code and display it to the user. For example, this will display `user.name`:
+JSX ໃຫ້ທ່ານໃສ່ markup ລົງໃນ JavaScript. ວົງປີກກາໃຫ້ທ່ານ "escape back" ໃສ່ໃນ JavaScript ເພື່ອໃຫ້ທ່ານສາມາດ embed ຕົວແປບາງອັນຈາກ code ຂອງທ່ານ ແລະ ສະແດງມັນໃຫ້ຜູ້ໃຊ້. ຕົວຢ່າງ, ຈະສະແດງ`user.name`:
 
 ```js {3}
 return (
@@ -125,7 +125,7 @@ return (
 );
 ```
 
-You can also "escape into JavaScript" from JSX attributes, but you have to use curly braces *instead of* quotes. For example, `className="avatar"` passes the `"avatar"` string as the CSS class, but `src={user.imageUrl}` reads the JavaScript `user.imageUrl` variable value, and then passes that value as the `src` attribute:
+ທ່ານຍັງສາມາດ "escape ເຂົ້າໄປໃນ JavaScript" ຈາກ JSX attributes, ແຕ່ທ່ານຕ້ອງໃຊ້ ວົງປີກກາ *ແທນ* ວົງຢືມ. ຕົວຢ່າງ, `className="avata"` ສົ່ງຜ່ານ string `"avatar"` ເປັນ CSS class, ແຕ່ `src={user.imageUrl}` ອ່ານຄ່າຕົວແປ JavaScript `user.imageUrl` ແລ້ວສົ່ງຄ່ານັ້ນເປັນ `src` attribute:
 
 ```js {3,4}
 return (
@@ -136,7 +136,7 @@ return (
 );
 ```
 
-You can put more complex expressions inside the JSX curly braces too, for example, [string concatenation](https://javascript.info/operators#string-concatenation-with-binary):
+ທ່ານສາມາດໃສ່ expressions ທີ່ມີຄວາມຊັບຊ້ອນຫຼາຍເຂົ້າໄປໃນ JSX ວົງປີກກາໄດ້ອີກເຊັ່ນກັນ, ຕົວຢ່າງ, [string concatenation](https://javascript.info/operators#string-concatenation-with-binary):
 
 <Sandpack>
 
@@ -177,11 +177,11 @@ export default function Profile() {
 
 </Sandpack>
 
-In the above example, `style={{}}` is not a special syntax, but a regular `{}` object inside the `style={ }` JSX curly braces. You can use the `style` attribute when your styles depend on JavaScript variables.
+ໃນຕົວຢ່າງຂ້າງເທິງ, `style={{}}` ບໍ່ແມ່ນ special syntax, ແຕ່ເປັນ `{}` object ທຳມະດາ ທີ່ຢູ່ຂ້າງໃນ `style={ }` JSX ວົງປີກກາ. ທ່ານສາມາດໃຊ້ `style` attribute ເມື່ອ styles ຂອງທ່ານຂຶ້ນກັບຕົວແປ JavaScript.
 
-## Conditional rendering {/*conditional-rendering*/}
+## ການສະແດງຜົນຢ່າງມີເງື່ອນໄຂ {/*conditional-rendering*/}
 
-In React, there is no special syntax for writing conditions. Instead, you'll use the same techniques as you use when writing regular JavaScript code. For example, you can use an [`if`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) statement to conditionally include JSX:
+ໃນ React, ມັນບໍ່ມີ special syntax ສຳລັບການຂຽນເງື່ອນໄຂ. ທ່ານຈະໃຊ້ເຕັກນິກດຽວກັບທີ່ທ່ານໃຊ້ຂຽນ code JavaScript ປົກະຕິແທນ. ຕົວຢ່າງ, ທ່ານສາມາດໃຊ້ [`if`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) statement ເພື່ອລວມ JSX ຢ່າງມີເງື່ອນໄຂ:
 
 ```js
 let content;
@@ -197,7 +197,7 @@ return (
 );
 ```
 
-If you prefer more compact code, you can use the [conditional `?` operator.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) Unlike `if`, it works inside JSX:
+ຫາກທ່ານຕ້ອງການ code ທີ່ສັ້ນກວ່ານີ້, ທ່ານສາມາດໃຊ້ [conditional `?` operator.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) ບໍ່ຄື `if`, ມັນເຮັດວຽກໄດ້ໃນ JSX:
 
 ```js
 <div>
@@ -209,7 +209,7 @@ If you prefer more compact code, you can use the [conditional `?` operator.](htt
 </div>
 ```
 
-When you don't need the `else` branch, you can also use a shorter [logical `&&` syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND#short-circuit_evaluation):
+ເມື່ອທ່ານບໍ່ຕ້ອງການເງື່ອນໄຂ `else`, ທ່ານສາມາດໃຊ້ [logical `&&` syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND#short-circuit_evaluation):
 
 ```js
 <div>
@@ -217,13 +217,13 @@ When you don't need the `else` branch, you can also use a shorter [logical `&&` 
 </div>
 ```
 
-All of these approaches also work for conditionally specifying attributes. If you're unfamiliar with some of this JavaScript syntax, you can start by always using `if...else`.
+ວິທີການທັງໝົດເຫຼົ່ານີ້ຍັງໃຊ້ໄດ້ກັບການລະບຸ attributes ແບບມີເງື່ອນໄຂ. ຖ້າທ່ານຍັງບໍ່ຄຸ້ນເຄີຍກັບ JavaScript syntax ເຫຼົ່ານີ້, ທ່ານສາມາດເລີ່ມໄດ້ຈາກການໃຊ້ `if...else` ຢູ່ເລື້ອຍໆ.
 
-## Rendering lists {/*rendering-lists*/}
+## ການສະແດງ lists {/*rendering-lists*/}
 
-You will rely on JavaScript features like [`for` loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) and the [array `map()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) to render lists of components.
+ທ່ານສາມາດໃຊ້ຄຸນສົມບັດຂອງ JavaScript ຢ່າງ [`for` loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) ແລະ [array `map()` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) ເພື່ອສະແດງ lists ຂອງ components.
 
-For example, let's say you have an array of products:
+ຕົວຢ່າງ, ສົມມຸດທ່ານມີ array ຂອງ products:
 
 ```js
 const products = [
@@ -233,7 +233,7 @@ const products = [
 ];
 ```
 
-Inside your component, use the `map()` function to transform an array of products into an array of `<li>` items:
+ທາງໃນ component ຂອງທ່ານ, ໃຊ້ `map()` function ເພື່ອປ່ຽນ  array ຂອງ products ໄປເປັນ array ຂອງລາຍການ `<li>`:
 
 ```js
 const listItems = products.map(product =>
@@ -247,15 +247,15 @@ return (
 );
 ```
 
-Notice how `<li>` has a `key` attribute. For each item in a list, you should pass a string or a number that uniquely identifies that item among its siblings. Usually, a key should be coming from your data, such as a database ID. React uses your keys to know what happened if you later insert, delete, or reorder the items.
+ສັງເກດວ່າ `<li>` ມີ `key` attribute. ສຳລັບແຕ່ລະລາຍການໃນ list, ທ່ານຄວນສົ່ງ string ຫຼື number ທີ່ບໍ່ຊໍ້າກັນ. ໂດຍປົກະຕິ, key ຄວນມາຈາກຂໍ້ມູນຂອງທ່ານ, ເຊັ່ນ: database ID. React ໃຊ້ key ຂອງທ່ານເພື່ອໃຫ້ຮູ້ວ່າມີຫຍັງເກີດຂຶ້ນຫຼັງຈາກ insert, delete ຫຼື reorder ລາຍການ.
 
 <Sandpack>
 
 ```js
 const products = [
-  { title: 'Cabbage', isFruit: false, id: 1 },
-  { title: 'Garlic', isFruit: false, id: 2 },
-  { title: 'Apple', isFruit: true, id: 3 },
+  { title: 'ກະຫລໍາ', isFruit: false, id: 1 },
+  { title: 'ກະທຽມ', isFruit: false, id: 2 },
+  { title: 'ໝາກມ່ວງ', isFruit: true, id: 3 },
 ];
 
 export default function ShoppingList() {
@@ -278,37 +278,37 @@ export default function ShoppingList() {
 
 </Sandpack>
 
-## Responding to events {/*responding-to-events*/}
+## ການຕອບສະໜອງຕໍ່ events {/*responding-to-events*/}
 
-You can respond to events by declaring *event handler* functions inside your components:
+ທ່ານສະມາດຕອບສະໜອງກັບ events ໂດຍການປະກາດ *event handler* functions ພາຍໃນ components ຂອງທ່ານ:
 
 ```js {2-4,7}
 function MyButton() {
   function handleClick() {
-    alert('You clicked me!');
+    alert('ເຈົ້າຄິກຂ້ອຍ!');
   }
 
   return (
     <button onClick={handleClick}>
-      Click me
+      ຄິກຂ້ອຍ
     </button>
   );
 }
 ```
 
-Notice how `onClick={handleClick}` has no parentheses at the end! Do not _call_ the event handler function: you only need to *pass it down*. React will call your event handler when the user clicks the button.
+ສັງເກດວິທີ `onclick={handleclick}` ບໍ່ມີວົງເລັບໃນທາງທ້າຍ! ບໍ່ຕ້ອງ _call_ event handler function: ທ່ານຕ້ອງ *ສົ່ງຕໍ່* ເທົ່ານັ້ນ. React ຈະ call event handler ຂອງທ່ານເມື່ອຜູ້ໃຊ້ກົດປຸ່ມ. 
 
-## Updating the screen {/*updating-the-screen*/}
+## ການອັບເດດໜ້າຈໍ {/*updating-the-screen*/}
 
-Often, you'll want your component to "remember" some information and display it. For example, maybe you want to count the number of times a button is clicked. To do this, add *state* to your component.
+ສ່ວນຫຼາຍ, ທ່ານຕ້ອງການໃຫ້ component ຂອງທ່ານ "ຈື່" ຂໍ້ມູນບາງຢ່າງ ແລະ ສະແດງຂໍ້ມູນນັ້ນ. ຕົວຢ່າງ, ບາງທີທ່ານຕ້ອງການນັບຈຳນວນການກົດເວລາປຸ່ມຖືກກົດ. ເພື່ອເຮັດສິ່ງນີ້, ເພີ່ມ *state* ໃສ່ໃນ component ຂອງທ່ານ.
 
-First, import [`useState`](/reference/react/useState) from React:
+ທຳອິດ, import [`useState`](/reference/react/useState) ຈາກ React:
 
 ```js
 import { useState } from 'react';
 ```
 
-Now you can declare a *state variable* inside your component:
+ຕອນນີ້ທ່ານສາມາດປະກາດ *ຕົວແປ state* ພາຍໃນ component ຂອງທ່ານ:
 
 ```js
 function MyButton() {
@@ -316,9 +316,9 @@ function MyButton() {
   // ...
 ```
 
-You’ll get two things from `useState`: the current state (`count`), and the function that lets you update it (`setCount`). You can give them any names, but the convention is to write `[something, setSomething]`.
+ທ່ານຈະໄດ້ຮັບສອງສິ່ງຈາກ `useState`: state ປັດຈຸບັນ (`count`), ແລະ function ທີ່ໃຫ້ທ່ານອັບເດດມັນ (`setCount`). ທ່ານສາມາດຕັ້ງຊື່ແນວໃດກໍໄດ້, ແຕ່ຫຼັກການແມ່ນໃຫ້ຂຽນວ່າ `[something, setSomething]`.
 
-The first time the button is displayed, `count` will be `0` because you passed `0` to `useState()`. When you want to change state, call `setCount()` and pass the new value to it. Clicking this button will increment the counter:
+ເທື່ອທຳອິດທີ່ປຸ່ມກົດສະແດງ, `count` ຈະເປັນ `0` ເພາະວ່າທ່ານໄດ້ສົ່ງ `0` ໄປທີ່ `useState()`. ເມື່ອທ່ານຕ້ອງການປ່ຽນ state, call `setCount()` ແລະ ສົ່ງຄ່າໃໝ່ໄປໃຫ້ມັນ. ຄິກປຸ່ມກົດຈະເພີ່ມຕົວນັບ:
 
 ```js {5}
 function MyButton() {
@@ -330,15 +330,15 @@ function MyButton() {
 
   return (
     <button onClick={handleClick}>
-      Clicked {count} times
+      ຄິກ {count} ເທື່ອ
     </button>
   );
 }
 ```
 
-React will call your component function again. This time, `count` will be `1`. Then it will be `2`. And so on.
+React ຈະ call component function ຂອງທ່ານອີກເທື່ອໜຶ່ງ. ເທື່ອນີ້, `count` ຈະມີຄ່າເປັນ `1`. ແລະ ຈະມີຄ່າເປັນ `2`. ແລະ ອື່ນໆ.
 
-If you render the same component multiple times, each will get its own state. Click each button separately:
+ຖ້າທ່ານ render component ດຽວກັນຫຼາຍໆເທື່ອ, ແຕ່ລະອັນກໍຈະມີ state ຂອງໃຜລາວ. ຄິກແຕ່ລະປຸ່ມແຍກກັນ:
 
 <Sandpack>
 
@@ -348,7 +348,7 @@ import { useState } from 'react';
 export default function MyApp() {
   return (
     <div>
-      <h1>Counters that update separately</h1>
+      <h1>Counters ທີ່ອັບເດດໃຜລາວ</h1>
       <MyButton />
       <MyButton />
     </div>
@@ -364,7 +364,7 @@ function MyButton() {
 
   return (
     <button onClick={handleClick}>
-      Clicked {count} times
+      ກົດ {count} ເທື່ອ
     </button>
   );
 }
@@ -379,59 +379,59 @@ button {
 
 </Sandpack>
 
-Notice how each button "remembers" its own `count` state and doesn't affect other buttons.
+ສັງເກດວິທີທີ່ແຕ່ລະປຸ່ມ "ຈື່" state `count` ຂອງຕົວເອງແນວໃດ ແລະ ບໍ່ສົ່ງຜົນກະທົບຕໍ່ປຸ່ມອື່ນ.
 
-## Using Hooks {/*using-hooks*/}
+## ການນຳໃຊ້ Hooks {/*using-hooks*/}
 
-Functions starting with `use` are called *Hooks*. `useState` is a built-in Hook provided by React. You can find other built-in Hooks in the [API reference.](/reference/react) You can also write your own Hooks by combining the existing ones.
+Functions ທີ່ເລີ່ມຕົ້ນດ້ວຍ `use` ແມ່ນເອີ້ນວ່າ *Hooks*. `useState` ເປັນ Hook ໃນໂຕທີເຮັດໂດຍ React. ທ່ານສາມາດຄົ້ນຫາ Hook ໂຕອື່ນໆໄດ້ໃນ [ອ້າງອີງ API.](/reference/react) ທ່ານສາມາດຂຽນ Hook ຂອງທ່ານເອງໂດຍການລວມເອົາສິ່ງທີ່ມີຢູ່ແລ້ວ.
 
-Hooks are more restrictive than other functions. You can only call Hooks *at the top* of your components (or other Hooks). If you want to use `useState` in a condition or a loop, extract a new component and put it there.
+Hooks ມີຂໍ້ຈຳກັດຫຼາຍກວ່າ functions ອື່ນ. ທ່ານສາມາດເອີ້ນ Hooks *ຢູ່ດ້ານເທິງ* component ຂອງທ່ານ (ຫຼື Hooks ອື່ນ). ຖ້າທ່ານຕ້ອງການໃຊ້ `useState` ໃນເງື່ອນໄຂ ຫຼື ໃນ loop, ແຕກມັນເປັນ component ໃໝ່ ແລະ ເອົາມັນໃສ່ນັ້ນ.
 
-## Sharing data between components {/*sharing-data-between-components*/}
+## ການ share ຂໍ້ມູນລະຫວ່າງ components {/*sharing-data-between-components*/}
 
-In the previous example, each `MyButton` had its own independent `count`, and when each button was clicked, only the `count` for the button clicked changed:
+ໃນຕົວຢ່າງກ່ອນໜ້ານີ້, ແຕ່ລະ `MyButton` ມີ `count` ທີ່ແຍກຈາກກັນ, ແລະ ເມື່ອແຕ່ລະອັນຖືກຄິກ, ສະເພາະ `count` ຂອງປຸ່ມທີ່ຄິກເທົ່ານັ້ນທີ່ປ່ຽນ: 
 
 <DiagramGroup>
 
 <Diagram name="sharing_data_child" height={367} width={407} alt="Diagram showing a tree of three components, one parent labeled MyApp and two children labeled MyButton. Both MyButton components contain a count with value zero.">
 
-Initially, each `MyButton`'s `count` state is `0`
+ເລີ່ມຕົ້ນ, state `count` ຂອງ `MyButton` ແຕ່ລະອັນແມ່ນ `0`
 
 </Diagram>
 
 <Diagram name="sharing_data_child_clicked" height={367} width={407} alt="The same diagram as the previous, with the count of the first child MyButton component highlighted indicating a click with the count value incremented to one. The second MyButton component still contains value zero." >
 
-The first `MyButton` updates its `count` to `1`
+`MyButton` ໂຕທຳອິດອັບເດດ `count` ເປັນ `1`
 
 </Diagram>
 
 </DiagramGroup>
 
-However, often you'll need components to *share data and always update together*.
+ເຖິງຢ່າງໃດກໍ່ຕາມ, ຫຼາຍຄັ້ງທ່ານຕ້ອງມີຫຼາຍ components ເພື່ອ *share ຂໍ້ມູນ ແລະ ອັບເດດພ້ອມກັນຢູ່ຕະຫຼອດ*
 
-To make both `MyButton` components display the same `count` and update together, you need to move the state from the individual buttons "upwards" to the closest component containing all of them.
+ໃນການເຮັດໃຫ້ `MyButton` components ທັງສອງສະແດງ `count` ດຽວກັນ ແລະ ອັບເດດພ້ອມກັນ, ທ່ານຕ້ອງໄດ້ຍ້າຍ state ຈາກຂອງແຕ່ລະອັນ "ຂຶ້ນ" ໄປຍັງ component ທີ່ປະກອບມີພວກມັນທັງໝົດ.
 
-In this example, it is `MyApp`:
+ຕົວຢ່າງນີ້, ແມ່ນ `MyApp`:
 
 <DiagramGroup>
 
 <Diagram name="sharing_data_parent" height={385} width={410} alt="Diagram showing a tree of three components, one parent labeled MyApp and two children labeled MyButton. MyApp contains a count value of zero which is passed down to both of the MyButton components, which also show value zero." >
 
-Initially, `MyApp`'s `count` state is `0` and is passed down to both children
+ເລີ່ມຕົ້ນ, state `count` ຂອງ `MyApp` ແມ່ນ `0` ແລະ ສົ່ງຕໍ່ໄປຫາລູກທັງສອງ
 
 </Diagram>
 
 <Diagram name="sharing_data_parent_clicked" height={385} width={410} alt="The same diagram as the previous, with the count of the parent MyApp component highlighted indicating a click with the value incremented to one. The flow to both of the children MyButton components is also highlighted, and the count value in each child is set to one indicating the value was passed down." >
 
-On click, `MyApp` updates its `count` state to `1` and passes it down to both children
+ຕອນກົດ, `MyApp` ອັບເດດ state `count` ເປັນ `1` ແລະ ສົ່ງຕໍ່ໄປຫາລູກທັງສອງ
 
 </Diagram>
 
 </DiagramGroup>
 
-Now when you click either button, the `count` in `MyApp` will change, which will change both of the counts in `MyButton`. Here's how you can express this in code.
+ຕອນນີ້ເມື່ອທ່ານຄິກປຸ່ມໃດໜຶ່ງ, `count` ໃນ `MyApp` ຈະປ່ຽນແປງ, ເຊິ່ງຈະປ່ຽນທັງສອງ count ໃນ `MyButton`. ນີ້ແມ່ນວິທີທີ່ທ່ານສາມາດລອງໃນ code.
 
-First, *move the state up* from `MyButton` into `MyApp`:
+ທຳອິດ, *ຍ້າຍ state ຂຶ້ນ* ຈາກ `MyButton` ໄປຫາ `MyApp`:
 
 ```js {2-6,18}
 export default function MyApp() {
@@ -451,12 +451,12 @@ export default function MyApp() {
 }
 
 function MyButton() {
-  // ... we're moving code from here ...
+  // ... ເຮົາຍ້າຍ code ຈາກບ່ອນນີ້ ...
 }
 
 ```
 
-Then, *pass the state down* from `MyApp` to each `MyButton`, together with the shared click handler. You can pass information to `MyButton` using the JSX curly braces, just like you previously did with built-in tags like `<img>`:
+ຈາກນັ້ນ, *ສົ່ງ state* ຈາກ `MyApp` ໄປຫາ `MyButton`, ພ້ອມກັນກັບການ share click handler. ທ່ານສາມາດສົ່ງຂໍ້ມູນຫາ `MyButton` ໂດຍການໃຊ້ ວົງປີກກາ JSX, ຄືກັນກັບທີ່ທ່ານເຮັດກັບ tag `<img>`:
 
 ```js {11-12}
 export default function MyApp() {
@@ -468,7 +468,7 @@ export default function MyApp() {
 
   return (
     <div>
-      <h1>Counters that update together</h1>
+      <h1>Counters ທີ່ອັບເດດພ້ອມກັນ</h1>
       <MyButton count={count} onClick={handleClick} />
       <MyButton count={count} onClick={handleClick} />
     </div>
@@ -476,21 +476,21 @@ export default function MyApp() {
 }
 ```
 
-The information you pass down like this is called _props_. Now the `MyApp` component contains the `count` state and the `handleClick` event handler, and *passes both of them down as props* to each of the buttons.
+ຂໍ້ມູນທີ່ສົ່ງຜ່ານລັກສະນະນີ້ແມ່ນເອີ້ນວ່າ _props_. ຕອນນີ້ `MyApp` component ປະກອບມີ `count` state ແລະ `handleClick` event handler, ແລະ *ສົ່ງຜ່ານທັງສອງໃນຮູບແບບຂອງ props* ໄປຍັງແຕ່ລະປຸ່ມ.
 
-Finally, change `MyButton` to *read* the props you have passed from its parent component:
+ສຸດທ້າຍ, ປ່ຽນ `MyButton` ເພື່ອ *ອ່ານ* props ທີ່ທ່ານໄດ້ສົ່ງຈາກ parent component ຂອງມັນ:
 
 ```js {1,3}
 function MyButton({ count, onClick }) {
   return (
     <button onClick={onClick}>
-      Clicked {count} times
+      ຄິກ {count} ເທື່ອ
     </button>
   );
 }
 ```
 
-When you click the button, the `onClick` handler fires. Each button's `onClick` prop was set to the `handleClick` function inside `MyApp`, so the code inside of it runs. That code calls `setCount(count + 1)`, incrementing the `count` state variable. The new `count` value is passed as a prop to each button, so they all show the new value. This is called "lifting state up". By moving state up, you've shared it between components.
+ເມື່ອທ່ານກົດປຸ່ມ, `onClick` handler ຈະເລີ່ມເຮັດວຽກ. props`onClick` ຂອງແຕ່ລະປຸ່ມຖືກຕັ້ງຄ່າເປັນ `handleClick` function ພາຍໃນ `MyApp`, ສະນັ້ນ code ພາຍໃນຂອງມັນຈຶ່ງເຮັດວຽກ. code ເອີ້ນ `setCount(count + 1)`, ເພີ່ມຕົວແປ  state `count`. ຄ່າ `count` ໃໝ່ຈະຖືກສົ່ງຜ່ານເປັນ prop ໄປແຕ່ລະປຸ່ມ, ດັ່ງນັ້ນຄ່າທັງໝົດຈື່ງສະແດງຄ່າໃໝ່. ນີ້ເອີ້ນວ່າ "ການຍົກ state ຂຶ້ນ", ທ່ານໄດ້ share ມັນລະຫວ່າງ components.
 
 <Sandpack>
 
@@ -506,7 +506,7 @@ export default function MyApp() {
 
   return (
     <div>
-      <h1>Counters that update together</h1>
+      <h1>Counters ທີ່ອັບເດດພ້ອມກັນ</h1>
       <MyButton count={count} onClick={handleClick} />
       <MyButton count={count} onClick={handleClick} />
     </div>
@@ -516,7 +516,7 @@ export default function MyApp() {
 function MyButton({ count, onClick }) {
   return (
     <button onClick={onClick}>
-      Clicked {count} times
+      ຄິກ {count} ເທື່ອ
     </button>
   );
 }
@@ -531,8 +531,8 @@ button {
 
 </Sandpack>
 
-## Next Steps {/*next-steps*/}
+## ຂັ້ນຕອນຕໍ່ໄປ {/*next-steps*/}
 
-By now, you know the basics of how to write React code!
+ຕອນນີ້, ທ່ານໄດ້ຮູ້ກ່ຽວກັບພື້ນຖານຂອງວິທີການຂຽນ code React!
 
-Check out the [Tutorial](/learn/tutorial-tic-tac-toe) to put them into practice and build your first mini-app with React.
+ເບິ່ງ [ຄູ່ມື](/learn/tutorial-tic-tac-toe) ເພື່ອນຳໄປໃຊ້ແທ້ ແລະ ສ້າງ mini-app ທຳອິດຂອງທ່ານດ້ວຍ React.
