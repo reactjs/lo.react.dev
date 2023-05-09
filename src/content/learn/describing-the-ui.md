@@ -1,29 +1,29 @@
 ---
-title: Describing the UI
+title: ອະທິບາຍ UI
 ---
 
 <Intro>
 
-React is a JavaScript library for rendering user interfaces (UI). UI is built from small units like buttons, text, and images. React lets you combine them into reusable, nestable *components.* From web sites to phone apps, everything on the screen can be broken down into components. In this chapter, you'll learn to create, customize, and conditionally display React components.
+React ແມ່ນ JavaScript library ສຳລັບສະແດງຜົນໜ້າຕ່າງຜູ້ໃຊ້ (UI). UI ແມ່ນເຮັດມາຈາກຊີ້ນສ່ວນນ້ອຍໆເຊັ່ນ: ປຸ່ມກົດ, ຂໍ້ຄວາມ, ແລະ ຮູບພາບ. React ຊ່ວຍໃຫ້ທ່ານລວມມັນເຂົ້າກັນເປັນ *component* ທີ່ໃຊ້ຊໍ້າ ແລະ ຊ້ອນກັນຫຼາຍໆຊັ້ນໄດ້. ຕັ້ງແຕ່ເວັບໄຊໄປຈົນເຖິງແອັບພິເຄຊັ່ນເທິງມືຖື, ທຸກຢ່າງເທິງໜ້າຈໍແມ່ນສາມາດແຕກຍ່ອຍເປັນ component ໄດ້. ໃນບົດນີ້, ທ່ານຈະໄດ້ຮຽນກ່ຽວກັບການສ້າງ, ການປັບແຕ່ງ ແລະ ສະແດງ React component ແບບມີເງື່ອນໄຂ. 
 
 </Intro>
 
 <YouWillLearn isChapter={true}>
 
-* [How to write your first React component](/learn/your-first-component)
-* [When and how to create multi-component files](/learn/importing-and-exporting-components)
-* [How to add markup to JavaScript with JSX](/learn/writing-markup-with-jsx)
-* [How to use curly braces with JSX to access JavaScript functionality from your components](/learn/javascript-in-jsx-with-curly-braces)
-* [How to configure components with props](/learn/passing-props-to-a-component)
-* [How to conditionally render components](/learn/conditional-rendering)
-* [How to render multiple components at a time](/learn/rendering-lists)
-* [How to avoid confusing bugs by keeping components pure](/learn/keeping-components-pure)
+* [ວິທີຂຽນ React component ທຳອິດຂອງທ່ານ](/learn/your-first-component)
+* [ເມືອໃດ ແລະ ວິທີການສ້າງຫຼາຍຟາຍ component](/learn/importing-and-exporting-components)
+* [ວິທີການເພີ່ມ markup ໃສ່ JavaScript ດ້ວຍ JSX](/learn/writing-markup-with-jsx)
+* [ວິທີໃຊ້ວົງປີກກາກັບ JSX ເພື່ອເຂົ້າເຖິງ function JavaScript ຈາກ component ຂອງທ່ານ](/learn/javascript-in-jsx-with-curly-braces)
+* [ວິທີການປັບແຕ່ງ component ດ້ວຍ props](/learn/passing-props-to-a-component)
+* [ວິທີການສະແດງ component ແບບມີເງື່ອນໄຂ](/learn/conditional-rendering)
+* [ວິທີການສະແດງຫຼາຍ component ພ້ອມກັນ](/learn/rendering-lists)
+* [ວິທີການຫຼີກເວັ້ນຂໍ້ຜິດພາດໂດຍການຮັກສາໃຫ້ component pure ທີ່ສຸດ](/learn/keeping-components-pure)
 
 </YouWillLearn>
 
-## Your first component {/*your-first-component*/}
+## Component ທຳອິດຂອງທ່ານ {/*your-first-component*/}
 
-React applications are built from isolated pieces of UI called *components*. A React component is a JavaScript function that you can sprinkle with markup. Components can be as small as a button, or as large as an entire page. Here is a `Gallery` component rendering three `Profile` components:
+ແອັບພິເຄຊັ່ນ React ສ້າງຂຶ້ນຈາກການແຍກສ່ວນຂອງ UI ທີ່ເອີ້ນວ່າ *components*. React component ແມ່ນ JavaScript function ທີ່ສາມາດໂຮຍໜ້າດ້ວຍ markup. Component ອາດມີຂະໜາດນ້ອຍເທົ່າປຸ່ມກົດ, ຫຼື ໃຫຍ່ເທົ່າກັບທັງໝົດໜ້າ. ນີ້ແມ່ນ Component `Gallery` ທີ່ສະແດງຜົນ component `Profile` ສາມລາຍການ:
 
 <Sandpack>
 
@@ -40,7 +40,7 @@ function Profile() {
 export default function Gallery() {
   return (
     <section>
-      <h1>Amazing scientists</h1>
+      <h1>ນັກວິທະຍາສາດທີ່ໜ້າປະຫຼາດໃຈ</h1>
       <Profile />
       <Profile />
       <Profile />
@@ -57,13 +57,13 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 <LearnMore path="/learn/your-first-component">
 
-Read **[Your First Component](/learn/your-first-component)** to learn how to declare and use React components.
+ອ່ານ **[Component ທຳອິດຂອງທ່ານ](/learn/your-first-component)** ເພື່ອຮຽນຮູ້ວິທີການປະກາດ ແລະ ນຳໃຊ້ React component.
 
 </LearnMore>
 
-## Importing and exporting components {/*importing-and-exporting-components*/}
+## ການ Import ແລະ Export component {/*importing-and-exporting-components*/}
 
-You can declare many components in one file, but large files can get difficult to navigate. To solve this, you can *export* a component into its own file, and then *import* that component from another file:
+ທ່ານສາມາດປະກາດຫຼາຍ Component ໃນໜຶ່ງຟາຍ, ແຕ່ຟາຍຂະໜາດໃຫຍ່ສາມາດເຮັດໃຫ້ຍາກໃນການຊອກຫາ. ເພື່ອແກ້ໄຂບັນຫານີ້, ທ່ານສາມາດ *export* component ເປັນຟາຍຂອງມັນເອງ, ແລ້ວ *import* component ນັ້ນຈາກຟາຍອື່ນ:
 
 
 <Sandpack>
@@ -84,7 +84,7 @@ import Profile from './Profile.js';
 export default function Gallery() {
   return (
     <section>
-      <h1>Amazing scientists</h1>
+      <h1>ນັກວິທະຍາສາດທີ່ໜ້າປະຫຼາດໃຈ</h1>
       <Profile />
       <Profile />
       <Profile />
@@ -112,32 +112,32 @@ img { margin: 0 10px 10px 0; }
 
 <LearnMore path="/learn/importing-and-exporting-components">
 
-Read **[Importing and Exporting Components](/learn/importing-and-exporting-components)** to learn how to split components into their own files.
+ອ່ານ **[ການ Import ແລະ Export Components](/learn/importing-and-exporting-components)** ເພື່ອຮຽນຮູ້ວິທີການແຍກ component ເຂົ້າໄປໃນຟາຍຂອງຕົນເອງ.
 
 </LearnMore>
 
-## Writing markup with JSX {/*writing-markup-with-jsx*/}
+## ການຂຽນ markup ດ້ວຍ JSX {/*writing-markup-with-jsx*/}
 
-Each React component is a JavaScript function that may contain some markup that React renders into the browser. React components use a syntax extension called JSX to represent that markup. JSX looks a lot like HTML, but it is a bit stricter and can display dynamic information.
+ແຕ່ລະ React component ແມ່ນຟັງຊັ່ນ JavaScript ທີ່ອາດມີ markup ບາງສ່ວນທີ່ React ສະແດງຜົນໃນບາວເຊີ. Component React ໃຊ້ syntax extension ເອີ້ນວ່າ JSX ເພີ່ມສະແດງ markup ນັ້ນ. JSX ຄ້າຍຄື HTML ຫຼາຍ, ແຕ່ເຂັ້ມງວດກວ່ານ້ອຍໜຶ່ງ ແລະ ສາມາດສະແດງຂໍ້ມູນ dynamic ໄດ້. 
 
-If we paste existing HTML markup into a React component, it won't always work:
+ຖ້າເຮົາວາງ markup HTML ທີ່ມີຢູ່ລົງໃນ React component, ມັນຈະບໍ່ເຮັດວຽກສະເໝີໄປ:
 
 <Sandpack>
 
 ```js
 export default function TodoList() {
   return (
-    // This doesn't quite work!
-    <h1>Hedy Lamarr's Todos</h1>
+    // ນີ້ມັນບໍ່ສາມາດເຮັດວຽກໄດ້ເລີຍ!
+    <h1>Todos ຂອງ Hedy Lamarr</h1>
     <img
       src="https://i.imgur.com/yXOvdOSs.jpg"
       alt="Hedy Lamarr"
       class="photo"
     >
     <ul>
-      <li>Invent new traffic lights
-      <li>Rehearse a movie scene
-      <li>Improve spectrum technology
+      <li>ປະດິດໄຟສັນຍານຈາລະຈອນ
+      <li>ຊ້ອມສາກໜັງ
+      <li>ປັບປຸງເຕັກໂນໂລຊີ spectrum
     </ul>
   );
 }
@@ -149,7 +149,7 @@ img { height: 90px; }
 
 </Sandpack>
 
-If you have existing HTML like this, you can fix it using a [converter](https://transform.tools/html-to-jsx):
+ຖ້າທ່ານມີ HTML ແບບນີ້, ທ່ານສາມາດແປງໄດ້ໂດຍການໃຊ້ [converter](https://transform.tools/html-to-jsx):
 
 <Sandpack>
 
@@ -157,16 +157,16 @@ If you have existing HTML like this, you can fix it using a [converter](https://
 export default function TodoList() {
   return (
     <>
-      <h1>Hedy Lamarr's Todos</h1>
+      <h1>Todos ຂອງ Hedy Lamarr</h1>
       <img
         src="https://i.imgur.com/yXOvdOSs.jpg"
         alt="Hedy Lamarr"
         className="photo"
       />
       <ul>
-        <li>Invent new traffic lights</li>
-        <li>Rehearse a movie scene</li>
-        <li>Improve spectrum technology</li>
+        <li>ປະດິດໄຟສັນຍານຈາລະຈອນ</li>
+        <li>ຊ້ອມສາກໜັງ</li>
+        <li>ປັບປຸງເຕັກໂນໂລຊີ spectrum</li>
       </ul>
     </>
   );
@@ -181,13 +181,13 @@ img { height: 90px; }
 
 <LearnMore path="/learn/writing-markup-with-jsx">
 
-Read **[Writing Markup with JSX](/learn/writing-markup-with-jsx)** to learn how to write valid JSX.
+ອ່ານ **[ການຂຽນ Markup ດ້ວຍ JSX](/learn/writing-markup-with-jsx)** ເພື່ອຮຽນຮູ້ວິທີການຂຽນ JSX ທີ່ຖືກຕ້ອງ.
 
 </LearnMore>
 
-## JavaScript in JSX with curly braces {/*javascript-in-jsx-with-curly-braces*/}
+## JavaScript ໃນ JSX ດ້ວຍວົງປີກກາ {/*javascript-in-jsx-with-curly-braces*/}
 
-JSX lets you write HTML-like markup inside a JavaScript file, keeping rendering logic and content in the same place. Sometimes you will want to add a little JavaScript logic or reference a dynamic property inside that markup. In this situation, you can use curly braces in your JSX to "open a window" to JavaScript:
+JSX ໃຫ້ທ່ານຂຽນ markup ຄ້າຍ HTML ໃນຟາຍ JavaScript, ຮັກສາ logic ການສະແດງຜົນ ແລະ ເນື້ອຫາໃນບ່ອນດຽວ. ບາງເທື່ອທ່ານອາດຈະຕ້ອງເພີ່ມ logic JavaScript ໜ້ອຍໜຶ່ງ ຫຼື ອ້າງອີງ dynamic property ພາຍໃນ markup ນັ້ນ. ໃນສະຖານະການນີ້, ທ່ານສາມາດໃຊ້ວົງປີກາໃນ JSX ຂອງທ່ານເພື່ດ "ເປີດໜ້າຕ່າງ" ເປັນ JavaScript:
 
 <Sandpack>
 
@@ -203,16 +203,16 @@ const person = {
 export default function TodoList() {
   return (
     <div style={person.theme}>
-      <h1>{person.name}'s Todos</h1>
+      <h1>Todos ຂອງ {person.name} </h1>
       <img
         className="avatar"
         src="https://i.imgur.com/7vQD0fPs.jpg"
         alt="Gregorio Y. Zara"
       />
       <ul>
-        <li>Improve the videophone</li>
-        <li>Prepare aeronautics lectures</li>
-        <li>Work on the alcohol-fuelled engine</li>
+        <li>ປັບປຸງວີດີໂອໂຟນ</li>
+        <li>ກຽມບັນຍາຍການບິນ</li>
+        <li>ເຮັດວຽກກັບເຄື່ອງຈັກທີ່ໃຊ້ແອວກໍຮໍເປັນເຊື້ອໄຟ</li>
       </ul>
     </div>
   );
@@ -229,13 +229,13 @@ body > div > div { padding: 20px; }
 
 <LearnMore path="/learn/javascript-in-jsx-with-curly-braces">
 
-Read **[JavaScript in JSX with Curly Braces](/learn/javascript-in-jsx-with-curly-braces)** to learn how to access JavaScript data from JSX.
+ອ່ານ **[JavaScript ໃນ JSX ດ້ວຍວົງປີກກາ](/learn/javascript-in-jsx-with-curly-braces)** ເພື່ອຮຽນຮູ້ກ່ຽວກັບການເຂົ້າເຖິງຂໍ້ມູນ JavaScript ຈາກ JSX.
 
 </LearnMore>
 
-## Passing props to a component {/*passing-props-to-a-component*/}
+## ສົ່ງຜ່ານ props ໃສ່ component {/*passing-props-to-a-component*/}
 
-React components use *props* to communicate with each other. Every parent component can pass some information to its child components by giving them props. Props might remind you of HTML attributes, but you can pass any JavaScript value through them, including objects, arrays, functions, and even JSX!
+Component React ໃຊ້ *props* ເພື່ອສື່ສານລະຫວ່າງກັນ. ທຸກໆ parent component ສາມາດສົ່ງບາງຂໍ້ມູນຫາ child component ມັນເອງໄດ້ໂດຍການໃຊ້ props. Props ອາດເຮັດໃຫ້ທ່ານນຶກເຖິງ HTML attribute, ແຕ່ທ່ານສາມາດສົ່ງຄ່າ JavaScript ຫຍັງກໍໄດ້ຜ່ານມັນ, ປະກອບມີ objects, arrays, functions ແລະ JSX!
 
 <Sandpack>
 
@@ -310,15 +310,15 @@ export function getImageUrl(person, size = 's') {
 
 <LearnMore path="/learn/passing-props-to-a-component">
 
-Read **[Passing Props to a Component](/learn/passing-props-to-a-component)** to learn how to pass and read props.
+ອ່ານ **[ການສົ່ງຜ່ານ Props ໄປຫາ Component](/learn/passing-props-to-a-component)** ເພື່ອຮຽນຮູ້ວິທີການສົ່ງຜ່ານ ແລະ ອ່ານ props.
 
 </LearnMore>
 
-## Conditional rendering {/*conditional-rendering*/}
+## ການສະແດງຜົນແບບມີເງື່ອນໄຂ {/*conditional-rendering*/}
 
-Your components will often need to display different things depending on different conditions. In React, you can conditionally render JSX using JavaScript syntax like `if` statements, `&&`, and `? :` operators.
+Component ຂອງທ່ານສ່ວນຫຼາຍຈະສະແດງສິ່ງຕ່າງໆຂຶ້ນກັບແຕ່ລະເງື່ອນໄຂທີ່ແຕກຕ່າງກັນ. ໃນ React, ທ່ານສາມາດສະແດງ JSX ຢ່າງມີເງື່ອນໄຂໂດຍການໃຊ້ syntax JavaScript ເຊັ່ນ `if` statements, `&&`, ແລະ `? :` operators.
 
-In this example, the JavaScript `&&` operator is used to conditionally render a checkmark:
+ໃນຕົວຢ່າງນີ້, JavaScript `&&` operator ແມ່ນໃຊ້ເພື່ອສະແດງເຄື່ອງໝາຍຕິກຕາມເງື່ອນໄຂ:
 
 <Sandpack>
 
@@ -334,19 +334,19 @@ function Item({ name, isPacked }) {
 export default function PackingList() {
   return (
     <section>
-      <h1>Sally Ride's Packing List</h1>
+      <h1>ລາຍການຂອງ Sally Ride</h1>
       <ul>
         <Item
           isPacked={true}
-          name="Space suit"
+          name="ຊຸດອາວະກາດ"
         />
         <Item
           isPacked={true}
-          name="Helmet with a golden leaf"
+          name="ໝວກກັນກະທົບທີ່ມີໃບສີທອງ"
         />
         <Item
           isPacked={false}
-          name="Photo of Tam"
+          name="ຮູບຂອງແທັມ"
         />
       </ul>
     </section>
@@ -358,15 +358,15 @@ export default function PackingList() {
 
 <LearnMore path="/learn/conditional-rendering">
 
-Read **[Conditional Rendering](/learn/conditional-rendering)** to learn the different ways to render content conditionally.
+ອ່ານ **[ການສະແດງຜົນຕາມເງື່ອນໄຂ](/learn/conditional-rendering)** ເພື່ອຮຽນຮູ້ວິທີຕ່າງໆໃນການສະແດງເນື້ອຫາຕາມເງື່ອນໄຂ.
 
 </LearnMore>
 
-## Rendering lists {/*rendering-lists*/}
+## ການສະແດງ lists {/*rendering-lists*/}
 
-You will often want to display multiple similar components from a collection of data. You can use JavaScript's `filter()` and `map()` with React to filter and transform your array of data into an array of components.
+ທ່ານມັກຈະຕ້ອງການສະແດງ component ຄ້າຍກັນຈາກຂໍ້ມູນ collection. ທ່ານສາມາດໃຊ້ JavaScript `filter()` ແລະ `map()` ກັບ React ເພື່ອ filter ແລະ ປ່ຽນ array ຂອງຂໍ້ມູນໄປເປັນ array ຂອງ component.
 
-For each array item, you will need to specify a `key`. Usually, you will want to use an ID from the database as a `key`. Keys let React keep track of each item's place in the list even if the list changes.
+ສຳລັບ array ແຕ່ລະລາຍການ , ທ່ານຈະຕ້ອງລະບຸ `key`. ສ່ວນຫຼາຍ, ທ່ານຈະຕ້ອງການ ID ຈາກ database ເປັນ `key`. Key ເຮັດໃຫ້ React ຕິດຕາມຕຳແໜ່ງຂອງແຕ່ລະລາຍການໃນ list ເຖິງວ່າ ລາຍການຈະປ່ຽນໄປກໍ່ຕາມ.
 
 <Sandpack>
 
@@ -384,13 +384,13 @@ export default function List() {
       <p>
         <b>{person.name}:</b>
         {' ' + person.profession + ' '}
-        known for {person.accomplishment}
+        ເປັນທີ່ຮູ້ຈັກສຳຫຼັບ {person.accomplishment}
       </p>
     </li>
   );
   return (
     <article>
-      <h1>Scientists</h1>
+      <h1>ນັກວິທະຍາສາດ</h1>
       <ul>{listItems}</ul>
     </article>
   );
@@ -401,32 +401,32 @@ export default function List() {
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
-  profession: 'mathematician',
-  accomplishment: 'spaceflight calculations',
+  profession: 'ນັກຄະນິດສາດ',
+  accomplishment: 'ການຄຳນວນການບິນໃນອາວະກາດ',
   imageId: 'MK3eW3A'
 }, {
   id: 1,
   name: 'Mario José Molina-Pasquel Henríquez',
-  profession: 'chemist',
-  accomplishment: 'discovery of Arctic ozone hole',
+  profession: 'ນັກເຄມີສາດ',
+  accomplishment: 'ການຄົ້ນພົບຫຼຸມໂອໂຊນອາກຕິກ',
   imageId: 'mynHUSa'
 }, {
   id: 2,
   name: 'Mohammad Abdus Salam',
-  profession: 'physicist',
-  accomplishment: 'electromagnetism theory',
+  profession: 'ນັກຟີຊິກສາດ',
+  accomplishment: 'ທິດສະດີແມ່ເຫຼັກໄຟຟ້າ',
   imageId: 'bE7W1ji'
 }, {
   id: 3,
   name: 'Percy Lavon Julian',
-  profession: 'chemist',
-  accomplishment: 'pioneering cortisone drugs, steroids and birth control pills',
+  profession: 'ນັກເຄມີສາດ',
+  accomplishment: 'ຜູ້ບຸກເບີກຢາຄອກຕິໂຊນ, ສະເຕີລອຍ ແລະ ຢາຄຸມກຳເນີດ',
   imageId: 'IOjWm71'
 }, {
   id: 4,
   name: 'Subrahmanyan Chandrasekhar',
-  profession: 'astrophysicist',
-  accomplishment: 'white dwarf star mass calculations',
+  profession: 'ນັກຟີຊິກດາລາສາດ',
+  accomplishment: 'ການຄຳນວນມວນດາວແຄະຂາວ',
   imageId: 'lrWQx8l'
 }];
 ```
@@ -458,18 +458,18 @@ h2 { font-size: 20px; }
 
 <LearnMore path="/learn/rendering-lists">
 
-Read **[Rendering Lists](/learn/rendering-lists)** to learn how to render a list of components, and how to choose a key.
+ອ່ານ **[ການສະແດງ Lists](/learn/rendering-lists)** ເພື່ອຮຽນຮູ້ວິທີສະແດງ list ຂອງ component ແລະ ວິທີການເລືອກ key.
 
 </LearnMore>
 
-## Keeping components pure {/*keeping-components-pure*/}
+## ການຮັກສາ components ໃຫ້ pure {/*keeping-components-pure*/}
 
-Some JavaScript functions are *pure.* A pure function:
+ບາງຟັງຊັ່ນ JavaScript ແມ່ນ *pure.* Pure function:
 
-* **Minds its own business.** It does not change any objects or variables that existed before it was called.
-* **Same inputs, same output.** Given the same inputs, a pure function should always return the same result.
+* **ຄຳນຶງເຖິງເລື່ອງໂຕມັນເອງ.** ມັນບໍ່ມີການປ່ຽນແປງ object ຫຼື ຕົວປ່ຽນໃດໆທີ່ມີຢູ່ກ່ອນທີ່ມັນຈະຖືກເອີ້ນໃຊ້.
+* **input ດຽວກັນ, output ດຽວກັນ.** ຍ້ອນ input ດຽວກັນ, pure function ຄວນຈະ return ຜົນໄດ້ຮັບດຽວກັນຢູ່ສະເໝີ.
 
-By strictly only writing your components as pure functions, you can avoid an entire class of baffling bugs and unpredictable behavior as your codebase grows. Here is an example of an impure component:
+ໃຫ້ຂຽນ Component ຂອງທ່ານໃຫ້ເປັນຟັງຊັ່ນລ້ວນໆເທົ່ານັ້ນຢ່າງເຄັ່ງຄັດ, ທ່ານສາມາດຫຼີກຫຼ່ຽງ bug ທີ່ເຮັດໃຫ້ວຸ້ນວາຍ ແລະ ພຶດຕິກຳທີ່ບໍ່ຄາດຄິດເມື່ອ codebase ຂອງທ່ານໃຫຍ່ຂຶ້ນ. ນີ້ແມ່ນຕົວຢ່າງຂອງ component ທີ່ບໍ່ pure:
 
 <Sandpack>
 
@@ -477,9 +477,9 @@ By strictly only writing your components as pure functions, you can avoid an ent
 let guest = 0;
 
 function Cup() {
-  // Bad: changing a preexisting variable!
+  // ບໍ່ດິ: ປ່ຽນຄ່າຕົວແປທີ່ມີຢູ່ກ່ອນ!
   guest = guest + 1;
-  return <h2>Tea cup for guest #{guest}</h2>;
+  return <h2>ຊາສຳລັບແຂກ  #{guest}</h2>;
 }
 
 export default function TeaSet() {
@@ -495,13 +495,13 @@ export default function TeaSet() {
 
 </Sandpack>
 
-You can make this component pure by passing a prop instead of modifying a preexisting variable:
+ທ່ານສາມາດເຮັດໃຫ້ component ນີ້ pure ໄດ້ ໂດຍການສົ່ງ prop ແທນທີ່ການແກ້ໄຂຕົວແປທີ່ມີຢູ່ແລ້ວ:
 
 <Sandpack>
 
 ```js
 function Cup({ guest }) {
-  return <h2>Tea cup for guest #{guest}</h2>;
+  return <h2>ຊາສຳລັບແຂກ #{guest}</h2>;
 }
 
 export default function TeaSet() {
@@ -519,12 +519,12 @@ export default function TeaSet() {
 
 <LearnMore path="/learn/keeping-components-pure">
 
-Read **[Keeping Components Pure](/learn/keeping-components-pure)** to learn how to write components as pure, predictable functions.
+ອ່ານ **[ຮັກສາໃຫ້ Component pure](/learn/keeping-components-pure)** ເພື່ອຮຽນຮູ້ວິທີຂຽນ component ໃຫ້ pure, ແລະ ສາມາດຄາດເດົາຟັງຊັ່ນໄດ້.
 
 </LearnMore>
 
-## What's next? {/*whats-next*/}
+## ຕໍ່ໄປແມ່ນຫຍັງ? {/*whats-next*/}
 
-Head over to [Your First Component](/learn/your-first-component) to start reading this chapter page by page!
+ໄປທີ່ [Component ທຳອິດຂອງທ່ານ](/learn/your-first-component) ເພື່ອເລີ່ມອ່ານບົດນີ້ເທື່ອລະໜ້າ!
 
-Or, if you're already familiar with these topics, why not read about [Adding Interactivity](/learn/adding-interactivity)?
+ຫຼຶ, ຖ້າທ່ານມີຄວາມຄຸ້ນເຄິຍກັບຫົວຂໍ້ເຫຼົ່ານີ້ແລ້ວ, ເປັນຫຍັງບໍ່ອ່ານ [ການເພີ່ມ Interactivity](/learn/adding-interactivity)?
