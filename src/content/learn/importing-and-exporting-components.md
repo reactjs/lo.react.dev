@@ -1,26 +1,26 @@
 ---
-title: Importing and Exporting Components
+title: ການ Import ແລະ  Export Components
 ---
 
 <Intro>
 
-The magic of components lies in their reusability: you can create components that are composed of other components. But as you nest more and more components, it often makes sense to start splitting them into different files. This lets you keep your files easy to scan and reuse components in more places.
+ຄວາມມະຫັດສະຈັນຂອງ component ແມ່ນຢູ່ບ່ອນທີ່ມັນສາມາດນຳກັບມາໃຊ້ໃໝ່ໄດ້: ທ່ານສາມາດສ້າງ components ທີ່ປະກອບດ້ວຍ component ອື່ນ. ແຕ່ເມື່ອທ່ານຊ້ອນ component ຫຼາຍຂຶ້ນເລື້ອຍໆ, ກໍຈະມີເຫດຜົນທີ່ຄວນເລີ່ມແຍກ component ອອກມາເປັນຟາຍຕ່າງໆ. ນີ້ຊ່ວຍໃຫ້ທ່ານສາມາດກວດ ແລະ ນຳ component ກັບມາໃຊ້ໃໝ່ໄດ້ໃນບ່ອນອື່ນໆຫຼາຍຂຶ້ນ.
 
 </Intro>
 
 <YouWillLearn>
 
-* What a root component file is
-* How to import and export a component
-* When to use default and named imports and exports
-* How to import and export multiple components from one file
-* How to split components into multiple files
+* ຟາຍ Root component ແມ່ນຫຍັງ
+* ວິທີການ import ແລະ export component
+* ເມື່ອໃດທີ່ຕ້ອງໃຊ້ ການ import ແລະ export ເປັນຄ່າເລີ່ມຕົ້ນ ແລະ ການຕັ້ງຊື່
+* ວິທີການ import ແລະ export ຫຼາຍ component ຈາກໜຶ່ງຟາຍ
+* ວິທີການແຍກ components ອອກເປັນຫຼາຍຟາຍ
 
 </YouWillLearn>
 
-## The root component file {/*the-root-component-file*/}
+## ຟາຍ root component {/*the-root-component-file*/}
 
-In [Your First Component](/learn/your-first-component), you made a `Profile` component and a `Gallery` component that renders it:
+ໃນ [Component ທຳອິດຂອງທ່ານ](/learn/your-first-component), ທ່ານໄດ້ສ້າງ component `Profile` ແລະ component `Gallery` ເພື່ອສະແດງມັນ:
 
 <Sandpack>
 
@@ -37,7 +37,7 @@ function Profile() {
 export default function Gallery() {
   return (
     <section>
-      <h1>Amazing scientists</h1>
+      <h1>ນັກວິທະຍາສາດທີ່ໜ້າປະຫຼາດໃຈ</h1>
       <Profile />
       <Profile />
       <Profile />
@@ -52,20 +52,20 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-These currently live in a **root component file,** named `App.js` in this example. In [Create React App](https://create-react-app.dev/), your app lives in `src/App.js`. Depending on your setup, your root component could be in another file, though. If you use a framework with file-based routing, such as Next.js, your root component will be different for every page.
+ປັດຈຸບັນຟາຍເຫຼົ່ານີ້ຢູ່ໃນ **ຟາຍ root component,** ຊື່ `App.js` ໃນຕົວຢ່າງນີ້. ໃນ [ການສ້າງແອັບ React](https://create-react-app.dev/), ແອັບຂອງທ່ານຢູ່ໃນ `src/App.js`. ຂຶ້ນກັບການຕັ້ງຄ່າຂອງທ່ານ, Root component ຂອງທ່ານສາມາດເປັນຟາຍອື່ນກໍໄດ້. ຖ້າທ່ານໃຊ້ framework ທີ່ມີການກຳນົດ routing ຕາມ file-based, ເຊັ່ນ Next.js, Root component ຂອງທ່ານຈະແຕກຕ່າງກັນໄປໃນແຕ່ລະ page.
 
-## Exporting and importing a component {/*exporting-and-importing-a-component*/}
+## ການ import ແລະ export component {/*exporting-and-importing-a-component*/}
 
-What if you want to change the landing screen in the future and put a list of science books there? Or place all the profiles somewhere else? It makes sense to move `Gallery` and `Profile` out of the root component file. This will make them more modular and reusable in other files. You can move a component in three steps:
+ຈະເຮັດແນວໃດຖ້າທ່ານຕ້ອງການປ່ຽນ landing screen ໃນອະນາຄົດ ແລະ ເອົາລາຍການຂອງປື້ມວິທະຍາສາດໃສ່ໃນນັ້ນ? ຫຼື ເອົາ profile ທັງໝົດໄວ້ບ່ອນອື່ນ? ການຍ້າຍ `Gallery` ແລະ `Profile` ອອກຈາກຟາຍ root component ເປັນເລື່ອງທີ່ສົມເຫດສົມຜົນ. ນີ້ຈະເຮັດໃຫ້ມັນແຍກເປັນ module ໄດ້ຫຼາຍຂື້ນ ແລະ ສາມາດນຳມາໃຊ້ຊໍ້າກັບຟາຍອື່ນໆ. ທ່ານສາມາດຍ້າຍ component ໃນ 3 ຂັ້ນຕອນ:
 
-1. **Make** a new JS file to put the components in.
-2. **Export** your function component from that file (using either [default](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_the_default_export) or [named](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_named_exports) exports).
-3. **Import** it in the file where you’ll use the component (using the corresponding technique for importing [default](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import#importing_defaults) or [named](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import#import_a_single_export_from_a_module) exports).
 
-Here both `Profile` and `Gallery` have been moved out of `App.js` into a new file called `Gallery.js`. Now you can change `App.js` to import `Gallery` from `Gallery.js`:
+1. **ສ້າງ** ຟາຍ JS ໃໝ່ເພື່ອເອົາ component ເຂົ້າໄປ.
+2. **Export** Component ຟັງຊັ່ນຂອງທ່ານຈາກຟາຍນັ້ນ (ໂດຍໃຊ້ [default](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_the_default_export) ຫຼື [named](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/export#using_named_exports) exports).
+3. **Import** ໃນຟາຍທີ່ທ່ານຈະໃຊ້ component (ໂດຍໃຊ້ເຕັກນິກທີ່ກ່ຽວຂ້ອງໃນການ import [default](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import#importing_defaults) ຫຼື [named](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import#import_a_single_export_from_a_module) exports).
+
+ທັງ `Profile` ແລະ `Gallery` ຖືກຍ້າຍອອກຈາກ `App.js` ໄປໃນຟາຍໃໝ່ຊື່ `Gallery.js`. ຕອນນີ້ທ່ານສາມາດປ່ຽນ `App.js` ເພື່ອ import `Gallery` ຈາກ `Gallery.js`:
 
 <Sandpack>
-
 ```js App.js
 import Gallery from './Gallery.js';
 
@@ -89,7 +89,7 @@ function Profile() {
 export default function Gallery() {
   return (
     <section>
-      <h1>Amazing scientists</h1>
+      <h1>ນັກວິທະຍາສາດທີ່ໜ້າປະຫຼາດໃຈ</h1>
       <Profile />
       <Profile />
       <Profile />
@@ -104,60 +104,60 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-Notice how this example is broken down into two component files now:
+ສັງເກດ ຕົວຢ່າງນີ້ໄດ້ແຕກອອກເປັນ 2 ຟາຍ component ໄດ້ແນວໃດ:
 
 1. `Gallery.js`:
-     - Defines the `Profile` component which is only used within the same file and is not exported.
-     - Exports the `Gallery` component as a **default export.**
+     - ປະກາດ component `Profile` ທີ່ໃຊ້ສະເພາະໃນຟາຍດຽວກັນ ແລະ ບໍ່ຖືກ export.
+     - Export component `Gallery` ເປັນ **default export.**
 2. `App.js`:
-     - Imports `Gallery` as a **default import** from `Gallery.js`.
-     - Exports the root `App` component as a **default export.**
+     - Imports `Gallery` ເປັນ **default import** ຈາກ `Gallery.js`.
+     - Exports root component ຂອງ `App` ເປັນ **default export.**
 
 
 <Note>
 
-You may encounter files that leave off the `.js` file extension like so:
+ທ່ານອາດຈະພົບຟາຍທີ່ບໍ່ມີນາມສະກຸນຟາຍ `.js` ດັ່ງນີ້:
 
 ```js 
 import Gallery from './Gallery';
 ```
 
-Either `'./Gallery.js'` or `'./Gallery'` will work with React, though the former is closer to how [native ES Modules](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules) work.
+`'./Gallery.js'` ຫຼື `'./Gallery'` ຈະເຮັດວຽກຮ່ວມກັບ React ໄດ້, ເຖິງວ່າອັນທຳອິດມັນຈະຄ້າຍກັບວິທີທີ່ [native ES Modules](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules) ເຮັດວຽກ.
 
 </Note>
 
 <DeepDive>
 
-#### Default vs named exports {/*default-vs-named-exports*/}
+#### default ແລະ named exports {/*default-vs-named-exports*/}
 
-There are two primary ways to export values with JavaScript: default exports and named exports. So far, our examples have only used default exports. But you can use one or both of them in the same file. **A file can have no more than one _default_ export, but it can have as many _named_ exports as you like.**
+ມີສອງວິທີຫຼັກໃນການ export value ດ້ວຍ JavaScript: default exports ແລະ named exports. ຈົນເຖີງຕອນນີ້, ຕົວຢ່າງຂອງພວກເຮົາໃຊ້ default exports. ແຕ່ທ່ານສາມາດໃຊ້ຢ່າງໃດຢ່າງໜຶ່ງ ຫຼື ທັງສອງຢ່າງໃນຟາຍດຽວກັນ. **ໜຶ່ງຟາຍບໍ່ສາມາດມີຫຼາຍກວ່າໜຶ່ງ _default_ export, ແຕ່ມັນສາມາດມີຫຼາຍ _named_ export ຕາມທີ່ທ່ານຕ້ອງການ.**
 
 ![Default and named exports](/images/docs/illustrations/i_import-export.svg)
 
-How you export your component dictates how you must import it. You will get an error if you try to import a default export the same way you would a named export! This chart can help you keep track:
+ວິທີທີ່ທ່ານ export component ເປັນຕົວກຳນົດວິທີທີ່ທ່ານຕ້ອງ import ມັນ. ທ່ານຈະໄດ້ຮັບຂໍ້ຜິດພາດຖ້າທ່ານພະຍາຍາມ import default export ແບບດຽວກັບທີ່ທ່ານໃຊ້ named export! Chart ນີ້ສາມາດຊ່ວຍໃຫ້ທ່ານຕິດຕາມ: 
 
 | Syntax           | Export statement                           | Import statement                          |
 | -----------      | -----------                                | -----------                               |
 | Default  | `export default function Button() {}` | `import Button from './Button.js';`     |
 | Named    | `export function Button() {}`         | `import { Button } from './Button.js';` |
 
-When you write a _default_ import, you can put any name you want after `import`. For example, you could write `import Banana from './Button.js'` instead and it would still provide you with the same default export. In contrast, with named imports, the name has to match on both sides. That's why they are called _named_ imports!
+ເມື່ອທ່ານຂຽນ _default_ import, ທ່ານສາມາດໃສ່ຊື່ໃດກໍໄດ້ທີ່ທ່ານຕ້ອງການຫຼັງ `import`. ຕົວຢ່າງ, ທ່ານສາມາດຂຽນ `import Banan from './Button.js'` ແທນໄດ້ ແລະ ມັນຈະຍັງໃຊ້ຄືກັນກັບ default export. ໃນທາງກົງກັນຂ້າມ, ດ້ວຍ named imports, ຊື່ຕ້ອງກົງກັນທັງສອງດ້ານ. ນັ້ນເປັນເຫດຜົນທີ່ເອີ້ນວ່າ _named_ import!
 
-**People often use default exports if the file exports only one component, and use named exports if it exports multiple components and values.** Regardless of which coding style you prefer, always give meaningful names to your component functions and the files that contain them. Components without names, like `export default () => {}`, are discouraged because they make debugging harder.
+**ຜູ້ຄົນມັກຈະໃຊ້ default exports ຖ້າຟາຍ export ມີແຕ່ component ດຽວ, ແລະ ໃຊ້ named exports ຖ້າມັນ exports ຫຼາຍ component ແລະ value.** ບໍ່ວ່າທ່ານຈະມັກ style ການຂຽນ code ແບບໃດ, ໃຫ້ຕັ້ງຊື່ທີ່ມີຄວາມໝາຍໃຫ້ກັບຟັງຊັ່ນ component ແລະ ຟາຍທີ່ມີຢູ່ສະເໝີ. Components ທີ່ບໍ່ມີຊື່, ເຊັ່ນ: `export default () => {}`, ແມ່ນບໍ່ຮອງຮັບ ເພາະວ່າມັນຈະເຮັດໃຫ້ການ debug ຍາກຂຶ້ນ.
 
 </DeepDive>
 
-## Exporting and importing multiple components from the same file {/*exporting-and-importing-multiple-components-from-the-same-file*/}
+## ການ Export ແລະ import ຫຼາຍ components ຈາກຟາຍດຽວກັນ {/*exporting-and-importing-multiple-components-from-the-same-file*/}
 
-What if you want to show just one `Profile` instead of a gallery? You can export the `Profile` component, too. But `Gallery.js` already has a *default* export, and you can't have _two_ default exports. You could create a new file with a default export, or you could add a *named* export for `Profile`. **A file can only have one default export, but it can have numerous named exports!**
+ຈະເຮັດແນວໃດຖ້າທ່ານຕ້ອງການສະແດງໜຶ່ງ `Profile` ແທນ gallery? ທ່ານສາມາດ export Component `Profile` ຄືກັນ. ແຕ່ `Gallery.js` ແມ່ນເປັນ *default* export ຢູ່ແລ້ວ, ແລະ ທ່ານບໍ່ສາມາດມີ _ສອງ_ default exports. ທ່ານສາມາດສ້າງຟາຍໃໝ່ດ້ວຍ default export, ຫຼື ທ່ານສາມາດເພີ່ມ *named* export ສຳລັບ `Profile`. **ໜຶ່ງຟາຍສາມາດມີໄດ້ແຕ່ໜຶ່ງ default export ເທົ່ານັ້ນ, ແຕ່ສາມາດມີຫຼາຍ named exports!** 
 
 <Note>
 
-To reduce the potential confusion between default and named exports, some teams choose to only stick to one style (default or named), or avoid mixing them in a single file. Do what works best for you!
+ເພື່ອຫຼຸດຄວາມສັບສົນທີ່ອາດຈະເກີດຂື້ນລະຫວ່າງ default ແລະ named exports, ບາງທີມເລືອກທີ່ຈະຢູ່ກັບແບບດຽວເທົ່ານັ້ນ (default ຫຼື named), ຫຼື ຫຼີກຫຼ່ຽງການປະສົມກັນໃນຟາຍດຽວ. ຫາສິ່ງທີ່ດີສຸດສຳລັບທ່ານ!
 
 </Note>
 
-First, **export** `Profile` from `Gallery.js` using a named export (no `default` keyword):
+ທຳອິດ, **export** `Profile` ຈາກ `Gallery.js` ໂດຍການໃຊ້ named export (ບໍ່ມີ keyword `default`):
 
 ```js
 export function Profile() {
@@ -165,13 +165,13 @@ export function Profile() {
 }
 ```
 
-Then, **import** `Profile` from `Gallery.js` to `App.js` using a named import (with the curly braces):
+ຈາກນັ້ນ, **import** `Profile` ຈາກ `Gallery.js` ໃສ່ໃນ `App.js` ນຳໃຊ້ named import (ດ້ວຍວົງປີກກາ):
 
 ```js
 import { Profile } from './Gallery.js';
 ```
 
-Finally, **render** `<Profile />` from the `App` component:
+ສຸດທ້າຍ, **ສະແດງ** `<Profile />` ຈາກ component `App`:
 
 ```js
 export default function App() {
@@ -179,7 +179,7 @@ export default function App() {
 }
 ```
 
-Now `Gallery.js` contains two exports: a default `Gallery` export, and a named `Profile` export. `App.js` imports both of them. Try editing `<Profile />` to `<Gallery />` and back in this example:
+ຕອນນີ້ `Gallery.js` ປະກອບມີສອງ exports: default `Gallery` export, ແລະ named `Profile` export. `App.js` imports ທັງສອງ. ລອງແກ້ໄຂ `<Profile />` ໃສ່ `<Gallery />` ແລະ ກັບໄປຕົວຢ່າງນີ້:
 
 <Sandpack>
 
@@ -207,7 +207,7 @@ export function Profile() {
 export default function Gallery() {
   return (
     <section>
-      <h1>Amazing scientists</h1>
+      <h1>ນັກວິທະຍາສາດທີ່ໜ້າປະຫຼາດໃຈ</h1>
       <Profile />
       <Profile />
       <Profile />
@@ -222,24 +222,25 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-Now you're using a mix of default and named exports:
+ຕອນນີ້ທ່ານໄດ້ໃຊ້ default ແລະ named exports ປົນກັນ:
 
 * `Gallery.js`:
-  - Exports the `Profile` component as a **named export called `Profile`.**
-  - Exports the `Gallery` component as a **default export.**
+  - Exports Component `Profile` ເປັນ **named export ເອີ້ນວ່າ `Profile`.**
+  - Exports Component `Gallery` ເປັນ **default export.**
 * `App.js`:
-  - Imports `Profile` as a **named import called `Profile`** from `Gallery.js`.
-  - Imports `Gallery` as a **default import** from `Gallery.js`.
-  - Exports the root `App` component as a **default export.**
+  - Imports `Profile` ເປັນ **named import ເອີ້ນວ່າ `Profile`** ຈາກ `Gallery.js`.
+  - Imports `Gallery` ເປັນ **default import** ຈາກ `Gallery.js`.
+  - Exports  root component ຂອງ `App`  ເປັນ **default export.**
 
 <Recap>
 
-On this page you learned:
+ໃນໜ້ານີ້ທ່ານໄດ້ຮຽນ:
 
-* What a root component file is
-* How to import and export a component
-* When and how to use default and named imports and exports
-* How to export multiple components from the same file
+* ຟາຍ Root component ແມ່ນຫຍັງ
+* ວິທີການ import ແລະ export component
+* ເມື່ອໃດທີ່ຕ້ອງໃຊ້ ການ import ແລະ export ເປັນຄ່າເລີ່ມຕົ້ນ ແລະ ການຕັ້ງຊື່
+* ວິທີການ import ແລະ export ຫຼາຍ component ຈາກໜຶ່ງຟາຍ
+* ວິທີການແຍກ components ອອກເປັນຫຼາຍຟາຍ
 
 </Recap>
 
@@ -247,13 +248,13 @@ On this page you learned:
 
 <Challenges>
 
-#### Split the components further {/*split-the-components-further*/}
+#### ແຍກ components ຕື່ມ {/*split-the-components-further*/}
 
-Currently, `Gallery.js` exports both `Profile` and `Gallery`, which is a bit confusing.
+ປັດຈຸບັນ, `Gallery.js` exports ທັງ `Profile` ແລະ `Gallery`, ເຊິ່ງເຮັດໃຫ້ສັບສົນໜ້ອຍໜຶ່ງ.
 
-Move the `Profile` component to its own `Profile.js`, and then change the `App` component to render both `<Profile />` and `<Gallery />` one after another.
+ຍ້າຍ Component `Profile` ໄປທີ່ `Profile.js` ຂອງຕົວເອງ, ແລະ ຈາກນັ້ນປ່ຽນ component `App` ເພື່ອສະແດງທັງ `<Profile />` ແລະ `<Gallery />` ເທື່ອລະລາຍການ.
 
-You may use either a default or a named export for `Profile`, but make sure that you use the corresponding import syntax in both `App.js` and `Gallery.js`! You can refer to the table from the deep dive above:
+ທ່ານອາດໃຊ້ທັງ default ຫຼື named export ສຳລັບ `Profile`, ແຕ່ໃຫ້ແນ່ໃຈວ່າທ່ານໃຊ້ syntax import ທີ່ກ່ຽວຂ້ອງໃນທັງ `App.js` ແລະ `Gallery.js`! ທ່ານສາມາດອ້າງອີງຈາກຕາຕະລາງ ຫຼື ລົງເລິກດ້ານເທິງ:
 
 | Syntax           | Export statement                           | Import statement                          |
 | -----------      | -----------                                | -----------                               |
@@ -262,7 +263,7 @@ You may use either a default or a named export for `Profile`, but make sure that
 
 <Hint>
 
-Don't forget to import your components where they are called. Doesn't `Gallery` use `Profile`, too?
+ຢ່າລືມ import components ຂອງທ່ານບ່ອນທີມັນຖືກເອີ້ນ. `Gallery` ບໍ່ໄດ້ໃຊ້ `Profile`, ຄືກັນ?
 
 </Hint>
 
@@ -295,7 +296,7 @@ export function Profile() {
 export default function Gallery() {
   return (
     <section>
-      <h1>Amazing scientists</h1>
+      <h1>ນັກວິທະຍາສາດທີ່ໜ້າປະຫຼາດໃຈ</h1>
       <Profile />
       <Profile />
       <Profile />
@@ -313,11 +314,11 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-After you get it working with one kind of exports, make it work with the other kind.
+ຫຼັງຈາກທີ່ທ່ານເຂົ້າໃຈໜຶ່ງວິທີການເຮັດວຽກຂອງປະເພດການ exports ແລ້ວ, ເຮັດໃຫ້ມັນເຮັດວຽກໄດ້ກັບອີກປະເພດ.
 
 <Solution>
 
-This is the solution with named exports:
+ນີ້ແມ່ນວິທີແກ້ບັນຫາດ້ວຍ named exports:
 
 <Sandpack>
 
@@ -341,7 +342,7 @@ import { Profile } from './Profile.js';
 export default function Gallery() {
   return (
     <section>
-      <h1>Amazing scientists</h1>
+      <h1>ນັກວິທະຍາສາດທີ່ໜ້າປະຫຼາດໃຈ</h1>
       <Profile />
       <Profile />
       <Profile />
@@ -367,7 +368,7 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-This is the solution with default exports:
+ນີ້ແມ່ນວິທີແກ້ໄຂບັນຫາດ້ວຍ default exports:
 
 <Sandpack>
 
@@ -391,7 +392,7 @@ import Profile from './Profile.js';
 export default function Gallery() {
   return (
     <section>
-      <h1>Amazing scientists</h1>
+      <h1>ນັກວິທະຍາສາດທີ່ໜ້າປະຫຼາດໃຈ</h1>
       <Profile />
       <Profile />
       <Profile />
