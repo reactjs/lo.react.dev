@@ -1,25 +1,25 @@
 ---
-title: JavaScript in JSX with Curly Braces
+title: JavaScript ໃນ JSX ດ້ວຍວົງປີກກາ
 ---
 
 <Intro>
 
-JSX lets you write HTML-like markup inside a JavaScript file, keeping rendering logic and content in the same place. Sometimes you will want to add a little JavaScript logic or reference a dynamic property inside that markup. In this situation, you can use curly braces in your JSX to open a window to JavaScript.
+JSX ໃຫ້ທ່ານຂຽນ markup ຄ້າຍ HTML ພາຍໃນຟາຍ JavaScript, ເຮັດໃຫ້ logic ການສະແດງຜົນ ແລະ ເນື້ອຫາຢູ່ໃນບ່ອນດຽວກັນ. ບາງເທື່ອທ່ານອາດຈະຕ້ອງການເພີ່ມ logic JavaScript ໜ້ອຍໜຶ່ງ ຫຼື ອ້າງອີງ dynamic property ພາຍໃນ markup ນັ້ນ. ໃນສະຖານະການນີ້, ທ່ານສາມາດໃຊ້ວົງປີກກາໃນ JSX ຂອງທ່ານເພື່ອເປີດໜ້າຕ່າງໄປຍັງ JavaScript.
 
 </Intro>
 
 <YouWillLearn>
 
-* How to pass strings with quotes
-* How to reference a JavaScript variable inside JSX with curly braces
-* How to call a JavaScript function inside JSX with curly braces
-* How to use a JavaScript object inside JSX with curly braces
+* ວິທີສົ່ງ string ດ້ວຍວົງຢືມ
+* ວິທີອ້າງອີງຕົວແປ JavaScript ພາຍໃນ JSX ດ້ວຍວົງປີກກາ
+* ວິທີເອີ້ນຟັງຊັ່ນ JavaScripot ພາຍໃນ JSX ດ້ວຍວົງປີກກາ
+* ວີທີໃຊ້ object JavaScript ພາຍໃນ JSX ດ້ວຍວົງປີກກາ
 
 </YouWillLearn>
 
-## Passing strings with quotes {/*passing-strings-with-quotes*/}
+##  ສົ່ງ string ດ້ວຍວົງຢືມ {/*passing-strings-with-quotes*/}
 
-When you want to pass a string attribute to JSX, you put it in single or double quotes:
+ເມື່ອທ່ານຕ້ອງການສົ່ງ attribute string ໄປຍັງ JSX, ໃຫ້ໃສ່ເຄື່ອງໝາຍຂີດດຽວ ຫຼື ວົງຢືມ:
 
 <Sandpack>
 
@@ -41,9 +41,9 @@ export default function Avatar() {
 
 </Sandpack>
 
-Here, `"https://i.imgur.com/7vQD0fPs.jpg"` and `"Gregorio Y. Zara"` are being passed as strings.
+ນີ້, `"https://i.imgur.com/7vQD0fPs.jpg"` ແລະ `"Gregorio Y. Zara"` ແມ່ນຖືກສົ່ງຜ່ານເປັນ string.
 
-But what if you want to dynamically specify the `src` or `alt` text? You could **use a value from JavaScript by replacing `"` and `"` with `{` and `}`**:
+ແຕ່ຖ້າທ່ານຕ້ອງການລະບຸຂໍ້ຄວາມ `src` ຫຼື `alt` ແບບ dynamic ເດ? ທ່ານສາມາດ **ໃຊ້ຄ່າຈາກ JavaScript ໂດຍແທນທີ່ `"` ແລະ `"` ດ້ວຍ `{` ແລະ `}`**
 
 <Sandpack>
 
@@ -67,11 +67,11 @@ export default function Avatar() {
 
 </Sandpack>
 
-Notice the difference between `className="avatar"`, which specifies an `"avatar"` CSS class name that makes the image round, and `src={avatar}` that reads the value of the JavaScript variable called `avatar`. That's because curly braces let you work with JavaScript right there in your markup!
+ສັງເກດຄວາມແຕກຕ່າງລະຫວ່າງ `className="avatar"`, ເຊິ່ງກຳນົດ class CSS `"avatar"` ທີ່ເຮັດໃຫ້ຮູບພາບມົນ, ແລະ `src={avatar}` ທີ່ອ່ານຄ່າຂອງຕົວແປ JavaScript ເອີ້ນວ່າ `avatar`. ນັ້ນເພາະວ່າວົງປີກກາເຮັດໃຫ້ທ່ານສາມາດເຮັດວຽກກັບ JavaScript ໃນ markup ຂອງທ່ານໄດ້!
 
-## Using curly braces: A window into the JavaScript world {/*using-curly-braces-a-window-into-the-javascript-world*/}
+## ການນຳໃຊ້ວົງປີກກາ: ໜ້າຕ່າງສູ່ໂລກຂອງ JavaScript {/*using-curly-braces-a-window-into-the-javascript-world*/}
 
-JSX is a special way of writing JavaScript. That means it’s possible to use JavaScript inside it—with curly braces `{ }`. The example below first declares a name for the scientist, `name`, then embeds it with curly braces inside the `<h1>`:
+JSX ແມ່ນວິທີການພິເສດໃນການຂຽນ JavaScript. ໝາຍຄວາມວ່າສາມາດໃຊ້ JavaScript ພາຍໃນໄດ້-ດ້ວຍວົງປີກກາ `{ }`. ຕົວຢ່າງດ້ານລຸ່ມທຳອິດແມ່ນປະກາດຊື່ສຳລັບນັກວິທະຍາສາດ, `name`, ຈາກນັ້ນ embed ມັນດ້ວຍວົງປີກກາພາຍໃນ `<h1>`:
 
 <Sandpack>
 
@@ -79,16 +79,16 @@ JSX is a special way of writing JavaScript. That means it’s possible to use Ja
 export default function TodoList() {
   const name = 'Gregorio Y. Zara';
   return (
-    <h1>{name}'s To Do List</h1>
+    <h1>To Do List ຂອງ {name} </h1>
   );
 }
 ```
 
 </Sandpack>
 
-Try changing the `name`'s value from `'Gregorio Y. Zara'` to `'Hedy Lamarr'`. See how the list title changes?
+ລອງປ່ຽນຄ່າ `name` ຈາກ `'Gregorio Y. Zara'` ເປັນ `'Hedy Lamarr'`. ເບິ່ງວ່າລາຍການປ່ຽນແປງແນວໃດ?
 
-Any JavaScript expression will work between curly braces, including function calls like `formatDate()`:
+Expression JavaScript ໃດໆຈະເຮັດວຽກລະຫວ່າງວົງປີກກາ, ລວມເຖິງການໃຊ້ຟັງຊັ່ນເຊັ່ນ `formatDate()`:
 
 <Sandpack>
 
@@ -104,25 +104,25 @@ function formatDate(date) {
 
 export default function TodoList() {
   return (
-    <h1>To Do List for {formatDate(today)}</h1>
+    <h1>To Do List ສຳລັບ {formatDate(today)}</h1>
   );
 }
 ```
 
 </Sandpack>
 
-### Where to use curly braces {/*where-to-use-curly-braces*/}
+### ບ່ອນໃຊ້ວົງປີກກາ {/*where-to-use-curly-braces*/}
 
-You can only use curly braces in two ways inside JSX:
+ທ່ານສາມາດໃຊ້ວົງປີກກາດ້ວຍ 2 ວິທີພາຍໃນ JSX ເທົ່ານັ້ນ:
 
-1. **As text** directly inside a JSX tag: `<h1>{name}'s To Do List</h1>` works, but `<{tag}>Gregorio Y. Zara's To Do List</{tag}>`  will not.
-2. **As attributes** immediately following the `=` sign: `src={avatar}` will read the `avatar` variable, but `src="{avatar}"` will pass the string `"{avatar}"`.
+1. **ເປັນຂໍ້ຄວາມ** ໂດຍກົງພາຍໃນແທັກ JSX: `<h1>To Do List ຂອງ {name}</h1>` ເຮັດວຽກ, ແຕ່ `<{tag}>To Do List ຂອງ Gregorio Y. Zara </{tag}>` ບໍ່ເຮັດວຽກ.
+2. **ເປັນ attributes** ຕໍ່ທ້າຍດ້ວຍເຄື່ອງໝາຍ `=`: `src={avatar}` ຈະອ່ານຕົວແປ `avatar`, ແຕ່ `src="{avatar}"` ຈະສົ່ງ string `"{avatar}"`.
 
-## Using "double curlies": CSS and other objects in JSX {/*using-double-curlies-css-and-other-objects-in-jsx*/}
+## ການໃຊ້ "ວົງປີກກາຄູ່": CSS ແລະ object ອື່ນໃນ JSX {/*using-double-curlies-css-and-other-objects-in-jsx*/}
 
-In addition to strings, numbers, and other JavaScript expressions, you can even pass objects in JSX. Objects are also denoted with curly braces, like `{ name: "Hedy Lamarr", inventions: 5 }`. Therefore, to pass a JS object in JSX, you must wrap the object in another pair of curly braces: `person={{ name: "Hedy Lamarr", inventions: 5 }}`.
+ນອກຈາກ string, number ແລະ expression JavaScript ອື່ນແລ້ວ, ທ່ານສາມາດສົ່ງ object ໃນ JSX. Object ສະແດງດ້ວຍວົງປີກກາເຊັ່ນ `{ name: "Hedy Lamarr", inventions: 5 }`. ດັ່ງນັ້ນ, ເພື່ອສົ່ງ Object JS ໃນ JSX, ທ່ານຕ້ອງໄດ້ລວມ object ໃນດ້ວຍວົງປີກກາອື່ນ: `person={{ name: "Hedy Lamarr", inventions: 5 }}`.
 
-You may see this with inline CSS styles in JSX. React does not require you to use inline styles (CSS classes work great for most cases). But when you need an inline style, you pass an object to the `style` attribute:
+ທ່ານອາດເຫັນສິ່ງນີ້ດ້ວຍ inline CSS style ໃນ JSX. React ບໍ່ຕ້ອງການໃຫ້ທ່ານໃຊ້ inline style (class CSS ເຮັດວຽກໄດ້ດີກັບກໍລະນີສ່ວນຫຼາຍ). ແຕ່ເມື່ອທ່ານຕ້ອງການ inline style, ທ່ານສົ່ງ object ໄປຫາ attribute `style`:
 
 <Sandpack>
 
@@ -133,9 +133,9 @@ export default function TodoList() {
       backgroundColor: 'black',
       color: 'pink'
     }}>
-      <li>Improve the videophone</li>
-      <li>Prepare aeronautics lectures</li>
-      <li>Work on the alcohol-fuelled engine</li>
+      <li>ປັບປຸງວີດີໂອໂຟນ</li>
+      <li>ກຽມບັນຍາຍການບິນ</li>
+      <li>ເຮັດວຽກນຳເຄື່ອງຈັກທີ່ໃຊ້ alcohol ເປັນເຊື້ອໄຟ</li>
     </ul>
   );
 }
@@ -148,9 +148,9 @@ ul { padding: 20px 20px 20px 40px; margin: 0; }
 
 </Sandpack>
 
-Try changing the values of `backgroundColor` and `color`.
+ລອງປ່ຽນແປງຄ່າ `backgroundColor` ແລະ `color`.
 
-You can really see the JavaScript object inside the curly braces when you write it like this:
+ທ່ານສາມາດເຫັນ object JavaScript ພາຍໃນວົງປີກກາເມື່ອທ່ານຂຽນມັນປະມານນີ້:
 
 ```js {2-5}
 <ul style={
@@ -161,17 +161,17 @@ You can really see the JavaScript object inside the curly braces when you write 
 }>
 ```
 
-The next time you see `{{` and `}}` in JSX, know that it's nothing more than an object inside the JSX curlies!
+ຄັ້ງຕໍ່ໄປທ່ານຈະເຫັນ `{{` ແລະ `}}` ໃນ JSX, ຮູ້ວ່າມັນບໍ່ມີຫຍັງຫຼາຍໄປກວ່າ object ພາຍໃນວົງປີກກາ JSX!
 
 <Pitfall>
 
-Inline `style` properties are written in camelCase. For example, HTML `<ul style="background-color: black">` would be written as `<ul style={{ backgroundColor: 'black' }}>`  in your component.
+Inline `style` properties ແມ່ນຖືກຂຽນແບບ camelCase. ຕົວຢ່າງ, HTML `<ul style="background-color: black">` ຄວນຖືກຂຽນເປັນ `<ul style={{ backgroundColor: 'black' }}>`  ໃນ component ຂອງທ່ານ.
 
 </Pitfall>
 
-## More fun with JavaScript objects and curly braces {/*more-fun-with-javascript-objects-and-curly-braces*/}
+## ມ່ວນຂື້ນຕື່ມດ້ວຍ object JavaScript ແລະ ວົງປີກກາ {/*more-fun-with-javascript-objects-and-curly-braces*/}
 
-You can move several expressions into one object, and reference them in your JSX inside curly braces:
+ທ່ານສາມາດຍ້າຍຫຼາຍ expression ໄປໄວ້ໃນໜຶ່ງ object, ແລະ reference ໃນ JSX ພາຍໃນວົງປີກກາ:
 
 <Sandpack>
 
@@ -187,16 +187,16 @@ const person = {
 export default function TodoList() {
   return (
     <div style={person.theme}>
-      <h1>{person.name}'s Todos</h1>
+      <h1>Todos ຂອງ {person.name}</h1>
       <img
         className="avatar"
         src="https://i.imgur.com/7vQD0fPs.jpg"
         alt="Gregorio Y. Zara"
       />
       <ul>
-        <li>Improve the videophone</li>
-        <li>Prepare aeronautics lectures</li>
-        <li>Work on the alcohol-fuelled engine</li>
+        <li>ປັບປຸງວີດີໂອໂຟນ</li>
+        <li>ກຽມບັນຍາຍການບິນ</li>
+        <li>ເຮັດວຽກນຳເຄື່ອງຈັກທີ່ໃຊ້ alcohol ເປັນເຊື້ອໄຟ</li>
       </ul>
     </div>
   );
@@ -211,7 +211,7 @@ body > div > div { padding: 20px; }
 
 </Sandpack>
 
-In this example, the `person` JavaScript object contains a `name` string and a `theme` object:
+ໃນຕົວຢ່າງນີ້, object JavaScript `person` ປະກອບມີ string `name` ແລະ object `theme`:
 
 ```js
 const person = {
@@ -223,31 +223,31 @@ const person = {
 };
 ```
 
-The component can use these values from `person` like so:
+Component ສາມາດໃຊ້ຄ່າເຫຼົ່ານີ້ຈາກ `person` ເຊັ່ນ:
 
 ```js
 <div style={person.theme}>
-  <h1>{person.name}'s Todos</h1>
+  <h1>Todos ຂອງ {person.name}</h1>
 ```
 
-JSX is very minimal as a templating language because it lets you organize data and logic using JavaScript.
+JSX ເປັນພາສາ template ທີ່ນ້ອຍຫຼາຍເພາະວ່າມັນຊ່ວຍໃຫ້ທ່ານຈັດລະບຽບຂໍ້ມູນ ແລະ logic ໂດຍໃຊ້ JavaScript.
 
 <Recap>
 
-Now you know almost everything about JSX:
+ຕອນນີ້ທ່ານຮູ້ເກືອບໝົດທຸກຢ່າງກ່ຽວກັບ JSX ແລ້ວ: 
 
-* JSX attributes inside quotes are passed as strings.
-* Curly braces let you bring JavaScript logic and variables into your markup.
-* They work inside the JSX tag content or immediately after `=` in attributes.
-* `{{` and `}}` is not special syntax: it's a JavaScript object tucked inside JSX curly braces.
+* attribute JSX ພາຍໃນວົງຢືມແມ່ນຖືກສົ່ງຜ່ານເປັນ string.
+* ວົງປີກກາຊ່ວຍໃຫ້ທ່ານນຳ logic JavaScript ແລະ ຕົວແປໃສ່ໃນ markup ຂອງທ່ານ.
+* ເຮັດວຽກໃນເນື້ອຫາແທັກ JSX ຫຼື ເຮັດວຽກທັນທີຫຼັງຈາກ `=` ໃນ attribute.
+* `{{` ແລະ `}}` ບໍ່ແມ່ນ special syntax: ມັນເປັນ object JavaScript ທີ່ເຊື່ອງຢູ່ໃນວົງປີກກາ JSX.
 
 </Recap>
 
 <Challenges>
 
-#### Fix the mistake {/*fix-the-mistake*/}
+#### ແກ້ໄຂຂໍ້ຜິດພາດ {/*fix-the-mistake*/}
 
-This code crashes with an error saying `Objects are not valid as a React child`:
+Code ນີ້ມັນພັງດ້ວຍຂໍ້ຜິດພາດ ແລະ ເວົ້າວ່າ  `Objects are not valid as a React child`: 
 
 <Sandpack>
 
@@ -263,16 +263,16 @@ const person = {
 export default function TodoList() {
   return (
     <div style={person.theme}>
-      <h1>{person}'s Todos</h1>
+      <h1>Todos ຂອງ {person}</h1>
       <img
         className="avatar"
         src="https://i.imgur.com/7vQD0fPs.jpg"
         alt="Gregorio Y. Zara"
       />
       <ul>
-        <li>Improve the videophone</li>
-        <li>Prepare aeronautics lectures</li>
-        <li>Work on the alcohol-fuelled engine</li>
+        <li>ປັບປຸງວີດີໂອໂຟນ</li>
+        <li>ກຽມບັນຍາຍການບິນ</li>
+        <li>ເຮັດວຽກນຳເຄື່ອງຈັກທີ່ໃຊ້ alcohol ເປັນເຊື້ອໄຟ</li>
       </ul>
     </div>
   );
@@ -287,15 +287,15 @@ body > div > div { padding: 20px; }
 
 </Sandpack>
 
-Can you find the problem?
+ທ່ານພົບບັນຫາບໍ່?
 
-<Hint>Look for what's inside the curly braces. Are we putting the right thing there?</Hint>
+<Hint>ເບິ່ງວ່າມີຫຍັງພາຍໃນວົງປີກກາ. ພວກເຮົາວາງສິ່ງທີ່ຖືກຕ້ອງໃນນັ້ນແລ້ວບໍ່?</Hint>
 
 <Solution>
 
-This is happening because this example renders *an object itself* into the markup rather than a string: `<h1>{person}'s Todos</h1>` is trying to render the entire `person` object! Including raw objects as text content throws an error because React doesn't know how you want to display them.
+ນີ້ເກີດຂຶ້ນເພາະວ່າຕົວຢ່າງນີ້ສະແດງຜົນ *object ເອງ* ລົງໃນ markup ແທນທີ່ຈະເປັນ string: `<h1>Todos ຂອງ {person}</h1>` ກຳລັງພະຍາຍາມສະແດງ object `person` ທັງໝົດ! ລວມທັງ object ດິບເນື່ອງຈາກເນື້ອຫາຂໍ້ຄວາມເຮັດໃຫ້ເກີດຂໍ້ຜິດພາດເນື່ອງຈາກ React ບໍ່ຮູ້ວ່າທ່ານຕ້ອງການສະແດງແນວໃດ.
 
-To fix it, replace `<h1>{person}'s Todos</h1>` with `<h1>{person.name}'s Todos</h1>`:
+ເພື່ອແປງມັນ, ແທນທີ `<h1>Todos ຂອງ {person}</h1>` ດ້ວຍ `<h1>Todos ຂອງ {person.name}</h1>`:
 
 <Sandpack>
 
@@ -311,16 +311,16 @@ const person = {
 export default function TodoList() {
   return (
     <div style={person.theme}>
-      <h1>{person.name}'s Todos</h1>
+      <h1>Todos ຂອງ {person.name}</h1>
       <img
         className="avatar"
         src="https://i.imgur.com/7vQD0fPs.jpg"
         alt="Gregorio Y. Zara"
       />
       <ul>
-        <li>Improve the videophone</li>
-        <li>Prepare aeronautics lectures</li>
-        <li>Work on the alcohol-fuelled engine</li>
+        <li>ປັບປຸງວີດີໂອໂຟນ</li>
+        <li>ກຽມບັນຍາຍການບິນ</li>
+        <li>ເຮັດວຽກນຳເຄື່ອງຈັກທີ່ໃຊ້ alcohol ເປັນເຊື້ອໄຟ</li>
       </ul>
     </div>
   );
@@ -337,9 +337,9 @@ body > div > div { padding: 20px; }
 
 </Solution>
 
-#### Extract information into an object {/*extract-information-into-an-object*/}
+#### ແຍກຂໍ້ມູນລົງໃນ object {/*extract-information-into-an-object*/}
 
-Extract the image URL into the `person` object.
+ແຍກ image URL ລົງໃນ object `person`. 
 
 <Sandpack>
 
@@ -355,16 +355,16 @@ const person = {
 export default function TodoList() {
   return (
     <div style={person.theme}>
-      <h1>{person.name}'s Todos</h1>
+      <h1>Todos ຂອງ {person.name}</h1>
       <img
         className="avatar"
         src="https://i.imgur.com/7vQD0fPs.jpg"
         alt="Gregorio Y. Zara"
       />
       <ul>
-        <li>Improve the videophone</li>
-        <li>Prepare aeronautics lectures</li>
-        <li>Work on the alcohol-fuelled engine</li>
+        <li>ປັບປຸງວີດີໂອໂຟນ</li>
+        <li>ກຽມບັນຍາຍການບິນ</li>
+        <li>ເຮັດວຽກນຳເຄື່ອງຈັກທີ່ໃຊ້ alcohol ເປັນເຊື້ອໄຟ</li>
       </ul>
     </div>
   );
@@ -381,7 +381,7 @@ body > div > div { padding: 20px; }
 
 <Solution>
 
-Move the image URL into a property called `person.imageUrl` and read it from the `<img>` tag using the curlies:
+ຍ້າຍ image URL ລົງໃນ property ເອີ້ນວ່າ `person.imageUrl` ແລະ ອ່ານມັນຈາກແທັກ `<img>` ໃຊ້ວົງປີກກາ:
 
 <Sandpack>
 
@@ -398,16 +398,16 @@ const person = {
 export default function TodoList() {
   return (
     <div style={person.theme}>
-      <h1>{person.name}'s Todos</h1>
+      <h1>Todos ຂອງ {person.name}</h1>
       <img
         className="avatar"
         src={person.imageUrl}
         alt="Gregorio Y. Zara"
       />
       <ul>
-        <li>Improve the videophone</li>
-        <li>Prepare aeronautics lectures</li>
-        <li>Work on the alcohol-fuelled engine</li>
+        <li>ປັບປຸງວີດີໂອໂຟນ</li>
+        <li>ກຽມບັນຍາຍການບິນ</li>
+        <li>ເຮັດວຽກນຳເຄື່ອງຈັກທີ່ໃຊ້ alcohol ເປັນເຊື້ອໄຟ</li>
       </ul>
     </div>
   );
@@ -424,13 +424,13 @@ body > div > div { padding: 20px; }
 
 </Solution>
 
-#### Write an expression inside JSX curly braces {/*write-an-expression-inside-jsx-curly-braces*/}
+#### ຂຽນ expression ພາຍໃນວົງເລັບ JSX {/*write-an-expression-inside-jsx-curly-braces*/}
 
-In the object below, the full image URL is split into four parts: base URL, `imageId`, `imageSize`, and file extension.
+ໃນ object ດ້ານລຸ່ມ, Image URL ເຕັມແມ່ນແຍກເປັນສີ່ສ່ວນ: base URL, `imageId`, `imageSize` ແລະ ຟາຍ extension.
 
-We want the image URL to combine these attributes together: base URL (always `'https://i.imgur.com/'`), `imageId` (`'7vQD0fP'`), `imageSize` (`'s'`), and file extension (always `'.jpg'`). However, something is wrong with how the `<img>` tag specifies its `src`.
+ພວກເຮົາຕ້ອງການ image URL ເພື່ອປະສົມກັບ attribute ເຫຼົ່ານີ້ເຂົ້ານຳກັນ: base URL (ເປັນ `'https://i.imgur.com/'` ສະເໝີ), `imageId` (`'7vQD0fP'`), `imageSize` (`'s'`), ແລະ ຟາຍ  extension (ເປັນ `'.jpg'` ສະເໝີ). ເຖິງຢ່າງໃດກໍ່ຕາມ, ມີບາງຢ່າງຜິດປົກະຕິກັບວິທີທີ່ແທັກ `<img>` ກຳນົດ `src`.
 
-Can you fix it?
+ທ່ານແປງໄດ້ບໍ່?
 
 <Sandpack>
 
@@ -450,16 +450,16 @@ const person = {
 export default function TodoList() {
   return (
     <div style={person.theme}>
-      <h1>{person.name}'s Todos</h1>
+      <h1>Todos ຂອງ {person.name}</h1>
       <img
         className="avatar"
         src="{baseUrl}{person.imageId}{person.imageSize}.jpg"
         alt={person.name}
       />
       <ul>
-        <li>Improve the videophone</li>
-        <li>Prepare aeronautics lectures</li>
-        <li>Work on the alcohol-fuelled engine</li>
+        <li>ປັບປຸງວີດີໂອໂຟນ</li>
+        <li>ກຽມບັນຍາຍການບິນ</li>
+        <li>ເຮັດວຽກນຳເຄື່ອງຈັກທີ່ໃຊ້ alcohol ເປັນເຊື້ອໄຟ</li>
       </ul>
     </div>
   );
@@ -474,15 +474,15 @@ body > div > div { padding: 20px; }
 
 </Sandpack>
 
-To check that your fix worked, try changing the value of `imageSize` to `'b'`. The image should resize after your edit.
+ຫາກຕ້ອງການການກວດສອບວ່າການແກ້ໄຂຂອງທ່ານໄດ້ຜົນ, ລອງປ່ຽນຄ່າຂອງ `imageSize` ເປັນ `'b'`. ຮູບພາບຄວນປັບຂະໜາດຫຼັງຈາກແກ້ໄຂ.
 
 <Solution>
 
-You can write it as `src={baseUrl + person.imageId + person.imageSize + '.jpg'}`.
+ທ່ານສາມາດຂຽນເປັນ `src={baseUrl + person.imageId + person.imageSize + '.jpg'}`.
 
-1. `{` opens the JavaScript expression
-2. `baseUrl + person.imageId + person.imageSize + '.jpg'` produces the correct URL string
-3. `}` closes the JavaScript expression
+1. `{` ເປີດ JavaScript expression
+2. `baseUrl + person.imageId + person.imageSize + '.jpg'` ສ້າງ string ທີ່ຖືກຕ້ອງ
+3. `}` ປິດ JavaScript expression
 
 <Sandpack>
 
@@ -501,16 +501,16 @@ const person = {
 export default function TodoList() {
   return (
     <div style={person.theme}>
-      <h1>{person.name}'s Todos</h1>
+      <h1>Todos ຂອງ {person.name} </h1>
       <img
         className="avatar"
         src={baseUrl + person.imageId + person.imageSize + '.jpg'}
         alt={person.name}
       />
       <ul>
-        <li>Improve the videophone</li>
-        <li>Prepare aeronautics lectures</li>
-        <li>Work on the alcohol-fuelled engine</li>
+        <li>ປັບປຸງວີດີໂອໂຟນ</li>
+        <li>ກຽມບັນຍາຍການບິນ</li>
+        <li>ເຮັດວຽກນຳເຄື່ອງຈັກທີ່ໃຊ້ alcohol ເປັນເຊື້ອໄຟ</li>
       </ul>
     </div>
   );
@@ -525,7 +525,7 @@ body > div > div { padding: 20px; }
 
 </Sandpack>
 
-You can also move this expression into a separate function like `getImageUrl` below:
+ທ່ານສາມາດຍ້າຍ expression ນີ້ເປັນຟັງຊັ່ນແຍກຕ່າງຫາກເຊັ່ນ `getImageUrl` ດ້ານລຸ່ມ:
 
 <Sandpack>
 
@@ -545,16 +545,16 @@ const person = {
 export default function TodoList() {
   return (
     <div style={person.theme}>
-      <h1>{person.name}'s Todos</h1>
+      <h1>Todos ຂອງ {person.name}</h1>
       <img
         className="avatar"
         src={getImageUrl(person)}
         alt={person.name}
       />
       <ul>
-        <li>Improve the videophone</li>
-        <li>Prepare aeronautics lectures</li>
-        <li>Work on the alcohol-fuelled engine</li>
+        <li>ປັບປຸງວີດີໂອໂຟນ</li>
+        <li>ກຽມບັນຍາຍການບິນ</li>
+        <li>ເຮັດວຽກນຳເຄື່ອງຈັກທີ່ໃຊ້ alcohol ເປັນເຊື້ອໄຟ</li>
       </ul>
     </div>
   );
@@ -580,7 +580,7 @@ body > div > div { padding: 20px; }
 
 </Sandpack>
 
-Variables and functions can help you keep the markup simple!
+ຕົວແປ ແລະ ຟັງຊັ່ນສາມາດຊ່ວຍໃຫ້ທ່ານເຮັດ markup ໄດ້ງ່າຍ!
 
 </Solution>
 
