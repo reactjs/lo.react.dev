@@ -1,24 +1,24 @@
 ---
-title: Writing Markup with JSX
+title: ຂຽນ Markup ດ້ວຍ JSX
 ---
 
 <Intro>
 
-*JSX* is a syntax extension for JavaScript that lets you write HTML-like markup inside a JavaScript file. Although there are other ways to write components, most React developers prefer the conciseness of JSX, and most codebases use it.
+*JSX* ແມ່ນ syntax extension ສຳລັບ JavaScript ທີ່ໃຫ້ທ່ານຂຽນ markup ຄ້າຍຄື HTML ພາຍໃນຟາຍ JavaScript. ເຖິງວ່າຈະມີຫຼາຍວິທີໃນການຂຽນ component, ນັກພັດທະນາ React ສ່ວນຫຼາຍມັກຄວາມງ່າຍຂອງ JSX, ແລະ codebase ສ່ວນຫຼາຍກໍໃຊ້ວິທີນີ້.
 
 </Intro>
 
 <YouWillLearn>
 
-* Why React mixes markup with rendering logic
-* How JSX is different from HTML
-* How to display information with JSX
+* ເປັນຫຍັງ React ຈິ່ງປົນ markup ກັບ logic ການສະແດງຜົນ
+* JSX ແຕກຕ່າງຈາກ HTML ແນວໃດ
+* ວິທີການສະແດງຂໍ້ມູນດ້ວຍ JSX
 
 </YouWillLearn>
 
-## JSX: Putting markup into JavaScript {/*jsx-putting-markup-into-javascript*/}
+## JSX: ການໃສ່ markup ລົງໃນ JavaScript {/*jsx-putting-markup-into-javascript*/}
 
-The Web has been built on HTML, CSS, and JavaScript. For many years, web developers kept content in HTML, design in CSS, and logic in JavaScript—often in separate files! Content was marked up inside HTML while the page's logic lived separately in JavaScript:
+ເວັບຖືກສ້າງມາຈາກ HTML, CSS ແລະ JavaScript. ໃນເວລາຫຼາຍປີ, ນັກພັດທະນາເວັບໄຊເກັບເນື້ອຫາໄວ້ໃນ HTML, ອອກແບບໃນ CSS ແລະ ສ້າງ logic ໄວ້ໃນ JavaScript ເຊິ່ງມັກຈະຢູ່ຄົນລະຟາຍ! ເນື້ອຫາແມ່ນ markup ພາຍໃນ HTML ໃນຂະນະ logic ຂອງ page ແມ່ນຢູ່ຄົນລະຟາຍໃນ JavaScript:
 
 <DiagramGroup>
 
@@ -36,53 +36,53 @@ JavaScript
 
 </DiagramGroup>
 
-But as the Web became more interactive, logic increasingly determined content. JavaScript was in charge of the HTML! This is why **in React, rendering logic and markup live together in the same place—components.**
+ແຕ່ເວັບໄຊມີການໂຕ້ຕອບຫຼາຍຂຶ້ນ, logic ກໍກຳນົດເນື້ອຫາຫຼາຍຂຶ້ນ. JavaScript ຮັບຜິດຊອບ HTML! ນີ້ຈິງເປັນເຫດຜົນທີ່ **ໃນ React, logic ຂອງການສະແດງຜົນ ແລະ markup ຢູ່ຮ່ວມກັນໃນບ່ອນດຽວກັນ-comopnents.**
 
 <DiagramGroup>
 
 <Diagram name="writing_jsx_sidebar" height={330} width={325} alt="React component with HTML and JavaScript from previous examples mixed. Function name is Sidebar which calls the function isLoggedIn, highlighted in yellow. Nested inside the function highlighted in purple is the p tag from before, and a Form tag referencing the component shown in the next diagram.">
 
-`Sidebar.js` React component
+`Sidebar.js` component React 
 
 </Diagram>
 
 <Diagram name="writing_jsx_form" height={330} width={325} alt="React component with HTML and JavaScript from previous examples mixed. Function name is Form containing two handlers onClick and onSubmit highlighted in yellow. Following the handlers is HTML highlighted in purple. The HTML contains a form element with a nested input element, each with an onClick prop.">
 
-`Form.js` React component
+`Form.js` component React 
 
 </Diagram>
 
 </DiagramGroup>
 
-Keeping a button's rendering logic and markup together ensures that they stay in sync with each other on every edit. Conversely, details that are unrelated, such as the button's markup and a sidebar's markup, are isolated from each other, making it safer to change either of them on their own.
+ຮັກສາ logic ການສະແດງຂອງປຸ່ມ ແລະ markup ໄວ້ນຳກັນເຮັດໃຫ້ໝັ້ນໃຈໄດ້ວ່າປຸ່ມທັງສອງຈະ sync ກັນ ໃນທຸກການແກ້ໄຂ. ໃນທາງກົງກັນຂ້າມ, ລາຍລະອຽດທີ່ບໍ່ກ່ຽວຂ້ອງ, ເຊັ່ນ markup ຂອງປຸ່ມກົດ ແລະ markup ຂອງ sidebar, ແມ່ນຖືກແຍກກັນ, ເຮັດໃຫ້ປອດໄພໄດ້ກວ່າການປ່ຽນຢ່າງໃດຢ່າງໜຶ່ງດ້ວຍຕົວເອງ.
 
-Each React component is a JavaScript function that may contain some markup that React renders into the browser. React components use a syntax extension called JSX to represent that markup. JSX looks a lot like HTML, but it is a bit stricter and can display dynamic information. The best way to understand this is to convert some HTML markup to JSX markup.
+ແຕ່ລະ component React ແມ່ນຟັງຊັ່ນ JavaScript ທີ່ອາດປະກອບມີບາງ markup ທີ່ React ສະແດງໃນບາວເຊີ. Component React ໃຊ້ syntax extension ເອີ້ນວ່າ JSX ເພື່ອນຳສະເໜີ markup ນັ້ນ. JSX ແມ່ນຄ້າຍຄືກັບ HTML ຫຼາຍ, ແຕ່ມັນເຂັ້ມງວດກວ່າໜ້ອຍໜຶ່ງ ແລະ ສາມາດສະແດງຂໍ້ມູນທີ່ເປັນ dynamic. ວິທີທີ່ດີທີ່ສຸດໃນການທຳຄວາມເຂົ້າໃຈສິ່ງນີ້ຄືການແປງ markup HTML ມາເປັນ markup JSX.
 
 <Note>
 
-JSX and React are two separate things. They're often used together, but you *can* [use them independently](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#whats-a-jsx-transform) of each other. JSX is a syntax extension, while React is a JavaScript library.
+JSX ແລະ React ເປັນສອງຢ່າງທີ່ແຍກກັນ. ສ່ວນຫຼາຍມັນໃຊ້ຮ່ວມກັນ, ແຕ່ທ່ານ *ສາມາດ* [ໃຊ້ແຍກສ່ວນ](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#whats-a-jsx-transform) ຂອງກັນ ແລະ ກັນ. JSX ແມ່ນ syntax extension, ໃນຂະນະ React ແມ່ນ JavaScript library.
 
 </Note>
 
-## Converting HTML to JSX {/*converting-html-to-jsx*/}
+## ການແປງ HTML ເປັນ JSX {/*converting-html-to-jsx*/}
 
-Suppose that you have some (perfectly valid) HTML:
+ສົມມຸດວ່າທ່ານມີ HTML ບາງສ່ວນ (ຖືກຕ້ອງຄົບຖ້ວນ):
 
 ```html
-<h1>Hedy Lamarr's Todos</h1>
+<h1>Todos ຂອງ Hedy Lamarr</h1>
 <img 
   src="https://i.imgur.com/yXOvdOSs.jpg" 
   alt="Hedy Lamarr" 
   class="photo"
 >
 <ul>
-    <li>Invent new traffic lights
-    <li>Rehearse a movie scene
-    <li>Improve the spectrum technology
+    <li>ປະດິດສັນຍານໄຟຈາລະຈອນໃໝ່
+    <li>ຊ້ອມສາກຮູບເງົາ
+    <li>ປັບປຸງເຕັກໂນໂລຊີ spectrum
 </ul>
 ```
 
-And you want to put it into your component:
+ແລະ ທ່ານຕ້ອງການເອົາໄປໃສ່ໃນ component ຂອງທ່ານ:
 
 ```js
 export default function TodoList() {
@@ -92,7 +92,7 @@ export default function TodoList() {
 }
 ```
 
-If you copy and paste it as is, it will not work:
+ຖ້າທ່ານ copy ແລະ paste ຕາມທີ່ເປັນຢູ່, ມັນຈະບໍ່ເຮັດວຽກ:
 
 
 <Sandpack>
@@ -101,16 +101,16 @@ If you copy and paste it as is, it will not work:
 export default function TodoList() {
   return (
     // This doesn't quite work!
-    <h1>Hedy Lamarr's Todos</h1>
+    <h1>Todos ຂອງ Hedy Lamarr</h1>
     <img 
       src="https://i.imgur.com/yXOvdOSs.jpg" 
       alt="Hedy Lamarr" 
       class="photo"
     >
     <ul>
-      <li>Invent new traffic lights
-      <li>Rehearse a movie scene
-      <li>Improve the spectrum technology
+      <li>ປະດິດສັນຍານໄຟຈາລະຈອນໃໝ່
+      <li>ຊ້ອມສາກຮູບເງົາ
+      <li>ປັບປຸງເຕັກໂນໂລຊີ spectrum
     </ul>
   );
 }
@@ -122,25 +122,25 @@ img { height: 90px }
 
 </Sandpack>
 
-This is because JSX is stricter and has a few more rules than HTML! If you read the error messages above, they'll guide you to fix the markup, or you can follow the guide below.
+ນີ້ເປັນເພາະວ່າ JSX ເຂັ້ມງວດກວ່າ ແລະ ມີກົດຫຼາຍກວ່າ HTML! ຖ້າທ່ານອ່ານຂໍ້ຄວາມສະແດງຄວາມຜິດພາດດ້ານເທິງ, ຂໍ້ຄວາມດັ່ງກ່າວຈະແນະນຳໃຫ້ທ່ານແກ້ໄຂ markup, ຫຼື ທ່ານສາມາດປະຕິບັດຕາມຄຳແນະນຳດ້ານລຸ່ມນີ້.
 
 <Note>
 
-Most of the time, React's on-screen error messages will help you find where the problem is. Give them a read if you get stuck!
+ໂດຍສ່ວນຫຼາຍ, ຂໍ້ຄວາມສະແດງຂໍ້ຜິດພາດເທິງໜ້າຈໍຂອງ React ຈະຊ່ວຍໃຫ້ທ່ານຮູ້ວ່າບັນຫາຢູ່ຈຸດໃດ. ອ່ານໃຫ້ຈົບຖ້າທ່ານຕິດບັນຫາ!
 
 </Note>
 
-## The Rules of JSX {/*the-rules-of-jsx*/}
+## ກົດຂອງ JSX {/*the-rules-of-jsx*/}
 
-### 1. Return a single root element {/*1-return-a-single-root-element*/}
+### 1. Return ໜຶ່ງ root element {/*1-return-a-single-root-element*/}
 
-To return multiple elements from a component, **wrap them with a single parent tag.**
+ເພື່ອ return ຫຼາຍ element ຈາກ component, **ໃຫ້ລວມມັນໄວ້ໃນ parent tag ດຽວ**
 
-For example, you can use a `<div>`:
+ຕົວຢ່າງ, ທ່ານສາມາດໃຊ້ `<div>`: 
 
 ```js {1,11}
 <div>
-  <h1>Hedy Lamarr's Todos</h1>
+  <h1>Todos ຂອງ Hedy Lamarr</h1>
   <img 
     src="https://i.imgur.com/yXOvdOSs.jpg" 
     alt="Hedy Lamarr" 
@@ -153,11 +153,11 @@ For example, you can use a `<div>`:
 ```
 
 
-If you don't want to add an extra `<div>` to your markup, you can write `<>` and `</>` instead:
+ຖ້າທ່ານບໍ່ຕ້ອງການເພີ່ມ `<div>` ອີກໃນ markup ຂອງທ່ານ, ທ່ານສາມາດຂຽນ `<>` ແລະ `</>` ແທນ:
 
 ```js {1,11}
 <>
-  <h1>Hedy Lamarr's Todos</h1>
+  <h1>Todos ຂອງ Hedy Lamarr</h1>
   <img 
     src="https://i.imgur.com/yXOvdOSs.jpg" 
     alt="Hedy Lamarr" 
@@ -169,21 +169,21 @@ If you don't want to add an extra `<div>` to your markup, you can write `<>` and
 </>
 ```
 
-This empty tag is called a *[Fragment.](/reference/react/Fragment)* Fragments let you group things without leaving any trace in the browser HTML tree.
+tag ເປົ່າວ່າງນີ້ເອີ້ນວ່າ *[Fragment.](/reference/react/Fragment)* Fragment ຊ່ວຍໃຫ້ທ່ານລວມສິ່ງຕ່າງໆໂດຍບໍ່ສະແດງຫຍັງໃນ  browser tree ຂອງ HTML.
 
 <DeepDive>
 
-#### Why do multiple JSX tags need to be wrapped? {/*why-do-multiple-jsx-tags-need-to-be-wrapped*/}
+#### ເປັນຫຍັງຫຼາຍ tags JSX ເຖິງຕ້ອງການລວມ? {/*why-do-multiple-jsx-tags-need-to-be-wrapped*/}
 
-JSX looks like HTML, but under the hood it is transformed into plain JavaScript objects. You can't return two objects from a function without wrapping them into an array. This explains why you also can't return two JSX tags without wrapping them into another tag or a Fragment.
+JSX ຄ້າຍຄື HTML, ແຕ່ເບື້ອງຫຼັງແມ່ນຈະຖືກປ່ຽນມາເປັນ object JavaScript ທຳມະດາ. ທ່ານບໍ່ສາມາດ return 2 object ຈາກຟັງຊັ່ນໂດຍບໍ່ລວມມັນຢູ່ array. ນີ້ອະທິບາຍວ່າເປັນຫຍັງທ່ານຈິງບໍ່ສາມາດ return 2 tag JSX ໂດຍບໍ່ລວມມັນເປັນ tag ອື່ນ ຫຼື Fragment.
 
 </DeepDive>
 
-### 2. Close all the tags {/*2-close-all-the-tags*/}
+### 2. ປິດ tags ທັງໝົດ {/*2-close-all-the-tags*/}
 
-JSX requires tags to be explicitly closed: self-closing tags like `<img>` must become `<img />`, and wrapping tags like `<li>oranges` must be written as `<li>oranges</li>`.
+JSX ກຳນົດໃຫ້ tag ຕ້ອງປິດເທົ່ານັ້ນ: tag ທີ່ປິດດ້ວຍຕົວເອງເຊັ່ນ `<img>` ຕ້ອງເປັນ `<img />`, ແລະ ລວມ tag ເຊັ່ນ `<li>ໝາກກ້ຽງ` ຕ້ອງຖືກຂຽນແບບນີ້ `<li>ໝາກກ້ຽງ</li>`.
 
-This is how Hedy Lamarr's image and list items look closed:
+ນີ້ແມ່ນວິທີປິດ ຮູບ ແລະ list items ຂອງ Hedy Lamarr:
 
 ```js {2-6,8-10}
 <>
@@ -193,18 +193,18 @@ This is how Hedy Lamarr's image and list items look closed:
     class="photo"
    />
   <ul>
-    <li>Invent new traffic lights</li>
-    <li>Rehearse a movie scene</li>
-    <li>Improve the spectrum technology</li>
+    <li>ປະດິດສັນຍານໄຟຈາລະຈອນໃໝ່</li>
+    <li>ຊ້ອມສາກຮູບເງົາ</li>
+    <li>ປັບປຸງເຕັກໂນໂລຊີ spectrum</li>
   </ul>
 </>
 ```
 
-### 3. camelCase <s>all</s> most of the things! {/*3-camelcase-salls-most-of-the-things*/}
+### 3. camelCase <s>ເກືອບ</s> ທຸກຢ່າງ! {/*3-camelcase-salls-most-of-the-things*/}
 
-JSX turns into JavaScript and attributes written in JSX become keys of JavaScript objects. In your own components, you will often want to read those attributes into variables. But JavaScript has limitations on variable names. For example, their names can't contain dashes or be reserved words like `class`.
+JSX ປ່ຽນເປັນ JavaScript ແລະ attribute ທີ່ຂຽນດ້ວຍ JavScript ກາຍເປັນ key ຂອງ object JavaScript. ໃນ component ຂອງທ່ານ, ທ່ານຢາກຈະອ່ານ attribute ເຫຼົ່ານັ້ນເປັນຕົວແປຢູ່ສະເໝີ. ແຕ່ JavaScript ມີຂໍ້ຈຳກັດສຳລັບຊື່ຕົວແປ. ຕົວຢ່າງ, ຊື່ມັນບໍ່ສາມາດປະກອບມີເຄື່ອງໝາຍຂີດຕໍ່ ຫຼື ຊື່ທີສະຫງວນໄວ້ ເຊັ່ນ `class`.
 
-This is why, in React, many HTML and SVG attributes are written in camelCase. For example, instead of `stroke-width` you use `strokeWidth`. Since `class` is a reserved word, in React you write `className` instead, named after the [corresponding DOM property](https://developer.mozilla.org/en-US/docs/Web/API/Element/className):
+ນີ້ແມ່ນເຫດຜົນວ່າເປັນຫຍັງ, ໃນ React, ຫຼາຍ attribute HTML ແລະ SVG ຖືກຂຽນເປັນແບບ camelCase. ຕົວຢ່າງ, ແທນທີ່ `stroke-width` ທ່ານໃຊ້ `strokeWidth`. ນັບແຕ່ `class` ຖືກສະຫງວນ, ໃນ React ທ່ານຂຽນ `className` ແທນ, ຊື່ຫຼັງຈາກ  [DOM property ທີ່ກ່ຽວຂ້ອງ](https://developer.mozilla.org/en-US/docs/Web/API/Element/className):
 
 ```js {4}
 <img 
@@ -214,19 +214,19 @@ This is why, in React, many HTML and SVG attributes are written in camelCase. Fo
 />
 ```
 
-You can [find all these attributes in the list of DOM component props.](/reference/react-dom/components/common) If you get one wrong, don't worry—React will print a message with a possible correction to the [browser console.](https://developer.mozilla.org/docs/Tools/Browser_Console)
+ທ່ານສາມາດ [ຄົ້ນຫາ attribute ເຫຼົ່ານີ້ໃນ list ຂອງ DOM component props.](/reference/react-dom/components/common) ຖ້າທ່ານເຂົ້າໃຈອັນໃດອັນໜຶ່ງຜິດ, ບໍ່ຕ້ອງຢ້ານ-React ຈະສະແດງຂໍ້ຄວາມພ້ອມກັບສິ່ງທີ່ຈະເປັນໄປໄດ້ໃນ [browser console.](https://developer.mozilla.org/docs/Tools/Browser_Console)
 
 <Pitfall>
 
-For historical reasons, [`aria-*`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA) and [`data-*`](https://developer.mozilla.org/docs/Learn/HTML/Howto/Use_data_attributes) attributes are written as in HTML with dashes.
+ສຳລັບເຫດຜົນທາງປະຫວັດສາດ, [`aria-*`](https://developer.mozilla.org/docs/Web/Accessibility/ARIA) ແລະ [`data-*`](https://developer.mozilla.org/docs/Learn/HTML/Howto/Use_data_attributes) attribute ແມ່ນຖືກຂຽນໃນ HTML ດ້ວຍເຄື່ອງໝາຍຂີດຕໍ່.
 
 </Pitfall>
 
-### Pro-tip: Use a JSX Converter {/*pro-tip-use-a-jsx-converter*/}
+### Pro-tip: ໃຊ້ JSX Converter {/*pro-tip-use-a-jsx-converter*/}
 
-Converting all these attributes in existing markup can be tedious! We recommend using a [converter](https://transform.tools/html-to-jsx) to translate your existing HTML and SVG to JSX. Converters are very useful in practice, but it's still worth understanding what is going on so that you can comfortably write JSX on your own.
+ການແປງ attribute ທັງໝົດໃນ markup ທີ່ມີຢູ່ອາດເປັນເລື່ອງທີ່ນ່າເບື່ອ! ພວກເຮົາແນະນຳໃຊ້ [converter](https://transform.tools/html-to-jsx) ເພື່ອແປງ HTML ແລະ SVG ທີ່ມີຢູ່ແລ້ວຂອງທ່ານເປັນ JSX. Converters ແມ່ນມີປະໂຫຍດຫຼາຍໃນທາງປະຕິບັດ, ແຕ່ກໍຍັງຄຸ້ມຄ່າທີ່ຈະທຳຄວາມເຂົ້າໃຈກັບສິ່ງທີ່ເກີດຂຶ້ນ ເພື່ອໃຫ້ທ່ານສາມາດຂຽນ JSX ດ້ວຍຕົນເອງຢ່າງສະບາຍໃຈ.
 
-Here is your final result:
+ນີ້ແມ່ນຜົນລັບສຸດທ້າຍຂອງທ່ານ:
 
 <Sandpack>
 
@@ -234,16 +234,16 @@ Here is your final result:
 export default function TodoList() {
   return (
     <>
-      <h1>Hedy Lamarr's Todos</h1>
+      <h1>Todos ຂອງ Hedy Lamarr</h1>
       <img 
         src="https://i.imgur.com/yXOvdOSs.jpg" 
         alt="Hedy Lamarr" 
         className="photo" 
       />
       <ul>
-        <li>Invent new traffic lights</li>
-        <li>Rehearse a movie scene</li>
-        <li>Improve the spectrum technology</li>
+        <li>ປະດິດສັນຍານໄຟຈາລະຈອນໃໝ່</li>
+        <li>ຊ້ອມສາກຮູບເງົາ</li>
+        <li>ປັບປຸງເຕັກໂນໂລຊີ spectrum</li>
       </ul>
     </>
   );
@@ -258,11 +258,11 @@ img { height: 90px }
 
 <Recap>
 
-Now you know why JSX exists and how to use it in components:
+ຕອນນີ້ທ່ານຮູ້ແລ້ວວ່າເປັນຫຍັງຈື່ງມີ JSX ແລະ ວິທີການໃຊ້ມັນໃນ component:
 
-* React components group rendering logic together with markup because they are related.
-* JSX is similar to HTML, with a few differences. You can use a [converter](https://transform.tools/html-to-jsx) if you need to.
-* Error messages will often point you in the right direction to fixing your markup.
+* Logic ການສະແດງຜົນກຸ່ມ component ພ້ອມກັບ markup ເພາະວ່າມັນກ່ຽວຂ້ອງກັນ.
+* JSX ຄ້າຍກັບ HTML, ແຕ່ມີຄວາມແຕກຕ່າງກັນໜ້ອຍໜຶ່ງ. ທ່ານສາມາດໃຊ້ [converter](https://transform.tools/html-to-jsx) ຖ້າທ່ານຕ້ອງການ.
+* ຂໍ້ຄວາມສະແດງຂໍ້ຜິດພາດສ່ວນຫຼາຍຈະແນະນຳທ່ານໄປໃນທາງທີ່ຖືກຕ້ອງເພື່ອແກ້ໄຂ markup ຂອງທ່ານ.
 
 </Recap>
 
@@ -270,9 +270,9 @@ Now you know why JSX exists and how to use it in components:
 
 <Challenges>
 
-#### Convert some HTML to JSX {/*convert-some-html-to-jsx*/}
+#### ແປງບາງ HTML ເປັນ JSX {/*convert-some-html-to-jsx*/}
 
-This HTML was pasted into a component, but it's not valid JSX. Fix it:
+HTML ນີ້ຖືກ paste ເປັນ component, ແຕ່ບໍ່ແມ່ນ JSX ທີ່ຖືກຕ້ອງ. ແກ້ມັນ:
 
 <Sandpack>
 
@@ -280,12 +280,12 @@ This HTML was pasted into a component, but it's not valid JSX. Fix it:
 export default function Bio() {
   return (
     <div class="intro">
-      <h1>Welcome to my website!</h1>
+      <h1>ຍິນດີຕ້ອນຮັບສູ່ເວັບໄຊຂອງຂ້ອຍ</h1>
     </div>
     <p class="summary">
-      You can find my thoughts here.
+      ທ່ານສາມາດຄົ້ນຫາຄວາມຄິດຂ້ອຍໄດ້ບ່ອນນີ້
       <br><br>
-      <b>And <i>pictures</b></i> of scientists!
+      <b>ແລະ <i>ຮູບ</b></i> ຂອງນັກວິທະຍາສາດ!
     </p>
   );
 }
@@ -308,7 +308,7 @@ export default function Bio() {
 
 </Sandpack>
 
-Whether to do it by hand or using the converter is up to you!
+ບໍ່ວ່າຈະເຮັດດ້ວຍຕົນເອງ ຫຼື ໃຊ້ converter ແມ່ນຂຶ້ນກັບໂຕທ່ານ!
 
 <Solution>
 
@@ -319,10 +319,10 @@ export default function Bio() {
   return (
     <div>
       <div className="intro">
-        <h1>Welcome to my website!</h1>
+        <h1>ຍິນດີຕ້ອນຮັບສູ່ເວັບໄຊຂອງຂ້ອຍ</h1>
       </div>
       <p className="summary">
-        You can find my thoughts here.
+        ທ່ານສາມາດຄົ້ນຫາຄວາມຄິດຂ້ອຍໄດ້ບ່ອນນີ້
         <br /><br />
         <b>And <i>pictures</i></b> of scientists!
       </p>
