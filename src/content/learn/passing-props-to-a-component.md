@@ -1,26 +1,26 @@
 ---
-title: Passing Props to a Component
+title: ການສົ່ງ Props ໄປຫາ Component
 ---
 
 <Intro>
 
-React components use *props* to communicate with each other. Every parent component can pass some information to its child components by giving them props. Props might remind you of HTML attributes, but you can pass any JavaScript value through them, including objects, arrays, and functions.
+Component React ໃຊ້ *props* ເພື່ອສື່ສານລະຫວ່າງກັນ ແລະ ກັນ. ທຸກໆ parent component ສາມາດສົ່ງບາງຂໍ້ມູນໄປຫາ child component ມັນເອງໂດຍການໃຫ້ props. Props ອາດເຕືອນທ່ານກ່ຽວກັບ attribute HTML, ແຕ່ທ່ານສາມາດສົ່ງຄ່າຂອງ JavaScript ໃດກໍໄດ້ຜ່ານມັນລວມເຖິງ objects, arrays, ແລະ ຟັງຊັ່ນ.
 
 </Intro>
 
 <YouWillLearn>
 
-* How to pass props to a component
-* How to read props from a component
-* How to specify default values for props
-* How to pass some JSX to a component
-* How props change over time
+* ວິທີສົ່ງ props ໄປຫາ component 
+* ວິທີອ່ານ props ຈາກ component 
+* ວິທີກຳນົດຄ່າເລີ່ມຕົ້ນສຳລັບ props 
+* ວິທີສົ່ງບາງ JSX ໄປຫາ component 
+* ວິທີທີ່ props ປ່ຽນແປງຕະຫຼອດເວລາ
 
 </YouWillLearn>
 
-## Familiar props {/*familiar-props*/}
+## ຄຸ້ນເຄີຍກັບ props {/*familiar-props*/}
 
-Props are the information that you pass to a JSX tag. For example, `className`, `src`, `alt`, `width`, and `height` are some of the props you can pass to an `<img>`:
+Props ແມ່ນຂໍ້ມູນທີ່ທ່ານສົ່ງຜ່ານແທັກ JSX. ຕົວຢ່າງ, `className`, `src`, `alt`, `width`, ແລະ `height` ແມ່ນບາງ props ທີ່ທ່ານສາມາດສົ່ງຜ່ານ `<img>`:
 
 <Sandpack>
 
@@ -51,11 +51,11 @@ body { min-height: 120px; }
 
 </Sandpack>
 
-The props you can pass to an `<img>` tag are predefined (ReactDOM conforms to [the HTML standard](https://www.w3.org/TR/html52/semantics-embedded-content.html#the-img-element)). But you can pass any props to *your own* components, such as `<Avatar>`, to customize them. Here's how!
+Props ສາມາດສົ່ງຜ່ານແທັກ `<img>` ນັ້ນຖືກກຳນົດແລ້ວ (ReactDOM conforms to [the HTML standard](https://www.w3.org/TR/html52/semantics-embedded-content.html#the-img-element)). ແຕ່ທ່ານສາມາດສົ່ງ props ໃດກໍ່ໄດ້ໄປຫາ component *ຂອງທ່ານເອງ*, ເຊັ່ນ `<Avatar>`, ເພື່ອປັບແຕ່ງ. ນີ້ແມ່ນວິທີ!
 
-## Passing props to a component {/*passing-props-to-a-component*/}
+## ການສົ່ງ props ໄປຫາ component {/*passing-props-to-a-component*/}
 
-In this code, the `Profile` component isn't passing any props to its child component, `Avatar`:
+ໃນ code ນີ້, Component `Profile` ບໍ່ສາມາດສົ່ງ props ໃດກໍໄດ້ໄປຫາ child component, `Avatar`:
 
 ```js
 export default function Profile() {
@@ -65,11 +65,11 @@ export default function Profile() {
 }
 ```
 
-You can give `Avatar` some props in two steps.
+ທ່ານສາມາດໃຫ້ props `Avatar` ໃນສອງຂັ້ນຕອນ.
 
-### Step 1: Pass props to the child component {/*step-1-pass-props-to-the-child-component*/}
+### ຂັ້ນຕອນທີ 1: ສົ່ງ props ໄປຫາ child component {/*step-1-pass-props-to-the-child-component*/}
 
-First, pass some props to `Avatar`. For example, let's pass two props: `person` (an object), and `size` (a number):
+ທຳອິດ, ສົ່ງ props ໄປຫາ `Avatar`. ຕົວຢ່າງ, ສົ່ງ 2 props: `person` (ເປັນ object), ແລະ `size` (ເປັນ number):
 
 ```js
 export default function Profile() {
@@ -84,15 +84,15 @@ export default function Profile() {
 
 <Note>
 
-If double curly braces after `person=` confuse you, recall [they're merely an object](/learn/javascript-in-jsx-with-curly-braces#using-double-curlies-css-and-other-objects-in-jsx) inside the JSX curlies.
+ຖ້າສອງວົງປີກກາຢູ່ຫຼັງ `person=` ເຮັດໃຫ້ທ່ານສັບສົນ, ໃຫ້ຈື່ໄວ້ວ່າ [ມັນເປັນ object](/learn/javascript-in-jsx-with-curly-braces#using-double-curlies-css-and-other-objects-in-jsx) ຢູ່ພາຍໃນວົງປີກກາ JSX.
 
 </Note>
 
-Now you can read these props inside the `Avatar` component.
+ທ່ານສາມາດອ່ານ props ນີ້ພາຍໃນ component `Avatar`
 
-### Step 2: Read props inside the child component {/*step-2-read-props-inside-the-child-component*/}
+### ຂັ້ນຕອນທີ 2: ການອ່ານ props ພາຍໃນ child component {/*step-2-read-props-inside-the-child-component*/}
 
-You can read these props by listing their names `person, size` separated by the commas inside `({` and `})` directly after `function Avatar`. This lets you use them inside the `Avatar` code, like you would with a variable.
+ທ່ານສາມາດອ່ານ props ໂດຍລະບຸຊື່ `person, size` ແຍກກັນໂດຍໃສ່ເຄື່ອງໝາຍຈຸດພາຍໃນ `({` ແລະ `})` ໂດຍກົງຫຼັງຈາກ `function Avatar`. ນີ້ເຮັດໃຫ້ທ່ານສາມາດນຳໃຊ້ພາຍໃນ code `Avatar`, ຄືກັບທີທ່ານໃຊ້ກັບຕົວແປ.
 
 ```js
 function Avatar({ person, size }) {
@@ -100,9 +100,9 @@ function Avatar({ person, size }) {
 }
 ```
 
-Add some logic to `Avatar` that uses the `person` and `size` props for rendering, and you're done.
+ເພີ່ມ logic ໃສ່ `Avatar` ທີ່ໃຊ້ props `person` ແລະ `size` ສຳລັບການສະແດງຜົນເທົ່ານີ້ກໍສຳເລັດ.
 
-Now you can configure `Avatar` to render in many different ways with different props. Try tweaking the values!
+ຕອນນີ້ທ່ານສາມາດຕັ້ງຄ່າ `Avatar` ເພື່ອສະແດງໄດ້ຫຼາຍວິທີດ້ວຍຫຼາຍ prop ທີ່ແຕກຕ່າງກັນ. ລອງປັບຫຼິ້ນເບິ່ງ!
 
 <Sandpack>
 
@@ -168,9 +168,9 @@ body { min-height: 120px; }
 
 </Sandpack>
 
-Props let you think about parent and child components independently. For example, you can change the `person` or the `size` props inside `Profile` without having to think about how `Avatar` uses them. Similarly, you can change how the `Avatar` uses these props, without looking at the `Profile`.
+Props ເຮັດໃຫ້ທ່ານຄິດກ່ຽວກັບ parent ແລະ child component ຢ່າງອິດສະຫຼະ. ຕົວຢ່າງ, ທ່ານສາມາດປ່ຽນ prop `person` ຫຼື `size` ພາຍໃນ `Profile` ໂດຍບໍ່ຈຳເປັນຕ້ອງຄິດວ່າ `Avatar` ໃຊ້ສິ່ງນີ້ແນວໃດ. ຄ້າຍຄືກັນ, ທ່ານສາມາດປ່ຽນວິທີທີ່ `Avatar` ໃຊ້ props, ໂດຍບໍ່ຕ້ອງເບິ່ງທີ່ `Profile`.
 
-You can think of props like "knobs" that you can adjust. They serve the same role as arguments serve for functions—in fact, props _are_ the only argument to your component! React component functions accept a single argument, a `props` object:
+ທ່ານສາມາດຄິດວ່າ props ຄືກັບລູກບິດທີ່ທ່ານສາມາດປັບໄດ້. ມັນເຮັດໜ້າທີ່ເປັນ argument ທີ່ເຮັດວຽກສຳລັບຟັງຊັ່ນ-ຄວາມຈິງ, props _ເປັນ_ argument ດຽວສຳລັບ component ຂອງທ່ານ! ຟັງຊັ່ນ component React ຮັບ argument ດຽວ, `props` object:
 
 ```js
 function Avatar(props) {
@@ -180,11 +180,11 @@ function Avatar(props) {
 }
 ```
 
-Usually you don't need the whole `props` object itself, so you destructure it into individual props.
+ປົກະຕິແລ້ວທ່ານບໍ່ຈຳເປັນຕ້ອງໃຊ້ `props` object ທັງໝົດ, ສະນັ້ນ ທ່ານສາມາດແຕກມັນອອກເປັນ props ຍ່ອຍແຕ່ລະອັນ.
 
 <Pitfall>
 
-**Don't miss the pair of `{` and `}` curlies** inside of `(` and `)` when declaring props:
+**ຢ່າລືມວົງປີກກາ `{` ແລະ `}`** ພາຍໃນຂອງ `(` ແລະ `)` ເມື່ອປະກາດ props:
 
 ```js
 function Avatar({ person, size }) {
@@ -192,7 +192,7 @@ function Avatar({ person, size }) {
 }
 ```
 
-This syntax is called ["destructuring"](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Unpacking_fields_from_objects_passed_as_a_function_parameter) and is equivalent to reading properties from a function parameter:
+Syntax ເອີ້ນວ່າ ["destructuring"](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Unpacking_fields_from_objects_passed_as_a_function_parameter) ແລະ ເທົ່າກັນກັບການອ່ານຄ່າ propertie ຈາກ function parameter:
 
 ```js
 function Avatar(props) {
@@ -204,9 +204,9 @@ function Avatar(props) {
 
 </Pitfall>
 
-## Specifying a default value for a prop {/*specifying-a-default-value-for-a-prop*/}
+## ການລະບຸຄ່າເລີ່ມຕົ້ນສຳລັບ prop {/*specifying-a-default-value-for-a-prop*/}
 
-If you want to give a prop a default value to fall back on when no value is specified, you can do it with the destructuring by putting `=` and the default value right after the parameter:
+ຫາກທ່ານຕ້ອງການໃຫ້ຄ່າ prop ເລີ່ມຕົ້ນເພື່ອໃຊ້ແທນເມື່ອບໍ່ໄດ້ລະບຸຄ່າໄວ້, ທ່ານສາມາດເຮັດໄດ້ໂດຍການ destructuring ໂດຍໃສ່ `=` ແລະ ຄ່າເລີ່ມຕົ້ນໄວ້ຫຼັງ parameter:
 
 ```js
 function Avatar({ person, size = 100 }) {
@@ -214,13 +214,13 @@ function Avatar({ person, size = 100 }) {
 }
 ```
 
-Now, if `<Avatar person={...} />` is rendered with no `size` prop, the `size` will be set to `100`.
+ຕອນນີ້, ຖ້າ `<Avatar person={...} />`  ສະແດງໂດຍບໍ່ມີ prop `size`, `size` ຈະຖືກຕັ້ງຄ່າເປັນ `100`.
 
-The default value is only used if the `size` prop is missing or if you pass `size={undefined}`. But if you pass `size={null}` or `size={0}`, the default value will **not** be used.
+ຄ່າເລີ່ມຕົ້ນຈະຖືກໃຊ້ກໍຕໍ່ເມືອບໍ່ມີ prop `size` ຫຼື ຖ້າທ່ານສົ່ງ `size={undefined}`. ແຕ່ຖ້າທ່ານສົ່ງ `size={null}` ຫຼື `size={0}`, ຄ່າເລີ່ມຕົ້ນຈະ **ບໍ່ຖືກ** ໃຊ້.
 
-## Forwarding props with the JSX spread syntax {/*forwarding-props-with-the-jsx-spread-syntax*/}
+## ການສົ່ງຕໍ່ props ດ້ວຍ spread syntax JSX {/*forwarding-props-with-the-jsx-spread-syntax*/}
 
-Sometimes, passing props gets very repetitive:
+ບາງເທື່ອ, ການສົ່ງ props ແມ່ນຊໍ້າກັນຫຼາຍ: 
 
 ```js
 function Profile({ person, size, isSepia, thickBorder }) {
@@ -237,7 +237,7 @@ function Profile({ person, size, isSepia, thickBorder }) {
 }
 ```
 
-There's nothing wrong with repetitive code—it can be more legible. But at times you may value conciseness. Some components forward all of their props to their children, like how this `Profile` does with `Avatar`. Because they don't use any of their props directly, it can make sense to use a more concise "spread" syntax:
+ມັນບໍ່ມີຫຍັງຜິດຖ້າ code ຊໍ້າ-ມັນສາມາດອ່ານໄດ້ຊັດເຈນຂຶ້ນ. ແຕ່ບາງຄັ້ງທ່ານອາດໃຫ້ຄວາມສຳຄັນກັບຄວາມກະທັດຮັດ. ບາງ component ສົ່ງຜ່ານ props ທັງໝົດໄປຫາ children ຂອງມັນທັງໝົດ, ເຊັ່ນດຽວກັບວິທີ `Profile` ນີ້ເຮັດກັບ `Avatar`. ເພາະວ່າພວກມັນບໍ່ໃຊ້ prop ໂດຍກົງ, ຈຶ່ງເໝາະສົມທີ່ຈະໃຊ້ syntax "spread" ທີກະທັດຮັດກວ່ານີ້:
 
 ```js
 function Profile(props) {
@@ -249,13 +249,13 @@ function Profile(props) {
 }
 ```
 
-This forwards all of `Profile`'s props to the `Avatar` without listing each of their names.
+ນີ້ສົ່ງຕໍ່ prop ທັງໝົດຂອງ `Profile` ໄປຫາ `Avatar` ໂດຍບໍ່ລະບຸຊື່ແຕ່ລະລາຍການ.
 
-**Use spread syntax with restraint.** If you're using it in every other component, something is wrong. Often, it indicates that you should split your components and pass children as JSX. More on that next!
+**ໃຊ້ spread syntax ດ້ວຍຄວາມລະມັດລະວັງ.** ຖ້າທ່ານໃຊ້ມັນທຸກໆ component ອື່ນ, ສະແດງວ່າມີບາງຢ່າງຜິດປົກະຕິ. ສ່ວນຫຼາຍ, ມັນບົ່ງບອກວ່າທ່ານຄວນຈະແຍກ component ແລະ ສົ່ງ children ເປັນ JSX. ເພີ່ມເຕີມຕໍ່ໄປ!
 
-## Passing JSX as children {/*passing-jsx-as-children*/}
+## ການສົ່ງ JSX ເປັນ children {/*passing-jsx-as-children*/}
 
-It is common to nest built-in browser tags:
+ມັນເປັນເລື່ອງປົກະຕິທີ່ຈະຊ້ອນ built-in ແທັກບາວເຊີ:
 
 ```js
 <div>
@@ -263,7 +263,7 @@ It is common to nest built-in browser tags:
 </div>
 ```
 
-Sometimes you'll want to nest your own components the same way:
+ບາງເທື່ອທ່ານຕ້ອງການຊ້ອນ component ຂອງທ່ານດ້ວຍຮູບແບບດຽວກັນ:
 
 ```js
 <Card>
@@ -271,7 +271,7 @@ Sometimes you'll want to nest your own components the same way:
 </Card>
 ```
 
-When you nest content inside a JSX tag, the parent component will receive that content in a prop called `children`. For example, the `Card` component below will receive a `children` prop set to `<Avatar />` and render it in a wrapper div:
+ເມື່ອທ່ານຊ້ອນເນື້ອຫາພາຍໃນແທັກ JSX, parent component ຈະຮັບເນື້ອຫາໃນ prop ເອີ້ນວ່າ `children`. ຕົວຢ່າງ, component `Card` ດ້ານລຸ່ມຈະຮັບ prop `children` ຕັ້ງຄ່າໃຫ້ `<Avatar />` ແລະ ສະແດງຜົນທາງໃນ div ທີ່ຄອບ:
 
 <Sandpack>
 
@@ -347,17 +347,18 @@ export function getImageUrl(person, size = 's') {
 
 </Sandpack>
 
-Try replacing the `<Avatar>` inside `<Card>` with some text to see how the `Card` component can wrap any nested content. It doesn't need to "know" what's being rendered inside of it. You will see this flexible pattern in many places.
+ລອງແທນທີ່ `<Avatar>` ພາຍໃນ `<Card>` ດ້ວຍຂໍ້ຄວາມເພື່ອເບິ່ງວ່າ component `Card` ສາມາດຄອບເນື້ອຫາທີ່ຊ້ອນກັນ. ມັນບໍ່ຈຳເປັນຕ້ອງ "ຮູ້" ສິ່ງທີ່ກຳລັງສະແດງພາຍໃນມັນ. ທ່ານຈະເຫັນຮູບແບບທີ່ຢືດຫຍຸ່ນນີ້ຫຼາຍບ່ອນ.
 
-You can think of a component with a `children` prop as having a "hole" that can be "filled in" by its parent components with arbitrary JSX. You will often use the `children` prop for visual wrappers: panels, grids, etc.
+ທ່ານສາມາດຄິດວ່າ component ທີ່ມີ prop `children` ວ່າມີ "ຂຸມ" ທີ່ສາມາດ "ເຕິມລົງ" ໂດຍ parent component ດ້ວຍ JSX ຕາມໃຈ. ທ່ານຈະໄດ້ໃຊ້ prop `children` ເລື້ອຍໆສຳລັບການຫໍ່ຫຸ້ມພາບເຊັ່ນ: panels, grids, ແລະ ອື່ນໆ.
+
 
 <Illustration src="/images/docs/illustrations/i_children-prop.png" alt='A puzzle-like Card tile with a slot for "children" pieces like text and Avatar' />
 
-## How props change over time {/*how-props-change-over-time*/}
+## props ປ່ຽນແປງແນວໃດເມື່ອເວລາຜ່ານໄປ {/*how-props-change-over-time*/}
 
-The `Clock` component below receives two props from its parent component: `color` and `time`. (The parent component's code is omitted because it uses [state](/learn/state-a-components-memory), which we won't dive into just yet.)
+Component `Clock` ດ້ານລຸ່ມຈະໄດ້ຮັບສອງ prop ຈາກ parent component ມັນເອງ: `color` ແລະ `time`. (Code ຂອງ parent component ແມ່ນຖືກປະໄວ້ເພາະວ່າມັນໃຊ້[state](/learn/state-a-components-memory), ທີ່ພວກເຮົາຍັງບໍ່ທັນເຈາະລົງເລິກໄປຕື່ມເທື່ອ.)
 
-Try changing the color in the select box below:
+ລອງປ່ຽນສີໃນ select box ດ້ານລຸ່ມ:
 
 <Sandpack>
 
@@ -392,7 +393,7 @@ export default function App() {
   return (
     <div>
       <p>
-        Pick a color:{' '}
+        ເລືອກສີ:{' '}
         <select value={color} onChange={e => setColor(e.target.value)}>
           <option value="lightcoral">lightcoral</option>
           <option value="midnightblue">midnightblue</option>
@@ -407,21 +408,21 @@ export default function App() {
 
 </Sandpack>
 
-This example illustrates that **a component may receive different props over time.** Props are not always static! Here, the `time` prop changes every second, and the `color` prop changes when you select another color. Props reflect a component's data at any point in time, rather than only in the beginning.
+ໃນຕົວຢ່າງນີ້ສະແດງໃຫ້ເຫັນວ່າ **component ອາດໄດ້ຮັບ prop ທີ່ແຕກຕ່າງເມື່ອເວລາຜ່ານໄປ.** Props ບໍ່ເປັນ static ສະເໝີໄປ! ນີ້, prop `time` ປ່ຽນແປງທຸກວິນາທີ, ແລະ prop `color` ປ່ຽນເມື່ອທ່ານເລືອກສີອື່ນ. Prop ສະທ້ອນຂໍ້ມູນ component ໃນເວລາໃດໜຶ່ງ, ແທນທີ່ຈະສະແດງສະເພາະໃນຊ່ວງເລີ່ມຕົ້ນ.
 
-However, props are [immutable](https://en.wikipedia.org/wiki/Immutable_object)—a term from computer science meaning "unchangeable". When a component needs to change its props (for example, in response to a user interaction or new data), it will have to "ask" its parent component to pass it _different props_—a new object! Its old props will then be cast aside, and eventually the JavaScript engine will reclaim the memory taken by them.
+ເຖິງຢ່າງໃດກໍຕາມ, props ແມ່ນ [immutable](https://en.wikipedia.org/wiki/Immutable_object)—ຄຳສັບຈາກວິທະຍາສາດຄອມພິວເຕີມີຄວາມໝາຍວ່າ "ບໍ່ປ່ຽນແປງ". ເມື່ອ component ຕ້ອງການປ່ຽນແປງ prop ມັນເອງ (ຍົກຕົວຢ່າງ, ໃນຕອນ response ຫາການໂຕ້ຕອບຜູ້ໃຊ້ ຫຼື ຂໍ້ມູນໃໝ່), ມັນຕ້ອງໄດ້ "ຂໍ" parent component ຂອງມັນເອງເພື່ອສົ່ງ _prop ທີ່ແຕກຕ່າງ_—object ໃໝ່! prop ເກົ່າຈະຖືກຖີ້ມ ແລະ ໃນທີ່ສຸດ JavaScript engine ຈະເອີ້ນຄືນ memory ທີ່ພວກມັນເອົາໄປ.
 
-**Don't try to "change props".** When you need to respond to the user input (like changing the selected color), you will need to "set state", which you can learn about in [State: A Component's Memory.](/learn/state-a-components-memory)
+**ຢ່າພາຍາຍາມ "ປ່ຽນ props".** ເມື່ອທ່ານຕ້ອງການ respond ຄືນຫາ user input (ເຊັ່ນ ປ່ຽນສີທີ່ເລືອກ), ທ່ານຈະຕ້ອງການ "set state", ທີ່ທ່ານໄດ້ຮຽນກ່ຽວກັບ [State: A Component's Memory.](/learn/state-a-components-memory)
 
 <Recap>
 
-* To pass props, add them to the JSX, just like you would with HTML attributes.
-* To read props, use the `function Avatar({ person, size })` destructuring syntax.
-* You can specify a default value like `size = 100`, which is used for missing and `undefined` props.
-* You can forward all props with `<Avatar {...props} />` JSX spread syntax, but don't overuse it!
-* Nested JSX like `<Card><Avatar /></Card>` will appear as `Card` component's `children` prop.
-* Props are read-only snapshots in time: every render receives a new version of props.
-* You can't change props. When you need interactivity, you'll need to set state.
+* ຫາກຕ້ອງການສົ່ງ props, ໃຫ້ເພີ່ມລົງໃນ JSX, ເຊັ່ນດຽວກັບທີ່ທ່ານເຮັດກັບ attribute HTML.
+* ຫາກຕ້ອງການອ່ານ props, ໃຊ້ destructuring syntax `function Avatar({ person, size})`.
+* ທ່ານສາມາດກຳນົດຄ່າເລີ່ມຕົ້ນເຊັ່ນ `size = 100`, ເຊິ່ງໃຊ້ສຳລັບ props ທີ່ບໍ່ມີ ຫຼື ເປັນ `undefined`.
+* ທ່ານສາມາດສົ່ງຕໍ່ທຸກ props ດ້ວຍ JSX spread syntax `<Avatar {...props} />`, ແຕ່ຢ່າໃຊ້ມັນຫຼາຍ!
+* JSX ທີ່ຊ້ອນກັນຫຼາຍເຊັ່ນ `<Card><Avatar /></Card>` ຈະປະກົດເປັນ `children` component ຂອງ component `Card`.
+* Props ແມ່ນ snapshot ທີ່ອ່ານໄດ້ຢ່າງດຽວໃນເວລາ: ທຸກໆການສະແດງຜົນຈະຮັບເວີຊັ່ນໃໝ່ຂອງ props.
+* ທ່ານບໍ່ສາມາດປ່ຽນ props. ເມື່ອທ່ານຕ້ອງການ ການໂຕ້ຕອບ, ທ່ານຈະຕ້ອງຕັ້ງຄ່າ state.
 
 </Recap>
 
@@ -429,9 +430,9 @@ However, props are [immutable](https://en.wikipedia.org/wiki/Immutable_object)�
 
 <Challenges>
 
-#### Extract a component {/*extract-a-component*/}
+#### ແຕກ component {/*extract-a-component*/}
 
-This `Gallery` component contains some very similar markup for two profiles. Extract a `Profile` component out of it to reduce the duplication. You'll need to choose what props to pass to it.
+Component `Gallery` ນີ້ມີ markup ທີ່ຄ້າຍກັນຫຼາຍສຳລັບສອງ profile. ແຕກ component `Profile` ອອກມາເພື່ອຫຼຸດຄວາມຊໍ້າຊ້ອນ. ທ່ານຕ້ອງເລືອກ prop ທີ່ຈະສົ່ງໄປຫາມັນ.
 
 <Sandpack>
 
@@ -524,15 +525,15 @@ li { margin: 5px; }
 
 <Hint>
 
-Start by extracting the markup for one of the scientists. Then find the pieces that don't match it in the second example, and make them configurable by props.
+ເລີ່ມຕົ້ນໂດຍການແຕກ markup ຂອງນັກວິທະຍາສາດ ຄົນໃດໜຶ່ງ. ຈາກນັ້ນຄົ້ນຫາສ່ວນທີ່ບໍ່ກົງກັນໃນຕົວຢ່າງທີ່ສອງ, ແລະ ເຮັດໃຫ້ມັນສາມາດປັບໄດ້ໂດຍໃຊ້ props.
 
 </Hint>
 
 <Solution>
 
-In this solution, the `Profile` component accepts multiple props: `imageId` (a string), `name` (a string), `profession` (a string), `awards` (an array of strings), `discovery` (a string), and `imageSize` (a number).
+ໃນທາງອອກນີ້, component `Profile` ຮັບຫຼາຍ props: `imageId` (ເປັນ string), `name` (ເປັນ string), `profession` (ເປັນ string), `awards` (ເປັນ array ຂອງ string), `discovery` (ເປັນ string), ແລະ `imageSize` (ເປັນ number).
 
-Note that the `imageSize` prop has a default value, which is why we don't pass it to the component.
+ໝາຍເຫດ ທີ່ prop `imageSize` ມີຄ່າເລີ່ມຕົ້ນ, ນັ້ນເປັນເຫດຜົນທີ່ເຮົາບໍ່ສົ່ງມັນຫາ component.
 
 <Sandpack>
 
@@ -630,9 +631,9 @@ li { margin: 5px; }
 
 </Sandpack>
 
-Note how you don't need a separate `awardCount` prop if `awards` is an array. Then you can use `awards.length` to count the number of awards. Remember that props can take any values, and that includes arrays too!
+ສັງເກດວ່າທ່ານບໍ່ຈຳເປັນຕ້ອງແຍກ prop `awardCount` ຖ້າ `awards` ເປັນ array. ຈາກນັ້ນທ່ານໃຊ້ `awards.length` ເພື່ອນັບຈຳນວນຂອງ awards. ໃຫ້ຈື່ໄວ້ວ່າ prop ສາມາດຮັບຄ່າໃດກໍໄດ້,​ແລະ ສາມາດລວມໃນ array ໄດ້ນຳ!
 
-Another solution, which is more similar to the earlier examples on this page, is to group all information about a person in a single object, and pass that object as one prop:
+ວິທີການອື່ນ, ຊື່ງຄ້າຍຄືກັບຕົວຢ່າງກ່ອນໜ້າໃນ page ນີ້, ແມ່ນ group ຂໍ້ມູນທັງໝົດກ່ຽວກັບ person ໃນ object ດຽວ, ແລະ ສົ່ງ object ດັ່ງກ່າວເປັນໜຶ່ງ prop:
 
 <Sandpack>
 
@@ -727,15 +728,15 @@ li { margin: 5px; }
 
 </Sandpack>
 
-Although the syntax looks slightly different because you're describing properties of a JavaScript object rather than a collection of JSX attributes, these examples are mostly equivalent, and you can pick either approach.
+ເຖິງວ່າ syntax ຈະແຕກຕ່າງໜ້ອຍໜຶ່ງເພາະວ່າທ່ານກຳລັງອະທິບາຍ propertie ຂອງ JavaScript object ແທນທີ່ຈະເປັນ collection ຂອງ attribute JSX, ໃນຕົວຢ່າງເຫຼົ່ານີ້ສ່ວນຫຼາຍແມ່ນຈະທຽບເທົ່າກັນ, ແລະ ທ່ານສາມາດເລືອກວິທີໃດກໍໄດ້.
 
 </Solution>
 
-#### Adjust the image size based on a prop {/*adjust-the-image-size-based-on-a-prop*/}
+#### ປັບຂະໜາດຮູບໂດຍອີງຕາມ prop {/*adjust-the-image-size-based-on-a-prop*/}
 
-In this example, `Avatar` receives a numeric `size` prop which determines the `<img>` width and height. The `size` prop is set to `40` in this example. However, if you open the image in a new tab, you'll notice that the image itself is larger (`160` pixels). The real image size is determined by which thumbnail size you're requesting.
+ໃນຕົວຢ່າງນີ້, `Avatar` ຮັບຕົວເລກ prop `size` ທີ່ສະແດງຂະໜາດຄວາມກວ້າງ ແລະ ຄວາມສູງ ຂອງ `<img>`. prop `size` ຕັ້ງເປັນ `40` ໃນຕົວຢ່າງນີ້. ເຖິງຢ່າງໃດກໍຕາມ, ຖ້າທ່ານເປີດຮູບໃນແຖບໃໝ່, ທ່ານຈະສັງເກດວ່າໂຕຮູບເອງແມ່ນໃຫຍ່ (`160` pixels). ຂະໜາດຮູບທີ່ແທ້ຈິງຈະພິຈາລະນາຈາກຂະໜາດພາບ thumbnail ທີ່ທ່ານຕ້ອງການ.
 
-Change the `Avatar` component to request the closest image size based on the `size` prop. Specifically, if the `size` is less than `90`, pass `'s'` ("small") rather than `'b'` ("big") to the `getImageUrl` function. Verify that your changes work by rendering avatars with different values of the `size` prop and opening images in a new tab.
+ປ່ຽນ component `Avatar` ເພື່ອຂໍຂະໜາດພາບທີ່ໃກ້ຄຽງທີ່ສຸດອີງຕາມ prop `size`. ໂດຍສະເພາະ, ຖ້າ `size` ນ້ອຍກວ່າ `90`, ສົ່ງ `'s'` ("ນ້ອຍ") ແທນທີ່ຈະເປັນ `'b'` ("ໃຫຍ່") ໄປຫາຟັງຊັ່ນ `getImageUrl`. ກວດສອບວ່າການປ່ຽນແປງຂອງທ່ານໄດ້ຜົນໂດຍການສະແດງ avatar ທີ່ມີຄ່າແຕກຕ່າງກັນຂອງ prop `size` ແລະ ເປີດຮູບໃນແຖບໃໝ່.
 
 <Sandpack>
 
@@ -786,7 +787,7 @@ export function getImageUrl(person, size) {
 
 <Solution>
 
-Here is how you could go about it:
+ນີ້ແມ່ນວິທີທີ່ທ່ານສາມາດເຮັດ:
 
 <Sandpack>
 
@@ -848,7 +849,7 @@ export function getImageUrl(person, size) {
 
 </Sandpack>
 
-You could also show a sharper image for high DPI screens by taking [`window.devicePixelRatio`](https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio) into account:
+ທ່ານສາມາດສະແດງຮູບທີ່ຄົມຊັດສຳລັບ ຈໍ ທີ່ມີ DPI ສູງໂດຍການ [`window.devicePixelRatio`](https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio) ໄປຫາ account:
 
 <Sandpack>
 
@@ -919,13 +920,13 @@ export function getImageUrl(person, size) {
 
 </Sandpack>
 
-Props let you encapsulate logic like this inside the `Avatar` component (and change it later if needed) so that everyone can use the `<Avatar>` component without thinking about how the images are requested and resized.
+Props ໃຫ້ທ່ານສາມາດຫໍ່ຫຸ້ມ logic ເຊັ່ນ ພາຍໃນ component `Avatar` ນີ້ (ແລະ ປ່ຽນມັນພາຍຫຼັງຖ້າຕ້ອງການ) ເພື່ອໃຫ້ທຸກຄົນສາມາດໃຊ້ component `<Avatar>` ໂດຍບໍ່ຕ້ອງຄິດເຖິງວິທີທີ່ຮູບມີການຮ້ອງຂໍ ແລະ ການປັບຂະໜາດຮູບພາບ.
 
 </Solution>
 
-#### Passing JSX in a `children` prop {/*passing-jsx-in-a-children-prop*/}
+#### ການສົ່ງ JSX ໃນ prop `children` {/*passing-jsx-in-a-children-prop*/}
 
-Extract a `Card` component from the markup below, and use the `children` prop to pass different JSX to it:
+ແຕກ `Card` component ຈາກ markup ດ້ານລຸ່ມ, ແລະ ໃຊ້ prop `children` ເພື່ອສົ່ງ JSX ທີ່ຕ່າງກັນຫາມັນ:
 
 <Sandpack>
 
@@ -983,13 +984,13 @@ h1 {
 
 <Hint>
 
-Any JSX you put inside of a component's tag will be passed as the `children` prop to that component.
+໋JSX ໃດໆທີ່ທ່ານໃສ່ໄວ້ໃນແທັກ component ຈະຖືກສົ່ງເປັນ prop `children` ຫາ component ນັ້ນ.
 
 </Hint>
 
 <Solution>
 
-This is how you can use the `Card` component in both places:
+ນີ້ແມ່ນວິທີທີ່ທ່ານສາມາດໃຊ້ component `Card` ໃນສອງບ່ອນ:
 
 <Sandpack>
 
@@ -1051,7 +1052,7 @@ h1 {
 
 </Sandpack>
 
-You can also make `title` a separate prop if you want every `Card` to always have a title:
+ທ່ານຍັງສາມາດແຍກ prop `title` ຖ້າທ່ານຕ້ອງການໃຫ້ທຸກໆ `Card` ນັ້ນມີ title:
 
 <Sandpack>
 
