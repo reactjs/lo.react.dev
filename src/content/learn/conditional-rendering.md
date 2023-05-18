@@ -1,24 +1,24 @@
 ---
-title: Conditional Rendering
+title: ການສະແດງຜົນແບບມີເງື່ອນໄຂ
 ---
 
 <Intro>
 
-Your components will often need to display different things depending on different conditions. In React, you can conditionally render JSX using JavaScript syntax like `if` statements, `&&`, and `? :` operators.
+component ຂອງທ່ານມັກຈະຕ້ອງສະແດງສິ່ງຕ່າງໆຂຶ້ນກັບແຕ່ລະເງື່ອນໄຂ. ໃນ React ທ່ານສາມາດສະແດງຜົນ JSX ຢ່າງມີເງື່ອນໄຂໂດຍໃຊ້ syntax JavaScript ເຊັ່ນ `if` statement, `&&`, ແລະ `? :` operators.
 
 </Intro>
 
 <YouWillLearn>
 
-* How to return different JSX depending on a condition
-* How to conditionally include or exclude a piece of JSX
-* Common conditional syntax shortcuts you’ll encounter in React codebases
+* ວິທີ return JSX ທີ່ແຕກຕ່າງກັນຕາມເງື່ອນໄຂ
+* ວິທີລວມ ຫຼື ແຍກຊີ້ນສ່ວນຂອງ JSX ຢ່າງມີເງື່ອນໄຂ
+* ທາງລັດ syntax ທີ່ມີເງື່ອນໄຂທົ່ວໄປທີ່ທ່ານຈະໄດ້ພົບໃນ React codebases
 
 </YouWillLearn>
 
-## Conditionally returning JSX {/*conditionally-returning-jsx*/}
+## ສົ່ງຄືນ JSX ແບບມີເງື່ອນໄຂ {/*conditionally-returning-jsx*/}
 
-Let’s say you have a `PackingList` component rendering several `Item`s, which can be marked as packed or not:
+ສົມມຸດວ່າທ່ານມີ component `PackingList` ທີ່ສະແດງ `Item` ຫຼາຍລາຍການ, ຊື່ງສາມາດເຮັດເຄື່ອງໝາຍວ່າແພັກແລ້ວ ຫຼື ບໍ່:
 
 <Sandpack>
 
@@ -52,9 +52,9 @@ export default function PackingList() {
 
 </Sandpack>
 
-Notice that some of the `Item` components have their `isPacked` prop set to `true` instead of `false`. You want to add a checkmark (✔) to packed items if `isPacked={true}`.
+ສັງເກດວ່າມີ component `Item` ບາງໂຕມີ prop `isPacked` ເປັນ `true` ແທນທີ່ຈະເປັນ `false`. ທ່ານຕ້ອງການເພີ່ມເຄື່ອງໝາຍຕິກ (✔) ລົງໃນລາຍການທີ່ຖືກແພັກຖ້າ `isPacked={true}`.
 
-You can write this as an [`if`/`else` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) like so:
+ທ່ານສາມາດຂຽນເປັນ [`if`/`else` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) ດັ່ງນີ້:
 
 ```js
 if (isPacked) {
@@ -63,7 +63,7 @@ if (isPacked) {
 return <li className="item">{name}</li>;
 ```
 
-If the `isPacked` prop is `true`, this code **returns a different JSX tree.** With this change, some of the items get a checkmark at the end:
+ຖ້າ prop `isPacked` ເປັນ `true`, code ນີ້ **ຈະຄືນຄ່າ JSX tree ທີ່ແຕກຕ່າງກັນ.** ດ້ວຍການປ່ຽນແປງນີ້, ບາງລາຍການມີເຄື່ອງໝາຍຕິກໃນຕອນທ້າຍ:
 
 <Sandpack>
 
@@ -100,13 +100,13 @@ export default function PackingList() {
 
 </Sandpack>
 
-Try editing what gets returned in either case, and see how the result changes!
+ລອງແກ້ໄຂສິ່ງທີ່ return ໃນທັງສອງກໍລະນີ, ແລະ ເບິ່ງວ່າຜົນລັບຈະປ່ຽນແປງແນວໃດ!
 
-Notice how you're creating branching logic with JavaScript's `if` and `return` statements. In React, control flow (like conditions) is handled by JavaScript.
+ສັງເກດວ່າທ່ານກຳລັງສ້າງ branching logic ດ້ວຍ `if` ແລະ `return` statement ຂອງ JavaScript. ໃນ React, flow ການຄວບຄຸມ (ເຊັ່ນ ເງື່ອນໄຂ) ແມ່ນຈັດການໂດຍ JavaScript.
 
-### Conditionally returning nothing with `null` {/*conditionally-returning-nothing-with-null*/}
+### ການ Return ທີ່ບໍ່ມີຄ່າດ້ວຍ `null` ຢ່າງມີເງື່ອນໄຂ {/*conditionally-returning-nothing-with-null*/}
 
-In some situations, you won't want to render anything at all. For example, say you don't want to show packed items at all. A component must return something. In this case, you can return `null`:
+ໃນບາງສະຖານະການ, ທ່ານບໍ່ສາມາດສະແດງສິ່ງຕ່າງໆໄດ້. ຕົວຢ່າງ, ທ່ານບໍ່ຕ້ອງການສະແດງລາຍການທີແພັກແລ້ວເລີຍ. Component ຕ້ອງ return ບາງຢ່າງ. ໃນກໍລະນີນີ້, ທ່ານສາມາດ return `null`:
 
 ```js
 if (isPacked) {
@@ -115,7 +115,7 @@ if (isPacked) {
 return <li className="item">{name}</li>;
 ```
 
-If `isPacked` is true, the component will return nothing, `null`. Otherwise, it will return JSX to render.
+ຖ້າ `isPacked` ເປັນ true, component ຈະບໍ່ return ຫຍັງ, `null`. ກົງກັນຂ້າມ, ມັນຈະ return JSX ເພື່ອສະແດງຜົນ.
 
 <Sandpack>
 
@@ -152,23 +152,23 @@ export default function PackingList() {
 
 </Sandpack>
 
-In practice, returning `null` from a component isn't common because it might surprise a developer trying to render it. More often, you would conditionally include or exclude the component in the parent component's JSX. Here's how to do that!
+ໃນທາງປະຕິບັດ, ການ return ດ້ວຍ `null` ຈາກ component ເປັນເລື່ອງທີ່ບໍ່ປົກະຕິເພາະມັນອາດຈະເຮັດໃຫ້ນັກພັດທະນາປະຫຼາດໃຈທີ່ພະຍາຍາມຈະສະແດງມັນ. ສ່ວນຫຼາຍ, ທ່ານຈະລວມ ຫຼື ແຍກ component ໃນ parent component ຂອງ JSX. ນີ້ແມ່ນວິທີການ!
 
-## Conditionally including JSX {/*conditionally-including-jsx*/}
+## ແບບມີເງື່ອນໄຂລວມມີ JSX {/*conditionally-including-jsx*/}
 
-In the previous example, you controlled which (if any!) JSX tree would be returned by the component. You may already have noticed some duplication in the render output:
+ໃນຕົວຢ່າງກ່ອນໜ້ານີ້, ທ່ານໄດ້ຄວບຄຸມ (ຖ້າມີ!) JSX tree ທີ່ return ໂດຍ component. ທ່ານອາດຈະສັງເກດເຫັນການສະແດງຜົນທີ່ຊໍ້າກັນ:
 
 ```js
 <li className="item">{name} ✔</li>
 ```
 
-is very similar to
+ຄ້າຍຄືກັບ
 
 ```js
 <li className="item">{name}</li>
 ```
 
-Both of the conditional branches return `<li className="item">...</li>`:
+ທັງສອງເງື່ອນໄຂ branch ແມ່ນ return `<li className="item">...</li>`:
 
 ```js
 if (isPacked) {
@@ -177,13 +177,13 @@ if (isPacked) {
 return <li className="item">{name}</li>;
 ```
 
-While this duplication isn't harmful, it could make your code harder to maintain. What if you want to change the `className`? You'd have to do it in two places in your code! In such a situation, you could conditionally include a little JSX to make your code more [DRY.](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
+ເຖິງວ່າການເຮັດຊໍ້ານີ້ຈະບໍ່ເປັນອັນຕະລາຍ, ແຕ່ມັນອາດຈະເຮັດໃຫ້ code ຂອງທ່ານຍາກໃນການ maintain. ຖ້າທ່ານຕ້ອງການປ່ຽນ `className` ເດ? ທ່ານຈະຕ້ອງໄດ້ເຮັດໃນສອງບ່ອນຂອງ code ທ່ານ! ໃນສະຖານະການແບບນີ້, ທ່ານສາມາດລວມ JSX ນ້ອຍແບບມີເງື່ອນໄຂເພື່ອເຮັດໃຫ້ code ຂອງທ່ານ [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) ຫຼາຍຂຶ້ນ.
 
 ### Conditional (ternary) operator (`? :`) {/*conditional-ternary-operator--*/}
 
-JavaScript has a compact syntax for writing a conditional expression -- the [conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) or "ternary operator".
+JavaScript ມີ syntax ທີ່ກະຊັບສຳລັບຂຽນ expression ເງື່ອນໄຂ -- [conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) ຫຼື "ternary operator".
 
-Instead of this:
+ແທນທີ່ຈະເປັນແບບນີ້:
 
 ```js
 if (isPacked) {
@@ -192,7 +192,7 @@ if (isPacked) {
 return <li className="item">{name}</li>;
 ```
 
-You can write this:
+ທ່ານສາມາດຂຽນແບບນີ້:
 
 ```js
 return (
@@ -202,17 +202,17 @@ return (
 );
 ```
 
-You can read it as *"if `isPacked` is true, then (`?`) render `name + ' ✔'`, otherwise (`:`) render `name`"*.
+ທ່ານສາມາດອ່ານເປັນ *"ຖ້າ `isPacked` ເປັນ true, ຈາກນັ້ນ (`?`) ສະແດງ `name + ' ✔'`, ຖ້າບໍ່ດັ່ງນັ້ນ (`:`) ສະແດງ `name`"*.
 
 <DeepDive>
 
-#### Are these two examples fully equivalent? {/*are-these-two-examples-fully-equivalent*/}
+#### ທັງສອງຕົວຢ່າງນີ້ຄືກັນທັງໝົດບໍ່? {/*are-these-two-examples-fully-equivalent*/}
 
-If you're coming from an object-oriented programming background, you might assume that the two examples above are subtly different because one of them may create two different "instances" of `<li>`. But JSX elements aren't "instances" because they don't hold any internal state and aren't real DOM nodes. They're lightweight descriptions, like blueprints. So these two examples, in fact, *are* completely equivalent. [Preserving and Resetting State](/learn/preserving-and-resetting-state) goes into detail about how this works.
+ຖ້າທ່ານມາຈາກພື້ນຖານການຂຽນໂປຣແກຣມເຊີງວັດຖຸ, ​ທ່ານອາດຈະຄິດວ່າສອງຕົວຢ່າງດ້ານເທິງມີຄວາມແຕກຕ່າງກັນໜ້ອຍໜຶ່ງເພາະວ່າຕົວຢ່າງໜຶ່ງອາດຈະສ້າງ "instance" ຂອງ `<li>` ສອງຕົວຢ່າງທີ່ແຕກຕ່າງກັນ. ແຕ່ JSX element ບໍ່ແມ່ນ "instances" ເພາະວ່າບໍ່ມີ state ພາຍໃນໃດໆ ແລະ ບໍ່ແມ່ນ DOM nodes ແທ້. ເປັນຄຳອະທິບາຍສັ້ນໆເຊັ່ນ blueprints. ສະນັ້ນສອງຕົວຢ່າງນີ້, ໃນຄວາມເປັນຈິງ, *ແມ່ນ* ທຽບເທົ່າກັນໝົດ. [ການຮັກສາ ແລະ ລີເຊັດ State](/learn/preserving-and-resetting-state) ມີລາຍລະອຽດກ່ຽວກັບວິທີການເຮັດວຽກນີ້.
 
 </DeepDive>
 
-Now let's say you want to wrap the completed item's text into another HTML tag, like `<del>` to strike it out. You can add even more newlines and parentheses so that it's easier to nest more JSX in each of the cases:
+ສົມມຸດວ່າທ່ານຕ້ອງການລວມຂໍ້ຄວາມລາຍການທີ່ສຳເລັດລົງໃນແທັກ HTML ເຊັ່ນ `<del>` ເພື່ອຂີດຂ້າ. ທ່ານສາມາດເພີ່ມແຖວໃໝ່ ແລະ ວົງເລັບເພື່ອໃຫ້ຊ້ອນ JSX ໃນແຕ່ລະກໍລະນີໄດ້ງ່າຍຂຶ້ນ.
 
 <Sandpack>
 
@@ -256,11 +256,11 @@ export default function PackingList() {
 
 </Sandpack>
 
-This style works well for simple conditions, but use it in moderation. If your components get messy with too much nested conditional markup, consider extracting child components to clean things up. In React, markup is a part of your code, so you can use tools like variables and functions to tidy up complex expressions.
+ແບບນີ້ໃຊ້ໄດ້ດີກັບເງື່ອນໄຂງ່າຍໆ, ແຕ່ໃຊ້ໃນປະລິມານທີ່ເໝາະສົມ. ຖ້າ component ຂອງທ່ານເລີ່ມຫຍຸ້ງດ້ວຍ markup ແບບມີເງື່ອນໄຂທີ່ຊ້ອນກັນຫຼາຍເກີນໄປໃຫ້ລອງແຍກ child component ເພື່ອລ້າງຂໍ້ມູນ. ໃນ React, markup ເປັນສ່ວນໜຶ່ງຂອງ code ທ່ານ, ສະນັ້ນທ່ານສາມາດໃຊ້ເຄື່ອງມືເຊັ່ນ: ຕົວແປ ແລະ ຟັງຊັ່ນເພື່ອຈັດລະບຽບ expression ທີ່ຊັບຊ້ອນໄດ້.
 
-### Logical AND operator (`&&`) {/*logical-and-operator-*/}
+### Logic ແລະ operator (`&&`) {/*logical-and-operator-*/}
 
-Another common shortcut you'll encounter is the [JavaScript logical AND (`&&`) operator.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND#:~:text=The%20logical%20AND%20(%20%26%26%20)%20operator,it%20returns%20a%20Boolean%20value.) Inside React components, it often comes up when you want to render some JSX when the condition is true, **or render nothing otherwise.** With `&&`, you could conditionally render the checkmark only if `isPacked` is `true`:
+ທາງລັດທົ່ວໄປທີ່ທ່ານຈະໄດ້ພົບຄືຕົວດຳເນີນການ [JavaScript logical ແລະ (`&&`) operator.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND#:~:text=The%20logical%20AND%20(%20%26%26%20)%20operator,it%20returns%20a%20Boolean%20value.) ພາຍໃນ component React, ມັກຈະເກີດເມື່ອທ່ານຕ້ອງການສະແດງຜົນບາງ JSX ເມື່ອພົບເງື່ອນໄຂທີ່ເປັນຈິງ, **ຫຼື ສະແດງຜົນຢ່າງອື່ນ.** ຍ້ອນ `&&` ທ່ານສາມາດສະແດງຜົນເຄື່ອງໝາຍຕິກຕາມເງື່ອນໄຂໃດກໍໄດ້ເມືອ `isPacked` ເປັນ `true`:
 
 ```js
 return (
@@ -270,9 +270,9 @@ return (
 );
 ```
 
-You can read this as *"if `isPacked`, then (`&&`) render the checkmark, otherwise, render nothing"*.
+ທ່ານສາມາດອ່ານສິ່ງນີ້ເປັນ *"ຖ້າ `isPacked`, ຈາກນັ້ນ (`&&`) ສະແດງຜົນເຄື່ອງໝາຍຕິກ, ນອກນັ້ນ, ບໍ່ສະແດງຜົນຫຍັງ"*.
 
-Here it is in action:
+ນີ້ຄືວິທີການ:
 
 <Sandpack>
 
@@ -310,30 +310,30 @@ export default function PackingList() {
 
 </Sandpack>
 
-A [JavaScript && expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND) returns the value of its right side (in our case, the checkmark) if the left side (our condition) is `true`. But if the condition is `false`, the whole expression becomes `false`. React considers `false` as a "hole" in the JSX tree, just like `null` or `undefined`, and doesn't render anything in its place.
+[JavaScript && expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_AND) ສົ່ງຄ່າທາງເບື້ອງຂວາ (ໃນກໍລະນີຂອງເຮົາ, ເຄື່ອງໝາຍຕິກ) ຖ້າເບື້ອງຊ້າຍ (ເງື່ອນໄຂຂອງເຮົາ) ເປັນ `true`. ແຕ່ຖ້າເງື່ອນໄຂເປັນ `false`, expression ທັງໝົດຈະເປັນ `false`. React ຖືວ່າ `false` ເປັນ "ຂຸມ" ໃນ JSX tree, ເຊັ່ນດຽວກັນກັບ `null` ຫຼື `undefined`, ແລະ ບໍ່ສະແດງຜົນຫຍັງເລີຍ.
 
 
 <Pitfall>
 
-**Don't put numbers on the left side of `&&`.**
+**ຫ້າມໃສ່ໂຕເລກຢູ່ເບື້ອງຊ້າຍຂອງ `&&`.**
 
-To test the condition, JavaScript converts the left side to a boolean automatically. However, if the left side is `0`, then the whole expression gets that value (`0`), and React will happily render `0` rather than nothing.
+ເພື່ອທົດສອບເງື່ອນໄຂ, JavaScript ແປງເບື້ອງຊ້າຍມືໃຫ້ເປັນ boolean ໂດຍອັດຕະໂນມັດ. ເຖິງຢ່າງໃດກໍຕາມ, ຖ້າເບື້ອງຊ້າຍມືເປັນ `0`, ຈາກນັ້ນ expression ທັງໝົດຈະໄດ້ຮັບຄ່ານັ້ນ (`0`), ແລະ React ຈະສະແດງຄ່າ `0` ແທນທີ່ຈະບໍ່ມີຫຍັງເລີຍ.
 
-For example, a common mistake is to write code like `messageCount && <p>New messages</p>`. It's easy to assume that it renders nothing when `messageCount` is `0`, but it really renders the `0` itself!
+ຕົວຢ່າງ, ຂໍ້ຜີດພາດທົ່ວໄປທີ່ຂຽນ code ເຊັ່ນ `messageCount && <p>New messages</p>`. ເປັນເລື່ອງງ່າຍທີ່ຈະສັນນິຖານວ່າມັນບໍ່ສະແດງຜົນຫຍັງເມື່ອ `messageCount` ເປັນ `0`, ແຕ່ຄວາມເປັນຈິງມັນສະແດງຜົນເປັນ `0` ເອງ!
 
-To fix it, make the left side a boolean: `messageCount > 0 && <p>New messages</p>`.
+ເພື່ອແກ້ໄຂ, ເຮັດໃຫ້ເບື້ອງຊ້າຍມືເປັນ boolean: `messageCount > 0 && <p>New messages</p>`.
 
 </Pitfall>
 
-### Conditionally assigning JSX to a variable {/*conditionally-assigning-jsx-to-a-variable*/}
+### ການກຳນົດຄ່າ JSX ໃຫ້ຕົວແປແບບມີເງື່ອນໄຂ {/*conditionally-assigning-jsx-to-a-variable*/}
 
-When the shortcuts get in the way of writing plain code, try using an `if` statement and a variable. You can reassign variables defined with [`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let), so start by providing the default content you want to display, the name:
+ເມື່ອທາງລັດຂັດຂວາງການຂຽນ code ແບບທຳມະດາ, ລອງໃຊ້ `if` statement ແລະ ຕົວແປ. ທ່ານສາມາດກຳນົດຕົວແປທີ່ຖືກປະກາດດ້ວຍ [`let`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) ຄືນໃໝ່, ສະນັ້ນເລີ່ມຈາກການໃຫ້ຄ່າເລີ່ມຕົ້ນເນື້ອຫາທີ່ທ່ານຕ້ອງການສະແດງ, ຊື່:
 
 ```js
 let itemContent = name;
 ```
 
-Use an `if` statement to reassign a JSX expression to `itemContent` if `isPacked` is `true`:
+ນຳໃຊ້ `if` statement ເພື່ອກຳນົດຄ່າ JSX expression ຄືນໃໝ່ໃຫ້ `itemContent` ຖ້າ `isPacked` ເປັນ `true`:
 
 ```js
 if (isPacked) {
@@ -341,7 +341,7 @@ if (isPacked) {
 }
 ```
 
-[Curly braces open the "window into JavaScript".](/learn/javascript-in-jsx-with-curly-braces#using-curly-braces-a-window-into-the-javascript-world) Embed the variable with curly braces in the returned JSX tree, nesting the previously calculated expression inside of JSX:
+[ວົງປີກກາ "ໜ້າຕ່າງເຂົ້າສູ່ JavaScript".](/learn/javascript-in-jsx-with-curly-braces#using-curly-braces-a-window-into-the-javascript-world) Embed ຕົວແປດ້ວຍວົງປີກກາໃນການ return JSX tree, ຊ້ອນ expression ທີ່ຄຳນວນໄວ້ກ່ອນໜ້ານີ້ພາຍໃນ JSX:
 
 ```js
 <li className="item">
@@ -349,7 +349,7 @@ if (isPacked) {
 </li>
 ```
 
-This style is the most verbose, but it's also the most flexible. Here it is in action:
+ແບບນີ້ມີລາຍລະອຽດຫຼາຍທີ່ສຸດ, ແຕ່ກໍຍືດຍຸ່ນທີ່ສຸດເຊັ່ນກັນ. ນີ້ແມ່ນວິທີການ:
 
 <Sandpack>
 
@@ -391,7 +391,7 @@ export default function PackingList() {
 
 </Sandpack>
 
-Like before, this works not only for text, but for arbitrary JSX too:
+ຄືກັບຜ່ານມາ, ນີ້ບໍ່ສະເພາະເຮັດວຽກໄດ້ນຳຂໍ້ຄວາມ, ແຕ່ສຳລັບ arbitrary JSX ກໍໄດ້ເຊັ່ນກັນ!
 
 <Sandpack>
 
@@ -437,16 +437,16 @@ export default function PackingList() {
 
 </Sandpack>
 
-If you're not familiar with JavaScript, this variety of styles might seem overwhelming at first. However, learning them will help you read and write any JavaScript code -- and not just React components! Pick the one you prefer for a start, and then consult this reference again if you forget how the other ones work.
+ຖ້າທ່ານຍັງບໍ່ຄຸ້ນເຄີຍກັບ JavaScript, ຮູບແບບນີ້ອາດເບິ່ງຄືຫຼາຍໃນຕອນທຳອິດ. ເຖິງຢ່າງໃດກໍ່ຕາມ, ການຮຽນຮູ້ສິ່ງເຫຼົ່ານີ້ຈະຊ່ວຍໃຫ້ທ່ານອ່ານ ແລະ ຂຽນ code JavaScript ໃດກໍໄດ້ -- ແລະ ບໍ່ສະເພາະແຕ່ component React! ເລືອກອັນໜຶ່ງທີ່ທ່ານມັກສຳລັບເລີ່ມຕົ້ນ, ແລະ ເບິ່ງຂໍ້ມູນອ້າງອີງນີ້ອີກຄັ້ງຖ້າທ່ານລືມວິທິການທີ່ຮູບແບບອື່ນເຮັດ.
 
 <Recap>
 
-* In React, you control branching logic with JavaScript.
-* You can return a JSX expression conditionally with an `if` statement.
-* You can conditionally save some JSX to a variable and then include it inside other JSX by using the curly braces.
-* In JSX, `{cond ? <A /> : <B />}` means *"if `cond`, render `<A />`, otherwise `<B />`"*.
-* In JSX, `{cond && <A />}` means *"if `cond`, render `<A />`, otherwise nothing"*.
-* The shortcuts are common, but you don't have to use them if you prefer plain `if`.
+* ໃນ React, ທ່ານສາມາດຄວບຄຸມ branching logic ດ້ວຍ JavaScript.
+* ທ່ານສາມາດ return JSX expression ແບບມີເງື່ອນໄຂດ້ວຍ `if` statement.
+* ທ່ານສາມາດບັນທຶກບາງ JSX ໃສ່ຕົວແປຢ່າງມີເງື່ອນໄຂ ແລະ ລວມມັນພາຍໃນ JSX ອື່ນດ້ວຍການໃຊ້ວົງປີກກາ.
+* ໃນ JSX, `{cond ? <A /> : <B />}` ໝາຍຄວາມວ່າ *"ຖ້າ `cond`, ສະແດງຜົນ `<A />`, ນອກນັ້ນ `<B />`"*.
+* ໃນ JSX, `{cond && <A />}` ໝາຍຄວາມວ່າ *"if `cond`, ສະແດງຜົນ `<A />`, ນອກນັ້ນບໍ່ສະແດງຫຍັງ"*.
+* ທາງລັດເປັນເລື່ອງປົກະຕິ, ແຕ່ທ່ານບໍ່ຈຳເປັນຕ້ອງໃຊ້ຫາກຕ້ອງການໃຊ້ `if` ທຳມະດາ.
 
 </Recap>
 
@@ -454,9 +454,9 @@ If you're not familiar with JavaScript, this variety of styles might seem overwh
 
 <Challenges>
 
-#### Show an icon for incomplete items with `? :` {/*show-an-icon-for-incomplete-items-with--*/}
+#### ສະແດງໄອຄອນສຳລັບລາຍການທີ່ບໍ່ສົມບູນດ້ວຍ `? :` {/*show-an-icon-for-incomplete-items-with--*/}
 
-Use the conditional operator (`cond ? a : b`) to render a ❌ if `isPacked` isn’t `true`.
+ນຳໃຊ້ conditional operator (`cond ? a : b`) ເພື່ອສະແດງຜົນ ❌ ຖ້າ `isPacked` ບໍ່ເປັນ `true`.
 
 <Sandpack>
 
@@ -534,15 +534,15 @@ export default function PackingList() {
 
 </Solution>
 
-#### Show the item importance with `&&` {/*show-the-item-importance-with-*/}
+#### ສະແດງ item ທີ່ສຳຄັນດ້ວຍ  `&&` {/*show-the-item-importance-with-*/}
 
-In this example, each `Item` receives a numerical `importance` prop. Use the `&&` operator to render "_(Importance: X)_" in italics, but only for items that have non-zero importance. Your item list should end up looking like this:
+ໃນຕົວຢ່າງນີ້, ແຕ່ລະ `Item` ຮັບຕົວເລກ prop `importance`. ໃຊ້ `&&` operator ເພື່ອສະແດງຜົນ "_(ຄວາມສຳຄັນ: X)_" ໃນຮູບແບບໂຕງ່ຽງ, ສະເພາະແຕ່ item ທີ່ມີຄວາມສຳຄັນບໍ່ເປັນສູນເທົ່ານັ້ນ. Item list ຂອງທ່ານຄວນຈະໜ້າຕາປະມານນີ້:
 
-* Space suit _(Importance: 9)_
+* Space suit _(ຄວາມສຳຄັນ: 9)_
 * Helmet with a golden leaf
-* Photo of Tam _(Importance: 6)_
+* Photo of Tam _(ຄວາມສຳຄັນ: 6)_
 
-Don't forget to add a space between the two labels!
+ຢ່າລືມເພີ່ມຍະວ່າງລະຫວ່າງສອງ label!
 
 <Sandpack>
 
@@ -582,7 +582,7 @@ export default function PackingList() {
 
 <Solution>
 
-This should do the trick:
+ນີ້ຄວນເປັນເຄັດລັບ:
 
 <Sandpack>
 
@@ -624,15 +624,15 @@ export default function PackingList() {
 
 </Sandpack>
 
-Note that you must write `importance > 0 && ...` rather than `importance && ...` so that if the `importance` is `0`, `0` isn't rendered as the result!
+ສັງເກດທ່ານຕ້ອງຂຽນ `importance > 0 && ...` ແທນທີ່ຈະເປັນ `importance && ...` ສະນັ້ນຫາກ `importance` ເປັນ `0`, ຜົນລັບຈະບໍ່ສະແດງ `0`!
 
-In this solution, two separate conditions are used to insert a space between the name and the importance label. Alternatively, you could use a fragment with a leading space: `importance > 0 && <> <i>...</i></>` or add a space immediately inside the `<i>`:  `importance > 0 && <i> ...</i>`.
+ໃນວິທີການນີ້, ຈະໃຊ້ເງື່ອນໄຂສອງເງື່ອນໄຂແຍກກັນເພື່ອໃສ່ຊ່ອງວ່າງລະຫວ່າງຊື່ ແລະ label. ອີກວິທີໜຶ່ງ, ທ່ານສາມາດໃຊ້ fragment ທີ່ມີຊ່ອງວ່າງນຳໜ້າ: `importance > 0 && <> <i>...</i></>` ຫຼື ເພີ່ມຊ່ອງວ່າງພາຍໃນ `importance > 0 && <> <i>...</i></>`.
 
 </Solution>
 
-#### Refactor a series of `? :` to `if` and variables {/*refactor-a-series-of---to-if-and-variables*/}
+#### Refactor ຊຸດຂອງ `? :` ເປັນ `if` ແລະ ຕົວແປ {/*refactor-a-series-of---to-if-and-variables*/}
 
-This `Drink` component uses a series of `? :` conditions to show different information depending on whether the `name` prop is `"tea"` or `"coffee"`. The problem is that the information about each drink is spread across multiple conditions. Refactor this code to use a single `if` statement instead of three `? :` conditions.
+component `Drink` ໃຊ້ຊຸດຂອງເງື່ອນໄຂ `? :` ເພື່ອສະແດງຂໍ້ມູນທີ່ແຕກຕ່າງຂຶ້ນກັບວ່າ prop `name` ເປັນ `"tea"` ຫຼື `"coffee"`. ບັນຫາແມ່ນຂໍ້ມູນກ່ຽວກັບເຄື່ອງດື່ມແຕ່ລະຊະນິດກະຈາຍໄປໃນຫຼາຍເງື່ອນໄຂ. Refactor code ນີ້ເພື່ອໃຊ້ `if` statement ດຽວແທນທີ່ໃຊ້ 3 ເງື່ອນໄຂ `? :`.
 
 <Sandpack>
 
@@ -665,11 +665,11 @@ export default function DrinkList() {
 
 </Sandpack>
 
-Once you've refactored the code to use `if`, do you have further ideas on how to simplify it?
+ເມື່ອທ່ານ refactor code ເພື່ອໃຊ້ `if` ແລ້ວ, ທ່ານຈະມີແນວຄິດອື່ນເຮັດໃຫ້ມັນງ່າຍຂຶ້ນບໍ່?
 
 <Solution>
 
-There are multiple ways you could go about this, but here is one starting point:
+ມັນມີຫຼາຍວິທີທີ່ທ່ານສາມາດເຮັດໄດ້, ແຕ່ນີ້ແມ່ນຈຸດເລີ່ມຕົ້ນ:
 
 <Sandpack>
 
@@ -712,9 +712,9 @@ export default function DrinkList() {
 
 </Sandpack>
 
-Here the information about each drink is grouped together instead of being spread across multiple conditions. This makes it easier to add more drinks in the future.
+ນີ້ແມ່ນຂໍ້ມູນກ່ຽວກັບແຕ່ລະປະເພດເຄື່ອງດື່ມທີ່ໄດ້ລວມເຂົ້າກັນແລ້ວແທນທີ່ຈະຖືກແຍກເປັນແຕ່ລະເງື່ອນໄຂ. ນີ້ເຮັດໃຫ້ມັນງ່າຍໃນການເພີ່ມເຄື່ອງດື່ມໃໝ່ໃນອະນາຄົດ.
 
-Another solution would be to remove the condition altogether by moving the information into objects:
+ວິທີການອື່ນອາດເປັນການລຶບເງື່ອນໄຂທັງໝົດໂດຍການຍ້າຍຂໍ້ມູນໄປເປັນ object:
 
 <Sandpack>
 
