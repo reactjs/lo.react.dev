@@ -1,24 +1,24 @@
 ---
-title: Rendering Lists
+title: ການສະແດງ Lists
 ---
 
 <Intro>
 
-You will often want to display multiple similar components from a collection of data. You can use the [JavaScript array methods](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array#) to manipulate an array of data. On this page, you'll use [`filter()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) and [`map()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/map) with React to filter and transform your array of data into an array of components.
+ທ່ານຈະຕ້ອງການສະແດງ component ທີ່ຄ້າຍກັນຈາກຂໍ້ມູນຂອງ collection. ທ່ານສາມາດໃຊ້ [JavaScript array methods](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array#) ເພື່ອຈັດການ array ຂອງຂໍ້ມູນ. ໃນ page ນີ້, ທ່ານຈະໄດ້ໃຊ້ [`filter()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) ແລະ [`map()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/map) ດ້ວຍ React ເພື່ອ filter ແລະ ແປງ array ຂໍ້ມູນຂອງທ່ານໃຫ້ເປັນ array ຂອງ component.
 
 </Intro>
 
 <YouWillLearn>
 
-* How to render components from an array using JavaScript's `map()`
-* How to render only specific components using JavaScript's `filter()`
-* When and why to use React keys
+* ວິທີການສະແດງ component ຈາກ array ໂດຍໃຊ້ `map()` ຂອງ JavaScript 
+* ວິທີການສະແດງສະເພາະ component ໂດຍໃຊ້ `filter()` ຂອງ JavaScript
+* ເມື່ອໃດ ແລະ ເປັນຫຍັງຕ້ອງໃຊ້ React keys
 
 </YouWillLearn>
 
-## Rendering data from arrays {/*rendering-data-from-arrays*/}
+## ການສະແດງຂໍ້ມູນຈາກ arrays {/*rendering-data-from-arrays*/}
 
-Say that you have a list of content.
+ບອກວ່າທ່ານມີລາຍການຂອງເນື້ອຫາ.
 
 ```js
 <ul>
@@ -30,11 +30,11 @@ Say that you have a list of content.
 </ul>
 ```
 
-The only difference among those list items is their contents, their data. You will often need to show several instances of the same component using different data when building interfaces: from lists of comments to galleries of profile images. In these situations, you can store that data in JavaScript objects and arrays and use methods like [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) and [`filter()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) to render lists of components from them.
+ຂໍ້ແຕກຕ່າງລະຫວ່າງລາຍການເຫຼົ່ານີ້ແມ່ນເນື້ອຫາ ແລະ ຂໍ້ມູນ. ທ່ານຈະຕ້ອງສະແດງ component ດຽວກັນຫຼາຍລາຍການໂດຍໃຊ້ຂໍ້ມູນທີ່ແຕກຕ່າງກັນເມື່ອສ້າງ interface: ຈາກລາຍການ comment ໄປຈົນເຖິງ gallery ຮູບພາບ profile. ໃນກໍລະນີນີ້, ທ່ານສາມາດເກັບຂໍ້ມູນໃນ object JavaScript ແລະ array ແລະ ໃຊ້ method ເຊັ່ນ [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) ແລະ [`filter()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) ເພື່ອສະແດງລາຍການຂອງ component ຈາກມັນ.
 
-Here’s a short example of how to generate a list of items from an array:
+ນີ້ແມ່ນຕົວຢ່າງຂອງວິທີສ້າງລາຍການຈາກ array:
 
-1. **Move** the data into an array:
+1. **ຍ້າຍ** ຂໍ້ມູນໄປເປັນ array:
 
 ```js
 const people = [
@@ -46,19 +46,19 @@ const people = [
 ];
 ```
 
-2. **Map** the `people` members into a new array of JSX nodes, `listItems`:
+2. **Map** member `people` ໄປເປັນ array ໃໝ່ຂອງ node JSX, `listItems`:
 
 ```js
 const listItems = people.map(person => <li>{person}</li>);
 ```
 
-3. **Return** `listItems` from your component wrapped in a `<ul>`:
+3. **Return** `listItems` ຈາກ component ທີລວມຢູ່ໃນ `<ul>`:
 
 ```js
 return <ul>{listItems}</ul>;
 ```
 
-Here is the result:
+ນີ້ແມ່ນຜົນລັບ:
 
 <Sandpack>
 
@@ -85,7 +85,7 @@ li { margin-bottom: 10px; }
 
 </Sandpack>
 
-Notice the sandbox above displays a console error:
+ສັງເກດ sandbox ດ້ານເທິງສະແດງ console error:
 
 <ConsoleBlock level="error">
 
@@ -93,11 +93,11 @@ Warning: Each child in a list should have a unique "key" prop.
 
 </ConsoleBlock>
 
-You'll learn how to fix this error later on this page. Before we get to that, let's add some structure to your data.
+ທ່ານຈະໄດ້ຮຽນວິທີແກ້ໄຂຂໍ້ຜິດພາດນີ້ໃນພາຍຫຼັງ. ກ່ອນຈະຮອດຂັ້ນຕອນນັ້ນ, ມາເພີ່ມໂຄ່ງສ້າງສຳລັບຂໍ້ມູນຂອງທ່ານ.
 
-## Filtering arrays of items {/*filtering-arrays-of-items*/}
+## ການ filter array ຂອງລາຍການ {/*filtering-arrays-of-items*/}
 
-This data can be structured even more.
+ຂໍ້ມູນນີ້ສາມາດຈັດໂຄ່ງສ້າງໄດ້ຫຼາຍຂຶ້ນ.
 
 ```js
 const people = [{
@@ -121,11 +121,11 @@ const people = [{
 }];
 ```
 
-Let's say you want a way to only show people whose profession is `'chemist'`. You can use JavaScript's `filter()` method to return just those people. This method takes an array of items, passes them through a “test” (a function that returns `true` or `false`), and returns a new array of only those items that passed the test (returned `true`).
+ສົມມຸດວ່າທ່ານຕ້ອງການວິທີສະແດງສະເພາະຄົນທີ່ມີອາຊີບເປັນ `'chemist'`. ທ່ານສາມາດໃຊ້ method JavaScript `filter()` ເພື່ອ return ສະເພາະແຕ່ຜູ້ຄົນເຫຼົ່ານັ້ນ. Method ນີ້ໃຊ້ array ຂອງລາຍການ, ສົ່ງຜ່ານ “test” (ຟັງຊັ່ນທີ່ returns `true` ຫຼື `false`), ແລະ return array ໃໝ່ສະເພາະລາຍການທີ່ຜ່ານການ test (returned `true`).
 
-You only want the items where `profession` is `'chemist'`. The "test" function for this looks like `(person) => person.profession === 'chemist'`. Here's how to put it together:
+ທ່ານຕ້ອງການສະເພາະລາຍການທີ່ `profession` ເປັນ `chemist` ເທົ່ານັ້ນ. ຟັງຊັ່ນ "test" ຈະມີລັກສະນະດັ່ງນີ້ `(person) => person.profession === 'chemist'`. ນີ້ແມ່ນວິທີການລວມເຂົ້າກັນ:
 
-1. **Create** a new array of just “chemist” people, `chemists`, by calling `filter()` on the `people` filtering by `person.profession === 'chemist'`:
+1. **ສ້າງ** array ໃໝ່ທີ່ມີແຕ່ຄົນເປັນ “chemist”, `chemists`, ໂດຍການໃຊ້ `filter()` ໃນ `people` filter ໂດຍ `person.profession === 'chemist'`:
 
 ```js
 const chemists = people.filter(person =>
@@ -133,7 +133,7 @@ const chemists = people.filter(person =>
 );
 ```
 
-2. Now **map** over `chemists`:
+2. ທຳການ **map** ເທິງ `chemists`:
 
 ```js {1,13}
 const listItems = chemists.map(person =>
@@ -151,7 +151,7 @@ const listItems = chemists.map(person =>
 );
 ```
 
-3. Lastly, **return** the `listItems` from your component:
+3. ສຸດທ້າຍ, **return** `listItems` ຈາກ component ຂອງທ່ານ:
 
 ```js
 return <ul>{listItems}</ul>;
@@ -244,7 +244,7 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 <Pitfall>
 
-Arrow functions implicitly return the expression right after `=>`, so you didn't need a `return` statement:
+Arrow ຟັງຊັ່ນຈະ return expression ທັນທີຫຼັງຈາກ `=>`, ສະນັ້ນທ່ານບໍ່ຈຳເປັນຕ້ອງໃຊ້ `return` statement:
 
 ```js
 const listItems = chemists.map(person =>
@@ -252,7 +252,7 @@ const listItems = chemists.map(person =>
 );
 ```
 
-However, **you must write `return` explicitly if your `=>` is followed by a `{` curly brace!**
+ເຖິງຢ່າງໃດກໍຕາມ, **ທ່ານຕ້ອງຂຽນ `return` ທັນທີຖ້າ `=>` ທ່ານຕາມຫຼັງດ້ວຍ `{` ວົງປີກກາ!**
 
 ```js
 const listItems = chemists.map(person => { // Curly brace
@@ -260,13 +260,13 @@ const listItems = chemists.map(person => { // Curly brace
 });
 ```
 
-Arrow functions containing `=> {` are said to have a ["block body".](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#function_body) They let you write more than a single line of code, but you *have to* write a `return` statement yourself. If you forget it, nothing gets returned!
+Arrow ຟັງຊັ່ນປະກອບມີ `=> {` ແມ່ນຖືກເອີ້ນວ່າ ["block body".](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#function_body) ມັນເຮັດໃຫ້ທ່ານສາມາດຂຽນ code ໄດ້ຫຼາຍກວ່າແຖວດຽວ, ແຕ່ວ່າທ່ານ *ຕ້ອງ* ໄດ້ຂຽນ `return` statement ດ້ວຍໂຕເອງ. ຖ້າທ່ານລືມ, ຈະບໍ່ມີຫຍັງຖືກ return!
 
 </Pitfall>
 
-## Keeping list items in order with `key` {/*keeping-list-items-in-order-with-key*/}
+## ການຈັດລະບຽບລາຍການດ້ວຍ `key` {/*keeping-list-items-in-order-with-key*/}
 
-Notice that all the sandboxes above show an error in the console:
+ສັງເກດວ່າ sandbox ທັງໝົດດ້ານເທິງສະແດງຂໍ້ຜິດພາດໃນ console:
 
 <ConsoleBlock level="error">
 
@@ -274,7 +274,7 @@ Warning: Each child in a list should have a unique "key" prop.
 
 </ConsoleBlock>
 
-You need to give each array item a `key` -- a string or a number that uniquely identifies it among other items in that array:
+ທ່ານຕ້ອງໄດ້ໃສ່ `key` ໃນແຕ່ລະລາຍການຂອງ array -- string ຫຼື number ທີ່ບໍ່ຊໍ້າກັບລາຍການອື່ນໆໃນ array ນັ້ນ:
 
 ```js
 <li key={person.id}>...</li>
@@ -282,13 +282,13 @@ You need to give each array item a `key` -- a string or a number that uniquely i
 
 <Note>
 
-JSX elements directly inside a `map()` call always need keys!
+element JSX ໂດຍກົງພາຍໃນການເອີ້ນ `map()` ຕ້ອງການ key ສະເໝີ!
 
 </Note>
 
-Keys tell React which array item each component corresponds to, so that it can match them up later. This becomes important if your array items can move (e.g. due to sorting), get inserted, or get deleted. A well-chosen `key` helps React infer what exactly has happened, and make the correct updates to the DOM tree.
+Key ຈະບອກ React ວ່າລາຍການ array ໃດທີ່ແຕ່ລະ component ສຳພັນກັນ, ເພື່ອໃຫ້ສາມາດຈັບຄູ່ໄດ້ໃນພາຍຫຼັງ. ນີ້ມີຄວາມສຳຄັນຫຼາຍຖ້າລາຍການ array ຂອງທ່ານສາມາດຍ້າຍ (ຕົວຢ່າງ ເນື່ອງຈາກການຮຽງລຳດັບ), ເພີ່ມ, ຫຼື ຖືກລຶບ. ການເລືອກ `key` ທີ່ດີສາມາດຊ່ວຍໃຫ້ React ສະຫຼຸບສິ່ງທີ່ເກີດຂຶ້ນແທ້, ແລະ ທຳການອັບເດດທີ່ຖືກຕ້ອງກັບ DOM tree.
 
-Rather than generating keys on the fly, you should include them in your data:
+ແທນທີ່ຈະສ້າງ key ທັນທີ, ທ່ານຄວນລວມມັນໄວ້ໃນຂໍ້ມູນຂອງທ່ານ:
 
 <Sandpack>
 
@@ -374,11 +374,11 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 <DeepDive>
 
-#### Displaying several DOM nodes for each list item {/*displaying-several-dom-nodes-for-each-list-item*/}
+#### ການສະແດງຫຼາຍ DOM node ສຳລັບແຕ່ລະລາຍການ {/*displaying-several-dom-nodes-for-each-list-item*/}
 
-What do you do when each item needs to render not one, but several DOM nodes?
+ທ່ານຈະເຮັດແນວໃດເມືອແຕ່ລະລາຍການບໍ່ຈຳເປັນຕ້ອງສະແດງພຽງ node ດຽວ, ແຕ່ຕ້ອງມີຫຼາຍ DOM node?
 
-The short [`<>...</>` Fragment](/reference/react/Fragment) syntax won't let you pass a key, so you need to either group them into a single `<div>`, or use the slightly longer and [more explicit `<Fragment>` syntax:](/reference/react/Fragment#rendering-a-list-of-fragments)
+Syntax ສັ້ນ [`<>...</>` Fragment](/reference/react/Fragment) ບໍ່ອະນຸຍາດໃຫ້ທ່ານສົ່ງ key, ສະນັ້ນທ່ານຕ້ອງ group ເຂົ້າເປັນ `<div>` ດຽວ, ຫຼື ໃຊ້ syntax ທີ່ຍາວຂຶ້ນໜ້ອຍໜຶ່ງ ແລະ  [ຊັດເຈນຫຼາຍຂຶ້ນ `<Fragment>`:](/reference/react/Fragment#rendering-a-list-of-fragments)
 
 ```js
 import { Fragment } from 'react';
@@ -393,46 +393,46 @@ const listItems = people.map(person =>
 );
 ```
 
-Fragments disappear from the DOM, so this will produce a flat list of `<h1>`, `<p>`, `<h1>`, `<p>`, and so on.
+Fragment ຫາຍໄປຈາກ DOM, ສະນັ້ນ, ນີ້ຈະສ້າງລາຍການຂອງ `<h1>`, `<p>`, `<h1>`, `<p>`, ແລະ ອື່ນໆ.
 
 </DeepDive>
 
-### Where to get your `key` {/*where-to-get-your-key*/}
+### ຈະຫາ `key` ໄດ້ຈາກບ່ອນໃດ {/*where-to-get-your-key*/}
 
-Different sources of data provide different sources of keys:
+ແຫຼ່ງຂອງຂໍ້ມູນທີ່ແຕກຕ່າງໃຫ້ແຫຼ່ງທີ່ມາຂອງ key ທີ່ຕ່າງກັນ:
 
-* **Data from a database:** If your data is coming from a database, you can use the database keys/IDs, which are unique by nature.
-* **Locally generated data:** If your data is generated and persisted locally (e.g. notes in a note-taking app), use an incrementing counter, [`crypto.randomUUID()`](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID) or a package like [`uuid`](https://www.npmjs.com/package/uuid) when creating items.
+* **ຂໍ້ມູນຈາກຖານຂໍ້ມູນ:** ຖ້າຂໍ້ມູນຂອງທ່ານແມ່ນມາຈາກຖານຂໍ້ມູນ, ທ່ານສາມາດໃຊ້ keys/IDs ຖານຂໍ້ມູນ, ທີ່ບໍ່ຊໍ້າກັນໂດຍທຳມະຊາດ.
+* **ຂໍ້ມູນທີ່ສ້າງຂຶ້ນພາຍໃນເຄື່ອງ:** ຫາກຂໍ້ມູນຂອງທ່ານຖືກສ້າງຂຶ້ນ ແລະ ມີຢູ່ໃນເຄື່ອງ (ເຊັ່ນ: ບັນທຶກໃນແອັບຈົດບັນທຶກ), ໃຫ້ໃຊ້ໂຕນັບທີ່ເພີ່ມຂື້ນ [`crypto.randomUUID()`](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID) ຫຼື package ເຊັ່ນ [`uuid`](https://www.npmjs.com/package/uuid) ເມື່ອສ້າງລາຍການ.
 
-### Rules of keys {/*rules-of-keys*/}
+### ກົດຂອງ keys {/*rules-of-keys*/}
 
-* **Keys must be unique among siblings.** However, it’s okay to use the same keys for JSX nodes in _different_ arrays.
-* **Keys must not change** or that defeats their purpose! Don't generate them while rendering.
+* **Key ຕ້ອງບໍ່ຊໍ້າກັນທຽບກັບໂຕອື່ນ.** ເຖິງຢ່າງໃດກໍຕາມ, ເປັນເລື່ອງປົກະຕິທີ່ຈະໃຊ້ key ດຽວກັນສຳລັບ JSX node ໃນ array _ທີ່ແຕກຕ່າງກັນ_.
+* **Key ຕ້ອງບໍ່ປ່ຽນແປງ** ຫຼື ຜິດຈຸດປະສົງ! ຢ່າສ້າງມັນໃນຕອນທີ່ກຳລັງສະແດງຜົນ.
 
-### Why does React need keys? {/*why-does-react-need-keys*/}
+### ເປັນຫຍັງ React ຕ້ອງການ key? {/*why-does-react-need-keys*/}
 
-Imagine that files on your desktop didn't have names. Instead, you'd refer to them by their order -- the first file, the second file, and so on. You could get used to it, but once you delete a file, it would get confusing. The second file would become the first file, the third file would be the second file, and so on.
+ຈິນຕະນາການວ່າຟາຍຢູ່ desktop ຂອງທ່ານບໍ່ມີຊື່. ແຕ່ທ່ານຄວນອ້າງອີງເຖິງມັນຕາມລຳດັບ --ຟາຍທຳອິດ,  ຟາຍທີ່ສອງ, ແລະ ອື່ນໆ. ທ່ານອາດຈະລຶ້ງກັບມັນ, ແຕ່ເມື່ອທ່ານລຶບຟາຍ, ມັນຈະເຮັດໃຫ້ສັບສົນ. ຟາຍທີ່ສອງຈະກາຍເປັນຟາຍທຳອິດ, ຟາຍທີ່ສາມຈະກາຍເປັນຟາຍທີ່ສອງ ແລະ ອື່ນໆ.
 
-File names in a folder and JSX keys in an array serve a similar purpose. They let us uniquely identify an item between its siblings. A well-chosen key provides more information than the position within the array. Even if the _position_ changes due to reordering, the `key` lets React identify the item throughout its lifetime.
+ຊື່ຟາຍໃນໂຟນເດີ ແລະ key JSX ໃນ array ມີຈຸດປະສົງຄ້າຍຄືກັນ. ມັນລະບຸລາຍການລະຫວ່າງກັນໂດຍບໍ່ຊໍ້າກັນ. Key ທີ່ເລືອກມາຢ່າງດີຈະໃຫ້ຂໍ້ມູນຫຼາຍກວ່າຕຳແໜ່ງພາຍໃນ array. ເຖິງວ່າ _ຕຳແໜ່ງ_ ຈະປ່ຽນໄປເນື່ອງຈາກການຮຽງລຳດັບໃໝ່ `key` ຈະຊ່ວຍໃຫ້ React ກຳນົດລາຍການໄດ້ຕະຫຼອດອາຍຸການໃຊ້ງານ.
 
 <Pitfall>
 
-You might be tempted to use an item's index in the array as its key. In fact, that's what React will use if you don't specify a `key` at all. But the order in which you render items will change over time if an item is inserted, deleted, or if the array gets reordered. Index as a key often leads to subtle and confusing bugs.
+ທ່ານອາດຫຼົງໃຊ້ index ຂອງລາຍການເປັນ key. ໃນຄວາມເປັນຈິງ,​ React ຈະໃຊ້ຖ້າທ່ານບໍ່ໄດ້ກຳນົດ `key` ເລີຍ. ແຕ່ລຳດັບທີ່ທ່ານສະແດງລາຍການຈະປ່ຽນໄປເມື່ອເວລາຜ່ານໄປຖ້າລາຍການຖືກເພີ່ມ, ລຶບ ຫຼື ຖ້າ array ຖືກການຈັດລຳດັບໃໝ່. Index ທີ່ເປັນ key ສ່ວນຫຼາຍຈະເຮັດໃຫ້ເກີດບັນຫາ ແລະ ຍາກໃນການນຳຫາຂໍ້ຜິດພາດ.
 
-Similarly, do not generate keys on the fly, e.g. with `key={Math.random()}`. This will cause keys to never match up between renders, leading to all your components and DOM being recreated every time. Not only is this slow, but it will also lose any user input inside the list items. Instead, use a stable ID based on the data.
+ເຊັ່ນດຽວກັນ, ບໍ່ສ້າງ key ທັນທີ, ຕົວຢ່າງ ດ້ວຍ `key={Math.random()}`. ນີ້ຈະເຮັດໃຫ້ key ບໍ່ກົງກັນໃນລະຫວ່າງການສະແດງຜົນ, ເຮັດໃຫ້ component ທັງໝົດຂອງທ່ານ ແລະ DOM ຖືກສ້າງຂຶ້ນໃໝ່ທຸກຄັ້ງ. ບໍ່ພຽງແຕ່ຈະຊ້າເທົ່ານັ້ນ, ແຕ່ມັນຍັງຈະເສຍ user input ພາຍໃນລາຍການນຳອີກ. ໃຫ້ໃຊ້ ID ທີ່ສະຖຽນຕາມຂໍ້ມູນແທນ.
 
-Note that your components won't receive `key` as a prop. It's only used as a hint by React itself. If your component needs an ID, you have to pass it as a separate prop: `<Profile key={id} userId={id} />`.
+ສັງເກດວ່າ Component ຂອງທ່ານຈະບໍ່ໄດ້ຮັບ `key` ເປັນ prop. ມັນຈະໃຊ້ເປັນພຽງ hint ໂດຍ React ເອງ. ຖ້າ Component ທ່ານຕ້ອງການ ID, ທ່ານຕ້ອງໄດ້ສົ່ງເປັນ prop ແຍກຕ່າງຫາກ: `<Profile key={id} userId={id} />`.
 
 </Pitfall>
 
 <Recap>
 
-On this page you learned:
+ໃນ page ນີ້ທ່ານໄດ້ຮຽນ:
 
-* How to move data out of components and into data structures like arrays and objects.
-* How to generate sets of similar components with JavaScript's `map()`.
-* How to create arrays of filtered items with JavaScript's `filter()`.
-* Why and how to set `key` on each component in a collection so React can keep track of each of them even if their position or data changes.
+* ວິທີຍ້າຍຂໍ້ມູນອອກຈາກ component ແລະ ເຂົ້າສູ່ໂຄ່ງສ້າງຂໍ້ມູນເຊັ່ນ array ແລະ object.
+* ວິທີສ້າງຊຸດຂອງ component ທີ່ຄ້າຍຄືກັນດ້ວຍ `map()` ຂອງ JavaScript.
+* ວິທີສ້າງ array ຂອງລາຍການທີ່ filter ດ້ວຍ `filter()` ຂອງ JavaScript.
+* ເຫດຜົນທີ່ຕ້ອງຕັ້ງຄ່າ `key` ໃນແຕ່ລະ component ໃນ collection ເພື່ອໃຫ້ React ສາມາດຕິດຕາມແຕ່ລະ component ໄດ້ເຖິງວ່າຕຳແໜ່ງ ຫຼື ຂໍ້ມູນຈະມີການປ່ຽນແປງ.
 
 </Recap>
 
@@ -440,11 +440,11 @@ On this page you learned:
 
 <Challenges>
 
-#### Splitting a list in two {/*splitting-a-list-in-two*/}
+#### ການແຍກ list ອອກເປັນສອງສ່ວນ {/*splitting-a-list-in-two*/}
 
-This example shows a list of all people.
+ຕົວຢ່າງນີ້ສະແດງລາຍການຂອງ people ທັງໝົດ.
 
-Change it to show two separate lists one after another: **Chemists** and **Everyone Else.** Like previously, you can determine whether a person is a chemist by checking if `person.profession === 'chemist'`.
+ປ່ຽນມັນເພື່ອສະແດງລາຍການແຍກກັນສອງລາຍການ: **Chemist** ແລະ **Everyone Else.** ຄືກັນກັບກ່ອນໜ້ານີ້, ທ່ານສາມາດກຳນົດໄດ້ວ່າບຸກຄົນເຫຼົ່ານີ້ເປັນ chemist ໂດຍການກວດວ່າ `person.profession === 'chemist'`.
 
 <Sandpack>
 
@@ -535,7 +535,7 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 <Solution>
 
-You could use `filter()` twice, creating two separate arrays, and then `map` over both of them:
+ທ່ານສາມາດໃຊ້ `filter()` ສອງເທື່ອ, ໂດຍສ້າງ array ແຍກກັນ 2 array ຈາກນັ້ນໃຊ້ `map` ໃສ່ທັງສອງ array:
 
 <Sandpack>
 
@@ -648,9 +648,9 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 </Sandpack>
 
-In this solution, the `map` calls are placed directly inline into the parent `<ul>` elements, but you could introduce variables for them if you find that more readable.
+ໃນວິທີການນີ້, ການເອີ້ນໃຊ້ `map` ຈະຖືກວາງໂດຍກົງໃນ `<ul>` element, ແຕ່ທ່ານສາມາດແນະນຳຕົວແປສຳລັບພວກມັນໄດ້ ຖ້າທ່ານພົບວ່າສາມາດອ່ານໄດ້ງ່າຍກວ່າ.
 
-There is still a bit duplication between the rendered lists. You can go further and extract the repetitive parts into a `<ListSection>` component:
+ຍັງມີການເຮັດຊໍ້າໜ້ອຍໜຶ່ງລະຫວ່າງລາຍການທີ່ສະແດງຜົນ. ທ່ານສາມາດໄປຕໍ່ ແລະ ແຍກຊີ້ນສ່ວນທີ່ຊໍ້າໆອອກເປັນ component `<ListSection>`:
 
 <Sandpack>
 
@@ -762,9 +762,9 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 </Sandpack>
 
-A very attentive reader might notice that with two `filter` calls, we check each person's profession twice. Checking a property is very fast, so in this example it's fine. If your logic was more expensive than that, you could replace the `filter` calls with a loop that manually constructs the arrays and checks each person once.
+ຜູ້ອ່ານທີ່ເຂົ້າໃຈຈະສັງເກດທີ່ວ່າມີການເອີ້ນໃຊ້ `filter` ສອງເທື່ອ, ພວກເຮົາສາມາດກວດສອບອາຊີບແຕ່ລະຄົນສອງເທື່ອ. ການກວດສອບ property ແມ່ນໄວຫຼາຍ, ສະນັ້ນໃນຕົວຢ່າງນີ້ຈື່ງບໍ່ມີບັນຫາ. ຖ້າ logic ຂອງທ່ານມີຄວາມສຳຄັນຫຼາຍກວ່ານັ້ນ, ທ່ານສາມາດແທນທີການເອີ້ນໃຊ້ `filter` ດ້ວຍ loop ທີ່ສ້າງ array ດ້ວຍໂຕເອງ ແລະ ກວດສອບແຕ່ລະຄົນພຽງຄັ້ງດຽວ.
 
-In fact, if `people` never change, you could move this code out of your component. From React's perspective, all that matters is that you give it an array of JSX nodes in the end. It doesn't care how you produce that array:
+ຄວາມຈິງ, ຖ້າ `people` ບໍ່ມີການປ່ຽນແປງ, ທ່ານສາມາດຍ້າຍ code ນີ້ອອກຈາກ component ຂອງທ່ານ. ຈາກມຸມມອງຂອງ React, ສິ່ງທີ່ສຳຄັນຄືທ່ານໃຫ້ array ຂອງ JSX node ໃນຕອນທ້າຍ. ມັນບໍ່ສົນໃຈວ່າທ່ານສ້າງ array ນັ້ນແນວໃດ:
 
 <Sandpack>
 
@@ -882,13 +882,13 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 </Solution>
 
-#### Nested lists in one component {/*nested-lists-in-one-component*/}
+#### ລາຍການທີ່ຊ້ອນກັນໃນໜຶ່ງ component {/*nested-lists-in-one-component*/}
 
-Make a list of recipes from this array! For each recipe in the array, display its name as an `<h2>` and list its ingredients in a `<ul>`.
+ເຮັດລາຍການສູດອາຫານຈາກ array ນີ້! ສຳລັບແຕ່ລະສູດໃນ array, ສະແດງຊື່ມັນເປັນ `<h2>` ແລະ ລະບຸສ່ວນປະສົມໃນ `<ul>`.
 
 <Hint>
 
-This will require nesting two different `map` calls.
+ນີ້ຈະຕ້ອງມີການຊ້ອນການເອີ້ນ `map` ທີ່ແຕກຕ່າງກັນສອງຄັ້ງ.
 
 </Hint>
 
@@ -926,7 +926,7 @@ export const recipes = [{
 
 <Solution>
 
-Here is one way you could go about it:
+ນີ້ແມ່ນວິທີທີ່ທ່ານສາມາດເຮັດໄດ້:
 
 <Sandpack>
 
@@ -972,13 +972,13 @@ export const recipes = [{
 
 </Sandpack>
 
-Each of the `recipes` already includes an `id` field, so that's what the outer loop uses for its `key`. There is no ID you could use to loop over ingredients. However, it's reasonable to assume that the same ingredient won't be listed twice within the same recipe, so its name can serve as a `key`. Alternatively, you could change the data structure to add IDs, or use index as a `key` (with the caveat that you can't safely reorder ingredients).
+`recipe` ແຕ່ລະລາຍການມີ field `id`, ສະນັ້ນນອກ loop ຈຶ່ງໃຊ້ສຳລັບ `key` ຂອງມັນ. ບໍ່ມີ ID ທີ່ທ່ານສາມາດໃຊ້ເພື່ອ loop ສ່ວນປະສົມ. ເຖິງຢ່າງໃດກໍຕາມ, ມີເຫດຜົນທີ່ຈະສັນນິຖານໄດ້ວ່າສ່ວນປະສົມດຽວກັນຈະບໍ່ຖືກກຳນົດສອງຄັ້ງໃນສູດອາຫານດຽວກັນ, ດັ່ງນັ້ນຊື່ຈຶ່ງສາມາດໃຊ້ເປັນ `key` ໄດ້. ນອກນັ້ນ, ທ່ານສາມາດປ່ຽນແປງໂຄ່ງສ້າງຂໍ້ມູນເພື່ອເພີ່ມ ID, ຫຼື ໃຊ້ index ເປັນ `key` (ໂດຍມີຄຳເຕືອນວ່າທ່ານບໍ່ສາມາດຈັດລຳດັບສ່ວນປະສົມໃໝ່ໄດ້ຢ່າງປອດໄພ).
 
 </Solution>
 
-#### Extracting a list item component {/*extracting-a-list-item-component*/}
+#### ການແຕກ component ລາຍການ {/*extracting-a-list-item-component*/}
 
-This `RecipeList` component contains two nested `map` calls. To simplify it, extract a `Recipe` component from it which will accept `id`, `name`, and `ingredients` props. Where do you place the outer `key` and why?
+Component `RecipeList` ປະກອບມີການເອີ້ນໃຊ້ `map` ທີ່ຊ້ອນກັນສອງລາຍການ. ເພື່ອໃຫ້ງ່າຍຂຶ້ນ, ໃຫ້ແຍກ component `Recipe` ອອກມາເຊິ່ງຈະຮັບ `id`, `name`, and `ingredients` props. ທ່ານຈະວາງ `key` ທາງນອກໄວ້ບ່ອນໃດ ແລະ ຍ້ອນເຫດຜົນຫຍັງ?
 
 <Sandpack>
 
@@ -1026,7 +1026,7 @@ export const recipes = [{
 
 <Solution>
 
-You can copy-paste the JSX from the outer `map` into a new `Recipe` component and return that JSX. Then you can change `recipe.name` to `name`, `recipe.id` to `id`, and so on, and pass them as props to the `Recipe`:
+ທ່ານສາມາດ copy-paste JSX ຈາກພາຍນອກ `map` ເປັນ component `Recipe` ໃໝ່ ແລະ return JSX ນັ້ນ. ຈາກນັ້ນທ່ານສາມາດປ່ຽນ `recipe.name` ເປັນ `name`, `recipe.id` ເປັນ `id` ແລະ ອື່ນໆ  ສົ່ງຜ່ານມັນເປັນ prop ໄປຫາ `Recipe`:
 
 <Sandpack>
 
@@ -1078,15 +1078,15 @@ export const recipes = [{
 
 </Sandpack>
 
-Here, `<Recipe {...recipe} key={recipe.id} />` is a syntax shortcut saying "pass all properties of the `recipe` object as props to the `Recipe` component". You could also write each prop explicitly: `<Recipe id={recipe.id} name={recipe.name} ingredients={recipe.ingredients} key={recipe.id} />`.
+ຈຸດນີ້, `<Recipe {...recipe} key={recipe.id} />` ແມ່ນ shortcut syntax ທີ່ບອກວ່າ "ສົ່ງ property ທັງໝົດຂອງ `recipe` ເປັນ prop ໄປຫາ component `Recipe`". ທ່ານຍັງສາມາດຂຽນແຕ່ລະ prop ຢ່າງຊັດເຈນ: `<Recipe id={recipe.id} name={recipe.name} ingredients={recipe.ingredients} key={recipe.id} />`.
 
-**Note that the `key` is specified on the `<Recipe>` itself rather than on the root `<div>` returned from `Recipe`.** This is because this `key` is needed directly within the context of the surrounding array. Previously, you had an array of `<div>`s so each of them needed a `key`, but now you have an array of `<Recipe>`s. In other words, when you extract a component, don't forget to leave the `key` outside the JSX you copy and paste.
+**ສັງເກດວ່າ `key` ຖືກກຳນົດໃນ `<Recipe>` ເອງແທນທີ່ຈະກຳນົດໃນ root `<div>` ທີ່ return ຈາກ `Recipe`**. ເນື່ອງຈາກຈຳເປັນຕ້ອງໃຊ້ `key` ນີ້ໂດຍກົງພາຍໃນເງື່ອນໄຂຂອງ array. ກ່ອນໜ້ານີ້, ທ່ານມີ array ຂອງ `<div>` ດັ່ງນັ້ນແຕ່ລະ array ຈຳເປັນຕ້ອງມີ `key`, ແຕ່ຕອນນີ້ທ່ານມີ array ຂອງ `<Recipe>`. ເວົ້າອີກແບບໄດ້ວ່າ, ເມື່ອທ່ານແຍກ component, ຢ່າລືມປະ `key` ໄວ້ນອກ JSX ທີ່ທ່ານ copy ແລະ paste.
 
 </Solution>
 
-#### List with a separator {/*list-with-a-separator*/}
+#### ລາຍການທີ່ມີໂຕຂັ້ນ {/*list-with-a-separator*/}
 
-This example renders a famous haiku by Katsushika Hokusai, with each line wrapped in a `<p>` tag. Your job is to insert an `<hr />` separator between each paragraph. Your resulting structure should look like this:
+ຕົວຢ່າງນີ້ສະແດງ haiku ທີ່ມີຊື່ສຽງໂດຍ Katsushika Hokusai, ໂດຍແຕ່ລະແຖວຈະຢູ່ໃນແທັກ `<p>`. ວຽກຂອງທ່ານແມ່ນຕ້ອງເພີ່ມໂຕຂັ້ນ `<hr />` ລະຫວ່າງແຕ່ລະຫຍໍ້ໜ້າ. ໂຄ່ງສ້າງຜົນລັບຂອງທ່ານຄວນມີລັກສະນະນີ້:
 
 ```js
 <article>
@@ -1098,7 +1098,7 @@ This example renders a famous haiku by Katsushika Hokusai, with each line wrappe
 </article>
 ```
 
-A haiku only contains three lines, but your solution should work with any number of lines. Note that `<hr />` elements only appear *between* the `<p>` elements, not in the beginning or the end!
+Haiku ມີພຽງສາມແຖວ, ແຕ່ວິທີການຂອງທ່ານຄວນໃຊ້ໄດ້ກັບຈັກແຖວກໍໄດ້. ສັງເກດວ່າ `<hr />` element ຈະສະແດງ*ລະຫວ່າງ* `<p>` element, ບໍ່ແມ່ນໃນຕອນເລີ່ມຕົ້ນ ຫຼື ຕອນທ້າຍ!
 
 <Sandpack>
 
@@ -1141,17 +1141,17 @@ hr {
 
 </Sandpack>
 
-(This is a rare case where index as a key is acceptable because a poem's lines will never reorder.)
+(ກໍລະນີນີ້ບໍ່ຄ່ອຍເກີດຂຶ້ນທີ່ index ເປັນ key ຈະຍອມຮັບໄດ້ເນື່ອງຈາກແຖວຂອງກະວີຈະບໍ່ຮຽງລຳດັບໃໝ່.)
 
 <Hint>
 
-You'll either need to convert `map` to a manual loop, or use a fragment.
+ທ່ານຈະຕ້ອງແປງ `map` ເປັນ loop ດ້ວຍໂຕເອງ, ຫຼື ໃຊ້ fragment.
 
 </Hint>
 
 <Solution>
 
-You can write a manual loop, inserting `<hr />` and `<p>...</p>` into the output array as you go:
+ທ່ານສາມາດຂຽນ loop ດ້ວຍໂຕເອງ, ເພີ່ມ `<hr />` ແລະ `<p>...</p>` ເຂົ້າໃນ array output ທີ່ທ່ານດຳເນີນການ:  
 
 <Sandpack>
 
@@ -1206,9 +1206,9 @@ hr {
 
 </Sandpack>
 
-Using the original line index as a `key` doesn't work anymore because each separator and paragraph are now in the same array. However, you can give each of them a distinct key using a suffix, e.g. `key={i + '-text'}`.
+ການໃຊ້ index ແຖວເກົ່າເປັນ `key` ບໍ່ເຮັດວຽກອີກຕໍ່ໄປເພາະວ່າແຕ່ລະໂຕຂັ້ນ ແລະ ຫຍໍ້ໜ້າແຕ່ລະໂຕຢູ່ໃນ array ດຽວກັນ. ເຖິງຢ່າງໃດກໍຕາມ, ທ່ານສາມາດກຳນົດ key ທີ່ແຕກຕ່າງກັນໃຫ້ແຕ່ລະລາຍການໄດ້ໂດຍໃຊ້ຄຳຕໍ່ທ້າຍເຊັ່ນ `key={i + '-text'}`.
 
-Alternatively, you could render a collection of fragments which contain `<hr />` and `<p>...</p>`. However, the `<>...</>` shorthand syntax doesn't support passing keys, so you'd have to write `<Fragment>` explicitly:
+ອີກວິທີໜຶ່ງ, ທ່ານສາມາດສະແດງຜົນ collection ຂອງ fragment ທີ່ປະກອບມີ `<hr />` and `<p>...</p>`. ເຖິງຢ່າງໃດກໍຕາມ, syntax `<>...</>` ບໍ່ຮອງຮັບການສົ່ງຜ່ານ key, ດັ່ງນັ້ນທ່ານຕ້ອງໄດ້ຂຽນ `<Fragment>` ຢ່າງຊັດເຈນ:
 
 <Sandpack>
 
@@ -1254,7 +1254,7 @@ hr {
 
 </Sandpack>
 
-Remember, fragments (often written as `<> </>`) let you group JSX nodes without adding extra `<div>`s!
+ຈື່ໄວ້ວ່າ, fragment (ມັກຂຽນເປັນ `<> </>`) ໃຫ້ທ່ານ group JSX node ໂດຍບໍ່ຕ້ອງເພີ່ມ `<div>`!
 
 </Solution>
 
