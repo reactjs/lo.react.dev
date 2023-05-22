@@ -1,41 +1,41 @@
 ---
-title: Keeping Components Pure
+title: ເຮັດໃຫ້ Components Pure
 ---
 
 <Intro>
 
-Some JavaScript functions are *pure.* Pure functions only perform a calculation and nothing more. By strictly only writing your components as pure functions, you can avoid an entire class of baffling bugs and unpredictable behavior as your codebase grows. To get these benefits, though, there are a few rules you must follow.
+ບາງຟັງຊັ່ນ JavaScript ແມ່ນ *pure.* ຟັງຊັ່ນ Pure ເຮັດການຄຳນວນເທົ່ານັ້ນ ແລະ ບໍ່ມີຫຍັງເພີ່ມເຕີມ. ການຂຽນ component ຂອງທ່ານໃຫ້ເປັນຟັງຊັ່ນ pure ເທົ່ານັ້ນຢ່າງເຄັ່ງຄັດ, ທ່ານສາມາດຫຼີກລ່ຽງຂໍ້ຜິດພາດທັງ class ແລະ ສິ່ງທີ່ຄາດບໍ່ເຖິງເມື່ອ codebase ຂອງທ່ານໃຫຍ່ຂຶ້ນ. ເພື່ອໃຫ້ໄດ້ຮັບຜົນປະໂຫຍດເຫຼົ່ານີ້, ມີກົດຢູ່ສອງສາມຂໍ້ທີ່ທ່ານຕ້ອງປະຕິບັດ.
 
 </Intro>
 
 <YouWillLearn>
 
-* What purity is and how it helps you avoid bugs
-* How to keep components pure by keeping changes out of the render phase
-* How to use Strict Mode to find mistakes in your components
+* Pure ແມ່ນຫຍັງ ແລະ ຊ່ວຍໃຫ້ທ່ານຫຼີກລ່ຽງຂໍ້ຜິດພາດໄດ້ແນວໃດ
+* ວິທີເຮັດໃຫ້ component pure ໂດຍການປ້ອງກັນການປ່ຽນແປງຈາກຂັ້ນຕອນການສະແດງຜົນ
+* ວິທີໃຊ້ Strict MOde ເພື່ອຫາຂໍ້ຜິດພາດໃນ component ຂອງທ່ານ
 
 </YouWillLearn>
 
-## Purity: Components as formulas {/*purity-components-as-formulas*/}
+## ຄວາມ Pure: Components ເປັນ formulas {/*purity-components-as-formulas*/}
 
-In computer science (and especially the world of functional programming), [a pure function](https://wikipedia.org/wiki/Pure_function) is a function with the following characteristics:
+ໃນວິທະຍາສາດຄອມພີວເຕີ (ແລະ ໂດຍສະເພາະຄຳສັບຂອງ functinal programming), [pure function](https://wikipedia.org/wiki/Pure_function) ເປັນຟັງຊັ່ນທີ່ມີລັກສະນະດັ່ງນີ້:
 
-* **It minds its own business.** It does not change any objects or variables that existed before it was called.
-* **Same inputs, same output.** Given the same inputs, a pure function should always return the same result.
+* **ມັນຄິດເຖິງເລື່ອງຂອງໂຕເອງ.** ມັນຈະບໍ່ປ່ຽນແປງ object ຫຼື ຕົວແປໃດໆທີ່ມີຢູ່ກ່ອນຈະຖືກເອີ້ນ.
+* **Input ດຽວກັນ, output ດຽວກັນ.** ເມື່ອພິຈາລະນາ input ດຽວກັນຟັງຊັ່ນ pure ຄວນ return ຜົນລັບດຽວກັນສະເໝີ.
 
-You might already be familiar with one example of pure functions: formulas in math.
+ທ່ານອາດຄຸ້ນເຄີຍກັບຕົວຢ່າງໜຶ່ງຂອງຟັງຊັ່ນ pure: ສູດທາງຄະນິດສາດ.
 
-Consider this math formula: <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>.
+ພິຈາລະນາສູດຄະນິດສາດນີ້: <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>.
 
-If <Math><MathI>x</MathI> = 2</Math> then <Math><MathI>y</MathI> = 4</Math>. Always. 
+ຖ້າ <Math><MathI>x</MathI> = 2</Math> ແລ້ວ <Math><MathI>y</MathI> = 4</Math>. ສະເໝີ. 
 
-If <Math><MathI>x</MathI> = 3</Math> then <Math><MathI>y</MathI> = 6</Math>. Always. 
+ຖ້າ <Math><MathI>x</MathI> = 3</Math> ແລ້ວ <Math><MathI>y</MathI> = 6</Math>. ສະເໝີ. 
 
-If <Math><MathI>x</MathI> = 3</Math>, <MathI>y</MathI> won't sometimes be <Math>9</Math> or <Math>–1</Math> or <Math>2.5</Math> depending on the time of day or the state of the stock market. 
+ຖ້າ <Math><MathI>x</MathI> = 3</Math>, <MathI>y</MathI> ບາງເທື່ອຈະບໍ່ເປັນ <Math>9</Math> ຫຼື <Math>–1</Math> ຫຼື <Math>2.5</Math> ຂຶ້ນກັບຊ່ວງເວລາຂອງວັນ ຫຼື ສະຖານະການຂອງຕະຫຼາດຫຸ້ນ. 
 
-If <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> and <Math><MathI>x</MathI> = 3</Math>, <MathI>y</MathI> will _always_ be <Math>6</Math>. 
+ຖ້າ <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> ແລະ <Math><MathI>x</MathI> = 3</Math>, <MathI>y</MathI> ຈະເປັນ <Math>6</Math>  _ຢູ່ສະເໝີ_. 
 
-If we made this into a JavaScript function, it would look like this:
+ຖ້າເຮົາເອົາເຂົ້າເປັນຟັງຊັ່ນ JavScript, ໜ້າຕາຈະປະມານນີ້:
 
 ```js
 function double(number) {
@@ -43,9 +43,9 @@ function double(number) {
 }
 ```
 
-In the above example, `double` is a **pure function.** If you pass it `3`, it will return `6`. Always.
+ໃນຕົວຢ່າງດ້ານເທິງ, `double` ເປັນ **ຟັງຊັ່ນ pure.** ຖ້າທ່ານສົ່ງ `3`, ມັນຈະ return `6`. ສະເໝີ.
 
-React is designed around this concept. **React assumes that every component you write is a pure function.** This means that React components you write must always return the same JSX given the same inputs:
+React ໄດ້ຮັບການອອກແບບຕາມແນວຄິດນີ້. **React ຈະຖືວ່າທຸກ component ທີ່ທ່ານຂຽນເປັນຟັງຊັ່ນ pure.** ເຊິ່ງໝາຍຄວາມວ່າ component React ທີ່ທ່ານຂຽນຈະຕ້ອງ return ຄ່າ JSX ດຽວກັນສະເໝີເມື່ອໄດ້ຮັບ input ດຽວກັນ:
 
 <Sandpack>
 
@@ -75,21 +75,21 @@ export default function App() {
 
 </Sandpack>
 
-When you pass `drinkers={2}` to `Recipe`, it will return JSX containing `2 cups of water`. Always. 
+ເມື່ອທ່ານສົ່ງ `drinker={2}` ຫາ `Recipe`. ມັນຈະ return JSX ທີ່ປະກອບມີ `2 cups of water`. ສະເໝີ.
 
-If you pass `drinkers={4}`, it will return JSX containing `4 cups of water`. Always.
+ຖ້າທ່ານສົ່ງ `drinkers={4}`, ມັນຈະ return JSX ທີ່ປະກອບມີ `4 cups of water`. ສະເໝີ.
 
-Just like a math formula. 
+ຄືກັບສູດຄະນິດສາດ.
 
-You could think of your components as recipes: if you follow them and don't introduce new ingredients during the cooking process, you will get the same dish every time. That "dish" is the JSX that the component serves to React to [render.](/learn/render-and-commit)
+ທ່ານສາມາດຄິດວ່າ component ຂອງທ່ານເປັນສູດອາຫານ: ຖ້າທ່ານເຮັດຕາມ ແລະ ບໍ່ເພີ່ມສ່ວນປະສົມໃໝ່ລະຫວ່າງຂັ້ນຕອນການເຮັດອາຫານ, ທ່ານຈະໄດ້ອາຫານຈານເກົ່າທຸກເທື່ອ. "ຈານ" ເປັນ JSX ທີ່ component ເຮັດໜ້າທີ່ຕອບສະໜອງຕໍ່ React ເພື່ອ [ສະແດງຜົນ.](/learn/render-and-commit)
 
 <Illustration src="/images/docs/illustrations/i_puritea-recipe.png" alt="A tea recipe for x people: take x cups of water, add x spoons of tea and 0.5x spoons of spices, and 0.5x cups of milk" />
 
-## Side Effects: (un)intended consequences {/*side-effects-unintended-consequences*/}
+## ຜົນຂ້າງຄຽງ: ຜົນທີ່ຕາມມາ(ໂດຍບໍ່ໄດ້ຕັ້ງໃຈ) {/*side-effects-unintended-consequences*/}
 
-React's rendering process must always be pure. Components should only *return* their JSX, and not *change* any objects or variables that existed before rendering—that would make them impure!
+ຂະບວນການສະແດງຜົນຂອງ React ຕ້ອງ pure ຢຸ່ສະເໝີ. Component ຄວນ *return* JSX ຂອງມັນເທົ່ານັ້ນ, ແລະ ບໍ່ *ປ່ຽນແປງ* object ຫຼື ຕົວແປໃດໆທີ່ມີຢູ່ກ່ອນໜ້າການສະແດງຜົນ-ເຊິ່ງຈະເຮັດໃຫ້ມັນບໍ່ pure!
 
-Here is a component that breaks this rule:
+ນີ້ແມ່ນ component ທີ່ຝ່າຝືນກົດນີ້:
 
 <Sandpack>
 
@@ -115,11 +115,11 @@ export default function TeaSet() {
 
 </Sandpack>
 
-This component is reading and writing a `guest` variable declared outside of it. This means that **calling this component multiple times will produce different JSX!** And what's more, if _other_ components read `guest`, they will produce different JSX, too, depending on when they were rendered! That's not predictable.
+Component ນີ້ກຳລັງອ່ານ ແລະ ຂຽນຕົວແປ `guest` ທີ່ປະກາດໄວ້ທາງນອກ. ໝາຍຄວາມວ່າ **ການເອີ້ນ component ນີ້ຫຼາຍເທື່ອມັນຈະສ້າງ JSX ທີ່ແຕກຕ່າງກັນ!** ແລະ ຫຼາຍໄປກວ່ານັ້ນ, ຖ້າ component _ອື່ນ_ ເອີ້ນ `guest`, ມັນຈະສ້າງ JSX ທີ່ແຕກຕ່າງກັນເຊັ່ນດຽວກັນ, ທັງນີ້ຂຶ້ນກັບເວລາສະແດງຜົນ! ນັ້ນບໍ່ສາມາດຄາດເດົາໄດ້.
 
-Going back to our formula <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>, now even if <Math><MathI>x</MathI> = 2</Math>, we cannot trust that <Math><MathI>y</MathI> = 4</Math>. Our tests could fail, our users would be baffled, planes would fall out of the sky—you can see how this would lead to confusing bugs!
+ກັບມາທີ່ສູດຂອງເຮົາ <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math>, ເຖິງວ່າຖ້າ <Math><MathI>x</MathI> = 2</Math>, ພວກເຮົາບໍ່ສາມາດເຊື່ອໄດ້ວ່າ <Math><MathI>y</MathI> = 4</Math>. ການທົດສອບຂອງພວກເຮົາຈະບໍ່ສຳເລັດ, ຜູ້ໃຊ້ຂອງເຮົາອາດຈະງົງ, ຄືກັບຍົນຈະຕົກລົງມາຈາກທ້ອງຟ້າ-ທ່ານຈະເຫັນໄດ້ວ່າສິ່ງນີ້ຈະເຮັດໃຫ້ເກີດຂໍ້ຜິດພາດທີ່ສັບສົນໄດ້ແນວໃດ!
 
-You can fix this component by [passing `guest` as a prop instead](/learn/passing-props-to-a-component):
+ທ່ານສາມາດແກ້ໄຂ component ນີ້ໄດ້ໂດຍ [ການສົ່ງ `guest` ເປັນ prop ແທນ](/learn/passing-props-to-a-component):
 
 <Sandpack>
 
@@ -141,31 +141,31 @@ export default function TeaSet() {
 
 </Sandpack>
 
-Now your component is pure, as the JSX it returns only depends on the `guest` prop.
+ປັດຈຸບັນ component ຂອງທ່ານ pure, ເນື່ອງຈາກສິ່ງທີ່ JSX ມັນ return ຂຶ້ນກັບ prop `guest` ເທົ່ານັ້ນ.
 
-In general, you should not expect your components to be rendered in any particular order. It doesn't matter if you call <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> before or after <Math><MathI>y</MathI> = 5<MathI>x</MathI></Math>: both formulas will resolve independently of each other. In the same way, each component should only "think for itself", and not attempt to coordinate with or depend upon others during rendering. Rendering is like a school exam: each component should calculate JSX on their own!
+ໂດຍທົ່ວໄປ, ທ່ານບໍ່ຄວນຄາດຫວັງໃຫ້ component ຂອງທ່ານສະແດງຜົນຕາມລຳດັບສະເພາະໃດໆ. ມັນບໍ່ສຳຄັນວ່າທ່ານຈະເອີ້ນ <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> ກ່ອນ ຫຼື ຫຼັງ <Math><MathI>y</MathI> = 5<MathI>x</MathI></Math>: ສູດທັງສອງຈະແຍກອອກຈາກກັນ. ໃນວິທີດຽວກັນ, ແຕ່ລະ component ຄວນ "ຄິດເພື່ອໂຕເອງເທົ່ານັ້ນ", ແລະ ບໍ່ພະຍາຍາມປະສານ ຫຼື ເພິ່ງພາຜູ້ອື່ນໃນລະຫວ່າງການ render. ການ render ກໍຄືກັບບົດເສັງໃນໂຮງຮຽນ: ແຕ່ລະ component ຄວນຄຳນວນ JSX ດ້ວຍໂຕເອງ!
 
 <DeepDive>
 
-#### Detecting impure calculations with StrictMode {/*detecting-impure-calculations-with-strict-mode*/}
+#### ການກວດສອບຫາການຄຳນວນທີ່ບໍ່ pure ດ້ວຍ Strict Mode {/*detecting-impure-calculations-with-strict-mode*/}
 
-Although you might not have used them all yet, in React there are three kinds of inputs that you can read while rendering: [props](/learn/passing-props-to-a-component), [state](/learn/state-a-components-memory), and [context.](/learn/passing-data-deeply-with-context) You should always treat these inputs as read-only.
+ເຖິງວ່າທ່ານອາດຈະຍັງບໍ່ໄດ້ໃຊ້ທັງໝົດ, ແຕ່ໃນ React ມີ input ສາມປະເພດທີ່ທ່ານສາມາດອ່ານໃນຂະນະ render [props](/learn/passing-props-to-a-component), [state](/learn/state-a-components-memory), ແລະ [context.](/learn/passing-data-deeply-with-context) ທ່ານຄວນຖືວ່າ input ເຫຼົ່ານີ້ມີໄວ້ສະເພາະ read-only ສະເໝີ.
 
-When you want to *change* something in response to user input, you should [set state](/learn/state-a-components-memory) instead of writing to a variable. You should never change preexisting variables or objects while your component is rendering.
+ເມື່ອທ່ານຕ້ອງການ *ປ່ຽນ* ບາງຢ່າງຕາມ user input, ທ່ານຄວນໃຊ້ [set state](/learn/state-a-components-memory) ແທນການຂຽນໄປຍັງຕົວແປ. ທ່ານບໍ່ຄວນປ່ຽນຕົວແປ ຫຼື object ທີ່ມີຢູ່ກ່ອນໃນຂະນະ component ຂອງທ່ານກຳລັງ render.
 
-React offers a "Strict Mode" in which it calls each component's function twice during development. **By calling the component functions twice, Strict Mode helps find components that break these rules.**
+React ມີ "Strict Mode" ເຊິ່ງຈະເອີ້ນຟັງຊັ່ນຂອງແຕ່ລະ Component ສອງຄັ້ງລະຫວ່າງການພັດທະນາ. **ໂດຍການເອີ້ນຟັງຊັ່ນ component ສອງຄັ້ງ, Strict Mode ຈະຊ່ວຍຄົ້ນຫາ component ທີ່ຝ່າຝືນກົດເຫຼົ່ານີ້.**
 
-Notice how the original example displayed "Guest #2", "Guest #4", and "Guest #6" instead of "Guest #1", "Guest #2", and "Guest #3". The original function was impure, so calling it twice broke it. But the fixed pure version works even if the function is called twice every time. **Pure functions only calculate, so calling them twice won't change anything**--just like calling `double(2)` twice doesn't change what's returned, and solving <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> twice doesn't change what <MathI>y</MathI> is. Same inputs, same outputs. Always.
+ສັງເກດວ່າຕົວຢ່າງເກົ່າທີ່ສະແດງ "Guest #2", "Guest #4" ແລະ "Guest #6" ແທນ "Guest #1", "Guest #2", ແລະ "Guest #3". ຟັງຊັ່ນເດີມແມ່ນບໍ່ pure, ດັ່ງນັ້ນການເອີ້ນໃຊ້ມັນສອງຄັ້ງຈຶ່ງພັງ. ແຕ່ເວີຊັ່ນ pure ຈະເຮັດວຽກເຖິງວ່າຟັງຊັ່ນຈະຖືກເອີ້ນໃຊ້ສອງຄັ້ງທຸກຄັ້ງ. **ຟັງຊັ່ນ pure ຈະຄຳນວນເທົ່ານັ້ນ, ສະນັ້ນການເອີ້ນໃຊ້ມັນສອງຄັ້ງຈະບໍ່ປ່ຽນແປງຫຍັງ**--ຄືກັນກັບການເອີ້ນ `double(2)` ສອງຄັ້ງບໍ່ປ່ຽນແປງສິ່ງທີ່ return, ແລະ ການແກ້ໄຂ <Math><MathI>y</MathI> = 2<MathI>x</MathI></Math> ສອງຄັ້ງບໍ່ໄດ້ປ່ຽນ <MathI>y</MathI> ແມ່ນຫຍັງ. Input ດຽວກັນ, output ດຽວກັນສະເໝີ.
 
-Strict Mode has no effect in production, so it won't slow down the app for your users. To opt into Strict Mode, you can wrap your root component into `<React.StrictMode>`. Some frameworks do this by default.
+Strict Mode ບໍ່ມີຜົນຫຍັງໃນ production, ດັ່ງນັ້ນຈຶ່ງບໍ່ເຮັດໃຫ້ແອັບຊ້າລົງສຳລັບຜູ້ໃຊ້ຂອງທ່ານ. ຫາກຕ້ອງເລືອກໃຊ້ Strict Mode, ທ່ານສາມາດລວມ component root ຂອງທ່ານເປັນ `<React.StrictMode>`. ບາງ framework ແມ່ນເຮັດໂດຍເປັນຄ່າເລີ່ມຕົ້ນ.
 
 </DeepDive>
 
-### Local mutation: Your component's little secret {/*local-mutation-your-components-little-secret*/}
+### Local mutation: ຄວາມລັບເລັກໆນ້ອຍຂອງ Component ຂອງທ່ານ {/*local-mutation-your-components-little-secret*/}
 
-In the above example, the problem was that the component changed a *preexisting* variable while rendering. This is often called a **"mutation"** to make it sound a bit scarier. Pure functions don't mutate variables outside of the function's scope or objects that were created before the call—that makes them impure!
+ໃນຕົວຢ່າງດ້ານເທິງ, ບັນຫາຄື component ປ່ຽນຕົວແປ *ທີ່ມີຢູ່ກ່ອນແລ້ວ* ໃນຂະນະ render. ເຊິ່ງມັກເອີ້ນວ່າ **"mutation"** ເພື່ອໃຫ້ຟັງແລ້ວນ່າຢ້ານຂຶ້ນ. ຟັງຊັ່ນ pure ຈະບໍ່ mutate ຕົວແປນອກຂອບເຂດຂອງຟັງຊັ່ນ ຫຼື object ທີ່ຖືກສ້າງກ່ອນຖືກເອີ້ນໃຊ້-ເຮັດໃຫ້ຕົວແປເຫຼົ່ານັ້ນບໍ່ pure! 
 
-However, **it's completely fine to change variables and objects that you've *just* created while rendering.** In this example, you create an `[]` array, assign it to a `cups` variable, and then `push` a dozen cups into it:
+ເຖີງຢ່າງໃດກໍຕາມ, **ມັນເປັນເລື່ອງປົກະຕິທີ່ຈະປ່ຽນຕົວແປ ແລະ object ທີ່ທ່ານ *ຫາກໍ* ສ້າງຂຶ້ນໃນລະຫວ່າງການ render.** ໃນຕົວຢ່າງນີ້, ທ່ານສ້າງ array `[]`, ກຳນົດໃຫ້ຕົວແປ `cups` ແລ້ວຕາມດ້ວຍ `push` dozen cups ເຂົ້າໄປ:
 
 <Sandpack>
 
@@ -185,43 +185,43 @@ export default function TeaGathering() {
 
 </Sandpack>
 
-If the `cups` variable or the `[]` array were created outside the `TeaGathering` function, this would be a huge problem! You would be changing a *preexisting* object by pushing items into that array.
+ຖ້າຕົວແປ `cups` ຫຼື array `[]` ຖືກສ້າງຢູ່ນອກຟັງຊັ່ນ `TeaGathering`, ນີ້ອາດເປັນບັນຫາໃຫຍ່! ທ່ານຈະປ່ຽນ object *ທີ່ມີຢູ່ແລ້ວ* ໂດຍການ push item ເຂົ້າໄປໃນ array.
 
-However, it's fine because you've created them *during the same render*, inside `TeaGathering`. No code outside of `TeaGathering` will ever know that this happened. This is called **"local mutation"**—it's like your component's little secret.
+ເຖິງຢ່າງໃດກໍຕາມ, ບໍ່ເປັນຫຍັງຖ້າທ່ານສ້າງ *ລະຫວ່າງການ render ດຽວກັນ*, ພາຍໃນ `TeaGathering`. ບໍ່ມີ code ຢູ່ດ້ານນອກຂອງ `TeaGathering` ຈະຮູ້ວ່າສິ່ງນີ້ເກີດຂຶ້ນ. ນີ້ເອີ້ນວ່າ **"local mutation"**-ມັນເໝືອນກັບຄວາມລັບເລັກໆນ້ອຍຂອງ component ຂອງທ່ານ.
 
-## Where you _can_ cause side effects {/*where-you-_can_-cause-side-effects*/}
+## ບ່ອນທີ່ທ່ານ _ສາມາດ_ ເຮັດໃຫ້ເກີດຜົນຂ້າງຄຽງ {/*where-you-_can_-cause-side-effects*/}
 
-While functional programming relies heavily on purity, at some point, somewhere, _something_ has to change. That's kind of the point of programming! These changes—updating the screen, starting an animation, changing the data—are called **side effects.** They're things that happen _"on the side"_, not during rendering.
+ໃນຂະນະທີ່ functional programming ຕ້ອງອາໄສຄວາມ pure ເປັນຢ່າງຫຼາຍ, ໃນບາງຈຸດ,​ບາງບ່ອນ _ບາງສິ່ງ_ ກໍຕ້ອງປ່ຽນແປງ. ນີ້ເປັນຈຸດປະສົງຂອງການຂຽນໂປຣແກຣມ! ການປ່ຽນແປງເຫຼົ່ານີ້-ການອັບເດດໜ້າຈໍ, ການເລີ່ມ animation, ການປ່ຽນແປງຂໍ້ມູນ-ເອີ້ນວ່າ **ຜົນຂ້າງຄຽງ.** ສິ່ງເຫຼົ່ານີ້ຄືສິ່ງທີ່ເກີດຂຶ້ນ _"ດ້ານຂ້າງ"_ ບໍ່ແມ່ນລະຫວ່າງການສະແດງຜົນ.
 
-In React, **side effects usually belong inside [event handlers.](/learn/responding-to-events)** Event handlers are functions that React runs when you perform some action—for example, when you click a button. Even though event handlers are defined *inside* your component, they don't run *during* rendering! **So event handlers don't need to be pure.**
+ໃນ React, **ຜົນຂ້າງຄຽງມັກຈະຢູ່ໃນ [event handlers.](/learn/responding-to-events)** Event handler ແມ່ນຟັງຊັ່ນທີ່ React ເຮັດວຽກເມື່ອທ່ານດຳເນີນການບາງຢ່າງ-ຕົວຢ່າງ, ເມື່ອທ່ານຄິກປຸ່ມ. ເຖິງວ່າ event handler ແມ່ນຖືກປະກາດ *ພາຍໃນ* component ຂອງທ່ານ, ມັນບໍ່ເຮັດວຽກ *ລະຫວ່າງ* ການສະແດງຜົນ! **ສະນັ້ນ event handler ບໍ່ຈຳເປັນຕ້ອງ pure.** 
 
-If you've exhausted all other options and can't find the right event handler for your side effect, you can still attach it to your returned JSX with a [`useEffect`](/reference/react/useEffect) call in your component. This tells React to execute it later, after rendering, when side effects are allowed. **However, this approach should be your last resort.**
+ຫາກທ່ານໃຊ້ຕົວເລືອກອື່ນໝົດແລ້ວ ແລະ ບໍ່ພົບ event handler ທີ່ເໝາະສົມສຳລັບຜົນຂ້າງຄຽງຂອງທ່ານ, ທ່ານຍັງສາມາດແນບມັນກັບ JSX ທີ່ return ດ້ວຍການເອີ້ນ [`useEffect`](/reference/react/useEffect) ໃນ component ຂອງທ່ານ. ສິ່ງນີ້ຈະບອກໃຫ້ React ດຳເນີນການພາຍຫຼັງ, ຫຼັງຈາກການ render, ເມື່ອອະນຸຍາດໃຫ້ມີຜົນຂ້າງຄຽງ. **ເຖິງຢ່າງໃດກໍຕາມ, ວິທີນີ້ຄວນເປັນທາງເລືອກສຸດທ້າຍຂອງທ່ານ**
 
-When possible, try to express your logic with rendering alone. You'll be surprised how far this can take you!
+ເມື່ອເປັນໄປໄດ້, ພະຍາຍາມສະແດງ logic ຂອງທ່ານດ້ວຍການ render ພຽງຢ່າງດຽວ. ທ່ານຈະປະຫຼາດໃຈວ່າສິ່ງນີ້ສາມາດພາທ່ານໄປໄກໄດ້ສໍ່າໃດ!
 
 <DeepDive>
 
-#### Why does React care about purity? {/*why-does-react-care-about-purity*/}
+#### ເປັນຫຍັງ React ຈຶ່ງສົນໃຈເລື່ອງ pure? {/*why-does-react-care-about-purity*/}
 
-Writing pure functions takes some habit and discipline. But it also unlocks marvelous opportunities:
+ການຂຽນຟັງຊັ່ນ pure ຕ້ອງໃຊ້ນິໄສ ແລະ ລະບຽບວິໄນ. ແຕ່ມັນຍັງປົດລ໋ອກໂອກາດທີ່ນ່າອັດສະຈັນອີກດ້ວຍ:
 
-* Your components could run in a different environment—for example, on the server! Since they return the same result for the same inputs, one component can serve many user requests.
-* You can improve performance by [skipping rendering](/reference/react/memo) components whose inputs have not changed. This is safe because pure functions always return the same results, so they are safe to cache.
-* If some data changes in the middle of rendering a deep component tree, React can restart rendering without wasting time to finish the outdated render. Purity makes it safe to stop calculating at any time.
+* Component ຂອງທ່ານສາມາດເຮັດວຽກໃນສະພາບແວດລ້ອມທີ່ແຕກຕ່າງກັນ-ຕົວຢ່າງ, ເທິງເຊີເວີ! ເນື່ອງຈາກ return ຜົນລັບດຽວກັນສຳລັບ input ດຽວກັນ, ໜຶ່ງ component ສາມາດຕອບສະໜອງຄຳຂໍຂອງຜູ້ໃຊ້ຈຳນວນຫຼາຍໄດ້.
+* ທ່ານສາມາດປັບປຸງປະສິດທິພາບໄດ້ໂດຍ [ການຂ້າມການ render](/reference/react/memo) component ທີ່ບໍ່ມີການປ່ຽນແປງ input. ສິ່ງນີ້ປອດໄພເພາະຟັງຊັ່ນ pure ຈະ return ຜົນລັບດຽວກັນສະເໝີ, ດັ່ງນັ້ນຈຶ່ງປອດໄພສຳລັບການ cache.
+* ຫາກຂໍ້ມູນບາງສ່ວນປ່ຽນແປງລະຫວ່າງການ render deep component tree, React ສາມາດເລີ່ມການ render ໃໝ່ໂດຍບໍ່ເສຍເວລາໃນການ render ທີ່ຫຼ້າສະໄໝໃຫ້ສຳເລັດ. Pure ເຮັດໃຫ້ປອດໄພທີ່ຈະຢຸດຄຳນວນໄດ້ທຸກເວລາ. 
 
-Every new React feature we're building takes advantage of purity. From data fetching to animations to performance, keeping components pure unlocks the power of the React paradigm.
+ທຸກໆ Feature React ໃໝ່ທີ່ເຮົາກຳລັງໃຊ້ປະໂຫຍດຈາກຄວາມ pure. ຕັ້ງແຕ່ການດຶງຂໍ້ມູນໄປຈົນເຖິງພາບເຄື່ອນໄຫວຈົນເຖິງປະສິດທິພາບ, ການຮັກສາ pure component ຈະຊ່ວຍປົດລັອກພະລັງຂອງ React paradigm.
 
 </DeepDive>
 
 <Recap>
 
-* A component must be pure, meaning:
-  * **It minds its own business.** It should not change any objects or variables that existed before rendering.
-  * **Same inputs, same output.** Given the same inputs, a component should always return the same JSX. 
-* Rendering can happen at any time, so components should not depend on each others' rendering sequence.
-* You should not mutate any of the inputs that your components use for rendering. That includes props, state, and context. To update the screen, ["set" state](/learn/state-a-components-memory) instead of mutating preexisting objects.
-* Strive to express your component's logic in the JSX you return. When you need to "change things", you'll usually want to do it in an event handler. As a last resort, you can `useEffect`.
-* Writing pure functions takes a bit of practice, but it unlocks the power of React's paradigm.
+* Component ຕ້ອງ pure, ໝາຍຄວາມວ່າ:
+  * **ມັນຄິດເຖິງເລື່ອງຂອງໂຕເອງ.** ບໍ່ຄວນປ່ຽນແປງ object ຫຼື ຕົວແປໃດໆທີ່ມີຢູ່ກ່ອນການ render.
+  * **input ດຽວກັນ, output ດຽວກັນ.** ເມື່ອພິຈາລະນາ input ດຽວກັນ, component ຄວນ return JSX ດຽວກັນສະເໝີ.
+* ການ render ສາມາດເກີດຂຶ້ນໄດ້ຕະຫຼອດເວລາ, ສະນັ້ນ component ບໍ່ຄວນຂຶ້ນກັບລຳດັບການສະແດງຜົນຂອງກັນ ແລະ ກັນ.
+* ທ່ານບໍ່ຄວນ mutate input ໃດໆທີ່ component ຂອງທ່ານໃຊ້ສຳລັບການ render. ຊື່ງລວມ prop, state ແລະ context. ເພື່ອອັບເດດໜ້າຈໍ, ["set" state](/learn/state-a-components-memory) ແທນການ mutate object ທີ່ມີຢູ່ກ່ອນ.
+* ພະຍາຍາມສະແດງ logic ຂອງ component ທ່ານໃນ JSX ທີ່ທ່ານ return. ເມື່ອທ່ານຕ້ອງການ "ປ່ຽນແປງສິ່ງ", ທ່ານມັກຈະຕ້ອງເຮັດ event handler. ເປັນທາງເລືອກສຸດທ້າຍ, ທ່ານສາມາດໃຊ້ `useEffect`
+* ການຂຽນຟັງຊັ່ນ pure ຕ້ອງອາໄສການເຝິກຊ້ອມໜ້ອຍໜຶ່ງ, ແຕ່ຈະປົດລ໋ອກພະລັງຂອງ React paradigm.
 
 </Recap>
 
@@ -229,15 +229,15 @@ Every new React feature we're building takes advantage of purity. From data fetc
   
 <Challenges>
 
-#### Fix a broken clock {/*fix-a-broken-clock*/}
+#### ແປງໂມງເພ {/*fix-a-broken-clock*/}
 
-This component tries to set the `<h1>`'s CSS class to `"night"` during the time from midnight to six hours in the morning, and `"day"` at all other times. However, it doesn't work. Can you fix this component?
+Component ນີ້ພະຍາຍາມຕັ້ງຄ່າ class CSS ຂອງ `<h1>` ເປັນ `"night"` ໃນຊ່ວງເວລາຕັ້ງແຕ່ທ່ຽງຄືນຫາຫົກຊົ່ວໂມງໃນຕອນເຊົ້າ, ແລະ `"day"` ໃນຊ່ວງເວລາອື່ນໆ. ເຖິງຢ່າງໃດກໍຕາມ, ມັນບໍ່ເຮັດວຽກ. ທ່ານສາມາດແກ້ໄຂ component ນີ້ໄດ້ ຫຼື ບໍ່?
 
-You can verify whether your solution works by temporarily changing the computer's timezone. When the current time is between midnight and six in the morning, the clock should have inverted colors!
+ທ່ານສາມາດກວດສອບວ່າວິທີແກ້ໄຂຂອງທ່ານເຮັດວຽກໄດ້ ຫຼື ບໍ່ ໂດຍການປ່ຽນ timezone ຂອງຄອມພີວເຕີຊົ່ວຄາວ. ເມື່ອເວລາປັດຈຸບັນຢູ່ລະຫວ່າງທ່ຽງຄືນຮອດຫົກໂມງເຊົ້າ, ໂມງຄວນປ່ຽນສີ!
 
 <Hint>
 
-Rendering is a *calculation*, it shouldn't try to "do" things. Can you express the same idea differently?
+ການສະແດງຜົນເປັນ *ການຄຳນວນ*, ບໍ່ຄວນພະຍາຍາມ "ເຮັດ" ສິ່ງຕ່າງໆ. ທ່ານສາມາດສະແດງຄວາມຄິດດຽວກັນແຕກຕ່າງກັນໄດ້ ຫຼື ບໍ່?
 
 </Hint>
 
@@ -301,7 +301,7 @@ body > * {
 
 <Solution>
 
-You can fix this component by calculating the `className` and including it in the render output:
+ທ່ານສາມາດແກ້ໄຂ component ນີ້ໄດ້ໂດຍການຄຳນວນ `className` ແລະ ລວມໄວ້ໃນຜົນລັບຂອງການ render:
 
 <Sandpack>
 
@@ -362,19 +362,19 @@ body > * {
 
 </Sandpack>
 
-In this example, the side effect (modifying the DOM) was not necessary at all. You only needed to return JSX.
+ໃນຕົວຢ່າງນີ້, ຜົນຂ້າງຄຽງ (ການແກ້ໄຂ DOM) ບໍ່ຈຳເປັນ. ທ່ານຕ້ອງ return JSX ເທົ່ານັ້ນ
 
 </Solution>
 
-#### Fix a broken profile {/*fix-a-broken-profile*/}
+#### ແປງ profile ເພ {/*fix-a-broken-profile*/}
 
-Two `Profile` components are rendered side by side with different data. Press "Collapse" on the first profile, and then "Expand" it. You'll notice that both profiles now show the same person. This is a bug.
+Component `Profile` ສອງລາຍການ render ຂ້າງກັນດ້ວຍຂໍ້ມູນທີ່ແຕກຕ່າງກັນ. ກົດ "Collapse" ໃນ profile ທຳອິດ, ຈາກນັ້ນ "Expand" ມັນ. ທ່ານຈະສັງເກດເຫັນວ່າທັງສອງ profile ສະແດງບຸກຄົນດຽວກັນ. ນີ້ຄື bug.
 
-Find the cause of the bug and fix it.
+ຫາສາເຫດຂອງ bug ແລະ ແກ້ໄຂ.
 
 <Hint>
 
-The buggy code is in `Profile.js`. Make sure you read it all from top to bottom!
+Code ທີ່ມີ bug ແມ່ນຢູ່ໃນ `Profile.js`. ຢ່າລືມອ່ານທັງໝົດແຕ່ເທິງລົງລຸ່ມ!
 
 </Hint>
 
@@ -475,9 +475,9 @@ h1 { margin: 5px; font-size: 18px; }
 
 <Solution>
 
-The problem is that the `Profile` component writes to a preexisting variable called `currentPerson`, and the `Header` and `Avatar` components read from it. This makes *all three of them* impure and difficult to predict.
+ບັນຫາແມ່ນ component `Profile` ຂຽນໄປຍັງຕົວແປທີ່ມີຢູ່ແລ້ວເຊິ່ງເອີ້ນວ່າ `currentPerson`, ແລະ component `Header` ແລະ `Avatar` ອ່ານຈາກມັນ. ນີ້ເຮັດໃຫ້ *ທັງສາມຄົນ* ບໍ່ pure ແລະ ຄາດເດົາໄດ້ຍາກ.
 
-To fix the bug, remove the `currentPerson` variable. Instead, pass all information from `Profile` to `Header` and `Avatar` via props. You'll need to add a `person` prop to both components and pass it all the way down.
+ເພື່ອແກ້ bug, ໃຫ້ລຶບຕົວແປ `currentPerson` ອອກ. ໃຫ້ສົ່ງຂໍ້ມູນທັງໝົດຈາກ `Profile` ໄປຫາ `Header` ແລະ `Avatar` ຜ່ານ prop ແທນ. ທ່ານຈະຕ້ອງເພີ່ມ prop `person` ໃຫ້ກັບທັງສອງ component ແລະ ຜ່ານມັນລົງໄປລຸ່ມສຸດ.
 
 <Sandpack>
 
@@ -571,15 +571,15 @@ h1 { margin: 5px; font-size: 18px; }
 
 </Sandpack>
 
-Remember that React does not guarantee that component functions will execute in any particular order, so you can't communicate between them by setting variables. All communication must happen through props.
+ໃຫ້ຈື່ວ່າ React ບໍ່ຮັບປະກັນວ່າຟັງຊັ່ນ component ຈະເຮັດວຽກຕາມລຳດັບໃດໆ, ດັ່ງນັ້ນທ່ານຈຶ່ງບໍ່ສາມາດສື່ສານລະຫວ່າງຟັງຊັ່ນເຫຼົ່ານັ້ນດ້ວຍການຕັ້ງຄ່າຕົວແປໄດ້. ການສື່ສານທັງໝົດຕ້ອງເກີດຂຶ້ນຜ່ານ prop.
 
 </Solution>
 
-#### Fix a broken story tray {/*fix-a-broken-story-tray*/}
+#### ແປງຖາດ story ທີ່ເພ {/*fix-a-broken-story-tray*/}
 
-The CEO of your company is asking you to add "stories" to your online clock app, and you can't say no. You've written a `StoryTray` component that accepts a list of `stories`, followed by a "Create Story" placeholder.
+CEO ຂອງບໍລິສັດທ່ານກຳລັງຂໍໃຫ້ທ່ານເພີ່ມ "stories" ໃນແອັບໂມງອອນລາຍຂອງທ່ານ, ແລະ ທ່ານບໍ່ສາມາດຕອບປະຕິເສດໄດ້. ທ່ານໄດ້ຂຽນ cmponent `StoryTray` ທີ່ຮັບລາຍການຂອງ `stories`, ຕາມດ້ວຍ placeholder "Create Story".
 
-You implemented the "Create Story" placeholder by pushing one more fake story at the end of the `stories` array that you receive as a prop. But for some reason, "Create Story" appears more than once. Fix the issue.
+ທ່ານໄດ້ implement placeholder "Create Story" ໂດຍເພີ່ມ fake story ທີ່ສ່ວນທ້າຍຂອງ array `stories` ທີ່ທ່ານໄດ້ຮັບເປັນ prop. ແຕ່ດ້ວຍເຫດຜົນໃດໜຶ່ງ, "Create Story" ສະແດງຫຼາຍກວ່າໜຶ່ງຄັ້ງ. ແກ້ໄຂບັນຫາ.
 
 <Sandpack>
 
@@ -675,11 +675,11 @@ li {
 
 <Solution>
 
-Notice how whenever the clock updates, "Create Story" is added *twice*. This serves as a hint that we have a mutation during rendering--Strict Mode calls components twice to make these issues more noticeable.
+ສັງເກດວ່າເມື່ອໃດກໍຕາມທີ່ໂມງອັບເດດ, ລະບົບຈະເພີ່ມ "Create Story"  *ສອງຄັ້ງ*. ນີ້ເປັນການບອກໃບ້ວ່າເຮົາມີການ mutate ລະຫວ່າງການ render-- Strict Mode ເອີ້ນ component ສອງຄັ້ງເພື່ອເຮັດໃຫ້ບັນຫາເຫຼົ່ານີ້ຊັດເຈນຂຶ້ນ.
 
-`StoryTray` function is not pure. By calling `push` on the received `stories` array (a prop!), it is mutating an object that was created *before* `StoryTray` started rendering. This makes it buggy and very difficult to predict.
+ຟັງຊັ່ນ `StoryTray` ບໍ່ pure. ໂດຍການເອີ້ນ `push` ເທິງ array `stories` (prop!), ມັນ mutate object ທີ່ຖືກສ້າງ *ກ່ອນ* `StoryTray` ຈະ render. ນີ້ເຮັດໃຫ້ເກິດ bug ແລະ ຍາກໃນການຄາດເດົາ.
 
-The simplest fix is to not touch the array at all, and render "Create Story" separately:
+ການແກ້ໄຂທີ່ງ່າຍທີ່ສຸດຄືຢ່າແຕະ array ເລີຍ, ແລະ render "Create Story" ແຍກກັນ:
 
 <Sandpack>
 
@@ -763,7 +763,7 @@ li {
 
 </Sandpack>
 
-Alternatively, you could create a _new_ array (by copying the existing one) before you push an item into it:
+ອີກວິທີໜຶ່ງ, ທ່ານສາມາສ້າງ array _ໃໝ່_ (ໂດຍການ copy array ທີ່ມີຢູ່) ກ່ອນທີ່ທ່ານຈະ push ລາຍການເຂົ້າໄປ:
 
 <Sandpack>
 
@@ -855,9 +855,9 @@ li {
 
 </Sandpack>
 
-This keeps your mutation local and your rendering function pure. However, you still need to be careful: for example, if you tried to change any of the array's existing items, you'd have to clone those items too.
+ນີ້ເຮັດໃຫ້ mutation local ຂອງທ່ານ ແລະ ຟັງຊັ່ນການ render ຂອງທ່ານ pure. ເຖິງຢ່າງໃດກໍຕາມ, ທ່ານຍັງຕ້ອງລະວັງ: ຕົວຢ່າງ, ຖ້າທ່ານພະຍາຍາມປ່ຽນແປງລາຍການທີ່ມີຢູ່ຂອງ array, ທ່ານຈະຕ້ອງ clone ລາຍການເຫຼົ່ານັ້ນນຳ.
 
-It is useful to remember which operations on arrays mutate them, and which don't. For example, `push`, `pop`, `reverse`, and `sort` will mutate the original array, but `slice`, `filter`, and `map` will create a new one.
+ມີປະໂຫຍດໃນການຈື່ຈຳວ່າການດຳເນີນການໃດໆໃນ array ທີເຮັດໃຫ້ເກີດການ mutate, ແລະ ການດຳເນີນການໃດທີ່ບໍ່ເຮັດ. ຕົວຢ່າງ `push`, `pop`, `reverse`, ແລະ `sort` ຈະ mutate array ເດີມ, ແຕ່ `slice`, `filter`, ແລະ `map` ຈະສ້າງ array ໃໝ່.
 
 </Solution>
 
