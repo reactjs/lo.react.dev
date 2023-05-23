@@ -1,30 +1,30 @@
 ---
-title: Adding Interactivity
+title: ການເພີ່ມ Interactivity
 ---
 
 <Intro>
 
-Some things on the screen update in response to user input. For example, clicking an image gallery switches the active image. In React, data that changes over time is called *state.* You can add state to any component, and update it as needed. In this chapter, you'll learn how to write components that handle interactions, update their state, and display different output over time.
+ບາງສິ່ງເທິງໜ້າຈໍອັບເດດຕາມການປ້ອນຂໍ້ມູນຂອງຜູ້ໃຊ້. ຕົວຢ່າງ, ການຄິກ image gallery ຈະເປັນການສະຫຼັບຮູບພາບທີ່ໃຊ້ງານຢູ່. ໃນ React, ຂໍ້ມູນທີ່ປ່ຽນແປງເມື່ອເວລາຜ່ານໄປເອີ້ນວ່າ *state.* ທ່ານສາມາດເພີ່ມ state ໃຫ້ກັບ component ໃດກໍໄດ້, ແລະ ອັບເດດມັນເມື່ອຕ້ອງການ. ໃນບົດນີ້, ທ່ານຈະໄດ້ຮຽນຮູ້ວິທີຂຽນ component ທີ່ handle interaction, ອັບເດດ state ແລະ ສະແດງ output ຕ່າງໆເມື່ອເວລາຜ່ານໄປ.
 
 </Intro>
 
 <YouWillLearn isChapter={true}>
 
-* [How to handle user-initiated events](/learn/responding-to-events)
-* [How to make components "remember" information with state](/learn/state-a-components-memory)
-* [How React updates the UI in two phases](/learn/render-and-commit)
-* [Why state doesn't update right after you change it](/learn/state-as-a-snapshot)
-* [How to queue multiple state updates](/learn/queueing-a-series-of-state-updates)
-* [How to update an object in state](/learn/updating-objects-in-state)
-* [How to update an array in state](/learn/updating-arrays-in-state)
+* [ວິທີ handle user-initiated event](/learn/responding-to-events)
+* [ວິທີເຮັດໃຫ້ component "ຈື່" ຂໍ້ມູນດ້ວຍ state](/learn/state-a-components-memory)
+* [React ອັບເດດ UI ໃນສອງຂັ້ນຕອນແນວໃດ](/learn/render-and-commit)
+* [ຍ້ອນເຫດຜົນຫຍັງ state ຈຶ່ງບໍ່ອັບເດດທັນທີຫຼັງຈາກທ່ານແປງມັນ](/learn/state-as-a-snapshot)
+* [ວິທີການຈັດຄິວການອັບເດດຫຼາຍ state](/learn/queueing-a-series-of-state-updates)
+* [ວິທິການອັບເດດ object ໃນ state](/learn/updating-objects-in-state)
+* [ວິທີການອັບເດດ array ໃນ state](/learn/updating-arrays-in-state)
 
 </YouWillLearn>
 
-## Responding to events {/*responding-to-events*/}
+## ການຕອບສະໜອງຕໍ່ກັບ event {/*responding-to-events*/}
 
-React lets you add *event handlers* to your JSX. Event handlers are your own functions that will be triggered in response to user interactions like clicking, hovering, focusing on form inputs, and so on.
+React ໃຫ້ທ່ານເພີ່ມ *event handler* ໃນ JSX ຂອງທ່ານ. Event handler ເປັນຟັງຊັ່ນຂອງທ່ານທີ່ຈະ trigger ໃຫ້ຕອບສະໜອງຕໍ່ການໂຕ້ຕອບຂອງຜູ້ໃຊ້ເຊັ່ນ: ການຄິກ, ການ hover, ການ focus ເທິງ form input ແລະ ອື່ນໆ.
 
-Built-in components like `<button>` only support built-in browser events like `onClick`. However, you can also create your own components, and give their event handler props any application-specific names that you like.
+Component built-in ເຊັ່ນ `<button>` ຮອງຮັບສະເພາະ built-in browser event ເຊັ່ນ `onClick`. ເຖິງຢ່າງໃດກໍຕາມ, ທ່ານຍັງສາມາດສ້າງ component ຂອງໂຕເອງ, ແລະ ໃຫ້ props event handler ຊື່ສະເພາະແອັບພິເຄຊັ່ນທີ່ທ່ານຕ້ອງການ.
 
 <Sandpack>
 
@@ -68,22 +68,22 @@ button { margin-right: 10px; }
 
 <LearnMore path="/learn/responding-to-events">
 
-Read **[Responding to Events](/learn/responding-to-events)** to learn how to add event handlers.
+ອ່ານ **[ການຕອບສະໜອງຕໍ່ກັບ  Events](/learn/responding-to-events)** ເພື່ອຮຽນຮູ້ວິທີການເພີ່ມ event handler.
 
 </LearnMore>
 
-## State: a component's memory {/*state-a-components-memory*/}
+## State: memory ຂອງ component {/*state-a-components-memory*/}
 
-Components often need to change what's on the screen as a result of an interaction. Typing into the form should update the input field, clicking "next" on an image carousel should change which image is displayed, clicking "buy" puts a product in the shopping cart. Components need to "remember" things: the current input value, the current image, the shopping cart. In React, this kind of component-specific memory is called *state.*
+Component ມັກຈະຕ້ອງປ່ຽນສິ່ງທີ່ຢູ່ເທິງໜ້າຈໍອັນເປັນຜົນມາຈາກ interaction. ການພິມລົງໃນ form ຄວນອັບເດດປ່ອງຕື່ມຂໍ້ມູນ, ການຄິກ "next" ເທິງ carousel image ຄວນປ່ຽນຮູບພາບທີ່ຈະສະແດງ, ການຄິກ "buy" ໃສ່ສິນຄ້າລົງໃນກະຕ່າສິນຄ້າ. Component ຕ້ອງການ "ຈື່ຈຳ" ສິ່ງຕ່າງໆ: ຄ່າ input ຫຼ້າສຸດ, ຮູບຫຼ້າສຸດ, ກະຕ່າສິນຄ້າ. ໃນ React ໜ່ວຍຄວາມຈຳສະເພາະ component ນີ້ເອີ້ນວ່າ *state.*
 
-You can add state to a component with a [`useState`](/reference/react/useState) Hook. *Hooks* are special functions that let your components use React features (state is one of those features). The `useState` Hook lets you declare a state variable. It takes the initial state and returns a pair of values: the current state, and a state setter function that lets you update it.
+ທ່ານສາມາດເພີ່ມ state ໃຫ້ກັບ component ດ້ວຍ [`useState`](/reference/react/useState) Hook. *Hook* ເປັນຟັງຊັ່ນພິເສດທີ່ຊ່ວຍໃຫ້ component ຂອງທ່ານໃຊ້ feature React (state ເປັນໜຶ່ງໃນ feature ເຫຼົ່ານັ້ນ). Hook `useState` ໃຫ້ທ່ານປະກາດຕົວແປ state. ໃຊ້ state ເລີ່ມຕົ້ນ ແລະ return ຄູ່ຂອງຄ່າ: state ຫຼ້າສຸດ ແລະ ຟັງຊັ່ນ state setter ທີ່ໃຫ້ທ່ານອັບເດດມັນ. 
 
 ```js
 const [index, setIndex] = useState(0);
 const [showMore, setShowMore] = useState(false);
 ```
 
-Here is how an image gallery uses and updates state on click:
+ນີ້ແມ່ນວິທີທີ່ gallery ຮູບພາບໃຊ້ ແລະ ອັບເດດ state ຕອນຄິກ:
 
 <Sandpack>
 
@@ -229,19 +229,19 @@ button {
 
 <LearnMore path="/learn/state-a-components-memory">
 
-Read **[State: A Component's Memory](/learn/state-a-components-memory)** to learn how to remember a value and update it on interaction.
+ອ່ານ **[State: Memory ຂອງ Component](/learn/state-a-components-memory)** ເພື່ອຮຽນຮູ້ວິທີຈົດຈຳຄ່າ ແລະ ອັບເດດມັນຕອນ interaction.
 
 </LearnMore>
 
-## Render and commit {/*render-and-commit*/}
+## Render ແລະ commit {/*render-and-commit*/}
 
-Before your components are displayed on the screen, they must be rendered by React. Understanding the steps in this process will help you think about how your code executes and explain its behavior.
+ກ່ອນ Component ຂອງທ່ານຈະສະແດງເທິງໜ້າຈໍ, ມັນຕ້ອງ render ໂດຍ React. ການທຳຄວາມເຂົ້າໃຈຂັ້ນຕອນຕ່າງໆ ໃນຂະບວນການນີ້ຈະຊ່ວຍໃຫ້ທ່ານຄິດເຖິງວິທີທີ່ code execute ແລະ ອະທິບາຍລັກສະນະການເຮັດວຽກຂອງມັນໄດ້.
 
-Imagine that your components are cooks in the kitchen, assembling tasty dishes from ingredients. In this scenario, React is the waiter who puts in requests from customers and brings them their orders. This process of requesting and serving UI has three steps:
+ຈິນຕະນາການວ່າ component ຂອງທ່ານແມ່ນພໍ່ຄົວໃຫ້ເຮືອນຄົວ, ກຳລັງເຮັດອາຫານຈານແຊບຈາກວັດຖຸດິບ. ໃນສະຖານະການສົມມຸດນີ້, React ແມ່ນພະນັກງານເສີບທີ່ສົ່ງຄຳຮ້ອງຈາກລູກຄ້າ ແລະ ນຳຄຳສັ່ງນັ້ນມາໃຫ້. ຂະບວນການຂໍ ແລະ ໃຫ້ບໍລິການ UI ມີສາມຂັ້ນຕອນ:
 
-1. **Triggering** a render (delivering the diner's order to the kitchen)
-2. **Rendering** the component (preparing the order in the kitchen)
-3. **Committing** to the DOM (placing the order on the table)
+1. **ການ Trigger** render (ສົ່ງອາຫານຕາມສັ່ງໄປທີເຮືອນຄົວ)
+2. **ການ Render** component (ກຽມອາຫານໃນເຮືອນຄົວ)
+3. **ການ Commit** to the DOM (ສົ່ງອາຫານໄປທີ່ໂຕະ)
 
 <IllustrationBlock sequential>
   <Illustration caption="Trigger" alt="React as a server in a restaurant, fetching orders from the users and delivering them to the Component Kitchen." src="/images/docs/illustrations/i_render-and-commit1.png" />
@@ -251,13 +251,13 @@ Imagine that your components are cooks in the kitchen, assembling tasty dishes f
 
 <LearnMore path="/learn/render-and-commit">
 
-Read **[Render and Commit](/learn/render-and-commit)** to learn the lifecycle of a UI update.
+ອ່ານ **[Render ແລະ Commit](/learn/render-and-commit)** ເພື່ອຮຽນຮູ້ກ່ຽວກັບວົງຈອນຂອງການອັບດດ UI.
 
 </LearnMore>
 
-## State as a snapshot {/*state-as-a-snapshot*/}
+## State ເປັນ snapshot {/*state-as-a-snapshot*/}
 
-Unlike regular JavaScript variables, React state behaves more like a snapshot. Setting it does not change the state variable you already have, but instead triggers a re-render. This can be surprising at first!
+ແຕກຕ່າງຈາກຕົວແປ JavaScript ທົ່ວໄປ, state React ຈະເຮັດວຽກຄືກັບ snapshot. ການຕັ້ງຄ່ານີ້ບໍ່ໄດ້ປ່ຽນຕົວແປ state ທີ່ທ່ານມີ, ແຕ່ມັນຈະ trigger ເພື່ອ render ໃໝ່ແທນ. ນີ້ອາດເປັນເລື່ອງປະຫຼາດໃຈໃນທຳອິດ!
 
 ```js
 console.log(count);  // 0
@@ -265,7 +265,7 @@ setCount(count + 1); // Request a re-render with 1
 console.log(count);  // Still 0!
 ```
 
-This behavior help you avoid subtle bugs. Here is a little chat app. Try to guess what happens if you press "Send" first and *then* change the recipient to Bob. Whose name will appear in the `alert` five seconds later?
+ລັກສະນະການເຮັດວຽກນີ້ຊ່ວຍໃຫ້ທ່ານຫຼີກຫຼ່ຽງ bug ໜ້ອຍໜຶ່ງ. ນີ້ແມ່ນແອັບແຊັດນ້ອຍ. ລອງເດົາເບິ່ງວ່າຈະເກີດຫຍັງຂຶ້ນຖ້າທ່ານກົດ "Send" ໃນຕອນທຳອິດ ແລະ *ຈາກນັ້ນ* ປ່ຽນຜູ້ຮັບເປັນ Bob. ຊື່ຂອງໃຜຈະປະກົດໃນ `alert` ໃນອີກຫ້າວິນາທີຕໍ່ມາ?
 
 <Sandpack>
 
@@ -314,13 +314,13 @@ label, textarea { margin-bottom: 10px; display: block; }
 
 <LearnMore path="/learn/state-as-a-snapshot">
 
-Read **[State as a Snapshot](/learn/state-as-a-snapshot)** to learn why state appears "fixed" and unchanging inside the event handlers.
+ອ່ານ **[State ເປັນ Snapshot](/learn/state-as-a-snapshot)** ເພື່ອຮຽນຮູ້ວ່າຍ້ອນຫຍັງ state ຈຶ່ງສະແດງເປັນ "fixed" ແລະ ບໍ່ມີການປ່ຽນແປງພາຍໃນ event handlers.
 
 </LearnMore>
 
-## Queueing a series of state updates {/*queueing-a-series-of-state-updates*/}
+## ການເຂົ້າຄິວອັບເດດ state {/*queueing-a-series-of-state-updates*/}
 
-This component is buggy: clicking "+3" increments the score only once.
+Component ນີ້ມີບັນຫາ: ການຄິກ "+3" ຈະເພີ່ມຄະແນນພຽງເທື່ອດຽວ.
 
 <Sandpack>
 
@@ -354,7 +354,8 @@ button { display: inline-block; margin: 10px; font-size: 20px; }
 
 </Sandpack>
 
-[State as a Snapshot](/learn/state-as-a-snapshot) explains why this is happening. Setting state requests a new re-render, but does not change it in the already running code. So `score` continues to be `0` right after you call `setScore(score + 1)`.
+[State ເປັນ Snapshot](/learn/state-as-a-snapshot) ອະທິບາຍວ່າເປັນຫຍັງສິ່ງນີ້ຈຶ່ງເກີດຂຶ້ນ. State ການຕັ້ງຄ່າ request ການ render ໃໝ່, ແຕ່ຈະບໍ່ປ່ຽນແປງໃນ code ທີ່ກຳລັງເຮັດວຽກ. ສະນັ້ນ `score` ຍັງເປັນ `0` ທັນທີຫຼັງຈາກທີ່ທ່ານເອີ້ນໃຊ້ `setScore(score +1)`.
+
 
 ```js
 console.log(score);  // 0
@@ -366,7 +367,7 @@ setScore(score + 1); // setScore(0 + 1);
 console.log(score);  // 0
 ```
 
-You can fix this by passing an *updater function* when setting state. Notice how replacing `setScore(score + 1)` with `setScore(s => s + 1)` fixes the "+3" button. This lets you queue multiple state updates.
+ທ່ານສາມາດແກ້ໄຂບັນຫາໄດ້ໂດຍການສົ່ງ *ຟັງຊັ່ນ updater* ເມື່ອຕັ້ງຄ່າ state. ສັງເກດວິທີປ່ຽນແທນ `setScore(score + 1)` ດ້ວຍ `setScore(s => s + 1)` ຈະແກ້ໄຂປຸ່ມ "+3" ໄດ້ແນວໃດ. ສິ່ງນີ້ຈະເຮັດໃຫ້ທ່ານສາມາດຈັດການຄິວການອັບເດດຫຼາຍ state ໄດ້.
 
 <Sandpack>
 
@@ -402,15 +403,15 @@ button { display: inline-block; margin: 10px; font-size: 20px; }
 
 <LearnMore path="/learn/queueing-a-series-of-state-updates">
 
-Read **[Queueing a Series of State Updates](/learn/queueing-a-series-of-state-updates)** to learn how to queue a sequence of state updates.
+ອ່ານ **[ການເຂົ້າຄິວອັບເດດ State](/learn/queueing-a-series-of-state-updates)** ເພື່ອຮຽນຮຸ້ວິທີການຈັດຄິວຊຸດອັບເດດ state.
 
 </LearnMore>
 
-## Updating objects in state {/*updating-objects-in-state*/}
+## ການອັບເດດ object ໃນ state {/*updating-objects-in-state*/}
 
-State can hold any kind of JavaScript value, including objects. But you shouldn't change objects and arrays that you hold in the React state directly. Instead, when you want to update an object and array, you need to create a new one (or make a copy of an existing one), and then update the state to use that copy.
+State ສາມາດເກັບຄ່າ JavaScript ຊະນິດໃດກໍໄດ້, ລວມເຖິງ object. ແຕ່ທ່ານບໍ່ຄວນປ່ຽນ object ແລະ array ທີ່ທ່ານເກັບໃນ state React ໂດຍກົງ. ເມື່ອທ່ານຕ້ອງການອັບເດດ object ແລະ array, ທ່ານຕ້ອງສ້າງອັນໃໝ່ (ຫຼຶ ສຳເນົາຂອງສິ່ງທີ່ມີຢູ່) ຈາກນັ້ນອັບເດດ state ເພື່ອໃຊ້ສຳເນົານັ້ນ.
 
-Usually, you will use the `...` spread syntax to copy objects and arrays that you want to change. For example, updating a nested object could look like this:
+ໂດຍປົກະຕິ, ທ່ານຈະໃຊ້ syntax spread `...` ເພື່ອສຳເນົາ object ແລະ array ທີ່ທ່ານຕ້ອງການປ່ຽນ. ຕົວຢ່າງ, ການອັບເດດ object ທີ່ຊ້ອນກັນອາດມີລັກສະນະດັ່ງນີ້:
 
 <Sandpack>
 
@@ -518,7 +519,7 @@ img { width: 200px; height: 200px; }
 
 </Sandpack>
 
-If copying objects in code gets tedious, you can use a library like [Immer](https://github.com/immerjs/use-immer) to reduce repetitive code:
+ຫາກການສຳເນົາ object ໃນ code ເປັນເລື່ອງນ່າເບື່ອ, ທ່ານສາມາດໃຊ້ library ເຊັ່ນ [Immer](https://github.com/immerjs/use-immer) ເພື່ອຫຼຸດການໃຊ້ code ຊໍ້າ:
 
 <Sandpack>
 
@@ -633,13 +634,13 @@ img { width: 200px; height: 200px; }
 
 <LearnMore path="/learn/updating-objects-in-state">
 
-Read **[Updating Objects in State](/learn/updating-objects-in-state)** to learn how to update objects correctly.
+ອ່ານ **[ການອັບເດດ Object ໃນ State](/learn/updating-objects-in-state)** ເພື່ອຮຽນຮູ້ວິທີອັບເດດ object ຢ່າງຖືກຕ້ອງ.
 
 </LearnMore>
 
-## Updating arrays in state {/*updating-arrays-in-state*/}
+## ການອັບເດດ array ໃນ state {/*updating-arrays-in-state*/}
 
-Arrays are another type of mutable JavaScript objects you can store in state and should treat as read-only. Just like with objects, when you want to update an array stored in state, you need to create a new one (or make a copy of an existing one), and then set state to use the new array:
+Array ເປັນ object JavaScript ທີ່ບໍ່ແນ່ນອນອີກປະເພດໜຶ່ງທີ່ທ່ານສາມາດເກັບໄວ້ໃນ state ແລະ ຄວນຖືເປັນ read-only. ແບບດຽວກັບ object, ເມື່ອທ່ານຕ້ອງການອັບເດດ array ທີ່ເກັບໄວ້ໃນ state, ທ່ານຕ້ອງສ້າງ array ໃໝ່ (ຫຼື ສຳເນົາຂອງ array ທີ່ມີຢູ່), ຈາກນັ້ນຕັ້ງ state ເພື່ອໃຊ້ array ໃໝ່:
 
 <Sandpack>
 
@@ -706,7 +707,7 @@ function ItemList({ artworks, onToggle }) {
 
 </Sandpack>
 
-If copying arrays in code gets tedious, you can use a library like [Immer](https://github.com/immerjs/use-immer) to reduce repetitive code:
+ຖ້າການສຳເນົາ array ໃນ code ເປັນເລື່ອງນ່າເບື່ອ, ທ່ານສາມາດໃຊ້ library ເຊັ່ນ [Immer](https://github.com/immerjs/use-immer) ເພື່ອຫຼຸດການໃຊ້ code ຊໍ້າ:
 
 <Sandpack>
 
@@ -791,12 +792,12 @@ function ItemList({ artworks, onToggle }) {
 
 <LearnMore path="/learn/updating-arrays-in-state">
 
-Read **[Updating Arrays in State](/learn/updating-arrays-in-state)** to learn how to update arrays correctly.
+ອ່ານ **[ການອັບເດດ Array ໃນ State](/learn/updating-arrays-in-state)** ເພື່ອຮຽນຮູ້ວິທີອັບເດດ arrat ຢ່າງຖືກຕ້ອງ.
 
 </LearnMore>
 
-## What's next? {/*whats-next*/}
+## ຕໍ່ໄປແມ່ນຫຍັງ? {/*whats-next*/}
 
-Head over to [Responding to Events](/learn/responding-to-events) to start reading this chapter page by page!
+ໄປທີ່ [ການ Respond ຈາກ Events](/learn/responding-to-events) ເພີ່ມເລີ່ມອ່ານບົດນີ້ເທື່ອລະໜ້າ!
 
-Or, if you're already familiar with these topics, why not read about [Managing State](/learn/managing-state)?
+ຫຼື, ຖ້າທ່ານຄຸ້ນເຄີຍກັບຫົວຂໍ້ເຫຼົ່ານີ້ແລ້ວ, ລອງອ່ານກ່ຽວກັບ [ການ manage State](/learn/managing-state) ເບິ່ງ
