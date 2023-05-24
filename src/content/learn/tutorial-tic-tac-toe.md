@@ -1,31 +1,32 @@
 ---
-title: 'Tutorial: Tic-Tac-Toe'
+title: 'ບົດສອນ: Tic-Tac-Toe'
 ---
 
 <Intro>
 
-You will build a small tic-tac-toe game during this tutorial. This tutorial does not assume any existing React knowledge. The techniques you'll learn in the tutorial are fundamental to building any React app, and fully understanding it will give you a deep understanding of React.
+ທ່ານຈະໄດ້ເຮັດເກມ tic-tac-toe ນ້ອຍໆລະຫວ່າງບົດສອນນີ້. ບົດສອນນີ້ບໍ່ໄດ້ສົມມຸດວ່າທ່ານມີຄວາມຮູ້ກ່ຽວກັບ React ຢູ່ແລ້ວ. ເຕັກນິກທີ່ທ່ານຈະໄດ້ຮຽນໃນບົດສອນນີ້ແມ່ນພື້ນຖານການສ້າງແອັບ React, ແລະ ການທຳຄວາມເຂົ້າໃຈຢ່າງຕັ້ງໃຈມັນຈະຊ່ວຍໃຫ້ທ່ານເຂົ້າໃຈເລິງເຊິງກ່ຽວກັບ React.
 
 </Intro>
 
 <Note>
 
-This tutorial is designed for people who prefer to **learn by doing** and want to quickly try making something tangible. If you prefer learning each concept step by step, start with [Describing the UI.](/learn/describing-the-ui)
+ບົດສອນນີ້ຖືກອອກແບບມາສຳລັບຄົນທີ່ມັກ **ຮຽນຮູ້ໂດຍການປະຕິບັດ** ແລະ ຕ້ອງການລອງເຮັດສິ່ງທີ່ຈັບຕ້ອງໄດ້ຢ່າງວ່ອງໄວ. ຫາກທ່ານຕ້ອງການຮຽນແຕ່ລະແນວຄິດຕາມຂັ້ນຕອນ, ເລີ່ມດ້ວຍ
+[ອະທິບາຍ UI.](/learn/describing-the-ui)
 
 </Note>
 
-The tutorial is divided into several sections:
+ບົດຮຽນນີ້ແມ່ນໄດ້ແບ່ງອອກເປັນຫຼາຍສ່ວນ:
 
-- [Setup for the tutorial](#setup-for-the-tutorial) will give you **a starting point** to follow the tutorial.
-- [Overview](#overview) will teach you **the fundamentals** of React: components, props, and state.
-- [Completing the game](#completing-the-game) will teach you **the most common techniques** in React development.
-- [Adding time travel](#adding-time-travel) will give you **a deeper insight** into the unique strengths of React.
+- [ການຕັ້ງຄ່າສຳລັບບົດຮຽນ](#setup-for-the-tutorial) ຈະໃຫ້ທ່ານເຫັນ **ຈຸດເລີ່ມຕົ້ນ** ເພື່ອປະຕິບັດຕາມບົດຮຽນ.
+- [ພາບລວມ](#overview) ຈະສອນທ່ານ **ພື້ນຖານ** ຂອງ React: components, props, ແລະ state.
+- [ການຈົບເກມ](#completing-the-game) ຈະສອນທ່ານ **ເຕັກນິກທີ່ພົບເລື້ອຍ** ໃນການພັດທະນາ React.
+- [ການເພີ່ມ time travel](#adding-time-travel) ຈະເຮັດໃຫ້ທ່ານ **ມີຄວາມເຂົ້າໃຈເລິກເຊິງຂຶ້ນ** ໃນຈຸດແຂງທີ່ເປັນເອກະລັກຂອງ React.
 
-### What are you building? {/*what-are-you-building*/}
+### ທ່ານກຳລັງສ້າງຫຍັງ? {/*what-are-you-building*/}
 
-In this tutorial, you'll build an interactive tic-tac-toe game with React.
+ໃນບົດຮຽນນີ້, ທ່ານຈະໄດ້ສ້າງເກມ tic-tac-toe ທີ່ມີການຕອບໂຕ້ດ້ວຍ React.
 
-You can see what it will look like when you're finished here:
+ທ່ານສາມາດເບິ່ງວ່າຮູບລັກສະນະມັນຈະເປັນແບບໃດຫຼັງຈາກທີ່ເຮັດສຳເລັດແລ້ວບ່ອນນີ້:
 
 <Sandpack>
 
@@ -194,15 +195,15 @@ body {
 
 </Sandpack>
 
-If the code doesn't make sense to you yet, or if you are unfamiliar with the code's syntax, don't worry! The goal of this tutorial is to help you understand React and its syntax.
+ຖ້າ code ຍັງບໍ່ສົມເຫດສົມຜົນສຳລັບທ່ານເທື່ອ, ຫຼື ຖ້າທ່ານຍັງບໍ່ທັນຄຸ້ນເຄີຍກັບ syntax ຂອງ code, ບໍ່ຕ້ອງຫ່ວງ! ເປົ້າໝາຍຂອງບົດສອນນີ້ແມ່ນຊ່ວຍໃຫ້ທ່ານມີຄວາມເຂົ້າໃຈ React ແລະ syntax ຂອງມັນ
 
-We recommend that you check out the tic-tac-toe game above before continuing with the tutorial. One of the features that you'll notice is that there is a numbered list to the right of the game's board. This list gives you a history of all of the moves that have occurred in the game, and it is updated as the game progresses.
+ພວກເຮົາແນະນຳທ່ານລອງເກມ tic-tac-toe ດ້ານເທິງກ່ອນສຶບຕໍ່ບົດສອນ. ໜຶ່ງໃນຄຸນສົມບັດຫຼັກທີ່ທ່ານສາມາດສັງເກດໄດ້ແມ່ນມີລາຍການຕົວເລກດ້ານຂວາມືຂອງກະດານ. ລາຍການນີ້ສະແດງປະຫວັດຂອງການເຄື່ອນທີ່ທັງໝົດທີ່ເກີດຂຶ້ນໃນເກມ, ແລະ ອັບເດດເມື่ອເກມດຳເນີນໄປ.
 
-Once you've played around with the finished tic-tac-toe game, keep scrolling. You'll start with a simpler template in this tutorial. Our next step is to set you up so that you can start building the game.
+ເມືອທ່ານໄດ້ຫຼິ້ນຈົນຈົບເກມ tic-tac-toe, ໃຫ້ເລື່ອນໄປເລື້ອຍໆ. ທ່ານຈະເລີ່ມຈາກ template ງ່າຍໆໃນບົດສອນນີ້. ຂັ້ນຕອນຕໍ່ໄປຂອງເຮົາແມ່ນການຕັ້ງຄ່າໃຫ້ທ່ານສາມາດເລີ່ມສ້າງເກມໄດ້.
 
-## Setup for the tutorial {/*setup-for-the-tutorial*/}
+## ການຕັ້ງຄ່າສຳລັບບົດຮຽນ {/*setup-for-the-tutorial*/}
 
-In the live code editor below, click **Fork** in the top-right corner to open the editor in a new tab using the website CodeSandbox. CodeSandbox lets you write code in your browser and preview how your users will see the app you've created. The new tab should display an empty square and the starter code for this tutorial.
+ໃນ live code editor ຄິກ **Fork** ໃນເບື້ອງຂວາທາງເທິງເພື່ອເປີດ editor ໃນແທັບໃໝ່ໂດຍໃຊ້ເວັບໄຊ CodeSandbox. CodeSandbox ໃຫ້ທ່ານຂຽນ code ໃນບາວເຊີ ແລະ ເບິ່ງຕົວຢ່າງວ່າຜູ້ໃຊ້ງານຈະເຫັນແອັບທີ່ທ່ານສ້າງຂຶ້ນແນວໃດ. ແທັບໃໝ່ຄວນຈະສະແດງປ່ອງສີ່ຫຼ່ຽມເປົ່າ ແລະ code ເລີ່ມຕົ້ນສຳລັບບົດຮຽນນີ້.
 
 <Sandpack>
 
@@ -261,33 +262,33 @@ body {
 
 <Note>
 
-You can also follow this tutorial using your local development environment. To do this, you need to:
+ທ່ານຍັງສາມາດເຮັດຕາມບົດສອນນີ້ໂດຍໃຊ້ local development environment ຂອງທ່ານ. ເພື່ອປະຕິບັດ, ທ່ານຕ້ອງ:
 
-1. Install [Node.js](https://nodejs.org/en/)
-1. In the CodeSandbox tab you opened earlier, press the top-left corner button to open the menu, and then choose **File > Export to ZIP** in that menu to download an archive of the files locally
-1. Unzip the archive, then open a terminal and `cd` to the directory you unzipped
-1. Install the dependencies with `npm install`
-1. Run `npm start` to start a local server and follow the prompts to view the code running in a browser
+1. ຕິດຕັ້ງ [Node.js](https://nodejs.org/en/)
+1. ຢູ່ໃນແທັບ CodeSandbox ທີ່ທ່ານເປີດກ່ອນໜ້ານີ້, ກົດປຸ່ມເບື້ອງຊ້າຍເທິງເພື່ອເປີດເມນູ, ຫຼັງຈາກນັ້ນ ເລືອກ  **File > Export to ZIP** ໃນເມນູນັ້ນເພື່ອດາວໂຫຼດ archive ໃນເຄື່ອງ
+1. Unzip archive ຟາຍ, ຈາກນັ້ນເປີດ ແລະ `cd` ເຂົ້າໄປໃນ directory ທີ່ທ່ານ unzip.
+1. ຕິດຕັ້ງ dependencies ດ້ວຍ `npm install`
+1. ແລ່ນ `npm start` ເພື່ອເລີ່ມ local server ແລະ ປະຕິບັດຕາມຄຳແນະນຳເພື່ອເບິ່ງ code ທີ່ເຮັດວຽກໃນບາວເຊີ
 
-If you get stuck, don't let this stop you! Follow along online instead and try a local setup again later.
+ຖ້າທ່ານຕິດບັນຫາ, ຢ່າປ່ອຍໃຫ້ມັນຢຸດທ່ານ! ເຮັດຢູ່ອອນໄລແທນ ແລະ ລອງຕັ້ງຄ່າໃນເຄື່ອງອີກພາຍຫຼັງ.
 
 </Note>
 
-## Overview {/*overview*/}
+## ພາບລວມ {/*overview*/}
 
-Now that you're set up, let's get an overview of React!
+ປັດຈຸບັນທ່ານພ້ອມແລ້ວ, ມາເບິ່ງພາບລວມຂອງ React! 
 
-### Inspecting the starter code {/*inspecting-the-starter-code*/}
+### ກວດ code ເລີ່ມຕົ້ນ {/*inspecting-the-starter-code*/}
 
-In CodeSandbox you'll see three main sections:
+ໃນ CodeSandbox ທ່ານຈະເຫັນ 3 ສ່ວນຫຼັກ:
 
 ![CodeSandbox with starter code](../images/tutorial/react-starter-code-codesandbox.png)
 
-1. The _Files_ section with a list of files like `App.js`, `index.js`, `styles.css` and a folder called `public`
-1. The _code editor_ where you'll see the source code of your selected file
-1. The _browser_ section where you'll see how the code you've written will be displayed
+1. ຫົວຂໍ້ _Files_ ດ້ວຍລາຍການຂອງຟາຍເຊັ່ນ:  `App.js`, `index.js`, `styles.css` ແລະ ໂຟເດີທີ່ຊື່ວ່າ `public`
+1. ສ່ວນ _code editor_ ບ່ອນທີ່ທ່ານຈະເຫັນ source code ຂອງຟາຍທີ່ທ່ານເລືອກ
+1. ສ່ວນ _browser_ ບ່ອນທີ່ທ່ານຈະໄດ້ເຫັນ code ທີ່ທ່ານຂຽນນັ້ນສະແດງຜົນ
 
-The `App.js` file should be selected in the _Files_ section. The contents of that file in the _code editor_ should be:
+ຟາຍ `App.js` ຄວນຖືກເລືອກໃນຫົວຂໍ້ _Files_. ເນື້ອໃນຂອງຟາຍ ໃນ _code editor_ ຄວນມີດັ່ງນີ້:
 
 ```jsx
 export default function Square() {
@@ -295,15 +296,15 @@ export default function Square() {
 }
 ```
 
-The _browser_ section should be displaying a square with a X in it like this:
+ສ່ວນຂອງ _browser_ ຄວນສະແດງສີ່ຫຼ່ຽມພ້ອມເຄື່ອງໝາຍ X ແບບນີ້:
 
 ![x-filled square](../images/tutorial/x-filled-square.png)
 
-Now let's have a look at the files in the starter code.
+ຕອນນີ້ມາເບິ່ງ code ເລີ່ມຕົ້ນໃນຟາຍ.
 
 #### `App.js` {/*appjs*/}
 
-The code in `App.js` creates a _component_. In React, a component is a piece of reusable code that represents a part of a user interface. Components are used to render, manage, and update the UI elements in your application. Let's look at the component line by line to see what's going on:
+Code ໃນ `App.js` ສ້າງ a _component_. ໃນ React, component ແມ່ນຊີ້ນສ່ວນຂອງ code ທີ່ໃຊ້ຊໍ້າໄດ້ເຊິ່ງໄດ້ສະແດງສ່ວນໜຶ່ງຂອງ user interface . Components ແມ່ນໃຊ້ສຳລັບສະແດງ, ຈັດການ ແລະ ອັບເດດ UI element ໃນແອັບພິເຄຊັ່ນຂອງທ່ານ. ມາເບິ່ງ component ໃນແຕ່ລະແຖວວ່າມີຫຍັງແນ່:
 
 ```js {1}
 export default function Square() {
@@ -311,23 +312,22 @@ export default function Square() {
 }
 ```
 
-The first line defines a function called `Square`. The `export` JavaScript keyword makes this function accessible outside of this file. The `default` keyword tells other files using your code that it's the main function in your file.
+ແຖວທຳອິດປະກາດຟັງຊັ່ນຊື່ວ່າ `Square`. Keyword `export` ຂອງ JavaScript ເຮັດໃຫ້ຟັງຊັ່ນນີ້ສາມາດເຂົ້າເຖິງໄດ້ຈາກພາຍນອກຟາຍນີ້. keyword `default` ບອກຟາຍອື່ນໃຫ້ໃຊ້ code ຂອງທ່ານທີ່ເປັນຟັງຊັ່ນຫຼັກໃນຟາຍຂອງທ່ານ.
 
 ```js {2}
 export default function Square() {
   return <button className="square">X</button>;
 }
 ```
-
-The second line returns a button. The `return` JavaScript keyword means whatever comes after is returned as a value to the caller of the function. `<button>` is a *JSX element*. A JSX element is a combination of JavaScript code and HTML tags that describes what you'd like to display. `className="square"` is a button property or *prop* that tells CSS how to style the button. `X` is the text displayed inside of the button and `</button>` closes the JSX element to indicate that any following content shouldn't be placed inside the button.
+ແຖວທີ່ສອງ return ປຸ່ມກົດ. Keyword `return` ຂອງ JavaScript ມີຄວາມໝາຍວ່າແມ່ນຫຍັງກໍຕາມທີ່ມານຳຫຼັງຈະ return ເປັນຄ່າໃຫ້ຜູ້ໃຊ້ຟັງຊັ່ນ. `<button` ແມ່ນ *JSX element*. JSX element ແມ່ນການລວມກັນຂອງ code JavaScript ແລະ ແທັກ HTML ທີ່ນຳສະເໜີສິ່ງທີ່ທ່ານຕ້ອງການສະແດງ. `className="square"` ແມ່ນ property ຫຼື *prop* ຂອງປຸ່ມກົດທີ່ບອກ CSS ວິທີການ style ປຸ່ມກົດ. `X` ແມ່ນຂໍ້ຄວາມທີ່ສະແດງຢູ່ພາຍໃນປຸ່ມກົດ ແລະ `</button>` ປິດ JSX element ເພື່ອໃຫ້ຮູ້ວ່າທຸກໆເນື້ອຫາຕໍ່ໄປບໍ່ຄວນຈະຖືກວາງໄວ້ພາຍໃນປຸ່ມກົດ.
 
 #### `styles.css` {/*stylescss*/}
 
-Click on the file labeled `styles.css` in the _Files_ section of CodeSandbox. This file defines the styles for your React app. The first two _CSS selectors_ (`*` and `body`) define the style of large parts of your app while the `.square` selector defines the style of any component where the `className` property is set to `square`. In your code, that would match the button from your Square component in the `App.js` file.
+ຄິກໃສ່ຟາຍທີ່ມີຊື່ວ່າ `style.css` ໃນສ່ວນຂອງ _Files_ ຢູ່ໃນ CodeSandbox. ຟາຍນີ້ປະກາດ style ສຳລັບແອັບ React ຂອງທ່ານ. ສອງ _CSS selectors_ (`*` ແລະ `body`) ທຳອິດ ປະກາດ style ສ່ວນໃຫຍ່ຂອງແອັບທ່ານໃນຂະນະທີ່ selector `.square` ປະກາດ style ຂອງ component ທີ່ໃຊ້ property `className` ເປັນ `square`. ໃນ code ຂອງທ່ານ, ນັ້ນຈະກົງກັບປຸ່ມກົດຈາກ Component Square ໃນຟາຍ `App.js` ຂອງທ່ານ.
 
 #### `index.js` {/*indexjs*/}
 
-Click on the file labeled `index.js` in the _Files_ section of CodeSandbox. You won't be editing this file during the tutorial but it is the bridge between the component you created in the `App.js` file and the web browser.
+ຄິກໃສ່ຟາຍທີ່ມີຊື່ `index.js` ໃນສ່ວນຂອງ _Files_ ຢູ່ໃນ CodeSandbox. ທ່ານບໍ່ສາມາດແກ້ໄຂຟາຍໃນລະຫວ່າງການຮຽນນີ້ແຕ່ມັນສາມາດເຊື່ອມໂຍງ component ທີ່ທ່ານສ້າງໃນຟາຍ `App.js` ແລະ ເວັບບາວເຊີ.
 
 ```jsx
 import { StrictMode } from 'react';
@@ -337,20 +337,20 @@ import './styles.css';
 import App from './App';
 ```
 
-Lines 1-5 brings all the necessary pieces together: 
+ແຖວທີ 1-5 ແມ່ນລວມສ່ວນທີ່ຈຳເປັນມາລວມກັນ:
 
 * React
-* React's library to talk to web browsers (React DOM)
-* the styles for your components
-* the component you created in `App.js`.
+* Library React ເພື່ອສື່ສານກັບເວັບບາວເຊີ (React DOM)
+* Style ຂອງ Component ທ່ານ
+* Component ທີ່ທ່ານສ້າງໃນ `App.js`.
 
-The remainder of the file brings all the pieces together and injects the final product into `index.html` in the `public` folder.
+ສ່ວນທີ່ເຫຼືອຂອງຟາຍຈະເອົາຊີ້ນສ່ວນທັງໝົດມາລວມກັນ ແລະ ເຮັດເປັນ final product ລົງໃນ `index.html` ໃນໂຟນເດີ `public`
 
-### Building the board {/*building-the-board*/}
+### ການສ້າງກະດານ {/*building-the-board*/}
 
-Let's get back to `App.js`. This is where you'll spend the rest of the tutorial.
+ກັບຄືນໄປທີ່ `App.js`. ນີ້ແມ່ນບ່ອນທີ່ທ່ານຈະໃຊ້ເວລາຫຼາຍກັບບົດຮຽນ.
 
-Currently the board is only a single square, but you need nine! If you just try and copy paste your square to make two squares like this:
+ປັດຈຸບັນ ກະດານມີແຕ່ໜຶ່ງສີ່ຫຼ່ຽມ, ແຕ່ທ່ານຕ້ອງການ 9! ຖ້າທ່ານລອງແຕ່ copy paste ສີ່ຫຼ່ຽມຂອງທ່ານເພື່ອໃຫ້ເປັນສອງອັນດັ່ງນີ້:
 
 ```js {2}
 export default function Square() {
@@ -358,7 +358,7 @@ export default function Square() {
 }
 ```
 
-You'll get this error:
+ທ່ານຈະໄດ້ຮັບຂໍ້ຜິດພາດນີ້:
 
 <ConsoleBlock level="error">
 
@@ -366,7 +366,7 @@ You'll get this error:
 
 </ConsoleBlock>
 
-React components need to return a single JSX element and not multiple adjacent JSX elements like two buttons. To fix this you can use *fragments* (`<>` and `</>`) to wrap multiple adjacent JSX elements like this:
+Component React ຕ້ອງການ return ໜຶ່ງ JSX element ແລະ ບໍ່ສາມາດສົ່ງ JSX ທີ່ຕິດພັນຫຼາຍອັນເຊັ່ນ ສອງປຸ່ມກົດ. ເພື່ອແກ້ໄຂບັນຫານີ້ທ່ານສາມາດໃຊ້ *fragments* (`<>` ແລະ `</>`) ເພື່ອລວມ JSX ທີ່ຕິດພັນຫຼາຍອັນດັ່ງນີ້:
 
 ```js {3-6}
 export default function Square() {
@@ -379,17 +379,18 @@ export default function Square() {
 }
 ```
 
-Now you should see:
+ຕອນນີ້ທ່ານຄວນເຫັນ:
 
 ![two x-filled squares](../images/tutorial/two-x-filled-squares.png)
 
-Great! Now you just need to copy-paste a few times to add nine squares and...
+ເກັ່ງຫຼາຍ! ຕອນນີ້ທ່ານພຽງແຕ່ copy-paste ບໍ່ເທົ່າໃດເທື່ອເພື່ອເພີ່ມ 9 ສີ່ຫຼ່ຽມ ແລະ ...
 
 ![nine x-filled squares in a line](../images/tutorial/nine-x-filled-squares.png)
 
-Oh no! The squares are all in a single line, not in a grid like you need for our board. To fix this you'll need to group your squares into rows with `div`s and add some CSS classes. While you're at it, you'll give each square a number to make sure you know where each square is displayed.
 
-In the `App.js` file, update the `Square` component to look like this:
+ຫະ! ສີ່ຫຼ່ຽມທັງໝົດແມ່ນຢູ່ແຖວດຽວກັນ, ບໍ່ໄດ້ຢູ່ໃນ grid ແບບທີ່ທ່ານຕ້ອງການຢູ່ໃນກະດານ. ເພື່ອແກ້ໄຂບັນຫານີ້ທ່ານຕ້ອງໄດ້ group ສີ່ຫຼ່ຽມໃຫ້ເປັນແຖວດ້ວຍ `<div>` ແລະ ເພີ່ມບາງ class CSS. ໃນຂະນະທີ່ທ່ານກຳລັງເຮັດ, ທ່ານຈະໃສ່ໂຕເລກແຕ່ລະສີ່ຫຼ່ຽມເພື່ອໃຫ້ແນ່ໃຈວ່າແຕ່ລະສີ່ຫຼ່ຽມຈະສະແດງບ່ອນໃດ.
+
+ໃນຟາຍ `App.js`, ອັບເດດ component `Square` ໜ້າຕາປະມານນີ້:
 
 ```js {3-19}
 export default function Square() {
@@ -415,11 +416,11 @@ export default function Square() {
 }
 ```
 
-The CSS defined in `styles.css` styles the divs with the `className` of `board-row`. Now that you've grouped your components into rows with the styled `div`s you have your tic-tac-toe board:
+CSS ທີ່ກຳນົດໃນ `styles.css` ແມ່ນໄດ້ style divs ດ້ວຍ `className` ຂອງ `board-row`. ຕອນນີ້ທ່ານໄດ້ group Component ຂອງທ່ານເປັນແຖວດຽວດ້ວຍ style ຂອງ div ທີ່ທ່ານມີໃນກະດານ tic-tac-toe:
 
 ![tic-tac-toe board filled with numbers 1 through 9](../images/tutorial/number-filled-board.png)
 
-But you now have a problem. Your component named `Square`, really isn't a square anymore. Let's fix that by changing the name to `Board`:
+ແຕ່ທ່ານກຳລັງມີບັນຫາ. Component ຊື່ `Square` ຂອງທ່ານ, ບໍ່ໄດ້ເປັນຮູບສີ່ຫຼ່ຽມອີກຕໍ່ໄປ. ມາແກ້ໄຂມັນໂດຍການປ່ຽນຊື່ເປັນ `Board`:
 
 ```js {1}
 export default function Board() {
@@ -427,7 +428,7 @@ export default function Board() {
 }
 ```
 
-At this point your code should look something like this:
+ໃນຈຸດນີ້ code ຂອງທ່ານຄວນໜ້າຕາປະມານນີ້:
 
 <Sandpack>
 
@@ -504,15 +505,15 @@ body {
 
 <Note>
 
-Psssst... That's a lot to type! It's okay to copy and paste code from this page. However, if you're up for a little challenge, we recommend only copying code that you've manually typed at least once yourself.
+ອືມ... ພິມໂຄດຫຼາຍ! ມັນເປັນເລື່ອງທີ່ດີທີ່ຈະ copy ແລະ paste code ຈາກ page ນີ້. ເຖິງຢ່າງໃດກໍ່ຕາມ, ຖ້າທ່ານມີຄວາມພ້ອມສຳລັບຄວາມທ້າທາຍເລັກໆນ້ອຍໆ, ພວກເຮົາຂໍແນະນຳທ່ານໃຫ້ copy code ທີ່ທ່ານພິມດ້ວຍຕົນເອງຢ່າງໜ້ອຍໜຶ່ງຄັ້ງເທົ່ານັ້ນ.
 
 </Note>
 
-### Passing data through props {/*passing-data-through-props*/}
+### ສົ່ງຂໍ້ມູນຜ່ານ props {/*passing-data-through-props*/}
 
-Next, you'll want to change the value of a square from empty to "X" when the user clicks on the square. With how you've built the board so far you would need to copy-paste the code that updates the square nine times (once for each square you have)! Instead of copy-pasting, React's component architecture allows you to create a reusable component to avoid messy, duplicated code.
+ຕໍ່ໄປ, ທ່ານຕ້ອງການປ່ຽນຄ່າຂອງສີ່ຫຼ່ຽມຈາກຄ່າເປົ່າເປັນ "X" ເມື່ອຜູ້ໃຊ້ຄິກສີ່ຫຼ່ຽມ. ໂດຍວິທີທີ່ທ່ານສ້າງກະດານຈົນມາຮອດນີ້ ທ່ານຈະຕ້ອງ copy-paste code ທີ່ອັບເດດສີ່ຫຼ່ຽມ 9 ເທື່ອ (ເຮັດເທື່ອລະສີ່ຫຼ່ຽມທີ່ທ່ານມີ)! ແທນທີ່ຈະ copy-past, ສະຖາປັກຕະຍະກຳ Component React ຊ່ວຍໃຫ້ທ່ານສ້າງ component ທີ່ໃຊ້ຊໍ້າໄດ້ເພື່ອຫຼີກຫຼ່ຽງ code ທີ່ມີຄວາມສັບສົນ, ແລະ ຊໍ້າຊ້ອນ.
 
-First, you are going to copy the line defining your first square (`<button className="square">1</button>`) from your `Board` component into a new `Square` component:
+ທຳອິດ, ທ່ານຈະຕ້ອງ copy ແຖວທີ່ປະກາດສີ່ຫຼ່ຽມທຳອິດ (`<button className="square">1</button>`) ຈາກ Component `Board` ໄປໃສ່ໃນ Component `Square` ໃໝ່:
 
 ```js {1-3}
 function Square() {
@@ -524,7 +525,7 @@ export default function Board() {
 }
 ```
 
-Then you'll update the Board component to render that `Square` component using JSX syntax:
+ຈາກນັ້ນທ່ານອັບເດດ Component Board  ເພື່ອສະແດງ Component `Square` ໂດຍໃຊ້ syntax JSX:
 
 ```js {5-19}
 // ...
@@ -551,15 +552,15 @@ export default function Board() {
 }
 ```
 
-Note how unlike the browser `div`s, your own components `Board` and `Square` must start with a capital letter. 
+ສັງເກດເຫັນຄວາມແຕກຕ່າງຂອງບາວເຊີ `div` component `Board` ແລະ `Square` ຕ້ອງເລີ່ມຕົ້ນດ້ວຍໂຕພິມໃຫຍ່.
 
-Let's take a look:
+ມາເບິ່ງ:
 
 ![one-filled board](../images/tutorial/board-filled-with-ones.png)
 
-Oh no! You lost the numbered squares you had before. Now each square says "1". To fix this, you will use *props* to pass the value each square should have from the parent component (`Board`) to its child (`Square`).
+ຫະ! ທ່ານໄດ້ເສຍຕົວເລກໃນສີ່ຫຼ່ຽມທີ່ທ່ານມີກ່ອນໜ້ານີ້. ຕອນນີ້ແຕ່ລະສີ່ຫຼ່ຽມສະແດງ "1". ເພື່ອແກ້ໄຂ, ທ່ານຈະໄດ້ໃຊ້ *props* ເພື່ອສົ່ງຜ່ານແຕ່ລະຄ່າທີ່ສີ່ຫຼ່ຽມຄວນມີຈາກ parent component (`Board`) ໄປຫາ child ຂອງມັນ (`Square`).
 
-Update the `Square` component to read the `value` prop that you'll pass from the `Board`:
+ອັບເດດ component `Square` ເືພ່ອອ່ານ `value` prop ທີ່ທ່ານຈະສົ່ງຈາກ `Board`:
 
 ```js {1}
 function Square({ value }) {
@@ -567,9 +568,9 @@ function Square({ value }) {
 }
 ```
 
-`function Square({ value })` indicates the Square component can be passed a prop called `value`.
+`function Square({ value })` ບົ່ງບອກວ່າ component Square ສາມາດສົ່ງ props ທີ່ເອີ້ນວ່າ `value`.
 
-Now you want to display that `value` instead of `1` inside every square. Try doing it like this:
+ຕອນນີ້ທ່ານຕ້ອງການສະແດງ `value` ນັ້ນແທນທີຈະເປັນ `1` ໃນທຸກໆສີ່ຫຼ່ຽມ. ລອງເຮັດແບບນີ້:
 
 ```js {2}
 function Square({ value }) {
@@ -577,11 +578,11 @@ function Square({ value }) {
 }
 ```
 
-Oops, this is not what you wanted:
+ອຸບ~~, ນີ້ບໍ່ແມ່ນສິ່ງທີ່ທ່ານຕ້ອງການ:
 
 ![value-filled board](../images/tutorial/board-filled-with-value.png)
 
-You wanted to render the JavaScript variable called `value` from your component, not the word "value". To "escape into JavaScript" from JSX, you need curly braces. Add curly braces around `value` in JSX like so:
+ທ່ານຕ້ອງການສະແດງຕົວແປ JavaScript ຊື່ວ່າ `value` ຈາກ component ຂອງທ່ານ, ບໍ່ແມ່ນຄຳວ່າ "value". ເພື່ອ "escape into JavaScriopt" ຈາກ JSX, ທ່ານຕ້ອງການວົງປີກກາ. ເພີ່ມວົງປີກກາລະຫວ່າງ `value` ໃນ JSX ແບບນີ້:
 
 ```js {2}
 function Square({ value }) {
@@ -589,11 +590,11 @@ function Square({ value }) {
 }
 ```
 
-For now, you should see an empty board:
+ສຳລັບຕອນນີ້, ທ່ານຄວນເຫັນກະດານທີ່ວ່າງເປົ່າ:
 
 ![empty board](../images/tutorial/empty-board.png)
 
-This is because the `Board` component hasn't passed the `value` prop to each `Square` component it renders yet. To fix it you'll add the `value` prop to each `Square` component rendered by the `Board` component:
+ນີ້ເປັນເພາະວ່າ component `Board` ບໍ່ໄດ້ສົ່ງ prop `value` ໄປໃຫ້ແຕ່ລະ component `Square` ເພື່ອສະແດງເທື່ອ. ເພື່ອແກ້ໄຂທ່ານຕ້ອງເພີ່ມ prop `value` ໃນແຕ່ລະ component `Square` ທີ່ສະແດງໂດຍ component `Board`:
 
 ```js {5-7,10-12,15-17}
 export default function Board() {
@@ -619,11 +620,11 @@ export default function Board() {
 }
 ```
 
-Now you should see a grid of numbers again:
+ຕອນນີ້ທ່ານຄວນເຫັນ grid ຂອງຕົວເລກອີກຄັ້ງ:
 
 ![tic-tac-toe board filled with numbers 1 through 9](../images/tutorial/number-filled-board.png)
 
-Your updated code should look like this:
+code ທີ່ອັບເດດຂອງທ່ານຄວນຄ້າຍຄືແບບນີ້:
 
 <Sandpack>
 
@@ -702,9 +703,9 @@ body {
 
 </Sandpack>
 
-### Making an interactive component {/*making-an-interactive-component*/}
+### ການເຮັດໃຫ້ Component ມີການໂຕ້ຕອບ {/*making-an-interactive-component*/}
 
-Let's fill the `Square` component with an `X` when you click it. Declare a function called `handleClick` inside of the `Square`. Then, add `onClick` to the props of the button JSX element returned from the `Square`:
+ມາເຕີມ component `Square` ດ້ວຍ `X` ເມື່ອທ່ານຄິກມັນ. ປະກາດຟັງຊັ່ນຊື່ວ່າ `handleClick` ພາຍໃນ `Square`. ຫຼັງຈາກນັ້ນ, ເພີ່ມ `onClick` ໃສ່ props ຂອງປຸ່ມກົດ JSX element ທີ່ return ຈາກ `Square`:
 
 ```js {2-4,9}
 function Square({ value }) {
@@ -723,19 +724,19 @@ function Square({ value }) {
 }
 ```
 
-If you click on a square now, you should see a log saying `"clicked!"` in the _Console_ tab at the bottom of the _Browser_ section in CodeSandbox. Clicking the square more than once will log `"clicked!"` again. Repeated console logs with the same message will not create more lines in the console. Instead, you will see an incrementing counter next to your first `"clicked!"` log.
+ຖ້າທ່ານຄິກໃສ່ສີ່ຫຼ່ຽມຕອນນີ້, ທ່ານຄວນຈະເຫັນ log ທີ່ສະແດງ `"clicked!"` ໃນແທັບ _Console_ ທີ່ຢູ່ດ້ານລຸ່ມຂອງ _Browser_ ໃນ CodeSandbox. ການຄິກສີ່ຫຼ່ຽມຫຼາຍກວ່າໜຶ່ງຄັ້ງຈະສະແດງ `"clicked!"` ອີກຄັ້ງ. ການເຮັດຊໍ້າ console log ດ້ວຍຂໍ້ຄວາມເກົ່າຈະບໍ່ສ້າງແຖວໃໝ່ໃນ console. ກົງກັນຂ້າມ, ທ່ານຈະເຫັນຕົວເລກການເພີ່ມຂຶ້ນດ້ານຫຼັງຂອງຄຳວ່າ `"clicked!"`.
 
 <Note>
 
-If you are following this tutorial using your local development environment, you need to open your browser's Console. For example, if you use the Chrome browser, you can view the Console with the keyboard shortcut **Shift + Ctrl + J** (on Windows/Linux) or **Option + ⌘ + J** (on macOS).
+ຖ້າທ່ານປະຕິບັດຕາມບົດຮຽນໂດຍໃຊ້ local development environment, ທ່ານຕ້ອງເປີດບາວເຊີ Console ຂອງທ່ານ. ຕົວຢ່າງ, ຖ້າທ່ານໃຊ້ Chrome ບາວເຊີ, ທ່ານສາມາດເບິ່ງ Console ດ້ວຍ keyboard shortcut **Shift + Ctrl + J** (ສຳລັບ Windows/Linux) ຫຼື **Option + ⌘ + J** (ສຳລັບ macOS).
 
 </Note>
 
-As a next step, you want the Square component to "remember" that it got clicked, and fill it with an "X" mark. To "remember" things, components use *state*.
+ໃນຂັ້ນຕອນຕໍ່ໄປ, ທ່ານຕ້ອງການໃຫ້ component Square ເພື່ອ "ຈື່" ວ່າມັນໄດ້ຖືກຄິກແລ້ວ, ແລະ ເຕີມມັນດ້ວຍເຄື່ອງໝາຍ "X". ເພື່ອ "ຈື່" ຄ່າຕ່າງໆ, comopnent ໃຊ້ *state*.
 
-React provides a special function called `useState` that you can call from your component to let it "remember" things. Let's store the current value of the `Square` in state, and change it when the `Square` is clicked.
+React ມີຟັງຊັ່ນພິເສດເອີ້ນວ່າ `useState` ທີ່ທ່ານສາມາດເອີ້ນຈາກ component ຂອງທ່ານເພື່ອໃຫ້ "ຈື່" ຄ່າ. ມາເກັບຄ່າຂອງ `Square` ໃນ state, ແລະ ປ່ຽນມັນເມື່ອ `Square` ຖືກຄິກ.
 
-Import `useState` at the top of the file. Remove the `value` prop from the `Square` component. Instead, add a new line at the start of the `Square` that calls `useState`. Have it return a state variable called `value`:
+Import `useState` ເທິງສຸດຂອງຟາຍ. ລຶບ prop `value` ຈາກ component `Square`. ກົງກັນຂ້າມ, ເພີ່ມແຖວໃໝ່ດ້ານໜ້າຂອງ `Square` ທີ່ເອີ້ນ `useSate`. ໃຫ້ສົ່ງຄືນຕົວແປທີ່ຊື່ `value`:
 
 ```js {1,3,4}
 import { useState } from 'react';
@@ -747,9 +748,9 @@ function Square() {
     //...
 ```
 
-`value` stores the value and `setValue` is a function that can be used to change the value. The `null` passed to `useState` is used as the initial value for this state variable, so `value` here starts off equal to `null`.
+`value` ເກັບຄ່າ ແລະ `setValue` ແມ່ນຟັງຊັ່ນທີ່ໃຊ້ເພື່ອປ່ຽນແປງຄ່າ. ຄ່າ `null` ທີ່ສົ່ງຜ່ານໄປຫາ `useState` ເພື່ອໃຊ້ເປັນຄ່າເລີ່ມຕົ້ນຂອງຕົວແປ state ນີ້, ສະນັ້ນ `value` ມີຄ່າເລີ່ມຕົ້ນເປັນ `null`.
 
-Since the `Square` component no longer accepts props anymore, you'll remove the `value` prop from all nine of the Square components created by the Board component:
+ຕັ້ງແຕ່ component `Square` ບໍ່ໄດ້ຮັບ prop ອີກຕໍ່ໄປ, ທ່ານຈະໄດ້ລຶບ prop `value` ຈາກ 9 component Square ທີ່ຖືກສ້າງໂດຍ component Board:
 
 ```js {6-8,11-13,16-18}
 // ...
@@ -776,7 +777,7 @@ export default function Board() {
 }
 ```
 
-Now you'll change `Square` to display an "X" when clicked. Replace the `console.log("clicked!");` event handler with `setValue('X');`. Now your `Square` component looks like this:
+ຕອນນີ້ທ່ານຈະໄດ້ປ່ຽນ `Square` ເພື່ອສະແດງ "X" ຕອນຖືກຄິກ. ແທນທີ `console.log("clicked!");` event handler ດ້ວຍ `setValue('X');`. ປັດຈຸບັນ component `Square` ຈະໜ້າຕາປະມານນີ້:
 
 ```js {5}
 function Square() {
@@ -797,13 +798,14 @@ function Square() {
 }
 ```
 
-By calling this `set` function from an `onClick` handler, you're telling React to re-render that `Square` whenever its `<button>` is clicked. After the update, the `Square`'s `value` will be `'X'`, so you'll see the "X" on the game board. Click on any Square, and "X" should show up:
+ໂດຍການເອີ້ນຟັງໃຊ້ `set` ນີ້ຈາກ `onClick` handler, ທ່ານກຳລັງບອກໃຫ້ React ເພື່ອສະແດງ `Square` ຄືນໃໝ່ ເມື່ອໃດກໍຕາມທີ `<button>` ຖືກຄິກ. ຫຼັງຈາກມີການປ່ຽນແປງ, `value` ຂອງ `Square` ຈະມີຄ່າເປັນ `'X'`, ດັ່ງນັ້ນທ່ານຈິງເຫັນ 
+"X" ໃນກະດານເກມ. ຄິກໃສ່ ສີ່ຫຼ່ຽມບ່ອນໃດກໍໄດ້, ແລະ "X" ຄວນຈະສະແດງ:
 
 ![adding xes to board](../images/tutorial/tictac-adding-x-s.gif)
 
-Each Square has its own state: the `value` stored in each Square is completely independent of the others. When you call a `set` function in a component, React automatically updates the child components inside too.
+ແຕ່ລະສີ່ຫຼ່ຽມມີ state ເປັນຂອງຕົວເອງ: `value` ຖືກເກັບໄວ້ໃນແຕ່ລະສີ່ຫຼ່ຽມຢ່າງອິດສະຫຼະຈາກກັນ. ເມື່ອທ່ານເອີ້ນຟັງຊັ່ນ `set` ໃນ component, React ຈະອັບເດດ child component ພາຍໃນໂດຍອັດຕະໂນມັດຄືກັນ.
 
-After you've made the above changes, your code will look like this:
+ຫຼັງຈາກທີ່ທ່ານໄດ້ທຳການປ່ຽນແປງດ້ານເທິງ, code ຂອງທ່ານຈະເປັນແບບນີ້:
 
 <Sandpack>
 
@@ -899,35 +901,35 @@ body {
 
 ### React Developer Tools {/*react-developer-tools*/}
 
-React DevTools let you check the props and the state of your React components. You can find the React DevTools tab at the bottom of the _browser_ section in CodeSandbox:
+React DevTools ຊ່ວຍໃຫ້ທ່ານກວດ prop ແລະ state ຂອງ Component React ຂອງທ່ານ. ທ່ານສາມາດຫາແທັບ React DevTools ໃນດ້ານລຸ່ມຂອງສ່ວນ _browser_ ໃນ CodeSandbox:
 
 ![React DevTools in CodeSandbox](../images/tutorial/codesandbox-devtools.png)
 
-To inspect a particular component on the screen, use the button in the top left corner of React DevTools:
+ເພື່ອກວດແຕ່ລະ component ເທິງໜ້າຈໍ, ໃຊ້ປຸ່ມທີ່ຢູ່ມຸມຊ້າຍດ້ານເທິງຂອງ React DevTools:
 
 ![Selecting components on the page with React DevTools](../images/tutorial/devtools-select.gif)
 
 <Note>
 
-For local development, React DevTools is available as a [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/), and [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil) browser extension. Install it, and the *Components* tab will appear in your browser Developer Tools for sites using React.
+ສຳລັບ local development, React DevTools ແມ່ນມີໃນ browser extension [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/), ແລະ [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil). ຕິດຕັ້ງມັນ, ແລະ ແທັບ *Components*  ຈະສະແດງໃນ browser Developer Tools ສຳລັບໜ້າທີ່ໃຊ້ React.
 
 </Note>
 
-## Completing the game {/*completing-the-game*/}
+## ເຮັດເກມໃຫ້ແລ້ວ {/*completing-the-game*/}
 
-By this point, you have all the basic building blocks for your tic-tac-toe game. To have a complete game, you now need to alternate placing "X"s and "O"s on the board, and you need a way to determine a winner.
+ໃນຈຸດນີ້, ທ່ານມີພື້ນຖານໃນການສ້າງ block ສຳລັບເກມ tic-tac-toe. ເພື່ອເຮັດໃຫ້ເກມສຳເລັດ, ຕອນນີ້ທ່ານຕ້ອງວາງ "X" ແລະ "O" ສະລັບກັນເທິງກະດານ, ແລະ ທ່ານຕ້ອງການວິທີການຕັດສິນຜູ້ຊະນະ.
 
-### Lifting state up {/*lifting-state-up*/}
+### ການຍົກ state ຂຶ້ນ {/*lifting-state-up*/}
 
-Currently, each `Square` component maintains a part of the game's state. To check for a winner in a tic-tac-toe game, the `Board` would need to somehow know the state of each of the 9 `Square` components.
+ປັດຈຸບັນ, ແຕ່ລະ component `Square` ເບິ່ງສ່ວນ state ຂອງເກມ. ເພື່ອກວດຫາຜູ້ຊະນະໃນເກມ tic-tac-toe, `Board` ຈຳເປັນຕ້ອງໄດ້ຮູ້ state ຂອງແຕ່ລະ component `Square`.
 
-How would you approach that? At first, you might guess that the `Board` needs to "ask" each `Square` for that `Square`'s state. Although this approach is technically possible in React, we discourage it because the code becomes difficult to understand, susceptible to bugs, and hard to refactor. Instead, the best approach is to store the game's state in the parent `Board` component instead of in each `Square`. The `Board` component can tell each `Square` what to display by passing a prop, like you did when you passed a number to each Square.
+ທ່ານຈະເຂົ້າໃກ້ສິ່ງນີ້ໄດ້ແນວໃດ? ຕອນທຳອິດ, ທ່ານອາດຈະເດົາໄດ້ວ່າ `Board` ຕ້ອງການ "ຂໍ" ແຕ່ລະ `Square` ສຳລັບ state ຂອງ `Square`. ເຖິງວ່າສິ່ງນີ້ດ້ານເຕັກນິກຈະເປັນໄປໄດ້ໃນ React, ພວກເຮົາບໍ່ແນະນຳເພາະວ່າ code ຈະເຂົ້າໃຈຍາກ, ມີຂໍ້ຜິດພາດໄດ້ງ່າຍ, ແລະ ຍາກໃນການ refactor. ວິທີທີ່ດີທີ່ສຸດແມ່ນເກັບ state ເກມໃນ parent `Board` component ແທນໃນແຕ່ລະ `Square`. Component `Board` ສາມາດບອກແຕ່ລະ `Square` ວ່າຈະສະແດງຫຍັງແນ່ໂດຍການສົ່ງຜ່ານ props, ຄືກັບທີ່ທ່ານໄດ້ເຮັດເມືອສົ່ງຄ່າໂຕເລກໃຫ້ແຕ່ລະສີ່ຫຼ່ຽມ.
 
-**To collect data from multiple children, or to have two child components communicate with each other, declare the shared state in their parent component instead. The parent component can pass that state back down to the children via props. This keeps the child components in sync with each other and with their parent.**
+**ເພື່ອຮວບຮ່ວມຂໍ້ມູນຈາກຫຼາຍ children,ຫຼື ສອງ child component ສື່ສານກັນ, ປະກາດ shared state ໃນ parent component ຂອງພວກມັນແທນ. Parent component ສາມາດສົ່ງ state ກັບຄືນຫາ children ດ້ວຍ props. ນີ້ເຮັດໃຫ້ child component sync ກັນ ແລະ ກັບ parent ຂອງມັນ.**
 
-Lifting state into a parent component is common when React components are refactored.
+ການຍົກ state ຂຶ້ນໄປຫາ parent component ເປັນເລື່ອງປົກະຕິເມື່ອ component React ຖືກ refactor.
 
-Let's take this opportunity to try it out. Edit the `Board` component so that it declares a state variable named `squares` that defaults to an array of 9 nulls corresponding to the 9 squares:
+ລອງຖືໂອກາດນີ້ລອງເບິ່ງ. ແກ້ໄຂ Component `Board` ເພື່ອໃຫ້ປະກາດຕົວແປ state ຊື່ `squares` ທີ່ມີຄ່າເລີ່ມຕົ້ນເປັນ 9 null ຂອງ array ທີ່ກົງກັບ 9 ສີ່ຫຼ່ຽມ
 
 ```js {3}
 // ...
@@ -938,14 +940,13 @@ export default function Board() {
   );
 }
 ```
-
-`Array(9).fill(null)` creates an array with nine elements and sets each of them to `null`. The `useState()` call around it declares a `squares` state variable that's initially set to that array. Each entry in the array corresponds to the value of a square. When you fill the board in later, the `squares` array will look like this:
+`Array(9).fill(null)` ສ້າງ array ດ້ວຍ 9 element ແລະ ຕັ້ງຄ່າພວກມັນເປັນ `null`. ການເອີ້ນໃຊ້ `useState()` ອ້ອມໆມັນປະກາດຕົວແປ state `squares` ທີ່ເລີ່ມຕົ້ນໃນ array ນັ້ນ. ແຕ່ລະລາຍການໃນ array ກົງກັບຄ່າໃນສີ່ຫຼ່ຽມ. ເມື່ອທ່ານເຕີມກະດານພາຍຫຼັງ, `squares` array ຈະມີໜ້າຕາປະມານນີ້:
 
 ```jsx
 ['O', null, 'X', 'X', 'X', 'O', 'O', null, null]
 ```
 
-Now your `Board` component needs to pass the `value` prop down to each `Square` that it renders:
+ຕອນນີ້ component `Board` ຂອງທ່ານຕ້ອງສົ່ງ prop `value` ລົງໄປຫາແຕ່ລະ `Square` ທີ່ສະແດງຜົນ:
 
 ```js {6-8,11-13,16-18}
 export default function Board() {
@@ -972,7 +973,7 @@ export default function Board() {
 }
 ```
 
-Next, you'll edit the `Square` component to receive the `value` prop from the Board component. This will require removing the Square component's own stateful tracking of `value` and the button's `onClick` prop:
+ຕໍ່ມາ, ທ່ານຈະໄດ້ແກ້ໄຂ component `Square` ທີ່ຮັບຄ່າ prop `value` ຈາກ component Board. ສິ່ງນີ້ຈະລຶບການຕິດຕາມ stateful ຂອງ component Square ຂອງ `value` ແລະ prop `onClick` ຂອງປຸ່ມກົດ:
 
 ```js {1,2}
 function Square({value}) {
@@ -980,11 +981,11 @@ function Square({value}) {
 }
 ```
 
-At this point you should see an empty tic-tac-toe board:
+ໃນຈຸດນີ້ທ່ານຄວນເຫັນບອດ tic-tac-toe ທີ່ວ່າງເປົ່າ:
 
 ![empty board](../images/tutorial/empty-board.png)
 
-And your code should look like this:
+ແລະ code ຂອງທ່ານຄວນເປັນແບບນີ້:
 
 <Sandpack>
 
@@ -1066,11 +1067,11 @@ body {
 
 </Sandpack>
 
-Each Square will now receive a `value` prop that will either be `'X'`, `'O'`, or `null` for empty squares.
+ແຕ່ລະສີ່ຫຼ່ຽມຈະຮັບ prop `value` ເຊິ່ງຈະເປັນ `'X'`, `'O'`, ຫຼື `null` ສຳລັບສີ່ຫຼ່ຽມທີ່ວ່າງເປົ່າ.
 
-Next, you need to change what happens when a `Square` is clicked. The `Board` component now maintains which squares are filled. You'll need to create a way for the `Square` to update the `Board`'s state. Since state is private to a component that defines it, you cannot update the `Board`'s state directly from `Square`.
+ຕໍ່ມາ, ທ່ານຕ້ອງການປ່ຽນແປງສິ່ງທີ່ຈະເກີດຂຶ້ນເມື່ອ `Square` ຖືກຄິກ. component `Board` ຕອນນີ້ຮັກສາສີ່ຫຼ່ຽມທີ່ຖືກເຕີມ. ທ່ານຈະຕ້ອງສ້າງວິທີທີ່ `Square` ອັບເດດ state ຂອງ `Board`. ຕັ້ງແຕ່ state ເປັນ private ຂອງ component ທີ່ກຳນົດ, ທ່ານບໍ່ສາມາດອັບເດດ state ຂອງ `Board` ໄດ້ໂດຍກົງຈາກ `Square`.
 
-Instead, you'll pass down a function from the `Board` component to the `Square` component, and you'll have `Square` call that function when a square is clicked. You'll start with the function that the `Square` component will call when it is clicked. You'll call that function `onSquareClick`:
+ແຕ່ທ່ານຈະສົ່ງຕໍ່ຟັງຊັນຈາກ component `Board` ໄປຫາ component `Square`, ແລະ ທ່ານຈະມີ `Square` ທີ່ເອີ້ນຟັງຊັ່ນເມື່ອຄິກໃສ່ສີ່ຫຼ່ຽມ. ທ່ານຈະເລີ່ມຕົ້ນດ້ວຍຟັງຊັ່ນທີ່ component `Square` ຈະຖືກໃຊ້ງານເມື່ອຖືກຄິກ. ທ່ານຈະເອີ້ນຟັງຊັ່ນນັ້ນວ່າ `onSquareClick`:
 
 ```js {3}
 function Square({ value }) {
@@ -1082,7 +1083,7 @@ function Square({ value }) {
 }
 ```
 
-Next, you'll add the `onSquareClick` function to the `Square` component's props:
+ຕໍ່ໄປ, ທ່ານຈະເພີ່ມຟັງຊັ່ນ `onSquareClick` ໃສ່ໃນ prop ຂອງ component `Square`:
 
 ```js {1}
 function Square({ value, onSquareClick }) {
@@ -1094,7 +1095,7 @@ function Square({ value, onSquareClick }) {
 }
 ```
 
-Now you'll connect the `onSquareClick` prop to a function in the `Board` component that you'll name `handleClick`. To connect `onSquareClick` to `handleClick` you'll pass a function to the `onSquareClick` prop of the first `Square` component: 
+ຕອນນີ້ທ່ານຈະເຊື່ອມຕໍ່ prop `onSquareClick` ໃສ່ຟັງຊັ່ນໃນ component `Board` ທີ່ທ່ານໃສ່ຊື່ວ່າ `handleClick`. ໃນການເຊື່ອມຕໍ່ `onSquareClick` ກັບ `handleClick` ທ່ານຈະຕ້ອງສົ່ງຜ່ານຟັງຊັນໄປຫາ prop `onSquareClick` ຂອງ component `Square` ທຳອິດ:
 
 ```js {7}
 export default function Board() {
@@ -1109,7 +1110,7 @@ export default function Board() {
 }
 ```
 
-Lastly, you will define the `handleClick` function inside the Board component to update the `squares` array holding your board's state:
+ທ້າຍສຸດ, ທ່ານຈະຕ້ອງກຳນົດຟັງຊັ່ນ `handleClick` ພາຍໃນ component Board ເພື່ອອັບເດດ array `squares` ທີ່ເກັບ state ຂອງ board:
 
 ```js {4-8}
 export default function Board() {
@@ -1127,17 +1128,17 @@ export default function Board() {
 }
 ```
 
-The `handleClick` function creates a copy of the `squares` array (`nextSquares`) with the JavaScript `slice()` Array method. Then, `handleClick` updates the `nextSquares` array to add `X` to the first (`[0]` index) square.
+ຟັງຊັ່ນ `handleClick` ສ້າງ copy ຂອງ array `squares` (`nextSquares`) ດ້ວຍ JavaScript `slice()` Array method. ຈາກນັ້ນ, `handleClick` ອັບເດດ array `nextSquares` ເພື່ອເພີ່ມ `X` ໃສ່ໃນສີ່ຫຼ່ຽມ (`[0]` index) ທຳອິດ.
 
-Calling the `setSquares` function lets React know the state of the component has changed. This will trigger a re-render of the components that use the `squares` state (`Board`) as well as its child components (the `Square` components that make up the board).
+ການເອີ້ນໃຊ້ຟັງຊັ່ນ `setSqures` ເຮັດໃຫ້ React ຮູ້ວ່າ state ຂອງ component ມີການປ່ຽນແປງ. ການດຳເນີນການນີ້ຈະກະຕຸ້ນການ render component ທີ່ໃຊ້ state `squares` (`Board`) ອີກຄັ້ງລວມເຖິງ child component ຂອງມັນ (component `Square` ທີ່ປະກອບເປັນກະດານ)
 
 <Note>
 
-JavaScript supports [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) which means an inner function (e.g. `handleClick`) has access to variables and functions defined in a outer function (e.g. `Board`). The `handleClick` function can read the `squares` state and call the `setSquares` method because they are both defined inside of the `Board` function.
+JavaScript ຮອງຮັບ [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) ເຊິ່ງໝາຍເຖິງຟັງຊັ່ນພາຍໃນ (ເຊັ່ນ `handleClick`) ມີສິດເຂົ້າເຖິງຕົວແປ ແລະ ຟັງຊັ່ນທີ່ກຳນົດໃນຟັງຊັ່ນພາຍນອກ (ເຊັ່ນ `Board`). ຟັງຊັ່ນ `handleClick` ສາມາດອ່ານ state `squares` ແລະ ເອີ້ນໃຊ້ method `setSquares` ໄດ້ ເພາະວ່າທັງສອງຖືກກຳນົດໄວ້ພາຍໃນຟັງຊັ່ນ `Board`.
 
 </Note>
 
-Now you can add X's to the board...  but only to the upper left square. Your `handleClick` function is hardcoded to update the index for the upper left square (`0`). Let's update `handleClick` to be able to update any square. Add an argument `i` to the `handleClick` function that takes the index of the square to update:
+ຕອນນີ້ທ່ານສາມາດເພີ່ມ X ລົງໃນກະດານໄດ້... ແຕ່ສະເພາະສີ່ຫຼ່ຽມດ້ານເທິງເບື້ອງຊ້າຍເທົ່ານັ້ນ. ຟັງຊັ່ນ `handleClick` ຂອງທ່ານໄດ້ຮັບການ hard code ເພື່ອອັບເດດ index ສຳລັບປ່ອງສີ່ຫຼ່ຽມດ້ານເທິງເບື້ອງຊ້າຍ (`0`). ມາອັບເດດ `handleClick` ເພື່ອໃຫ້ສາມາດອັບເດດສີ່ຫຼ່ຽມໃດກໍໄດ້. ເພີ່ມ argument `i` ໃຫ້ກັບຟັງຊັ່ນ `handleClick` ທີ່ຮັບ index ຂອງສີ່ຫຼ່ຽມເພື່ອອັບເດດ:
 
 ```js {4,6}
 export default function Board() {
@@ -1155,13 +1156,13 @@ export default function Board() {
 }
 ```
 
-Next, you will need to pass that `i` to `handleClick`. You could try to set the `onSquareClick` prop of square to be `handleClick(0)` directly in the JSX like this, but it won't work:
+ຕໍ່ໄປ, ທ່ານຈະຕ້ອງສົ່ງ `i` ນັ້ນໄປຍັງ `handleClick`. ທ່ານສາມາດລອງຕັ້ງຄ່າ prop `onSquareClick` ຂອງສີ່ຫຼ່ຽມເປັນ `handleClick(0)` ໂດຍກົງໃນ JSX ແບບນີ້, ແຕ່ຈະເຮັດວຽກບໍ່ໄດ້:
 
 ```jsx
 <Square value={squares[0]} onSquareClick={handleClick(0)} />
 ```
 
-Here is why this doesn't work. The `handleClick(0)` call will be a part of rendering the board component. Because `handleClick(0)` alters the state of the board component by calling `setSquares`, your entire board component will be re-rendered again. But this runs `handleClick(0)` again, leading to an infinite loop:
+ນີ້ແມ່ນສາເຫດທີ່ບໍ່ເຮັດວຽກ. ການເອີ້ນ `handleClick(0)` ຈະເປັນສ່ວນໜຶ່ງຂອງການ render component board. ເພາະວ່າ `handleClick(0)` ປ່ຽນແປງ state ຂອງ component board ໂດຍການເອີ້ນ `setSquares` component ຂອງ board ທັງໝົດຈະຖືກ render ໃໝ່ອີກຄັ້ງ. ແຕ່ມັນຈະແລ່ນ `handleClick(0)` ອີກຄັ້ງ, ແລະ ນຳພາໄປສູ່ການ loop ທີ່ບໍ່ສິ້ນສຸດ:
 
 <ConsoleBlock level="error">
 
@@ -1169,13 +1170,13 @@ Too many re-renders. React limits the number of renders to prevent an infinite l
 
 </ConsoleBlock>
 
-Why didn't this problem happen earlier?
+ເປັນຫຍັງກ່ອນໜ້ານີ້ມັນບໍ່ເກີດບັນຫາ?
 
-When you were passing `onSquareClick={handleClick}`, you were passing the `handleClick` function down as a prop. You were not calling it! But now you are *calling* that function right away--notice the parentheses in `handleClick(0)`--and that's why it runs too early. You don't *want* to call `handleClick` until the user clicks!
+ເມື່ອທ່ານຜ່ານ `onSquareClick={handleClick}`, ທ່ານກຳລັງສົ່ງຟັງຊັ່ນ `handleClick` ລົງເປັນ prop. ທ່ານບໍ່ໄດ້ເອີ້ນໃຊ້ມັນ! ແຕ່ຕອນນີ້ທ່ານກຳລັງ *ເອີ້ນໃຊ້* ຟັງຊັ່ນນັ້ນທັນທີ--ສັງເກດວົງເລັບໃນ `handleClick(0)` --ແລະ ນັ້ນແມ່ນສາເຫດທີ່ມັນເຮັດວຽກໄວເກີນໄປ. ທ່ານບໍ່ *ຕ້ອງການ* ເອີ້ນ `handleClick` ຈົນກວ່າຜູ້ໃຊ້ຈະຄິກ!
 
-You could fix by creating a function like `handleFirstSquareClick` that calls `handleClick(0)`, a function like `handleSecondSquareClick` that calls `handleClick(1)`, and so on. You would pass (rather than call) these functions down as props like `onSquareClick={handleFirstSquareClick}`. This would solve the infinite loop.
+ທ່ານສາມາດແກ້ໄຂໂດຍການສ້າງຟັງຊັ່ນເຊັ່ນ `handleFirstSquareClick` ທີ່ເອີ້ນ `handleClick(0)`, ຟັງຊັ່ນເຊັ່ນ `handleSeconSquareClick` ທີ່ເອີ້ນ `handleClick(1)` ແລະ ອື່ນໆ. ທ່ານຈະສົ່ງຜ່ານ (ແທນທີ່ຈະເອີ້ນໃຊ້) ຟັງຊັ່ນເຫຼົ່ານີ້ລົງມາເປັນ prop ເຊັ່ນ `onSquareClick={handleFirstSquareClick}`. ນີ້ຈະແກ້ໄຂບັນຫາການ loop ທີ່ບໍ່ສິ້ນສຸດ.
 
-However, defining nine different functions and giving each of them a name is too verbose. Instead, let's do this:
+ເຖິງຢ່າງໃດກໍຕາມ, ການກຳນົດຟັງຊັ່ນທີ່ແຕກຕ່າງກັນ 9 ຟັງຊັ່ນ ແລະ ຕັ້ງຊື່ໃຫ້ກັບແຕ່ລະຟັງຊັ່ນນັ້ນມີລາຍລະອຽດຫຼາຍເກີນໄປ, ລອງເຮັດແບບນີ້ແທນ:
 
 ```js {6}
 export default function Board() {
@@ -1189,9 +1190,10 @@ export default function Board() {
 }
 ```
 
-Notice the new `() =>` syntax. Here, `() => handleClick(0)` is an *arrow function,* which is a shorter way to define functions. When the square is clicked, the code after the `=>` "arrow" will run, calling `handleClick(0)`.
+ສັງເກດ syntax `() =>` ໃໝ່. ໂຕນີ້ `() => handleClick(0)` ແມ່ນ *arrow function,* ເຊິ່ງເປັນວິທີທີ່ສັ້ນກວ່າໃນການປະກາດຟັງຊັ່ນ. ເມື່ອສີ່ຫຼ່ຽມຖືກຄິກ, code ທີ່ຢູ່ຫຼັງ `=>` "arrow" ຈະເຮັດວຽກ, ໂດຍເອີ້ນ `handleClick(0)`. 
 
-Now you need to update the other eight squares to call `handleClick` from the arrow functions you pass. Make sure that the argument for each call of the `handleClick` corresponds to the index of the correct square:
+ຕອນນີ້ທ່ານຕ້ອງອັບເດດສີ່ຫຼ່ຽມອີກ 8 ປ່ອງເພື່ອເອີ້ນ `handleClick` ຈາກ arrow function ທີ່ທ່ານສົ່ງ. ກວດສອບໃຫ້ແນ່ໃຈວ່າ argument ສຳລັບການເອີ້ນໃຊ້ `handleClick` ແຕ່ລະຄັ້ງສອດຄ່ອງກັບ index ຂອງສີ່ຫຼ່ຽມທີ່ຖືກຕ້ອງ:
+
 
 ```js {6-8,11-13,16-18}
 export default function Board() {
@@ -1218,13 +1220,13 @@ export default function Board() {
 };
 ```
 
-Now you can again add X's to any square on the board by clicking on them:
+ຕອນນີ້ທ່ານສາມາດເພີ່ມ X ລົງໃສ່ສີ່ຫຼ່ຽມໃດກໍໄດ້ເທິງກະດານໄດ້ອີກຄັ້ງໂດຍຄິກບ່ອນປ່ອງສີ່ຫຼ່ຽມ:
 
 ![filling the board with X](../images/tutorial/tictac-adding-x-s.gif)
 
-But this time all the state management is handled by the `Board` component!
+ແຕ່ຕອນນີ້ການຈັດການ state ທັງໝົດແມ່ນຖືກຈັດການໂດຍ component `Board`!
 
-This is what your code should look like:
+code ຂອງທ່ານຄວນເປັນແບບນີ້:
 
 <Sandpack>
 
@@ -1317,27 +1319,27 @@ body {
 
 </Sandpack>
 
-Now that your state handling is in the `Board` component, the parent `Board` component passes props to the child `Square` components so that they can be displayed correctly. When clicking on a `Square`, the child `Square` component now asks the parent `Board` component to update the state of the board. When the `Board`'s state changes, both the `Board` component and every child `Square` re-renders automatically. Keeping the state of all squares in the `Board` component will allow it to determine the winner in the future.
+ຕອນນີ້ການຈັດການ state ຂອງທ່ານຢູ່ໃນ component `Board`, parent component `Board` ຈະສົ່ງ prop ໄປຫາ child component `Square` ເພື່ອໃຫ້ສາມາດສະແດງຜົນໄດ້ຢ່າງຖືກຕ້ອງ. ເມື່ອຄິກ `Square`, child component `Square` ຈະຖາມ component `Board` ເພືອອັບເດດ state ຂອງກະດານ. ເມື່ອ state ຂອງ `Board` ມີການປ່ຽນແປງ, ທັງ component `Board` ແລະ child component `Square` ຈະ render ໃໝ່ໂດຍອັດຕະໂນມັດ. ການຮັກສາ state ຂອງສີ່ຫຼ່ຽມທັງໝົດໃນສ່ວນຂອງ component `Board` ຈະຊ່ວຍໃຫ້ສາມາດຕັດສິນຜູ້ຊະນະໃນອະນາຄົດ.
 
-Let's recap what happens when a user clicks the top left square on your board to add an `X` to it:
+ເຮົາມາສະຫຼຸບສິ່ງທີ່ເກີດຂຶ້ນເມື່ອຜູ້ໃຊ້ຄິກປ່ອງສີ່ຫຼ່ຽມດ້ານເທິງເບື້ອງຊ້າຍເທິງກະດານຂອງທ່ານເພື່ອເພີ່ມ `X` ລົງໄປ:
 
-1. Clicking on the upper left square runs the function that the `button` received as its `onClick` prop from the `Square`. The `Square` component received that function as its `onSquareClick` prop from the `Board`. The `Board` component defined that function directly in the JSX. It calls `handleClick` with an argument of `0`.
-1. `handleClick` uses the argument (`0`) to update the first element of the `squares` array from `null` to `X`.
-1. The `squares` state of the `Board` component was updated, so the `Board` and all of its children re-render. This causes the `value` prop of the `Square` component with index `0` to change from `null` to `X`.
+1. ການຄິກທີ່ປ່ອງສີ່ຫຼ່ຽມດ້ານເທິງເບື້ອງຊ້າຍເປັນການເອີ້ນໃຊ້ຟັງຊັ່ນທີ່ `button` ໄດ້ຮັບ prop `onClick` ຈາກ `Square`. Component `Square` ໄດ້ຮັບຟັງຊັ່ນນັ້ນເປັນ prop `onSquareClick` ຈາກ `Board`. Component `Board` ກຳນົດຟັງຊັ່ນໂດຍກົງໃນ JSX ມັນເອີ້ນໃຊ້ `handleClock` ດ້ວຍ argument ເປັນ (`0`).
+2. `handleClick` ໃຊ້ argument (`0`) ເພື່ອອັບເດດ element ທຳອິດຂອງ array `squares` ຈາກ `null` ເປັນ `X`.
+3. state `squares` ຂອງ component `Board` ໄດ້ຮັບການອັບເດດ, ດັ່ງນັ້ນ `Board` ແລະ children ຂອງມັນຈະ render ໃໝ່. ສິ່ງນີ້ເຮັດໃຫ້ prop `value` ຂອງ component `Square` ທີ່ມີ index `0` ປ່ຽນຈາກ `null` ເປັນ `X`.
 
-In the end the user sees that the upper left square has changed from empty to having a `X` after clicking it.
+ໃນຕອນທ້າຍຜູ້ໃຊ້ຈະເຫັນວ່າປ່ອງດ້ານເທິງເບື້ອງຊ້າຍປ່ຽນຈາກວ່າງເປັນມີ `X` ຫຼັງຈາກກົດ.
 
 <Note>
 
-The DOM `<button>` element's `onClick` attribute has a special meaning to React because it is a built-in component. For custom components like Square, the naming is up to you. You could give any name to the `Square`'s `onSquareClick` prop or `Board`'s `handleClick` function, and the code would work the same. In React, it's conventional to use `onSomething` names for props which represent events and `handleSomething` for the function definitions which handle those events.
+Attribute `onClick` ຂອງ element DOM `<button>` ມີຄວາມໝາຍພິເສດສຳລັບ React ເນື່ອງຈາກເປັນ built-in component. ສຳລັບ customer component ເຊັ່ນ Square, ຊື່ແມ່ນແລ້ວແຕ່ທ່ານ. ທ່ານສາມາດໃສ່ຊື່ຫຍັງກໍໄດ້ໃຫ້ prop `onSquareClick` ຂອງ `Square` ຫຼື ຟັງຊັ່ນ `handleClick` ຂອງ `Board`, ແລະ code ຈະເຮັດວຽກຄືກັນ. ໃນ React, ເປັນເລື່ອງປົກະຕິທີ່ຈະໃສ່ຊື່ `onSomething` ສຳລັບ prop ທີ່ສະແດງ event ແລະ `handleSomething` ສຳລັບຄຳຈັດກັດຄວາມຂອງຟັງຊັ່ນທີ່ຈັດການ event ເຫຼົ່ານັ້ນ.
 
 </Note>
 
-### Why immutability is important {/*why-immutability-is-important*/}
+### ເປັນຫຍັງການ immutable ຈິງມີຄວາມສຳຄັນ {/*why-immutability-is-important*/}
 
-Note how in `handleClick`, you call `.slice()` to create a copy of the `squares` array instead of modifying the existing array. To explain why, we need to discuss immutability and why immutability is important to learn.
+ສັງເກດວ່າໃນ `handleClick`, ທ່ານເອີ້ນ `.slice()` ເພື່ອສ້າງສຳເນົາຂອງ array `squares` ແທນທີຈະແກ້ໄຂ array ທີ່ມີຢູ່. ເພື່ອອະທິບາຍເຫດຜົນ, ເຮົາຈຳເປັນຕ້ອງໄດ້ສົນທະນາກ່ຽວກັບການ immutability ແລະ ເປັນຫຍັງ immutablity ຈຶ່ງມີຄວາມສຳຄັນໃນການຮຽນຮູ້.
 
-There are generally two approaches to changing data. The first approach is to _mutate_ the data by directly changing the data's values. The second approach is to replace the data with a new copy which has the desired changes. Here is what it would look like if you mutated the `squares` array:
+ໂດຍທົ່ວໄປມີສອງວິທີໃນການປ່ຽນແປງຂໍ້ມູນ. ວິທີທຳອິດແມ່ນ _mutate_ ຂໍ້ມູນໂດຍການປ່ຽນຄ່າຂອງຂໍ້ມູນໂດຍກົງ. ວິທີທີ່ສອງແມ່ນການແທນທີ່ຂໍ້ມູນດ້ວຍການສຳເນົາໃໝ່ທີ່ມີການປ່ຽນແປງຕາມຄວາມຕ້ອງການ. ນີ້ແມ່ນລັກສະນະທີ່ຈະເກີດຂຶ້ນເມື່ອທ່ານ mutate array ຂອງ `squares`:
 
 ```jsx
 const squares = [null, null, null, null, null, null, null, null, null];
@@ -1345,7 +1347,7 @@ squares[0] = 'X';
 // Now `squares` is ["X", null, null, null, null, null, null, null, null];
 ```
 
-And here is what it would look like if you changed data without mutating the `squares` array:
+ແລະ ນີ້ແມ່ນລັກສະນະທີ່ຈະເກີດຂຶ້ນເມື່ອທ່ານປ່ຽນຂໍ້ມູນໂດຍບໍ່ mutate array ຂອງ `squares`:
 
 ```jsx
 const squares = [null, null, null, null, null, null, null, null, null];
@@ -1353,17 +1355,18 @@ const nextSquares = ['X', null, null, null, null, null, null, null, null];
 // Now `squares` is unchanged, but `nextSquares` first element is 'X' rather than `null`
 ```
 
-The result is the same but by not mutating (changing the underlying data) directly, you gain several benefits.
+ຜົນລັບຈະຄືກັນແຕ່ບໍມີການ mutate (ປ່ຽນແປງຂໍ້ມູນພື້ນຖານ) ໂດຍກົງ, ທ່ານຈະໄດ້ຮັບປະໂຫຍດຫຼາຍປະການ.
 
-Immutability makes complex features much easier to implement. Later in this tutorial, you will implement a "time travel" feature that lets you review the game's history and "jump back" to past moves. This functionality isn't specific to games--an ability to undo and redo certain actions is a common requirement for apps. Avoiding direct data mutation lets you keep previous versions of the data intact, and reuse them later.
+Immutability ເຮັດໃຫ້ feature ທີ່ຊັບຊ້ອນງ່າຍໃນການ implement. ພາຍຫຼັງໃນບົດຮຽນນີ້, ທ່ານຈະ implement "time travel" feature ທີ່ໃຫ້ທ່ານກວດປະຫວັດຂອງເກມ ແລະ  "ກັບຄືນ" ໄປຫາການເຄື່ອນໄຫວທີ່ຜ່ານມາ. ຟັງຊັ່ນນີ້ບໍ່ສະເພາະແຕ່ເກມ--ຄວາມສາມາດໃນການ undo ແລະ redo ເປັນ action ທົ່ວໄປທີ່ຕ້ອງການສຳລັບແອັບຯ. ຫຼີກຫຼ່ຽງການ mutate ຂໍ້ມູນໂດຍກົງເຮັດໃຫ້ທ່ານສາມາດຮັກສາເວີຊັ່ນກ່ອນໜ້າຂອງຂໍ້ມູນໄວ້ໄດ້ ແລະ ນຳມາໃຊ້ໃນພາຍຫຼັງ.
 
-There is also another benefit of immutability. By default, all child components re-render automatically when the state of a parent component changes. This includes even the child components that weren't affected by the change. Although re-rendering is not by itself noticeable to the user (you shouldn't actively try to avoid it!), you might want to skip re-rendering a part of the tree that clearly wasn't affected by it for performance reasons. Immutability makes it very cheap for components to compare whether their data has changed or not. You can learn more about how React chooses when to re-render a component in [the `memo` API reference](/reference/react/memo).
+ນອກນັ້ນຍັງມີປະໂຫຍດອີກປະການໜຶ່ງຂອງ immutability. ຕາມຄ່າເລີ່ມຕົ້ນ, child component ທັງໝົດຈະ render ໃໝ່ໂດຍອັດຕະໂນມັດເມື່ອ state ຂອງ parent component ມີການປ່ຽນແປງ. ເຊິ່ງລວມເຖິງ child component ທີ່ບໍ່ໄດ້ຮັບຜົນກະທົບຈາກການປ່ຽນແປງ. ເຖິງວ່າການ render ໃໝ່ຈະບໍ່ເຮັດໃຫ້ຜູ້ໃຊ້ສັງເກດເຫັນໄດ້ເອງ (ທ່ານບໍ່ຄວນພະຍາຍາມຫຼີກຫຼ່ຽງ!), ທ່ານອາດຕ້ອງການການຂ້າມການ render ໃໝ່ໃນສ່ວນຂອງ tree ທີ່ບໍ່ໄດ້ຮັບຜົນກະທົບຢ່າງຊັດເຈນດ້ວຍເຫດຜົນດ້ານປະສິດທິພາບ. Immutability ເຮັດໃຫ້ component ມີລາຄາຖືກຫຼາຍໃນການປຽບທຽບວ່າຂໍ້ມູນມີການປ່ຽນແປງ ຫຼື ບໍ່. ທ່ານສາມາດຮຽນຮູ້ເພີ່ມເຕີມກ່ຽວກັບວິທີທີ່ React ເລືອກເວລາ render component ໃໝ່ ໃນ [`memo` API reference](/reference/react/memo).
 
-### Taking turns {/*taking-turns*/}
 
-It's now time to fix a major defect in this tic-tac-toe game: the "O"s cannot be marked on the board.
+### ການປ່ຽນຜຽນ {/*taking-turns*/}
 
-You'll set the first move to be "X" by default. Let's keep track of this by adding another piece of state to the Board component:
+ເຖິງເວລາທີ່ຈະແກ້ໄຂບັນຫາທີ່ສຳຄັນໃນເກມ tic-tac-toe ນີ້: ບໍ່ສາມາດເຮັດເຄື່ອງໝາຍ "O" ເທິງກະດານໄດ້.
+
+ທ່ານຈະຕັ້ງຄ່າການເຄື່ອນໄຫວທຳອິດເປັນ "X" ໂດຍຄ່າເລີ່ມຕົ້ນ. ມາຕິດຕາມສິ່ງນີ້ໂດຍການເພີ່ມ state ອີກສ່ວນໜຶ່ງໃຫ້ກັບ component ຂອງ Board:
 
 ```js {2}
 function Board() {
@@ -1374,7 +1377,7 @@ function Board() {
 }
 ```
 
-Each time a player moves, `xIsNext` (a boolean) will be flipped to determine which player goes next and the game's state will be saved. You'll update the `Board`'s `handleClick` function to flip the value of `xIsNext`:
+ທຸກຄັ້ງທີ່ຜູ້ຫຼິ້ນເຄື່ອນ, `xIsNext` (ເປັນ boolean) ຈະຖືກພິກເພື່ອຕັດສິນວ່າຜູ້ຫຼິ້ນຄົນໃດຈະໄປຕໍ່ ແລະ state ຂອງເກມຈະຖືກບັນທຶກ. ທ່ານຈະອັບເດດຟັງຊັ່ນ `handleClick` ຂອງ `Board` ເພື່ອພິກຄ່າຂອງ `xIsNext`:
 
 ```js {7,8,9,10,11,13}
 export default function Board() {
@@ -1398,15 +1401,15 @@ export default function Board() {
 }
 ```
 
-Now, as you click on different squares, they will alternate between `X` and `O`, as they should!
+ຕອນນີ້, ເມື່ອທ່ານຄິກໃສ່ປ່ອງສີ່ຫຼ່ຽມ, ມັນຈະສະຫຼັບກັນລະຫວ່າງ `X` ແລະ `O`, ດັ່ງທີ່ມັນຄວນຈະເປັນ!
 
-But wait, there's a problem. Try clicking on the same square multiple times:
+ແຕ່ວ່າ, ມັນມີບັນຫາ. ລອງຄິກໃສ່ປ່ອງສີ່ຫຼ່ຽມຫຼາຍໆຄັ້ງ:
 
 ![O overwriting an X](../images/tutorial/o-replaces-x.gif)
 
-The `X` is overwritten by an `O`! While this would add a very interesting twist to the game, we're going to stick to the original rules for now.
+`X` ຖືກຂຽນທັບດ້ວຍ `O`! ເຖິງວ່າສິ່ງນີ້ຈະເພີ່ມຈຸດປ່ຽນທີ່ນ່າສົນໃຈໃຫ້ກັບເກມ, ແຕ່ເຮົາຈະຍຶດກົດດັ່ງເດີມສຳລັບຕອນນີ້.
 
-When you mark a square with a `X` or an `O` you aren't first checking to see if the square already has a `X` or `O` value. You can fix this by *returning early*. You'll check to see if the square already has a `X` or an `O`. If the square is already filled, you will `return` in the `handleClick` function early--before it tries to update the board state.
+ເມື່ອທ່ານເຮັດເຄື່ອງໝາຍດ້ວຍ `X` ຫຼື `O` ທ່ານຈະບໍ່ໄດ້ກວດສອບກ່ອນເພື່ອໃຫ້ຮູ້ວ່າສີ່ຫຼ່ຽມນັ້ນມີຄ່າ `X` ຫຼື `O` ຢູ່ແລ້ວ. ທ່ານສາມາດແກ້ໄຂໂດຍການ *return ກ່ອນ*. ທ່ານຈະກວດສອບວ່າສີ່ຫຼ່ຽມມີ `X` ຫຼື `O` ຢູ່ແລ້ວ. ຖ້າວ່າສີ່ຫຼ່ຽມມີແລ້ວ, ທ່ານຈະ `return` ດ້ວຍຟັງຊັ່ນ `handleClick` ກ່ອນ--ກ່ອນທີ່ລະບົບຈະພະຍາຍາມອັບເດດ state ຂອງ board.
 
 ```js {2,3,4}
 function handleClick(i) {
@@ -1418,7 +1421,7 @@ function handleClick(i) {
 }
 ```
 
-Now you can only add `X`'s or `O`'s to empty squares! Here is what your code should look like at this point:
+ຕອນນີ້ທ່ານສາມາດເພີ່ມ `X` ຫຼື `0` ໃນສີ່ຫຼ່ຽມວ່າງເທົ່ານັ້ນ! ນີ້ແມ່ນລັກສະນະຂອງ code ທ່ານຄວນມີລັກສະນະດັ່ງນີ້:
 
 <Sandpack>
 
@@ -1520,9 +1523,9 @@ body {
 
 </Sandpack>
 
-### Declaring a winner {/*declaring-a-winner*/}
+### ການປະກາດຫາຜູ້ຊະນະ {/*declaring-a-winner*/}
 
-Now that the players can take turns, you'll want to show when the game is won and there are no more turns to make. To do this you'll add a helper function called `calculateWinner` that takes an array of 9 squares, checks for a winner and returns `'X'`, `'O'`, or `null` as appropriate. Don't worry too much about the `calculateWinner` function; it's not specific to React:
+ເມື່ອຜູ້ຫຼິ້ນປ່ຽນກັນຫຼິ້ນໄດ້ແລ້ວ, ທ່ານຈະຕ້ອງການສະແດງໃຫ້ເຫັນວ່າເກມຊະນະຕອນໃດ ແລະ ບໍ່ຕ້ອງປ່ຽນຜຽນກັນອີກຕໍ່ໄປ. ເພື່ອເຮັດສິ່ງນີ້ທ່ານຕ້ອງໄດ້ເພີ່ມ helper ຟັງຊັ່ນຊື່ວ່າ `calculateWinner` ທີ່ໃຊ້ array ຂອງ 9 ສີ່ຫຼ່ຽມ, ກວດຫາຜູ້ຊະນະ ແລະ return `'X'`, `'O'`, ຫຼື `null` ຕາມຄວາມເໝາະສົມ. ບໍ່ຕ້ອງກັງວົນຫຼາຍເກີນໄປກ່ຽວກັບຟັງຊັ່ນ `calculateWinner`; ມັນບໍ່ໄດ້ສະເພາະເຈາະຈົງໃນ React:
 
 ```js App.js
 export default function Board() {
@@ -1552,11 +1555,11 @@ function calculateWinner(squares) {
 
 <Note>
 
-It does not matter whether you define `calculateWinner` before or after the `Board`. Let's put it at the end so that you don't have to scroll past it every time you edit your components.
+ມັນບໍ່ສຳຄັນວ່າທ່ານຈະກຳນົດ `calculateWinner` ກ່ອນ ຫຼື ຫຼັງ `Board`. ເອົາມັນໄວ້ທ້າຍສຸດຈະບໍ່ຕ້ອງເລື່ອນຜ່ານທຸກຄັ້ງທີ່ແກ້ໄຂ component.
 
 </Note>
 
-You will call `calculateWinner(squares)` in the `Board` component's `handleClick` function to check if a player has won. You can perform this check at the same time you check if a user has clicked a square that already has a `X` or and `O`. We'd like to return early in both cases:
+ທ່ານຈະເອີ້ນໃຊ້ `calculateWinner(squares)` ໃນຟັງຊັ່ນ `handleClick` ຂອງ component `Board` ເພື່ອກວດສອບວ່າຜູ້ຫຼິ້ນຊະນະ ຫຼື ບໍ່. ທ່ານສາມາດດຳເນີນການກວດສອບນີ້ໄປພ້ອມກັບກວດສອບວ່າຜູ້ໃຊ້ຄິກປ່ອງສີ່ຫຼ່ຽມທີ່ມີ `X` ຫຼື `O` ຢູ່ແລ້ວ ຫຼື ບໍ່. ເຮົາຕ້ອງການ return ກ່ອນໃນສອງກໍລະນີ:
 
 ```js {2}
 function handleClick(i) {
@@ -1568,7 +1571,7 @@ function handleClick(i) {
 }
 ```
 
-To let the players know when the game is over, you can display text such as "Winner: X" or "Winner: O". To do that you'll add a `status` section to the `Board` component. The status will display the winner if the game is over and if the game is ongoing you'll display which player's turn is next:
+ເພື່ອໃຫ້ຜູ້ຫຼິ້ນຮູ້ເມື່ອເກມຈົບ, ທ່ານສາມາດສະແດງຂໍ້ຄວາມເຊັ່ນ: "Winner: X" ຫຼື "Winner: O". ເພື່ອເຮັດສິ່ງນີ້ທ່ານຕ້ອງເພີ່ມສ່ວນ `status` ລົງໃນ component `Board`. Status ຈະສະແດງຜູ້ຊະນະຫາກເກມຈົບລົງ ແລະ ຖ້າເກມກຳລັງດຳເນີນຢູ່ທ່ານຈະເຫັນຜຽນຂອງຜູ້ຫຼິ້ນຄົນຕໍ່ໄປ:
 
 ```js {3-9,13}
 export default function Board() {
@@ -1590,7 +1593,7 @@ export default function Board() {
 }
 ```
 
-Congratulations! You now have a working tic-tac-toe game. And you've just learned the basics of React too. So _you_ are the real winner here. Here is what the code should look like:
+ຍິນດີນຳ! ຕອນນີ້ທ່ານມີເກມ tic-tac-toe ທີ່ເຮັດວຽກໄດ້. ແລະ ທ່ານຫາກໍໄດ້ຮຽນຮູ້ພື້ນຖານຂອງ React ນຳ. ສະນັ້ນ _ທ່ານ_ ຄືຜູ້ຊະນະຕົວຈິງໃນທີ່ນີ້. ນີ້ແມ່ນສິ່ງທີ່ code ຂອງທ່ານຄວນຈະເປັນ:
 
 <Sandpack>
 
@@ -1721,17 +1724,17 @@ body {
 
 </Sandpack>
 
-## Adding time travel {/*adding-time-travel*/}
+## ການເພີ່ມ time travel {/*adding-time-travel*/}
 
-As a final exercise, let's make it possible to "go back in time" to the previous moves in the game.
+ໃນແບບເຝິກຫັດສຸດທ້າຍ, ເຮົາມາເຮັດໃຫ້ "ຍ້ອນເວລາກັບໄປ" ໄປຫາການເຄື່ອນໄຫວກ່ອນໜ້າໃນເກມກັນ.
 
-### Storing a history of moves {/*storing-a-history-of-moves*/}
+### ການເກັບປະຫວັດການເຄື່ອນໄຫວ {/*storing-a-history-of-moves*/}
 
-If you mutated the `squares` array, implementing time travel would be very difficult.
+ຖ້າທ່ານ mutate array `squares`, ການ implement time travel ຈະເປັນເລື່ອງທີ່ຍາກຫຼາຍ.
 
-However, you used `slice()` to create a new copy of the `squares` array after every move, and treated it as immutable. This will allow you to store every past version of the `squares` array, and navigate between the turns that have already happened.
+ເຖິງຢ່າງໃດກໍຕາມ, ຖ້າທ່ານໃຊ້ `slice()` ເພື່ອສ້າງສຳເນົາຂອງ array `squares` ຫຼັງຈາກທຸກໆການເຄື່ອນໄຫວ, ແລະ ຖືວ່າມັນ mutate ໄດ້. ການດຳເນີນການນີ້ຈະຊ່ວຍໃຫ້ທ່ານສາມາດຈັດການກັບ array `squares` ທຸກເວີຊັ່ນທີ່ຜ່ານມາ, ແລະ ໄປຫາລະຫວ່າງຜຽນຕ່າງໆທີ່ເກີດຂຶ້ນແລ້ວ.
 
-You'll store the past `squares` arrays in another array called `history`, which you'll store as a new state variable. The `history` array represents all board states, from the first to the last move, and has a shape like this:
+ທ່ານຈະເກັບ array `squares` ໃນ array ອື່ນເອີ້ນວ່າ `history`, ເຊິ່ງທ່ານຈະຈັດເກັບເປັນຕົວແປ state ໃໝ່. Array `history` ສະແດງເຖິງ state ຂອງກະດານ, ຈາກຄັ້ງທຳອິດໄປຫາຄັ້ງສຸດທ້າຍ, ແລະ ມີຮູບຮ່າງດັ່ງນີ້:
 
 ```jsx
 [
@@ -1745,13 +1748,13 @@ You'll store the past `squares` arrays in another array called `history`, which 
 ]
 ```
 
-### Lifting state up, again {/*lifting-state-up-again*/}
+### ການຍົກ state ຂຶ້ນ, ອີກຄັ້ງ {/*lifting-state-up-again*/}
 
-You will now write a new top-level component called `Game` to display a list of past moves. That's where you will place the `history` state that contains the entire game history.
+ຕອນນີ້ທ່ານຈະຂຽນ component ຊື່ວ່າ `Game` ເພື່ອສະແດງລາຍການການເຄື່ອນໄຫວທີ່ຜ່ານມາ. ບ່ອນນັ້ນຈະວາງ state `history` ທີ່ປະກອບມີປະຫວັດເກມທັງໝົດ.
 
-Placing the `history` state into the `Game` component will let you remove the `squares` state from its child `Board` component. Just like you "lifted state up" from the `Square` component into the `Board` component, you will now lift it up from the `Board` into the top-level `Game` component. This gives the `Game` component full control over the `Board`'s data and lets it instruct the `Board` to render previous turns from the `history`.
+ການວາງ state `history` ລົງໃນ component `Game` ຈະຊ່ວຍໃຫ້ທ່ານລຶບ state `squares` ອອກຈາກ child component ຂອງ `Board` ຂອງມັນໄດ້. ເໝືອນກັບທີ່ທ່ານ "ຍົກ state ຂຶ້ນ" ຈາກ component `Square` ໄປເປັນ component `Board`, ທ່ານຈະຍົກ state ຈາກ `Board` ໄປເປັນ component `Game` ລະດັບເທິງສຸດ. ນີ້ເຮັດໃຫ້ component `Game` ຄວບຄຸມຂໍ້ມູນຂອງ `Board` ໄດ້ຢ່າງເຕັມທີ ແລະ ຊ່ວຍໃຫ້ component ສັ່ງໃຫ້ `Board` ສະແດງຜົນກ່ອນໜ້າຈາກ `history`.
 
-First, add a `Game` component with `export default`. Have it render the `Board` component and some markup:
+ທຳອິດ, ເພີ່ມ component `Game` ດ້ວຍ `export default`. ໃຫ້ render component `Board` ແລະ ບາງ markup:
 
 ```js {1,5-16}
 function Board() {
@@ -1772,9 +1775,9 @@ export default function Game() {
 }
 ```
 
-Note that you are removing the `export default` keywords before the `function Board() {` declaration and adding them before the `function Game() {` declaration. This tells your `index.js` file to use the `Game` component as the top-level component instead of your `Board` component. The additional `div`s returned by the `Game` component are making room for the game information you'll add to the board later.
+ຈື່ໄວ້ວ່າທ່ານກຳລັງລຶບ keyword `export default` ກ່ອນການປະກາດ `function Board() {` ແລະ ເພີ່ມກ່ອນການປະກາດ `function Game() {`. ເຊິ່ງຈະບອກໃຫ້ຟາຍ `index.js` ຂອງທ່ານໃຊ້ component `Game` ເປັນ component ລະດັບເທິງສຸດແທນ component `Board`. `div` ເພີ່ມເຕີມທີ່ return ໂດຍ component `Game` ເຮັດໃຫ້ມີບ່ອນວ່າງສຳລັບຂໍ້ມູນເກມທີ່ທ່ານຈະເພີ່ມລົງໃນກະດານພາຍຫຼັງ.
 
-Add some state to the `Game` component to track which player is next and the history of moves:
+ເພີ່ມ state ໃນ component `Game` ເພື່ອຕິດຕາມຜູ້ຫຼິ້ນຄົນຕໍ່ໄປ ແລະ ປະຫວັດການເຄື່ອນໄຫວ:
 
 ```js {2-3}
 export default function Game() {
@@ -1783,9 +1786,9 @@ export default function Game() {
   // ...
 ```
 
-Notice how `[Array(9).fill(null)]` is an array with a single item, which itself is an array of 9 `null`s.
+ສັງເກດວ່າ `[Array(9).fill(null)]` ເປັນ array ທີ່ມີລາຍການດຽວ, ເຊິ່ງຕົວມັນເອງເປັນ array ຂອງ 9 `null`.
 
-To render the squares for the current move, you'll want to read the last squares array from the `history`. You don't need `useState` for this--you already have enough information to calculate it during rendering:
+ຫາກຕ້ອງການ render squares ສຳລັບການຍ້າຍປັດຈຸບັນ, ທ່ານຕ້ອງອ່ານ array squares ຈາກ `history`. ທ່ານບໍ່ຈຳເປັນຕ້ອງໃຊ້ `useState` ສຳລັບສິ່ງນີ້--ທ່ານມີຂໍ້ມູນພຽງພໍທີ່ຈະຄຳນວນໃນລະຫວ່າງການ render:
 
 ```js {4}
 export default function Game() {
@@ -1795,7 +1798,7 @@ export default function Game() {
   // ...
 ```
 
-Next, create a `handlePlay` function inside the `Game` component that will be called by the `Board` component to update the game. Pass `xIsNext`, `currentSquares` and `handlePlay` as props to the `Board` component:
+ຈາກນັ້ນ, ສ້າງຟັງຊັ່ນ `handlePlay` ພາຍໃນ component `Game` ທີ່ component `Board` ຈະເອີ້ນໃຊ້ເພື່ອອັບເດດເກມ. ສົ່ງ `xIsNext`, `currentSquares` ແລະ `handlePlay` ເປັນ prop ຫາ component `Board`: 
 
 ```js {6-8,13}
 export default function Game() {
@@ -1816,7 +1819,7 @@ export default function Game() {
 }
 ```
 
-Let's make the `Board` component fully controlled by the props it receives. Change the `Board` component to take three props: `xIsNext`, `squares`, and a new `onPlay` function that `Board` can call with the updated squares array when a player makes a move. Next, remove the first two lines of the `Board` function that call `useState`:
+ມາເຮັດໃຫ້ component `Board` ຄວບຄຸມໂດຍ prop ທີ່ໄດ້ຮັບຢ່າງເຕັມທີ. ປ່ຽນ component `Board` ເພື່ອໃຊ້ 3 prop: `xIsNext`, `squares`, ແລະ ຟັງຊັ່ນໃໝ່ `onPlay` ທີ່ `Board` ສາມາດເອີ້ນໄດ້ດ້ວຍ array squares ທີ່ອັບເດດເມື່ອຜູ້ຫຼິ້ນທຳການເຄື່ອນໄຫວ. ຕໍ່ໄປ, ລຶບສອງແຖວທຳອິດຂອງຟັງຊັ່ນ `Board` ທີ່ເອີ້ນ `useState`:
 
 ```js {1}
 function Board({ xIsNext, squares, onPlay }) {
@@ -1827,7 +1830,7 @@ function Board({ xIsNext, squares, onPlay }) {
 }
 ```
 
-Now replace the `setSquares` and `setXIsNext` calls in `handleClick` in the `Board` component with a single call to your new `onPlay` function so the `Game` component can update the `Board` when the user clicks a square:
+ຕອນນີ້ທຳການແທນທີ່ `setSquares` ແລະ `setXIsNext` ທີ່ເອີ້ນ `handleClick` ໃນ component `Board` ໂດຍການເອີ້ນຟັງຊັ່ນ `onPlay` ເທື່ອດຽວ ເພື່ອໃຫ້ component `Game` ສາມາດອັບເດດ `Board` ເມື່ອຜູ້ໃສ່ຄິກໃສ່ສີ່ຫຼ່ຽມ:
 
 ```js {12}
 function Board({ xIsNext, squares, onPlay }) {
@@ -1847,11 +1850,11 @@ function Board({ xIsNext, squares, onPlay }) {
 }
 ```
 
-The `Board` component is fully controlled by the props passed to it by the `Game` component. You need to implement the `handlePlay` function in the `Game` component to get the game working again.
+Component `Board` ຖືກຄວບຄຸມໂດຍ prop ທີ່ສົ່ງຜ່ານໄປຍັງ component `Game`. ທ່ານຕ້ອງໃຊ້ຟັງຊັ່ນ `handlePlay` ໃນ component `Game` ເພື່ອເຮັດໃຫ້ເກມເຮັດວຽກໄດ້ອີກຄັ້ງ.
 
-What should `handlePlay` do when called? Remember that Board used to call `setSquares` with an updated array; now it passes the updated `squares` array to `onPlay`.
+`handlePlay` ຄວນເຮັດແນວໃດເມື່ອຖືກເອີ້ນໃຊ້? ຈື່ໄວ້ວ່າ Board ເຄີຍເອີ້ນ `setSquares` ດ້ວຍ array ທີ່ອັບເດດ; ຕອນນີ້ມັນສົ່ງຜ່ານ array `squares` ທີ່ອັບເດດແລ້ວໄປຫາ `onPlay`.
 
-The `handlePlay` function needs to update `Game`'s state to trigger a re-render, but you don't have a `setSquares` function that you can call any more--you're now using the `history` state variable to store this information. You'll want to update `history` by appending the updated `squares` array as a new history entry. You also want to toggle `xIsNext`, just as Board used to do:
+ຟັງຊັ່ນ `handlePlay` ຈຳເປັນຕ້ອງອັບເດດ state ຂອງ `Game` ເພື່ອ trigger ການ render ໃໝ່, ແຕ່ທ່ານບໍ່ມີຟັງຊັ່ນ `setSquares` ທີ່ທ່ານສາມາດເອີ້ນໄດ້ອີກ--ປັດຈຸບັນທ່ານກຳລັງໃຊ້ຕົວແປ state `history` ເພື່ອເກັບຂໍ້ມູນນີ້. ທ່ານຈະຕ້ອງອັບເດດ `history` ໂດຍຕໍ່ທ້າຍ array `squares` ທີ່ອັບເດດເປັນລາຍການປະຫວັດໃໝ່, ທີ່ທ່ານຕ້ອງການສະຫຼັບ `xIsNext`, ເຊັ່ນດຽວກັບທີ່ Board ເຄີຍເຮັດ:
 
 ```js {4-5}
 export default function Game() {
@@ -1864,11 +1867,11 @@ export default function Game() {
 }
 ```
 
-Here, `[...history, nextSquares]` creates a new array that contains all the items in `history`, followed by `nextSquares`. (You can read the `...history` [*spread syntax*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) as "enumerate all the items in `history`".)
+ຕອນນີ້, `[...history, nextSquares]` ສ້າງ array ໃໝ່ທີ່ມີລາຍການທັງໝົດໃນ `history`, ຕາມດ້ວຍ `nextSquares`. (ທ່ານສາມາດອ່ານ `...history` [*spread syntax*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) ເປັນ "ລາຍການ enumerate ທັງໝົດໃນ `history`".)
 
-For example, if `history` is `[[null,null,null], ["X",null,null]]` and `nextSquares` is `["X",null,"O"]`, then the new `[...history, nextSquares]` array will be `[[null,null,null], ["X",null,null], ["X",null,"O"]]`.
+ຕົວຢ່າງ, ຖ້າ `history` ເປັນ `[[null,null,null], ["X",null,null]]` ແລະ `nextSquares` ເປັນ `["X",null,"O"]`, ດັ່ງນັ້ນ  `[...history, nextSquares]` array ໃໝ່ຈະເປັນ `[[null,null,null], ["X",null,null], ["X",null,"O"]]`.
 
-At this point, you've moved the state to live in the `Game` component, and the UI should be fully working, just as it was before the refactor. Here is what the code should look like at this point:
+ໃນຈຸດນີ້, ທ່ານໄດ້ຍ້າຍ state ໄປຢູ່ໃນ component `Game`, ແລະ UI ຄວນຈະເຮັດວຽກໄດ້ສົມບູນ, ຄືກັບທີ່ເປັນມາກ່ອນການ refactor. ນີ້ແມ່ນສິ່ງທີ່ code ທ່ານຄວນຈະເປັນໃນຈຸດນີ້:
 
 <Sandpack>
 
@@ -2017,19 +2020,19 @@ body {
 
 </Sandpack>
 
-### Showing the past moves {/*showing-the-past-moves*/}
+### ສະແດງການເຄື່ອນໄຫວທີ່ຜ່ານມາ {/*showing-the-past-moves*/}
 
-Since you are recording the tic-tac-toe game's history, you can now display a list of past moves to the player.
+ຕັ້ງແຕ່ທ່ານເກັບປະຫວັດຂອງເກມ tic-tac-toe, ທ່ານສາມາດສະແດງລາຍການເຄື່ອນໄຫວຂອງຜູ້ຫຼິ້ນ.
 
-React elements like `<button>` are regular JavaScript objects; you can pass them around in your application. To render multiple items in React, you can use an array of React elements.
+Element React ເຊັ່ນ `<button>` ແມ່ນ object JavaScript ທຳມະດາ; ທ່ານສາມາດສົ່ງຕໍ່ໄດ້ໃນແອັບພິເຄຊັ່ນຂອງທ່ານ. ເພື່ອ render ຫຼາຍລາຍການໃນ React, ທ່ານສາມາດໃຊ້ array ຂອງ element React.
 
-You already have an array of `history` moves in state, so now you need to transform it to an array of React elements. In JavaScript, to transform one array into another, you can use the [array `map` method:](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+ທ່ານມີ array ຂອງການເຄື່ອນໄຫວ `history` ໃນ state, ດັ່ງນັ້ນຕອນນີ້ທ່ານຕ້ອງແປງ array ຂອງ element React. ໃນ JavaScript, ຫາກຕ້ອງການແປງ array ໜຶ່ງໄປເປັນອີກ array, ທ່ານສາມາດໃຊ້ [array `map` method:](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
 
 ```jsx
 [1, 2, 3].map((x) => x * 2) // [2, 4, 6]
 ```
 
-You'll use `map` to transform your `history` of moves into React elements representing buttons on the screen, and display a list of buttons to "jump" to past moves. Let's `map` over the `history` in the Game component:
+ທ່ານຈະໃຊ້ `map` ເພື່ອປ່ຽນ `history` ຂອງການເຄື່ອນໄຫວເປັນ element React ທີ່ສະແດງປຸ່ມເທິງໜ້າຈໍ, ແລະ ສະແດງລາຍການຂອງປຸ່ມເພື່ອ "ຂ້າມ" ໄປຫາການເຄື່ອນໄຫວທີ່ຜ່ານມາ. ມາ `map` ເໜືອ `history` ໃນ component Game:
 
 ```js {11-13,15-27,35}
 export default function Game() {
@@ -2073,7 +2076,7 @@ export default function Game() {
 }
 ```
 
-You can see what your code should look like below. Note that you should see an error in the developer tools console that says: ``Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of `Game`.`` You'll fix this error in the next section.
+ທ່ານສາມາດເບິ່ງໄດ້ວ່າ code ຂອງທ່ານຄວນເປັນແນວໃດໃນດ້ານລຸ່ມນີ້. ສັງເກດວ່າທ່ານຄວນເຫັນຂໍ້ຜິດພາດໃນ console developer tools ທີ່ບອກວ່າ: ``Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of `Game`.`` ທ່ານຈະແປງຂໍ້ຜິດພາດນີ້ໃນຫົວຂໍ້ຕໍ່ໄປ.
 
 <Sandpack>
 
@@ -2241,24 +2244,24 @@ body {
 
 </Sandpack>
 
-As you iterate through `history` array inside the function you passed to `map`, the `squares` argument goes through each element of `history`, and the `move` argument goes through each array index: `0`, `1`, `2`, …. (In most cases, you'd need the actual array elements, but to render a list of moves you will only need indexes.)
+ເມື່ອທ່ານ iterate ຜ່ານ array `history` ພາຍໃນຟັງຊັ່ນທີ່ທ່ານສົ່ງຜ່ານໄປຍັງ `map`, argument `squares` ຈະຜ່ານແຕ່ລະ element ຂອງ `history`, ແລະ argument `move` ຈະຜ່ານແຕ່ລະ index: `0`, `1`, `2`, …. (ໃນກໍລະນີສ່ວນຫຼາຍ, ທ່ານຕ້ອງໃຊ້ array element ແທ້, ແຕ່ຫາກຕ້ອງການ render ລາຍການການເຄື່ອນໄຫວທ່ານຈະຕ້ອງໃຊ້ index ເທົ່ານັ້ນ.)
 
-For each move in the tic-tac-toe game's history, you create a list item `<li>` which contains a button `<button>`. The button has an `onClick` handler which calls a function called `jumpTo` (that you haven't implemented yet).
+ສຳລັບການເຄື່ອນໄຫວແຕ່ລະຄັ້ງໃນປະຫວັດຂອງເກມ tic-tac-toe, ທ່ານສ້າງລາຍການ `<li>` ເຊິ່ງມີປຸ່ມ `<button>`. ປຸ່ມມີ່ `onClick` handler ເຊິ່ງຈະເອີ້ນຟັງຊັ່ນທີ່ເອີ້ນວ່າ `jumpTo` (ທີ່ທ່ານຍັງບໍ່ທັນໄດ້ implement ເທື່ອ).
 
-For now, you should see a list of the moves that occurred in the game and an error in the developer tools console. Let's discuss what the "key" error means.
+ສຳລັບຕອນນີ້, ທ່ານຄວນເຫັນລາຍການເຄື່ອນໄຫວທີ່ເກີດຂຶ້ນໃນເກມ ແລະ ຂໍ້ຜິດພາດໃນ console developer tools. ມາລົມກັນວ່າາຂໍ້ຜິດພາດ "key" ໝາຍເຖິງຫຍັງ.
 
-### Picking a key {/*picking-a-key*/}
+### ການເລືອກ key {/*picking-a-key*/}
 
-When you render a list, React stores some information about each rendered list item. When you update a list, React needs to determine what has changed. You could have added, removed, re-arranged, or updated the list's items.
+ເມື່ອທ່ານ render ລາຍການ, React ຈະເກັບຂໍ້ມູນບາງຢ່າງກ່ຽວກັບແຕ່ລະລາຍການທີ່ render. ເມື່ອທ່ານອັບເດດລາຍການ, React ຈຳເປັນຕ້ອງພິຈາລະນາວ່າມີການປ່ຽນແປງຫຍັງແນ່. ທ່ານສາມາດເພີ່ມ, ລຶບ, ຈັດວາງໃໝ່, ຫຼື ອັບເດດລາຍການ.
 
-Imagine transitioning from
+ຈິນຕະນາການປ່ຽນຈາກ
 
 ```html
 <li>Alexa: 7 tasks left</li>
 <li>Ben: 5 tasks left</li>
 ```
 
-to
+ເປັນ
 
 ```html
 <li>Ben: 9 tasks left</li>
@@ -2266,7 +2269,7 @@ to
 <li>Alexa: 5 tasks left</li>
 ```
 
-In addition to the updated counts, a human reading this would probably say that you swapped Alexa and Ben's ordering and inserted Claudia between Alexa and Ben. However, React is a computer program and can't know what you intended, so you need to specify a _key_ property for each list item to differentiate each list item from its siblings. If your data was from a database, Alexa, Ben, and Claudia's database IDs could be used as keys.
+ນອກເໜືອຈາກການອັບເດດ count ແລ້ວ, ການອ່ານໂດຍມະນຸດອາດບອກວ່າທ່ານສະຫຼັບຄຳສັ່ງຂອງ Alexa ແລະ Ben ແລະ ເພີ່ມ Claudia ລະຫວ່າງ Alexa ແລະ Ben. ເຖິງຢ່າງໃດກໍຕາມ, React ເປັນໂປຣແກຣມຄອມພິວເຕີ ແລະ ບໍ່ສາມາດຮູ້ວ່າທ່ານຕ້ອງການຫຍັງ, ດັ່ງນັ້ນທ່ານຕ້ອງໄດ້ລະບຸ _key_ property ສຳລັບແຕ່ລະລາຍການໃນລາຍການເພື່ອແຍກຄວາມແຕກຕ່າງລະຫວ່າງແຕ່ລະລາຍການຂອງກັນ ແລະ ກັນ. ຖ້່າຂໍ້ມູນຂອງທ່ານມາຈາກຖານຂໍ້ມູນ, ID ຖານຂໍ້ມູນ Alexa, Ben ແລະ Claudia  ສາມາດໃຊ້ເປັນ key ໄດ້.
 
 ```js {1}
 <li key={user.id}>
@@ -2274,23 +2277,23 @@ In addition to the updated counts, a human reading this would probably say that 
 </li>
 ```
 
-When a list is re-rendered, React takes each list item's key and searches the previous list's items for a matching key. If the current list has a key that didn't exist before, React creates a component. If the current list is missing a key that existed in the previous list, React destroys the previous component. If two keys match, the corresponding component is moved.
+ເມື່ອລາຍການຖືກ render ໃໝ່, React ຈະໃຊ້ key ຂອງແຕ່ລະລາຍການ ແລະ ຄົ້ນຫາ key ທີ່ກົງກັນໃນລາຍການກ່ອນໜ້າຂອງລາຍການ. ຖ້າລາຍການປັດຈຸບັນມີ key ທີ່ບໍ່ເຄີຍມີມາກ່ອນ, React ຈະສ້າງ component. ຖ້າລາຍການປັດຈຸບັນບໍ່ມີ key ທີ່ມີຢູ່ໃນລາຍການກ່ອນໜ້າ, React ຈະທຳລາຍ component ກ່ອນໜ້າ. ຫາກສອງ key ກົງກັນ, component ທີ່ກ່ຽວຂ້ອງຈະຖືກຍ້າຍ.
 
-Keys tell React about the identity of each component, which allows React to maintain state between re-renders. If a component's key changes, the component will be destroyed and re-created with a new state.
+Key ຈະບອກ React ກ່ຽວກັບເອກະລັກຂອງແຕ່ລະ component, ເຊິ່ງຊ່ວຍໃຫ້ React ຮັກສາ state ລະຫວ່າງການ render ໃໝ່. ຖ້າ key ຂອງ component ມີການປ່ຽນແປງ, component ຈະຖືກທຳລາຍ ແລະ ຖືກສ້າງໃໝ່ພ້ອມ state ໃໝ່ດ້ວຍ.
 
-`key` is a special and reserved property in React. When an element is created, React extracts the `key` property and stores the key directly on the returned element. Even though `key` may look like it is passed as props, React automatically uses `key` to decide which components to update. There's no way for a component to ask what `key` its parent specified.
+`key`  ເປັນ property ພິເສດ ແລະ ຖືກສະຫງວນໄວ້ໃນ React. ເມື່ອ element ຖືກສ້າງ, React ຈະແຍກ property `key` ແລະ ເກັບ key ໂດຍກົງຕອນ return element. ເຖິງວ່າ `key` ອາດຈະເບິ່ງຄືວ່າມັນຖືກສົ່ງຜ່ານເປັນ prop, ແຕ່ React ຈະໃຊ້ `key` ໂດຍອັດຕະໂນມັດເພື່ອຕັດສິນວ່າຈະອັບເດດ component ໃດ. ບໍ່ມີທາງທີ່ component ຈະຖາມວ່າ `key` ໃດທີ່ parent ລະບຸ. 
 
-**It's strongly recommended that you assign proper keys whenever you build dynamic lists.** If you don't have an appropriate key, you may want to consider restructuring your data so that you do.
+**ແນະນຳເປັນຢ່າງສູງໃຫ້ທ່ານກຳນົດ key ທີ່ເໝາະສົມທຸກຄັ້ງທີທ່ານສ້າງລາຍການແບບ dynamic.** ຖ້າທ່ານບໍ່ມີ key ທີ່ເໝາະສົມທ່ານອາດຈະຕ້ອງພິຈາລະນາໂຄ່ງສ້າງຂໍ້ມູນໃໝ່ເພື່ອໃຫ້ສາມາດຈັດການໄດ້.
 
-If no key is specified, React will report an error and use the array index as a key by default. Using the array index as a key is problematic when trying to re-order a list's items or inserting/removing list items. Explicitly passing `key={i}` silences the error but has the same problems as array indices and is not recommended in most cases.
+ຖ້າບໍ່ໄດ້ລະບຸ key, React ຈະລາຍງານຂໍ້ຜິດພາດ ແລະ ໃຊ້ index array ເປັນ key ຕາມຄ່າເລີ່ມຕົ້ນ. ການໃຊ້ index array ເປັນ key ຈະມີບັນຫາເມື່ອພະຍາຍາມຈັດລຳດັບລາຍການຂອງລາຍການໃໝ່ ຫຼື ເພີ່ມ/ລຶບ ລາຍການ. ການຜ່ານ `key={i}` ຢ່າງຊັດເຈນເປັນການປິດສຽງຂໍ້ຜິດພາດແຕ່ມີບັນຫາເຊັ່ນດຽວກັບ index array ແລະ ບໍ່ແນະນຳໃນກໍລະນີສ່ວນໃຫຍ່.
 
-Keys do not need to be globally unique; they only need to be unique between components and their siblings.
+Key ບໍ່ຈຳເປັນຕ້ອງຊໍ້າກັນທັງໝົດ; ມັນຕ້ອງບໍ່ຊໍ້າກັນລະຫວ່າງ component ແລະ component ກັນເອງ.
 
-### Implementing time travel {/*implementing-time-travel*/}
+### ການ Implement time travel {/*implementing-time-travel*/}
 
-In the tic-tac-toe game's history, each past move has a unique ID associated with it: it's the sequential number of the move. Moves will never be re-ordered, deleted, or inserted in the middle, so it's safe to use the move index as a key.
+ໃນປະຫວັດຂອງເກມ tic-tac-toe, ການເຄື່ອນໄຫວຜ່ານມາແຕ່ລະຄັ້ງຈະມີ ID ສະເພາະທີ່ກ່ຽວຂ້ອງ: ນັ້ນຄືໝາຍເລກລຳດັບລາຍການເຄື່ອນໄຫວ. ການຍ້າຍຈະບໍ່ຖືກສັ່ງຊໍ້າ, ລຶບ ຫຼື ເພີ່ມທາງກາງ, ສະນັ້ນຈຶ່ງປອດໄພທີ່ຈະໃຊ້ index ການຍ້າຍເປັນ key.
 
-In the `Game` function, you can add the key as `<li key={move}>`, and if you reload the rendered game, React's "key" error should disappear:
+ໃນຟັງຊັ່ນ `Game`, ທ່ານສາມາດເພີ່ມ key ເປັນ `<li key={move}>`, ແລະ ຖ້າທ່ານໂຫຼດເກມທີ່ render ຊໍ້າ, ຂໍ້ຜິດພາດ "key" ຂອງ React ຈະຫາຍໄປ:
 
 ```js {4}
 const moves = history.map((squares, move) => {
@@ -2470,7 +2473,7 @@ body {
 
 </Sandpack>
 
-Before you can implement `jumpTo`, you need the `Game` component to keep track of which step the user is currently viewing. To do this, define a new state variable called `currentMove`, defaulting to `0`:
+ກ່ອນທີ່ທ່ານຈະໃຊ້ implement `jumpTo`, ທ່ານຕ້ອງມີ component `Game` ເພື່ອຕິດຕາມວ່າຜູ້ໃຊ້ກຳລັງເບິ່ງຂັ້ນຕອນໃດຢູ່. ໃນການດຳເນີນການນີ້, ໃຫ້ກຳນົດຕົວແປ state ໃໝ່ ຊື່ວ່າ `currentMove`, ໃສ່ຄ່າເລີ່ມຕົ້ນເປັນ `0`:
 
 ```js {4}
 export default function Game() {
@@ -2482,7 +2485,7 @@ export default function Game() {
 }
 ```
 
-Next, update the `jumpTo` function inside `Game` to update that `currentMove`. You'll also set `xIsNext` to `true` if the number that you're changing `currentMove` to is even.
+ຕໍ່ໄປ, ອັບເດດຟັງຊັ່ນ `jumpTo` ພາຍໃນ `Game` ເພື່ອອັບເດດ `currentMove`. ທ່ານຈະຕ້ອງຕັ້ງຄ່າ `xIsNext` ເປັນ `true` ຫາກຕົວເລກທີ່ທ່ານປ່ຽນ `currentMove` ເປັນເລກຄູ່.
 
 ```js {4-5}
 export default function Game() {
@@ -2495,10 +2498,10 @@ export default function Game() {
 }
 ```
 
-You will now make two changes to the `Game`'s `handlePlay` function which is called when you click on a square.
+ຕອນນີ້ທ່ານຈະຕ້ອງປ່ຽນແປງສອງຄັ້ງກັບຟັງຊັ່ນ `handlePlay` ຂອງ `Game` ເຊິ່ງຈະຖືກເອີ້ນໃຊ້ເມື່ອທ່ານຄິກໃສ່ສີ່ຫຼ່ຽມ.
 
-- If you "go back in time" and then make a new move from that point, you only want to keep the history up to that point. Instead of adding `nextSquares` after all items (`...` spread syntax) in `history`, you'll add it after all items in `history.slice(0, currentMove + 1)` so that you're only keeping that portion of the old history.
-- Each time a move is made, you need to update `currentMove` to point to the latest history entry.
+- ຖ້າທ່ານ "ຍ້ອນເວລາກັບໄປ" ແລ້ວທຳການຍ້າຍເທື່ອໃໝ່ຈາກຈຸດນັ້ນ, ທ່ານພຽງຕ້ອງການເກັບປະຫວັດໄວ້ຈົນຮອດຈຸດນັ້ນ. ແທນທີ່ຈະເພີ່ມ `nextSquares` ຫຼັງລາຍການທັງໝົດ (`...` syntax spread) ໃນ `history`, ທ່ານຈະເພີ່ມລາຍການທັງໝົດໃນ `history.slice(0, currentMove + 1)` ເພື່ອໃຫ້ທ່ານຮັກສາສ່ວນນັ້ນຂອງປະຫວັດເກົ່າ.
+- ທຸກຄັ້ງທີ່ມີການຍ້າຍ, ທ່ານຕ້ອງອັບເດດ `currentMove` ເພື່ອຊີ້ໄປທີ່ລາຍການປະຫວັດຫຼ້າສຸດ.
 
 ```js {2-4}
 function handlePlay(nextSquares) {
@@ -2509,7 +2512,7 @@ function handlePlay(nextSquares) {
 }
 ```
 
-Finally, you will modify the `Game` component to render the currently selected move, instead of always rendering the final move:
+ສຸດທ້າຍ, ທ່ານຈະແກ້ໄຂ component `Game` ເພື່ອສະແດງຜົນການເຄື່ອນໄຫວທີ່ຖືກເລືອກປັດຈຸບັນ, ແທນທີ່ຈະສະແດງການເຄື່ອນໄຫວຄັ້ງສຸດທ້າຍສະເໝີ:
 
 ```js {5}
 export default function Game() {
@@ -2522,7 +2525,7 @@ export default function Game() {
 }
 ```
 
-If you click on any step in the game's history, the tic-tac-toe board should immediately update to show what the board looked like after that step occurred.
+ຖ້າທ່ານຄິກຂັ້ນຕອນໃດໃນປະຫວັດຂອງເກມ, ກະດານ tic-tac-toe ຄວນອັບເດດທັນທີເພື່ອສະແດງລັກສະນະຂອງກະດານຫຼັງຈາກຂັ້ນຕອນນັ້ນເກີດຂຶ້ນ.
 
 <Sandpack>
 
@@ -2693,11 +2696,11 @@ body {
 
 </Sandpack>
 
-### Final cleanup {/*final-cleanup*/}
+### Cleanup ເທື່ອສຸດທ້າຍ {/*final-cleanup*/}
 
-If you look at the code very closely, you may notice that `xIsNext === true` when `currentMove` is even and `xIsNext === false` when `currentMove` is odd. In other words, if you know the value of `currentMove`, then you can always figure out what `xIsNext` should be.
+ຖ້າທ່ານເບິ່ງ code ຢ່າງໃກ້ຊິດ, ທ່ານຈະສັງເກດວ່າ `xIsNext === true` ເມື່ອ `currentMove` ເປັນເລກຄູ່ ແລະ `xIsNext === false` ເມື່ອ `currentMove` ເປັນເລກຄີກ. ໃນຄວາມໝາຍໜຶ່ງ, ຖ້າທ່ານຮູ້ຄ່າຂອງ `currentMove`, ທ່ານກໍຈະຮູ້ວ່າ `xIsNext` ຄວນເປັນແນວໃດ.
 
-There's no reason for you to store both of these in state. In fact, always try to avoid redundant state. Simplifying what you store in state reduces bugs and makes your code easier to understand. Change `Game` so that it doesn't store `xIsNext` as a separate state variable and instead figures it out based on the `currentMove`:
+ບໍ່ມີເຫດຜົນໃດທີ່ທ່ານຈະເກັບສອງສິ່ງນີ້ໄວ້ໃນ state. ໃນຄວາມເປັນຈິງ, ພະຍາຍາມຫຼີກຫຼ່ຽງ state ທີ່ຊໍ້າຊ້ອນ. ການຫຼຸດຄວາມຊໍ້າຊ້ອນຂອງສິ່ງທີ່ທ່ານຈະຈັດເກັບໃນ state ຈະຫຼຸດ bug ແລະ ເຮັດໃຫ້ code ຂອງທ່ານເຂົ້າໃຈງ່າຍຂຶ້ນ. ປ່ຽນ `Game` ເພື່ອບໍ່ໃຫ້ເກັບ `xIsNext` ເປັນຕົວແປ state ແຍກຕ່າງຫາກ ແລະ ແທນທີ່ຈະໄປຕາມ `currentMove`:
 
 ```js {4,11,15}
 export default function Game() {
@@ -2719,20 +2722,20 @@ export default function Game() {
 }
 ```
 
-You no longer need the `xIsNext` state declaration or the calls to `setXIsNext`. Now, there's no chance for `xIsNext` to get out of sync with `currentMove`, even if you make a mistake while coding the components.
+ທ່ານບໍ່ຈຳເປັນຕ້ອງມີການປະກາດ state `xIsNext` ຫຼື ການເອີ້ນໃຊ້ `setXIsNext` ອີກຕໍ່ໄປ. ຕອນນີ້, ບໍ່ມີໂອກາດທີ່ `xIsNext` ຈະ sync ກັບ `currentMove`, ເຖິງວ່າທ່ານຈະເຮັດຜິດພາດໃນຂະນະຂຽນ code component ກໍຕາມ.
 
-### Wrapping up {/*wrapping-up*/}
+### ສະຫຼຸບ {/*wrapping-up*/}
 
-Congratulations! You've created a tic-tac-toe game that:
+ຂໍສະແດງຄວາມຍິນດີ! ທ່ານໄດ້ສ້າງເກມ tic-tac-toe ທີ: 
 
-- Lets you play tic-tac-toe,
-- Indicates when a player has won the game,
-- Stores a game's history as a game progresses,
-- Allows players to review a game's history and see previous versions of a game's board.
+- ໃຫ້ທ່ານຫຼິ້ນ tic-tac-toe,
+- ລະບຸເມື່ອຜູ້ຫຼິ້ນຊະນະເກມ,
+- ຈັດເກັບປະຫວັດຂອງເກມໃນຂະນະທີ່ເກມດຳເນີນໄປ,
+- ອະນຸຍາດໃຫ້ຜູ້ຫຼິ້ນກວດປະຫວັດຂອງເກມ ແລະ ເບິ່ງເວີຊັ່ນກ່ອນໜ້າຂອງກະດານເກມ.
 
-Nice work! We hope you now feel like you have a decent grasp of how React works.
+ເຮັດໄດ້ດີຫຼາຍ! ພວກເຮົາຫວັງວ່າທ່ານຈະຮູ້ສຶກວ່າທ່ານເຂົ້າໃຈແລ້ວວ່າ React ນັ້ນເຮັດວຽກແນວໃດ.
 
-Check out the final result here:
+ກວດຜົນລັບສຸດທ້າຍບ່ອນນີ້:
 
 <Sandpack>
 
@@ -2901,12 +2904,12 @@ body {
 
 </Sandpack>
 
-If you have extra time or want to practice your new React skills, here are some ideas for improvements that you could make to the tic-tac-toe game, listed in order of increasing difficulty:
+ຖ້າທ່ານມີເວລາເພີ່ມ ຫຼື ຕ້ອງການເຝິກຝົນທັກສະ React ໃໝ່, ຕໍ່ໄປນີ້ແມ່ນບາງແນວຄິດສຳລັບປັບປຸງທີ່ທ່ານສາມາດເຮັດໄດ້ກັບເກມ tic-tac-toe, ໂດຍຮຽງຕາມລຳດັບຄວາມຍາກທີ່ເພີ່ມຂຶ້ນ:
 
-1. For the current move only, show "You are at move #..." instead of a button.
-1. Rewrite `Board` to use two loops to make the squares instead of hardcoding them.
-1. Add a toggle button that lets you sort the moves in either ascending or descending order.
-1. When someone wins, highlight the three squares that caused the win (and when no one wins, display a message about the result being a draw).
-1. Display the location for each move in the format (row, col) in the move history list.
+1. ສຳລັບການຍ້າຍປັດຈຸບັນເທົ່ານັ້ນ, ສະແດງ  "You are at move #..." ແທນປຸ່ມ.
+1. ຂຽນ `Board` ໃໝ່ເພື່ອໃຊ້ loop ສອງຮອບເພື່ອສ້າງສີ່ຫຼ່ຽມແທນການ hardcode.
+1. ເພີ່ມປຸ່ມ toggle ທີ່ໃຫ້ທ່ານຮຽງລຳດັບການເຄື່ອນໄຫວໃນລຳດັບຈາກນ້ອຍໄປຫາຫຼາຍ ຫຼື ຈາກຫຼາຍໄປຫານ້ອຍ.
+1. ເມື່ອມີ່ຜູ້ຊະນະ, highlight ສາມ ສີ່ຫຼ່ຽມທີ່ເຮັດໃຫ້ເກີດການຊະນະ (ແລະ ເມື່ອບໍ່ມີໃຜຊະນະ, ໃຫ້ສະແດງຂໍ້ຄວາມກ່ຽວກັບຜົນສະເໝີ).
+1. ສະແດງຕໍແໜ່ງສຳລັບການເຄື່ອນໄຫວແຕ່ລະຄັ້ງໃນຮູບແບບ (ແຖວ, ຖັນ) ໃນລາຍການປະຫວັດການເຄື່ອນໄຫວ.
 
-Throughout this tutorial, you've touched on React concepts including elements, components, props, and state. Now that you've seen how these concepts work when building a game, check out [Thinking in React](/learn/thinking-in-react) to see how the same React concepts work when build an app's UI.
+ຕະຫຼອດບົດສອນນີ້, ທ່ານໄດ້ສຳພັດກັບແນວຄິດຂອງ React ປະກອບມີ element, component, prop ແລະ state. ຕອນນີ້ທ່ານໄດ້ເຫັນວ່າແນວຄິດເຫຼົ່ານີ້ເຮັດວຽກແນວໃດເມື່ອສ້າງເກມ, ເບິ່ງ [ຄິດແບບ React](/learn/thinking-in-react) ເພື່ອເບິ່ງວ່າແນວຄິດດຽວກັນຂອງ React ເຮັດວຽກແນວໃດເມື່ອສ້າງ UI ຂອງແອັບ.
