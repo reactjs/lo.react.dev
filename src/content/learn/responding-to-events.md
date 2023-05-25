@@ -1,24 +1,24 @@
 ---
-title: Responding to Events
+title: ການ Respond ຕໍ່ Events
 ---
 
 <Intro>
 
-React lets you add *event handlers* to your JSX. Event handlers are your own functions that will be triggered in response to interactions like clicking, hovering, focusing form inputs, and so on.
+React ໃຫ້ທ່ານເພີ່ມ *event handlers* ໃນ JSX ຂອງທ່ານ. Event handler ແມ່ນຟັງຊັ່ນຂອງທ່ານເອງທີ່ຈະຖືກ trigger ໃຫ້ຕອບສະໜອງຕໍ່ interaction ເຊັ່ນ ການຄິກ, ການ hover, ການ focus form input ແລະ ອື່ນໆ.
 
 </Intro>
 
 <YouWillLearn>
 
-* Different ways to write an event handler
-* How to pass event handling logic from a parent component
-* How events propagate and how to stop them
+* ວິທີຕ່າງໆໃນການຂຽນ event handler
+* ວິທີການສົ່ງຜ່ານ logic ຂອງ event handler ຈາກ parent component
+* Event ກະຈາຍແນວໃດ ແລະ ຈະຢຸດແນວໃດ
 
 </YouWillLearn>
 
-## Adding event handlers {/*adding-event-handlers*/}
+## ການເພີ່ມ event handlers {/*adding-event-handlers*/}
 
-To add an event handler, you will first define a function and then [pass it as a prop](/learn/passing-props-to-a-component) to the appropriate JSX tag. For example, here is a button that doesn't do anything yet:
+ໃນການເພີ່ມ event handler, ທຳອິດທ່ານຈະຕ້ອງກຳນົດຟັງຊັ່ນ ຈາກນັ້ນ [ສົ່ງຜ່ານເປັນ prop](/learn/passing-props-to-a-component) ໄປຫາແທັກ JSX ທີ່ເໝາະສົມ. ຕົວຢ່າງ, ນີ້ແມ່ນປຸ່ມທີ່ຍັງບໍ່ທັນໄດ້ເຮັດຫຍັງ:
 
 <Sandpack>
 
@@ -34,11 +34,11 @@ export default function Button() {
 
 </Sandpack>
 
-You can make it show a message when a user clicks by following these three steps:
+ທ່ານສາມາດກຳນົດໃຫ້ສະແດງຂໍ້ຄວາມເມື່ອຜູ້ໃຊ້ຄິກໂດຍປະຕິບັດຕາມສາມຂັ້ນຕອນ:
 
-1. Declare a function called `handleClick` *inside* your `Button` component.
-2. Implement the logic inside that function (use `alert` to show the message).
-3. Add `onClick={handleClick}` to the `<button>` JSX.
+1. ປະກາດຟັງຊັ່ນທີ່ເອີ້ນວ່າ `handleClick` *ພາຍໃນ* component `Button` ຂອງທ່ານ.
+2. Implement logic ພາຍໃນຟັງຊັ່ນນັ້ນ (ໃຊ້ `alert` ເພື່ອສະແດງຂໍ້ຄວາມ).
+3. ເພີ່ມ `onClick={handleClick}` ໃນ `<button>` JSX.
 
 <Sandpack>
 
@@ -62,14 +62,14 @@ button { margin-right: 10px; }
 
 </Sandpack>
 
-You defined the `handleClick` function and then [passed it as a prop](/learn/passing-props-to-a-component) to `<button>`.  `handleClick` is an **event handler.** Event handler functions:
+ທ່ານກຳນົດຟັງຊັ່ນ `handleClick` ຈາກນັ້ນ [ສົ່ງຜ່ານເປັນ prop](/learn/passing-props-to-a-component) ເປັນ `<botton>`. `handleClick` ເປັນ **event handler.** ຟັງຊັ່ນ Event handler:
 
-* Are usually defined *inside* your components.
-* Have names that start with `handle`, followed by the name of the event.
+* ມັກຖືກກຳນົດ *ພາຍໃນ* component ຂອງທ່ານ.
+* ມີຊື່ຂຶ້ນຕົ້ນດ້ວຍ `handle`, ຕາມດ້ວຍຊື່ event.
 
-By convention, it is common to name event handlers as `handle` followed by the event name. You'll often see `onClick={handleClick}`, `onMouseEnter={handleMouseEnter}`, and so on.
+ຕາມແບບແຜນ, ມັນເປັນເລື່ອງປົກະຕິທີ່ຈະຕັ້ງຊື່ event handler ເປັນ `handle` ຕາມດ້ວຍຊື່ event. ທ່ານມັກຈະເຫັນ `onClick={handleClick}`, `onMouseEnter={handleMouseEnter}`, ແລະ ອື່ນໆ
 
-Alternatively, you can define an event handler inline in the JSX:
+ຫຼື ທ່ານສາມາດກຳນົດ event handler ແບບແຖວດຽວໃນ JSX:
 
 ```jsx
 <button onClick={function handleClick() {
@@ -77,7 +77,7 @@ Alternatively, you can define an event handler inline in the JSX:
 }}>
 ```
 
-Or, more concisely, using an arrow function:
+ຫຼື, ກະຊັບຫຼາຍຂຶ້ນ, ດ້ວຍການໃຊ້ arrow function:
 
 ```jsx
 <button onClick={() => {
@@ -85,54 +85,54 @@ Or, more concisely, using an arrow function:
 }}>
 ```
 
-All of these styles are equivalent. Inline event handlers are convenient for short functions.
+ຮູບແບບທັງໝົດນີ້ແມ່ນຄືກັນ. Event handler ແບບແຖວດຽວແມ່ນສະດວກສຳລັບຟັງຊັ່ນສັ້ນໆ.
 
 <Pitfall>
 
-Functions passed to event handlers must be passed, not called. For example:
+ຟັງຊັ່ນທີ່ສົ່ງຜ່ານໄປຫາ event handler ຈະຕ້ອງຖືກສົ່ງຜ່ານ, ບໍ່ແມ່ນການເອີ້ນໃຊ້. ຕົວຢ່າງ:
 
-| passing a function (correct)     | calling a function (incorrect)     |
+| ການສົ່ງຜ່ານຟັງຊັ່ນ (ຖືກຕ້ອງ)     | ການເອີ້ນໃຊ້ຟັງຊັ່ນ (ບໍ່ຖືກຕ້ອງ)     |
 | -------------------------------- | ---------------------------------- |
 | `<button onClick={handleClick}>` | `<button onClick={handleClick()}>` |
 
-The difference is subtle. In the first example, the `handleClick` function is passed as an `onClick` event handler. This tells React to remember it and only call your function when the user clicks the button.
+ຄວາມແຕກຕ່າງນັ້ນລະອຽດອ່ອນ. ໃນຕົວຢ່າງທຳອິກ, ຟັງຊັ່ນ `handleClick` ຈະຖືກສົ່ງຜ່ານເປັນ event handler `onClick`. ສິ່ງນີ້ບອກໃຫ້ React ຈົດຈຳ ແລະ ເອີ້ນໃຊ້ຟັງຊັ່ນຂອງທ່ານເມື່ອຜູ້ໃຊ້ຄິກປຸ່ມເທົ່ານັ້ນ
 
-In the second example, the `()` at the end of `handleClick()` fires the function *immediately* during [rendering](/learn/render-and-commit), without any clicks. This is because JavaScript inside the [JSX `{` and `}`](/learn/javascript-in-jsx-with-curly-braces) executes right away.
+ໃນຕົວຢ່າງທີ່ສອງ, `()` ດ້ານທ້າຍຂອງ `handleClick()` ຈະເລີ່ມການເຮັດວຽກຂອງຟັງຊັ່ນ *ທັນທີ* ລະຫວ່າງ [ການ render](/learn/render-and-commit), ໂດຍບໍ່ຕ້ອງຄິກ. ເນື່ອງຈາກ JavaScript ພາຍໃນ [JSX `{` ແລະ `}`](/learn/javascript-in-jsx-with-curly-braces) ດຳເນີນການທັນທີ.
 
-When you write code inline, the same pitfall presents itself in a different way:
+ເມື່ອທ່ານຂຽນ code ແບບແຖວດຽວ, pitfall ດຽວກັນຈະນຳສະເໜີຕົວເອງໃນລັກສະນະທີ່ຕ່າງອອກໄປ:
 
-| passing a function (correct)            | calling a function (incorrect)    |
+| ການສົ່ງຜ່ານຟັງຊັ່ນ (ຖືກຕ້ອງ)     | ການເອີ້ນໃຊ້ຟັງຊັ່ນ (ບໍ່ຖືກຕ້ອງ)     |
 | --------------------------------------- | --------------------------------- |
 | `<button onClick={() => alert('...')}>` | `<button onClick={alert('...')}>` |
 
 
-Passing inline code like this won't fire on click—it fires every time the component renders:
+ການສົ່ງຜ່ານ code ແບບແຖວດຽວແບບນີ້ຈະບໍ່ເລີ່ມເຮັດວຽກເມື່ອຄິກ-ຈະເລີ່ມເຮັດວຽກທຸກຄັ້ງທີ່ component render:
 
 ```jsx
 // This alert fires when the component renders, not when clicked!
 <button onClick={alert('You clicked me!')}>
 ```
 
-If you want to define your event handler inline, wrap it in an anonymous function like so:
+ຖ້າທ່ານຕ້ອງການກຳນົດ event handler ແບບແຖວດຽວ, ໃຫ້ລວມມັນໄວ້ໃນຟັງຊັ່ນທີ່ບໍ່ລະບຸຊື່ດັ່ງນີ້:
 
 ```jsx
 <button onClick={() => alert('You clicked me!')}>
 ```
 
-Rather than executing the code inside with every render, this creates a function to be called later.
+ແທນທີ່ຈະ execute code ພາຍໃນທຸກໆການ render, ສິ່ງນີ້ຈະສ້າງຟັງຊັ່ນທີ່ເອີ້ນໃຊ້ພາຍຫຼັງ.
 
-In both cases, what you want to pass is a function:
+ໃນສອງກໍລະນີ, ສິ່ງທີ່ທ່ານຕ້ອງການສົ່ງຜ່ານແມ່ນຟັງຊັ່ນ:
 
-* `<button onClick={handleClick}>` passes the `handleClick` function.
-* `<button onClick={() => alert('...')}>` passes the `() => alert('...')` function.
+* `<button onClick={handleClick}>` ຜ່ານຟັງຊັ່ນ `handleClick`.
+* `<button onClick={() => alert('...')}>` ຜ່ານຟັງຊັ່ນ  `() => alert('...')`.
 
-[Read more about arrow functions.](https://javascript.info/arrow-functions-basics)
+[ອ່ານເພີ່ມເຕີມກ່ຽວກັບ arrow functions.](https://javascript.info/arrow-functions-basics)
 
 </Pitfall>
 
-### Reading props in event handlers {/*reading-props-in-event-handlers*/}
+### ການອ່ານ props ໃນ event handlers {/*reading-props-in-event-handlers*/}
 
-Because event handlers are declared inside of a component, they have access to the component's props. Here is a button that, when clicked, shows an alert with its `message` prop:
+ເນື່ອງຈາກມີການປະກາດ event handler ພາຍໃນ component, ພວກມັນຈຶ່ງສາມາດເຂົ້າເຖິງ prop ຂອງ component. ນີ້ແມ່ນປຸ່ມທີ່, ເມື່ອທ່ານຄິກແລ້ວ, ຈະສະແດງການແຈ້ງເຕືອນພ້ອມກັບ `message` prop: 
 
 <Sandpack>
 
@@ -165,13 +165,13 @@ button { margin-right: 10px; }
 
 </Sandpack>
 
-This lets these two buttons show different messages. Try changing the messages passed to them.
+ເຊິ່ງຈະເຮັດໃຫ້ປຸ່ມທັງສອງນີ້ສະແດງຂໍ້ຄວາມທີ່ແຕກຕ່າງກັນໄດ້. ລອງປ່ຽນຂໍ້ຄວາມທີ່ສົ່ງເຖິງພວກມັນ.
 
-### Passing event handlers as props {/*passing-event-handlers-as-props*/}
+### ການສົ່ງ event handlers ເປັນ props {/*passing-event-handlers-as-props*/}
 
-Often you'll want the parent component to specify a child's event handler. Consider buttons: depending on where you're using a `Button` component, you might want to execute a different function—perhaps one plays a movie and another uploads an image. 
+ຫຼາຍເທື່ອທີ່ທ່ານຕ້ອງການໃຫ້ parent component ລະບຸ child event handler. ຂຶ້ນຢູ່ກັບປຸ່ມ: ຂຶ້ນຢູ່ກັບວ່າທ່ານໃຊ້ component `Button` ບ່ອນໃດ, ທ່ານອາດຈ້ອງ execute ຟັງຊັ່ນອື່ນ ບາງເທື່ອຟັງຊັ່ນໜຶ່ງຫຼິ້ນວີດີໂອ ແລະ ອີກຟັງຊັ່ນໜໜຶ່ງອັບໂຫຼດຮູບພາບ.
 
-To do this, pass a prop the component receives from its parent as the event handler like so:
+ເພື່ອເຮັດສິ່ງນີ້, ໃຫ້ສົ່ງ prop ທີ່ component ໄດ້ຮັບຈາກ parent ເປັນ event handler ດັ່ງນີ້:
 
 <Sandpack>
 
@@ -220,22 +220,22 @@ button { margin-right: 10px; }
 
 </Sandpack>
 
-Here, the `Toolbar` component renders a `PlayButton` and an `UploadButton`:
+ຈຸດນີ້, component `Toolbar` ທຳການ render `PlayButton` ແລະ `UploadButton`:
 
-- `PlayButton` passes `handlePlayClick` as the `onClick` prop to the `Button` inside.
-- `UploadButton` passes `() => alert('Uploading!')` as the `onClick` prop to the `Button` inside.
+- `PlayButton` ສົ່ງ `handlePlayClick` ເປັນ prop `onClick` ໄປຍັງ `Button` ພາຍໃນ.
+- `UploadButton` ສົ່ງ `() => alert('Uploading!')` ເປັນ prop ໄປຍັງ `Button` ພາຍໃນ.
 
-Finally, your `Button` component accepts a prop called `onClick`. It passes that prop directly to the built-in browser `<button>` with `onClick={onClick}`. This tells React to call the passed function on click.
+ສຸດທ້າຍ, component `Button` ຂອງທ່ານພ້ອມຮັບ prop ທີ່ຊື່ວ່າ `onClick`. ມັນສົ່ງຜ່ານ prop ໂດຍກົງໄປຫາ built-in browser `<button>` ດ້ວຍ `onClick={onClick}`. ສິ່ງນີ້ຈະບອກໃຫ້ React ເອີ້ນໃຊ້ຟັງຊັ່ນທີ່ສົ່ງຜ່ານເມື່ອຄິກ.
 
-If you use a [design system](https://uxdesign.cc/everything-you-need-to-know-about-design-systems-54b109851969), it's common for components like buttons to contain styling but not specify behavior. Instead, components like `PlayButton` and `UploadButton` will pass event handlers down.
+ຖ້າທ່ານໃຊ້ [design system](https://uxdesign.cc/everything-you-need-to-know-about-design-systems-54b109851969), ເປັນເລື່ອງປົກະຕິທີ່ component ຕ່າງໆເຊັ່ນ ປຸ່ມຈະປະກອບມີ style ແຕ່ບໍ່ໄດ້ລະບຸລັກສະນະການເຮັດວຽກ. Component ເຊັ່ນ `PlayButton` ແລະ `UploadButton` ຈະສົ່ງ event handler ລົງມາແທນ.
 
-### Naming event handler props {/*naming-event-handler-props*/}
+### ການຕັ້ງຊື່ prop event handler {/*naming-event-handler-props*/}
 
-Built-in components like `<button>` and `<div>` only support [browser event names](/reference/react-dom/components/common#common-props) like `onClick`. However, when you're building your own components, you can name their event handler props any way that you like.
+Component built-in ເຊັ່ນ `<button>` ແລະ `<div>` ຮອງຮັບສະເພາະ [browser event names](/reference/react-dom/components/common#common-props) ເຊັ່ນ `onClick`. ເຖິງຢ່າງໃດກໍຕາມ, ເມື່ອທ່ານສ້າງ component ຂອງທ່ານເອງ, ທ່ານສາມາດຕັ້ງຊື່ prop event handler ໄດ້ຕາມທີ່ທ່ານຕ້ອງການ.
 
-By convention, event handler props should start with `on`, followed by a capital letter.
+ຕາມແບບແຜນ, prop event handler ຄວນເລີ່ມຕົ້ນດ້ວຍ `on`, ຕາມດ້ວຍໜັງສືໂຕໃຫຍ່.
 
-For example, the `Button` component's `onClick` prop could have been called `onSmash`:
+ຕົວຢ່າງ, prop `onClick` ຂອງ component `Button` ອາດຈະຖືກເອີ້ນ `onSmash`:
 
 <Sandpack>
 
@@ -268,9 +268,9 @@ button { margin-right: 10px; }
 
 </Sandpack>
 
-In this example, `<button onClick={onSmash}>` shows that the browser `<button>` (lowercase) still needs a prop called `onClick`, but the prop name received by your custom `Button` component is up to you!
+ໃນຕົວຢ່າງນີ້, `<button onClick={onSmash}>` ສະແດງວ່າ browser `<button>` (ໂຕພິມນ້ອຍ) ຍັງຕ້ອງການ prop ຊື່ `onClick`, ແຕ່ຊື່ prop ທີ່ໄດ້ຮັບຈາກ component `Button` ທີ່ທ່ານກຳນົດເອງແມ່ນຂຶ້ນກັບທ່ານ! 
 
-When your component supports multiple interactions, you might name event handler props for app-specific concepts. For example, this `Toolbar` component receives `onPlayMovie` and `onUploadImage` event handlers:
+ເມື່ອ component ຂອງທ່ານຮອງຮັບຫຼາຍ interaction, ທ່ານອາດຕັ້ງຊື່ prop event handler ສຳລັບແນວຄິດສະເພາະແອັບ. ຕົວຢ່າງ, component `Toolbar` ນີ້ໄດ້ຮັບ event handler `onPlayMovie  ແລະ `onUploadImage`:
 
 <Sandpack>
 
@@ -312,19 +312,19 @@ button { margin-right: 10px; }
 
 </Sandpack>
 
-Notice how the `App` component does not need to know *what* `Toolbar` will do with `onPlayMovie` or `onUploadImage`. That's an implementation detail of the `Toolbar`. Here, `Toolbar` passes them down as `onClick` handlers to its `Button`s, but it could later also trigger them on a keyboard shortcut. Naming props after app-specific interactions like `onPlayMovie` gives you the flexibility to change how they're used later.
+ສັງເກດວ່າ component `App` ບໍ່ຈຳເປັນຕ້ອງຮູ້ວ່າ *ສິ່ງທີ່* `Toolbar` ຈະເຮັດຫຍັງກັບ `onPlayMovie` ຫຼື `onUploadImage`. ນັ້ນແມ່ນລາຍລະອຽດການ implementation ຂອງ `Toolbar`. ໃນນີ້, `Toolbar` ສົ່ງຜ່ານ `onClick` handler ໄປຍັງ `Button` ຂອງມັນ, ແຕ່ພາຍຫຼັງຍັງສາມາດ trigger ເທິງທາງລັດຄີບອດ. ການຕັ້ງຊື່ prop ຕາມການ interaction ສະເພາະແອັບເຊັ່ນ `onPlayMovie` ຊ່ວຍໃຫ້ທ່ານປ່ຽນວິທີໃຊ້ງານໃນພາຍຫຼັງໄດ້ຢ່າງຍືດຫຍຸ່ນ.
   
 <Note>
 
-Make sure that you use the appropriate HTML tags for your event handlers. For example, to handle clicks, use [`<button onClick={handleClick}>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) instead of `<div onClick={handleClick}>`. Using a real browser `<button>` enables built-in browser behaviors like keyboard navigation. If you don't like the default browser styling of a button and want to make it look more like a link or a different UI element, you can achieve it with CSS. [Learn more about writing accessible markup.](https://developer.mozilla.org/en-US/docs/Learn/Accessibility/HTML)
+ກວດສອບວ່າທ່ານໃຊ້ແທັກ HTML ທີ່ເໝາະສົມສຳລັບ event handler. ຕົວຢ່າງ, ເພື່ອຈັດການຄິກ, ໃຊ້ [`<button onClick={handleClick}>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) ແທນ `<div onClick={handleClick}>`. ການໃຊ້ບາວເຊີແທ້ `<button>` ເປີດໃຊ້ງານລັກສະນະການເຮັດວຽກຂອງ built-in browser ເຊັ່ນການນຳທາງດ້ວຍຄີບອດ. ຖ້າທ່ານບໍ່ມັກ style ບາວເຊີເລີ່ມຕົ້ນຂອງປຸ່ມ ແລະ ຕ້ອງການເຮັດໃຫ້ມັນຄືລີ້ງ ຫຼື UI element, ທ່ານສາມາດເຮັດໄດ້ດ້ວຍ CSS. [ຮຽນຮູ້ເພີມເຕີມກ່ຽວກັບການຂຽນ accessible markup.](https://developer.mozilla.org/en-US/docs/Learn/Accessibility/HTML)
   
 </Note>
 
-## Event propagation {/*event-propagation*/}
+## ການເຜີຍແຜ່ Event {/*event-propagation*/}
 
-Event handlers will also catch events from any children your component might have. We say that an event "bubbles" or "propagates" up the tree: it starts with where the event happened, and then goes up the tree.
+Event handler ຈະຈັບ event ຈາກ children ທີ່ component ຂອງທ່ານທີ່ອາດມີ. ພວກເຮົາເວົ້າວ່າ event "bubbles" ຫຼື "propagates" ຂຶ້ນໄປເທິງ tree: ມັນເລີ່ມຈາກຈຸດທີ່ event ນັ້ນເກີດຂຶ້ນ, ຈາກນັ້ນຈຶ່ງຂຶ້ນໄປເທິງ tree.
 
-This `<div>` contains two buttons. Both the `<div>` *and* each button have their own `onClick` handlers. Which handlers do you think will fire when you click a button?
+`<div>` ປະກອບມີສອງປຸ່ມ. ທັງ `<div>` *ແລະ* ແຕ່ລະປຸ່ມມີ `onClick` handler ຂອງໂຕເອງ. ທ່ານຄິດວ່າ handler ໃດທີ່ຈະເລີ່ມເຮັດວຽກເມື່ອທ່ານຄິກ?
 
 <Sandpack>
 
@@ -355,19 +355,19 @@ button { margin: 5px; }
 
 </Sandpack>
 
-If you click on either button, its `onClick` will run first, followed by the parent `<div>`'s `onClick`. So two messages will appear. If you click the toolbar itself, only the parent `<div>`'s `onClick` will run.
+ຖ້າທ່ານຄິກປຸ່ມໃດໜຶ່ງ, `onClick` ຈະເຮັດວຽກກ່ອນ, ຕາມດ້ວຍ `onClick` ຂອງ parent `<div>`. ສະນັ້ນສອງຂໍ້ຄວາມຈະປະກົດຂຶ້ນ. ຖ້າທ່ານຄິກ toolbar, ສະເພາະ `onClick` ຂອງ `<div>` ຂອງ parent ເທົ່ານັ້ນທີ່ຈະເຮັດວຽກ
 
 <Pitfall>
 
-All events propagate in React except `onScroll`, which only works on the JSX tag you attach it to.
+ການເຜີຍແຜ່ event ທັງໝົດໃນ React ຍົກເວັ້ນ `onScroll`, ເຊິ່ງໃຊ້ໄດ້ກັບແທັກ JSX ທີ່ທ່ານແນບມາເທົ່ານັ້ນ.
 
 </Pitfall>
 
-### Stopping propagation {/*stopping-propagation*/}
+### ຢຸດການເຜີຍແຜ່ {/*stopping-propagation*/}
 
-Event handlers receive an **event object** as their only argument. By convention, it's usually called `e`, which stands for "event". You can use this object to read information about the event.
+Event handler ຮັບ **event object** ເປັນ argument ພຽງຢ່າງດຽວ. ໂດຍທົ່ວໄປ, ຈະເອີ້ນວ່າ `e`, ທີ່ຫຍໍ້ມາຈາກ "event". ທ່ານສາມາດໃຊ້ object ນີ້ເພື່ອອ່ານຂໍ້ມູນກ່ຽວກັບ event.
 
-That event object also lets you stop the propagation. If you want to prevent an event from reaching parent components, you need to call `e.stopPropagation()` like this `Button` component does:
+Event object ນັ້ນຍັງຊ່ວຍໃຫ້ທ່ານຢຸດການເຜີຍແຜ່. ຫາກທ່ານຕ້ອງການປ້ອງກັນບໍ່ໃຫ້ event ເຂົ້າເຖິງ parent component, ທ່ານຕ້ອງເອີ້ນໃຊ້ `e.stopPropagation()` ຄືກັບ component `Button` ເຮັດ:
 
 <Sandpack>
 
@@ -409,22 +409,22 @@ button { margin: 5px; }
 
 </Sandpack>
 
-When you click on a button:
+ເມື່ອທ່ານຄິກທີ່ປຸ່ມ:
 
-1. React calls the `onClick` handler passed to `<button>`. 
-2. That handler, defined in `Button`, does the following:
-   * Calls `e.stopPropagation()`, preventing the event from bubbling further.
-   * Calls the `onClick` function, which is a prop passed from the `Toolbar` component.
-3. That function, defined in the `Toolbar` component, displays the button's own alert.
-4. Since the propagation was stopped, the parent `<div>`'s `onClick` handler does *not* run.
+1. React ເອີ້ນໃຊ້ `onClick` handler ທີ່ສົ່ງຜ່ານໄປຍັງ `<button>`.
+2. Handler, ຖືກກຳນົດໃນ `Button`, ເຮັດສິ່ງຕໍ່ໄປນີ້:
+   * ເອີ້ນ `e.stopPropagation()`, ເພື່ອປ້ອງກັນບໍ່ໃຫ້ event ເດືອດອີກຕໍ່ໄປ.
+   * ເອີ້ນໃຊ້ຟັງຊັ່ນ `onClick`, ເຊິ່ງເປັນ prop ທີ່ສົ່ງຜ່ານຈາກ component `Toolbar`
+3. ຟັງຊັ່ນນັ້ນເຊິ່ງກຳນົດໄວ້ໃນ component `Toolbar`, ສະແດງການແຈ້ງເຕືອນຂອງປຸ່ມເອງ.
+4. ເນື່ອງຈາກການເຜີດແຜ່ຢຸດລົງ, `onClick` handler ຂອງ parent `<div>` ຈຶ່ງ *ບໍ່* ເຮັດວຽກ.
 
-As a result of `e.stopPropagation()`, clicking on the buttons now only shows a single alert (from the `<button>`) rather than the two of them (from the `<button>` and the parent toolbar `<div>`). Clicking a button is not the same thing as clicking the surrounding toolbar, so stopping the propagation makes sense for this UI.
+ຈາກຜົນຂອງ `e.stopPropagation()`, ຕອນນີ້ການຄິກທີ່ປຸ່ມຈະສະແດງພຽງການແຈ້ງເຕືອນດຽວ (ຈາກ `<button>`) ແທນທີ່ຈະເປັນສອງປຸ່ມ (ຈາກ `<botton>` ແລະ parent toobar `<div>`). ການຄິກປຸ່ມບໍ່ຄືກັບການຄິກ toolbar ຮອບໆ, ສະນັ້ນການຢຸດເຜີຍແຜ່ຈິງເໝາະສົມສຳລັບ UI ນີ້.
 
 <DeepDive>
 
-#### Capture phase events {/*capture-phase-events*/}
+#### ການບັນທຶກ phase events {/*capture-phase-events*/}
 
-In rare cases, you might need to catch all events on child elements, *even if they stopped propagation*. For example, maybe you want to log every click to analytics, regardless of the propagation logic. You can do this by adding `Capture` at the end of the event name:
+ໃນກໍລະນີທີ່ເກີດຂຶ້ນບໍ່ຫຼາຍ, ທ່ານອາດຈະຕ້ອງ catch event ທັງໝົດໃນ child element, *ເຖິງວ່າເຫດການເຫຼົ່ານັ້ນຈະຢຸດເຜີຍແຜ່ໄປແລ້ວກໍຕາມ*. ຕົວຢ່າງ, ບາງທີທ່ານອາດຕ້ອງການບັນທຶກທຸກການຄິກໄປຍັງການວິເຄາະ ໂດຍບໍ່ຄຳນຶງ logic ການເຜີຍແຜ່. ທ່ານສາມາດເຮັດໄດ້ໂດຍເພີ່ມ `Capture` ຕໍ່ທ້າຍຊື່ event:
 
 ```js
 <div onClickCapture={() => { /* this runs first */ }}>
@@ -433,19 +433,19 @@ In rare cases, you might need to catch all events on child elements, *even if th
 </div>
 ```
 
-Each event propagates in three phases: 
+ແຕ່ລະ event ເຜີຍແຜ່ໃນສາມຂັ້ນຕອນ:
 
-1. It travels down, calling all `onClickCapture` handlers.
-2. It runs the clicked element's `onClick` handler. 
-3. It travels upwards, calling all `onClick` handlers.
+1. ມັນເຄື່ອນລົງມາ, ໂດຍການເອີ້ນ `onClickCapture` handler.
+2. ມັນແລ່ນ `onClick` handler ຂອງ element ການຄິກ.
+3. ມັນເຄື່ອນທີ່ຂຶ້ນທາງເທິງ, ເອີ້ນ `onClick` handler ທັງໝົດ.
 
-Capture events are useful for code like routers or analytics, but you probably won't use them in app code.
+Event Capture ມີປະໂຫຍດສຳລັບ code ເຊັ່ນ router ຫຼື ການວິເຄາະ, ແຕ່ທ່ານອາດບໍ່ແມ່ນ event ເຫຼົ່ານັ້ນໃນ code ຂອງແອັບ.
 
 </DeepDive>
 
-### Passing handlers as alternative to propagation {/*passing-handlers-as-alternative-to-propagation*/}
+### ການສົ່ງ handler ເປັນທາງເລືອກໃນການເຜີຍແຜ່ {/*passing-handlers-as-alternative-to-propagation*/}
 
-Notice how this click handler runs a line of code _and then_ calls the `onClick` prop passed by the parent:
+ສັງເກດວ່າ click handler ນີ້ແລ່ນ code _ແລ້ວ_ ເອີ້ນ prop `onClick` ທີ່ parent ສົ່ງໄດ້ແນວໃດ:
 
 ```js {4,5}
 function Button({ onClick, children }) {
@@ -460,13 +460,13 @@ function Button({ onClick, children }) {
 }
 ```
 
-You could add more code to this handler before calling the parent `onClick` event handler, too. This pattern provides an *alternative* to propagation. It lets the child component handle the event, while also letting the parent component specify some additional behavior. Unlike propagation, it's not automatic. But the benefit of this pattern is that you can clearly follow the whole chain of code that executes as a result of some event.
+ທ່ານສາມາດເພີ່ມ code ໃຫ້ກັບ handler ນີ້ກ່ອນທີ່ຈະເອີ້ນ event handler `onClick` parent ໄດ້, ຄືກັນ. ຮູບແບບນີ້ໃຫ້ *ທາງເລືອກ* ໃນການເຜີຍແຜ່. ມັນອະນຸຍາດໃຫ້ child component ຈັດການ event, ໃນຂະນະທີ່ຍັງໃຫ້ parent component ລະບຸພຶດທິກຳເພີ່ມເຕີມບາງຢ່າງ. ບໍ່ຄືກັບການເຜີຍແຜ່, ມັນບໍ່ອັດຕະໂນມັດ. ແຕ່ຂໍ້ດີຂອງຮູບແບບນີ້ຄືທ່ານສາມາດຕິດຕາມຕ່ອງໂສ່ຂອງ code ທັງໝົດໄດ້ຢ່າງຊັດເຈນເຊິ່ງງດຳເນີນການໂດຍເປັນຜົນມາຈາກ event ບາງຢ່າງ.
 
-If you rely on propagation and it's difficult to trace which handlers execute and why, try this approach instead.
+ຖ້າທ່ານເພິ່ງພາການເຜີຍແຜ່ ແລະ ເປັນການຍາກທີ່ຈະຕິດຕາມວ່າ handler ໃດ execute ແລະ ຍ້ອນຫຍັງ, ໃຫ້ລອງໃຊ້ວິທີນີ້ແທນ.
 
-### Preventing default behavior {/*preventing-default-behavior*/}
+### ການປ້ອງກັນພຶດທິກຳເລີ່ມຕົ້ນ {/*preventing-default-behavior*/}
 
-Some browser events have default behavior associated with them. For example, a `<form>` submit event, which happens when a button inside of it is clicked, will reload the whole page by default:
+Event ບາວເຊີບາງຢ່າງມີລັກສະນະການເຮັດວຽກເລີ່ມຕົ້ນທີ່ກ່ຽວຂ້ອງ. ຕົວຢ່າງ, event ການ submit `<form>`, ເຊິ່ງເກີດຂຶ້ນເມື່ອທ່ານຄິກປຸ່ມພາຍໃນນັ້ນ, ຈະໂຫຼດໜ້າໃໝ່ຕາມຄ່າເລີ່ມຕົ້ນ:
 
 <Sandpack>
 
@@ -487,7 +487,7 @@ button { margin-left: 5px; }
 
 </Sandpack>
 
-You can call `e.preventDefault()` on the event object to stop this from happening:
+ທ່ານສາມາດເອີ້ນ `e.preventDefault()` ເທິງ event object ເພື່ອຢຸດສິ່ງນີ້ບໍ່ໃຫ້ເກີດຂຶ້ນ:
 
 <Sandpack>
 
@@ -511,28 +511,28 @@ button { margin-left: 5px; }
 
 </Sandpack>
 
-Don't confuse `e.stopPropagation()` and `e.preventDefault()`. They are both useful, but are unrelated:
+ຢ່າສັບສົນລະຫວ່າງ `e.stopPropagation()` ແລະ `e.preventDefault()`. ມີປະໂຫຍດໝົດສອງ, ແຕ່ບໍ່ກ່ຽວຂ້ອງກັນ:
 
-* [`e.stopPropagation()`](https://developer.mozilla.org/docs/Web/API/Event/stopPropagation) stops the event handlers attached to the tags above from firing.
-* [`e.preventDefault()` ](https://developer.mozilla.org/docs/Web/API/Event/preventDefault) prevents the default browser behavior for the few events that have it.
+* [`e.stopPropagation()`](https://developer.mozilla.org/docs/Web/API/Event/stopPropagation) ຢຸດ event handler ທີ່ແນບກັບແທັກທາງເທິງບໍ່ໃຫ້ເລີ່ມເຮັດວຽກ.
+* [`e.preventDefault()` ](https://developer.mozilla.org/docs/Web/API/Event/preventDefault) ປ້ອງກັນພຶດທິກຳເລີ່ມຕົ້ນຂອງບາວເຊີສຳລັບບາງ event ທີ່ມີ.
 
-## Can event handlers have side effects? {/*can-event-handlers-have-side-effects*/}
+## Event handler ສາມາດມີ່ຜົນຂ້າງຄຽງໄດ້ ຫຼື ບໍ່? {/*can-event-handlers-have-side-effects*/}
 
-Absolutely! Event handlers are the best place for side effects.
+ແນ່ນອນ! Event handler ເປັນບ່ອນທີ່ດີທີ່ສຸດສຳລັບຜົນຂ້າງຄຽງ.
 
-Unlike rendering functions, event handlers don't need to be [pure](/learn/keeping-components-pure), so it's a great place to *change* something—for example, change an input's value in response to typing, or change a list in response to a button press. However, in order to change some information, you first need some way to store it. In React, this is done by using [state, a component's memory.](/learn/state-a-components-memory) You will learn all about it on the next page.
+Event handler ບໍ່ຈຳເປັນຕ້ອງ [pure](/learn/keeping-components-pure), ເຊິ່ງແຕກຕ່າງຈາກຟັງຊັ່ນການ render, ດັ່ງນັ້ນມັນຈຶ່ງເປັນບ່ອນທີ່ດີໃນການ *ປ່ຽນແປງ* ບາງຢ່າງ-ຕົວຢ່າງ, ປ່ຽນຄ່າ input ຕາມການພິມ, ຫຼື ປ່ຽນລາຍການຕາມການກົດປຸ່ມ. ເຖິງຢ່າງໃດກໍຕາມ, ໃນການປ່ຽນແປງຂໍ້ມູນບາງຢ່າງ, ທຳອິດທ່ານຕ້ອງມີວິທີໃນການຈັດເກັບ. ໃນ React, ສິ່ງນີ້ເຮັດໄດ້ໂດຍການໃຊ້ [state, memory ຂອງ component.](/learn/state-a-components-memory) ທ່ານຈະໄດ້ຮຽນຮູ້ທັງໝົດກ່ຽວກັບມັນໃນໜ້າຕໍ່ໄປ.
 
 <Recap>
 
-* You can handle events by passing a function as a prop to an element like `<button>`.
-* Event handlers must be passed, **not called!** `onClick={handleClick}`, not `onClick={handleClick()}`.
-* You can define an event handler function separately or inline.
-* Event handlers are defined inside a component, so they can access props.
-* You can declare an event handler in a parent and pass it as a prop to a child.
-* You can define your own event handler props with application-specific names.
-* Events propagate upwards. Call `e.stopPropagation()` on the first argument to prevent that.
-* Events may have unwanted default browser behavior. Call `e.preventDefault()` to prevent that.
-* Explicitly calling an event handler prop from a child handler is a good alternative to propagation.
+* ທ່ານສາມາດ handle event ໂດຍສົ່ງຟັງຊັ່ນເປັນ prop ໄປຫາ element ເຊັ່ນ `<button>`.
+* Event handler ຕ້ອງຜ່ານ, **ບໍ່ເອີ້ນ!** `onClick={handleClick}`, ບໍ່ແມ່ນ `onClick={handleClick}`.
+* ທ່ານສາມາດກຳນົດຟັງຊັ່ນ event handler ແຍກກັນ ຫຼື ໃນແຖວ.
+* Event handler ແມ່ນຖືກກຳນົດໄວ້ໃນ component, ດັ່ງນັ້ນມັນຈຶ່ງສາມາດເຂົ້າເຖິງ prop ໄດ້.
+* ທ່ານສາມາດປະກາດ event handler ໃນ parent ແລະ ສົ່ງຕໍ່ເປັນ prop ໄປຫາ child.
+* ທ່ານສາມາດກຳນົດ event ຂອງທ່ານເອງດ້ວຍຊື່ສະເພາະຂອງແອັບພິເຄຊັ່ນ.
+* Event ເຜີຍແຜ່ຂຶ້ນໄປ. ເອີ້ນວ່າ `e.stopPropagation()` ໃນ argument ທຳອິດເພື່ອປ້ອງກັນສິ່ງນັ້ນ.
+* Event ອາດມີພຶດທິກຳເລີ່ມຕົ້ນຂອງບາວເຊີທີ່ບໍ່ຕ້ອງການ. ເອີ້ນ `e.preventDefault()` ເພື່ອຫຼີກຫຼ່ຽງມັນ.
+* ການເອີ້ນ event handler ຢ່າງຊັດເຈນຈາກ child handler ແມ່ນເປັນທາງເລືອກທີ່ດີໃນການເຜີຍແຜ່.
 
 </Recap>
 
@@ -540,9 +540,9 @@ Unlike rendering functions, event handlers don't need to be [pure](/learn/keepin
 
 <Challenges>
 
-#### Fix an event handler {/*fix-an-event-handler*/}
+#### ແປງ event handler {/*fix-an-event-handler*/}
 
-Clicking this button is supposed to switch the page background between white and black. However, nothing happens when you click it. Fix the problem. (Don't worry about the logic inside `handleClick`—that part is fine.)
+ການຄິກປຸ່ມນີ້ຄວນເປັນການສະຫຼັບພື້ນຫຼັງຂອງໜ້າລະຫວ່າງສີຂາວ ແລະ ສີດຳ. ເຖິງຢ່າງໃດກໍຕາມ, ຈະບໍ່ມີຫຍັງເກີດຂຶ້ນເມື່ອທ່ານຄິກມັນ. ແກ້ໄຂບັນຫາ. (ຢ່າກັງວົນກ່ຽວກັບ logic ພາຍໃນ `handleClick`-ສ່ວນນັ້ນເຮັດວຽກໄດ້.)
 
 <Sandpack>
 
@@ -569,7 +569,7 @@ export default function LightSwitch() {
 
 <Solution>
 
-The problem is that `<button onClick={handleClick()}>` _calls_ the `handleClick` function while rendering instead of _passing_ it. Removing the `()` call so that it's `<button onClick={handleClick}>` fixes the issue:
+ບັນຫາແມ່ນ `<button onClick={handleClick()}>` _ເອີ້ນ_ ຟັງຊັ່ນ `handleClick` ຂະນະ render ແທນ _ສົ່ງຜ່ານ_ ມັນ. ລຶບການເອີ້ນ `()` ເພື່ອໃຫ້ເປັນ `<button onClick={handleClick}>` ແກ້ໄຂບັນຫາ:
 
 <Sandpack>
 
@@ -594,7 +594,7 @@ export default function LightSwitch() {
 
 </Sandpack>
 
-Alternatively, you could wrap the call into another function, like `<button onClick={() => handleClick()}>`:
+ຫຼຶ ທ່ານສາມາດລວມການເອີ້ນໄວ້ໃນຟັງຊັ່ນອື່ນເຊັ່ນ  `<button onClick={() => handleClick()}>`:
 
 <Sandpack>
 
@@ -621,11 +621,11 @@ export default function LightSwitch() {
 
 </Solution>
 
-#### Wire up the events {/*wire-up-the-events*/}
+#### ເຊື່ອມຕໍ່ events {/*wire-up-the-events*/}
 
-This `ColorSwitch` component renders a button. It's supposed to change the page color. Wire it up to the `onChangeColor` event handler prop it receives from the parent so that clicking the button changes the color.
+Component `ColorSwitch` ນີ້ render ປຸ່ມ. ມັນຄວນຈະປ່ຽນສີ່ page. ເຊື່ອມຕໍ່ກັບ event handler `onChangeColor` ທີ່ໄດ້ຮັບຈາກ parent ເພື່ອໃຫ້ການຄິກປຸ່ມປ່ຽນສີ.
 
-After you do this, notice that clicking the button also increments the page click counter. Your colleague who wrote the parent component insists that `onChangeColor` does not increment any counters. What else might be happening? Fix it so that clicking the button *only* changes the color, and does _not_ increment the counter.
+ຫຼັງຈາກທີ່ທ່ານເຮັດແບບນີ້, ສັງເກດວ່າການຄິກປຸ່ມຈະເພີ່ມຕົວນັບການຄິກໜ້າ page ນຳ. ເພື່ອນຮ່ວມງານຂອງທ່ານຂຽນ component ຢັ້ງຢືນວ່າ `onChangeColor` ຈະບໍ່ເພີ່ມຕົວນັບໃດໆ. ຈະເກີດຫຍັງຕື່ມ? ແກ້ໄຂເພື່ອໃຫ້ຄິກປຸ່ມ *ເທົ່ານັ້ນ* ປ່ຽນສີ ແລະ _ບໍ່_ ເພີ່ມຕົວນັບ.
 
 <Sandpack>
 
@@ -679,9 +679,9 @@ export default function App() {
 
 <Solution>
 
-First, you need to add the event handler, like `<button onClick={onChangeColor}>`.
+ທຳອິດ, ທ່ານຕ້ອງເພິ່ມ event handler, ເຊັ່ນ `<button onClick={onChangeColor}>`.
 
-However, this introduces the problem of the incrementing counter. If `onChangeColor` does not do this, as your colleague insists, then the problem is that this event propagates up, and some handler above does it. To solve this problem, you need to stop the propagation. But don't forget that you should still call `onChangeColor`.
+ເຖິງຢ່າງໃດກໍຕາມ, ສິ່ງນີ້ເຮັດໃຫ້ເກີດບັນຫາຂອງຕົວນັບທີ່ເພີ່ມຂຶ້ນ. ຖ້າ `onChangeColor` ບໍ່ເຮັດແບບນີ້, ຕາມທີ່ເພື່ອນຮ່ວມງານຂອງທ່ານຢືນຢັນ, ບັນຫາແມ່ນ event ນີ້ເຜີຍແຜ່ອອກໄປ ແລະ handler ດ້ານເທິງກໍເຮັດແບບນັ້ນ. ເພື່ອແກ້ໄຂບັນຫານີ້, ທ່ານຕ້ອງຢຸດການເຜີຍແຜ. ແຕ່ຢ່າລືມວ່າທ່ານຍັງເອີ້ນ `onChangeColor` ຢູ່.
 
 <Sandpack>
 
