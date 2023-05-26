@@ -1,27 +1,29 @@
 ---
-title: Render and Commit
+title: Render ແລະ Commit
 ---
 
 <Intro>
 
-Before your components are displayed on screen, they must be rendered by React. Understanding the steps in this process will help you think about how your code executes and explain its behavior.
+ກ່ອນທີ່ component ຂອງທ່ານຈະສະແດງເທິງໜ້າຈໍ, ຈະຕ້ອງ render ໂດຍ React. ການທຳຄວາມເຂົ້າໃຈໃນຂະບວນການນີ້ຈະຊ່ວຍໃຫ້ທ່ານຄິດຫາວິທີ execute code ແລະ ອະທິບາຍວິທີການເຮັດວຽກຂອງມັນໄດ້.
 
 </Intro>
 
 <YouWillLearn>
 
-* What rendering means in React
-* When and why React renders a component
-* The steps involved in displaying a component on screen
-* Why rendering does not always produce a DOM update
+* ການ render ໃນ React ແມ່ນຫຍັງ
+* ເມື່ອໃດ ແລະ ຍ້ອນຫຍັງ React ຈຶ່ງ render component
+* ຂັ້ນຕອນທີ່ກ່ຽວຂ້ອງໃນການສະແດງ component ເທິງໜ້າຈໍ
+* ເປັນຫຍັງການ render ຈຶ່ງບໍ່ສ້າງການອັບເດດ DOM ທຸກຄັ້ງ
 
 </YouWillLearn>
 
-Imagine that your components are cooks in the kitchen, assembling tasty dishes from ingredients. In this scenario, React is the waiter who puts in requests from customers and brings them their orders. This process of requesting and serving UI has three steps:
+ກ່ອນ Component ຂອງທ່ານຈະສະແດງເທິງໜ້າຈໍ, ມັນຕ້ອງ render ໂດຍ React. ການທຳຄວາມເຂົ້າໃຈຂັ້ນຕອນຕ່າງໆ ໃນຂະບວນການນີ້ຈະຊ່ວຍໃຫ້ທ່ານຄິດເຖິງວິທີທີ່ code execute ແລະ ອະທິບາຍລັກສະນະການເຮັດວຽກຂອງມັນໄດ້.
 
-1. **Triggering** a render (delivering the guest's order to the kitchen)
-2. **Rendering** the component (preparing the order in the kitchen)
-3. **Committing** to the DOM (placing the order on the table)
+ຈິນຕະນາການວ່າ component ຂອງທ່ານແມ່ນພໍ່ຄົວໃນເຮືອນຄົວ, ກຳລັງເຮັດອາຫານຈານແຊບຈາກວັດຖຸດິບ. ໃນສະຖານະການສົມມຸດນີ້, React ແມ່ນພະນັກງານເສີບທີ່ສົ່ງຄຳຮ້ອງຈາກລູກຄ້າ ແລະ ນຳຄຳສັ່ງນັ້ນມາໃຫ້. ຂະບວນການຂໍ ແລະ ໃຫ້ບໍລິການ UI ມີສາມຂັ້ນຕອນ:
+
+1. **ການ Trigger** render (ສົ່ງອາຫານຕາມສັ່ງໄປທີເຮືອນຄົວ)
+2. **ການ Render** component (ກຽມອາຫານໃນເຮືອນຄົວ)
+3. **ການ Commit** to the DOM (ສົ່ງອາຫານໄປທີ່ໂຕະ)
 
 <IllustrationBlock sequential>
   <Illustration caption="Trigger" alt="React as a server in a restaurant, fetching orders from the users and delivering them to the Component Kitchen." src="/images/docs/illustrations/i_render-and-commit1.png" />
@@ -29,16 +31,16 @@ Imagine that your components are cooks in the kitchen, assembling tasty dishes f
   <Illustration caption="Commit" alt="React delivers the Card to the user at their table." src="/images/docs/illustrations/i_render-and-commit3.png" />
 </IllustrationBlock>
 
-## Step 1: Trigger a render {/*step-1-trigger-a-render*/}
+## ຂັ້ນຕອນທີ 1: ການ Trigger render {/*step-1-trigger-a-render*/}
 
-There are two reasons for a component to render:
+ມີສອງເຫດຜົນສຳລັບ component ໃນການ render:
 
-1. It's the component's **initial render.**
-2. The component's (or one of its ancestors') **state has been updated.**
+1. ເປັນ **ການ render ເລີ່ມຕົ້ນ.** ຂອງ component
+2. State **ຂອງ component (ຫຼື ໜຶ່ງໃນບັນພະບູລຸດຂອງມັນ) ໄດ້ຮັບການອັບເດດແລ້ວ.**
 
-### Initial render {/*initial-render*/}
+### ການ render ເລີ່ມຕົ້ນ {/*initial-render*/}
 
-When your app starts, you need to trigger the initial render. Frameworks and sandboxes sometimes hide this code, but it's done by calling [`createRoot`](/reference/react-dom/client/createRoot) with the target DOM node, and then calling its `render` method with your component:
+ເມື່ອແອັບຂອງທ່ານເລີ່ມເຮັດວຽກ, ທ່ານຈະຕ້ອງ trigger ການ render ເລີ່ມຕົ້ນ. Framework ແລະ sandbox ບາງເທື່ອຈະເຊື່ອງ code ນີ້, ແຕ່ເຮັດໄດ້ໂດຍການເອີ້ນ [`createRoot`](/reference/react-dom/client/createRoot) ກັບ DOM node ເປົ້າໝາຍ , ຈາກນັ້ນຈະເອີ້ນ method `render` ດ້ວຍ component ຂອງທ່ານ:
 
 <Sandpack>
 
@@ -63,11 +65,11 @@ export default function Image() {
 
 </Sandpack>
 
-Try commenting out the `root.render()` call and see the component disappear!
+ລອງ comment ໃນການເອີ້ນ `root.render()` ແລະ ເບິ່ງວ່າ component ນັ້ນຫາຍໄປ!
 
-### Re-renders when state updates {/*re-renders-when-state-updates*/}
+### ການ render ໃໝ່ເມື່ອ state ມີການອັບເດດ {/*re-renders-when-state-updates*/}
 
-Once the component has been initially rendered, you can trigger further renders by updating its state with the [`set` function.](/reference/react/useState#setstate) Updating your component's state automatically queues a render. (You can imagine these as a restaurant guest ordering tea, dessert, and all sorts of things after putting in their first order, depending on the state of their thirst or hunger.)
+ເມື່ອ component ຂອງທ່ານໄດ້ຮັບການ render ທຳອິດແລ້ວ, ທ່ານສາມາດ trigger ການ render ເພີ່ມເຕີມໄດ້ໂດຍການອັບເດດ state ດ້ວຍ [ຟັງຊັ່ນ `set`.](/reference/react/useState#setstate) ການອັບເດດ state ຂອງ component ຈະຈັດການຄິວການ render ໂດຍອັດຕະໂນມັດ. (ຈິນຕະນາການວ່າແຂກໃນຮ້ານອາຫານສັ່ງຊາ, ຂອງຫວານ ແລະ ສິ່ງຕ່າງໆ ຫຼັງຈາກສັ່ງອາຫານເທື່ອທຳອິດ, ຂຶ້ນຢູ່ກັບລະດັບຂອງຄວາມກະຫາຍ ຫຼື ຄວາມຫິວ.)
 
 <IllustrationBlock sequential>
   <Illustration caption="State update..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. They patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
@@ -75,16 +77,16 @@ Once the component has been initially rendered, you can trigger further renders 
   <Illustration caption="...render!" alt="The Card Chef gives React the pink Card." src="/images/docs/illustrations/i_rerender3.png" />
 </IllustrationBlock>
 
-## Step 2: React renders your components {/*step-2-react-renders-your-components*/}
+## ຂັ້ນຕອນທີ 2: React render component ຂອງທ່ານ {/*step-2-react-renders-your-components*/}
 
-After you trigger a render, React calls your components to figure out what to display on screen. **"Rendering" is React calling your components.**
+ຫຼັງຈາກທີ່ທ່ານ trigger ການ render, React ຈະເອີ້ນ component ຂອງທ່ານເພື່ອເບິ່ງວ່າຈະສະແດງຫຍັງແນ່ເທິງໜ້າຈໍ. **"ການ render" ແມ່ນ React ເອີ້ນໃຊ້ component ຂອງທ່ານ.**
 
-* **On initial render,** React will call the root component.
-* **For subsequent renders,** React will call the function component whose state update triggered the render.
+* **ໃນການ render ເລີ່ມຕົ້ນ,** React ຈະເອີ້ນໃຊ້ root component.
+* **ສຳລັບການ render ທີ່ຕາມມາ,** React ຈະເອີ້ນໃຊ້ component ຂອງຟັງຊັ່ນເຊິ່ງການອັບເດດ state ຈະ trigger ການ render.
 
-This process is recursive: if the updated component returns some other component, React will render _that_ component next, and if that component also returns something, it will render _that_ component next, and so on. The process will continue until there are no more nested components and React knows exactly what should be displayed on screen.
+ຂະບວນການນີ້ເປັນແບບເອີ້ນຊໍ້າ: ຖ້າ component ທີ່ອັບເດດ return component ອື່ນ, React ຈະ render component _ນັ້ນ_ ຕໍ່ໄປ, ແລະ ຖ້າ component ນັ້ນ return ບາງຢ່າງ, ມັນຈະ render component _ນັ້ນ_ ຕໍ່ໄປ, ແລະ ອື່ນໆ. ຂະບວນການຈະດຳເນີນຕໍ່ໄປຈົນກວ່າຈະບໍ່ມີ component ທີ່ຊ້ອນກັນອີກຕໍ່ໄປ ແລະ React ຮູ້ວ່າແມ່ນຫຍັງຈະສະແດງເທິງໜ້າຈໍ.
 
-In the following example, React will call `Gallery()` and  `Image()` several times:
+ໃນຕົວຢ່າງຕໍ່ໄປນີ້, React ຈະເອີ້ນໃຊ້ `Gallery()` ແລະ `Image()` ຫຼາຍຄັ້ງ:
 
 <Sandpack>
 
@@ -124,17 +126,17 @@ img { margin: 0 10px 10px 0; }
 
 </Sandpack>
 
-* **During the initial render,** React will [create the DOM nodes](https://developer.mozilla.org/docs/Web/API/Document/createElement) for `<section>`, `<h1>`, and three `<img>` tags. 
-* **During a re-render,** React will calculate which of their properties, if any, have changed since the previous render. It won't do anything with that information until the next step, the commit phase.
+* **ລະຫວ່າງການ render ເລີ່ມຕົ້ນ,** React ຈະ [ສ້າງ DOM nodes](https://developer.mozilla.org/docs/Web/API/Document/createElement) ສຳລັບ `<section>`, `<h1>`, ແລະ ສາມແທັກ `<img>`.
+* **ລະຫວ່າງການ render ໃໝ່,** React ຈະຄຳນວນວ່າ property ໃດຂອງພວກມັນ (ຖ້າມີ) ມີການປ່ຽນແປງຕັ້ງແຕ່ການ render ຄັ້ງກ່ອນ. ມັນຈະບໍ່ເຮັດຫຍັງກັບຂໍ້ມູນນັ້ນຈົນກວ່າຈະເຖິງຂັ້ນຕອນຕໍ່ໄປ, ຂັ້ນຕອນການ commit.
 
 <Pitfall>
 
-Rendering must always be a [pure calculation](/learn/keeping-components-pure):
+ການ render ຕ້ອງເປັນ [ການຄຳນວນ pure](/learn/keeping-components-pure):
 
-* **Same inputs, same output.** Given the same inputs, a component should always return the same JSX. (When someone orders a salad with tomatoes, they should not receive a salad with onions!)
-* **It minds its own business.** It should not change any objects or variables that existed before rendering. (One order should not change anyone else's order.)
+* **input ດຽວກັນ, output ດຽວກັນ.** ເມື່ອພິຈາລະນາ input ດຽວກັນ, component ຄວນຈະ return ຄ່າ JSX ດຽວກັນສະເໝີ . (ເມື່ອມີຄົນສັ່ງສະລັດກັບໝາກເລັ່ນ, ພວກເຂົາບໍ່ຄວນໄດ້ຮັບສະລັດກັບຫອມບົວ!)
+* **ຄຳນຶງເຖິງເລື່ອງຕົວເອງ.** ມັນຄວນບໍ່ປ່ຽນແປງ object ຫຼື ຕົວແປໃດໆ ທີ່ມີກ່ອນການ render. (ຄຳສັ່ງດຽວບໍ່ຄວນປ່ຽນຄຳສັ່ງຂອງຄົນອື່ນ.)
 
-Otherwise, you can encounter confusing bugs and unpredictable behavior as your codebase grows in complexity. When developing in "Strict Mode", React calls each component's function twice, which can help surface mistakes caused by impure functions.
+ຖ້າບໍ່ດັ່ງນັ້ນ, ທ່ານອາດຈະພົບ bug ທີ່ນ່າສັບສົນ ແລະ ພຶດທິກຳທີ່ຄາດເດົາບໍ່ໄດ້ເມື່ອ codebase ຂອງທ່ານມີຄວາມຊັບຊ້ອນຫຼາຍເກີນໄປ. ເມື່ອພັດທະນາໃນ "Strict Mode", React ຈະເອີ້ນໃຊ້ແຕ່ລະຟັງຊັ່ນຂອງ component ສອງຄັ້ງ, ເຊິ່ງສາມາດຊ່ວຍຫາຂໍ້ຜິດພາດເບື້ອງຕົ້ນທີ່ອາດຈະເກີດຂຶ້ນຈາກຟັງຊັ່ນທີ່ບໍ່ pure ໄດ້.
 
 </Pitfall>
 
@@ -142,18 +144,18 @@ Otherwise, you can encounter confusing bugs and unpredictable behavior as your c
 
 #### Optimizing performance {/*optimizing-performance*/}
 
-The default behavior of rendering all components nested within the updated component is not optimal for performance if the updated component is very high in the tree. If you run into a performance issue, there are several opt-in ways to solve it described in the [Performance](https://reactjs.org/docs/optimizing-performance.html) section. **Don't optimize prematurely!**
+ລັກສະນະການເຮັດວຽກເລີ່ມຕົ້ນຂອງການ render component ທັງໝົດທີຊ້ອນກັນຢູ່ພາຍໃນ component ທີ່ອັບເດດແລ້ວບໍ່ເໝາະສົມສຳລັບປະສິດທິພາບ ຖ້າ component ທີ່ອັບເດດແລ້ວນັ້ນຢູ່ສູງຫຼາຍໃນ tree. ຫາກທ່ານພົບບັນຫາດ້ານປະສິດທິພາບ, ມີວິທີເລືອກໃຊ້ຫຼາຍວິທີໃນການແກ້ໄຂບັນຫາຕາມທີ່ອະທິບາຍໄວ້ໃນຫົວຂໍ້ [ປະສິດທິພາບ](https://reactjs.org/docs/optimizing-performance.html). **ຢ່າເພີ່ມປະສິດທິພາບກ່ອນເວລາອັນຄວນ!** 
 
 </DeepDive>
 
-## Step 3: React commits changes to the DOM {/*step-3-react-commits-changes-to-the-dom*/}
+## ຂັ້ນຕອນທີ 3: React commit ການປ່ຽນແປງກັບ DOM {/*step-3-react-commits-changes-to-the-dom*/}
 
-After rendering (calling) your components, React will modify the DOM. 
+ຫຼັງຈາກການ render (ການເອີ້ນໃຊ້) component ຂອງທ່ານ, React ຈະແກ້ໄຂ DOM.
 
-* **For the initial render,** React will use the [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) DOM API to put all the DOM nodes it has created on screen. 
-* **For re-renders,** React will apply the minimal necessary operations (calculated while rendering!) to make the DOM match the latest rendering output.
+* **ສຳລັບການ render ເລີ່ມຕົ້ນ,** React ຈະໃຊ້ [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild)  DOM API ເພື່ອວາງ DOM node ທັງໝົດ ມັນຖືກສ້າງຂຶ້ນເທິງໜ້າຈໍ.
+* **ສຳລັບການ render ໃໝ່,** React ຈະໃຊ້ການດຳເນີນການທີ່ຈຳເປັນໜ້ອຍທີ່ສຸດ (ຄຳນວນຂະນະ render!) ເພື່ອເຮັດໃຫ້ DOM ກົງກັບ output ການ render ຫຼ້າສຸດ.
 
-**React only changes the DOM nodes if there's a difference between renders.** For example, here is a component that re-renders with different props passed from its parent every second. Notice how you can add some text into the `<input>`, updating its `value`, but the text doesn't disappear when the component re-renders:
+**React ຈະປ່ຽນ DOM node ກໍຕໍ່ເມື່ອມີຄວາມແຕກຕ່າງລະຫວ່າງການ render ເທົ່ານັ້ນ.** ຕົວຢ່າງ, ນີ້ແມ່ນ component ທີ່ render ໃໝ່ດ້ວຍ prop ແຕກຕ່າງທີ່ຖືກສົ່ງຜ່ານມາຈາກ parent ທຸກໆວິນາທີ. ສັງເກດວິທີທີ່ທ່ານສາມາດເພີ່ມຂໍ້ຄວາມລົງໃນ `<input>`, ອັບເດດ `value` ຂອງມັນ, ແຕ່ຂໍ້ຄວາມຈະບໍ່ຫາຍໄປເມື່ອ component ມີການ render ໃໝ່:
 
 <Sandpack>
 
@@ -193,21 +195,21 @@ export default function App() {
 
 </Sandpack>
 
-This works because during this last step, React only updates the content of `<h1>` with the new `time`. It sees that the `<input>` appears in the JSX in the same place as last time, so React doesn't touch the `<input>`—or its `value`!
-## Epilogue: Browser paint {/*epilogue-browser-paint*/}
+ມັນເຮັດວຽກໄດ້ເພາະໃນຂັ້ນຕອນສຸດທ້າຍນີ້, React ຈະອັບເດດເນື້ອຫາຂອງ `<h1>` ດ້ວຍ `time` ໃໝ່ເທົ່ານັ້ນ. ເຫັນວ່າ `<input>` ປະກົດໃນ JSX ໃນຕຳແໜ່ງດຽວກັນກັບຄັ້ງກ່ອນ, ສະນັ້ນ React ຈະບໍ່ແຕະ `<input>`-ຫຼື `value` ຂອງມັນ!
+## ບົດສົ່ງທ້າຍ: ລະບາຍສີເທິງ Browser {/*epilogue-browser-paint*/}
 
-After rendering is done and React updated the DOM, the browser will repaint the screen. Although this process is known as "browser rendering", we'll refer to it as "painting" to avoid confusion throughout the docs.
+ຫຼັງຈາກການ render ສຳເລັດແລ້ວ ແລະ React ອັບເດດ DOM ແລ້ວ, ບາວເຊີຈະທາສີໜ້າຈໍໃໝ່. ເຖິງວ່າຂະບວນການນີ້ເອີ້ນວ່າ "browser rendering", ແຕ່ເຮົາຈະເອີ້ນວ່າ "ການລະບາຍສີ" ເພື່ອຫຼີກຫຼ່ຽງຄວາມສັບສົນໃນເອກະສານ.
 
 <Illustration alt="A browser painting 'still life with card element'." src="/images/docs/illustrations/i_browser-paint.png" />
 
 <Recap>
 
-* Any screen update in a React app happens in three steps:
-  1. Trigger
-  2. Render
-  3. Commit
-* You can use Strict Mode to find mistakes in your components
-* React does not touch the DOM if the rendering result is the same as last time
+* ການອັບເດດໜ້າຈໍໃດໆໃນແອັບ React ແມ່ນເກີດຈາກ 3 ຂັ້ນຕອນ:
+  1. ການ Trigger
+  2. ການ Render
+  3. ການ Commit
+* ທ່ານສາມາດໃຊ້ Strict Mode ເພື່ອຄົ້ນຫາຂໍ້ຜິດພາດໃນ component ຂອງທ່ານ
+* React ຈະບໍ່ແຕະ DOM ຖ້າຜົນຂອງການ render ບໍ່ຄືກັບຄັ້ງທີ່ຜ່ານມາ
 
 </Recap>
 
