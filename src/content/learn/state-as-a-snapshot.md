@@ -1,27 +1,27 @@
 ---
-title: State as a Snapshot
+title: State ເປັນ Snapshot
 ---
 
 <Intro>
 
-State variables might look like regular JavaScript variables that you can read and write to. However, state behaves more like a snapshot. Setting it does not change the state variable you already have, but instead triggers a re-render.
+ຕົວແປ state ອາດຄ້າຍຄືຕົວແປ JavaScript ທົ່ວໄປທີ່ທ່ານສາມາອ່ານ ແລະ ຂຽນໄດ້. ເຖິງຢ່າງໃດກໍຕາມ, state ຈະເຮັດວຽກຄື snapshot ຫຼາຍກວ່າ. ການຕັ້ງຄ່ານີ້ບໍ່ໄດ້ປ່ຽນຕົວແປ state ທີ່ທ່ານມີຢູ່ແລ້ວ, ແຕ່ຈະ trigger ການ render ໃໝ່ແທນ.
 
 </Intro>
 
 <YouWillLearn>
 
-* How setting state triggers re-renders
-* When and how state updates
-* Why state does not update immediately after you set it
-* How event handlers access a "snapshot" of the state
+* state ການຕັ້ງຄ່າ trigger ການ render ໃໝ່ແນວໃດ
+* state ອັບເດດຕອນໃດ ແລະ ແນວໃດ 
+* ເປັນຫຍັງ state ຈຶ່ງບໍ່ອັບເດດທັນທີຫຼັງຈາກທີ່ທ່ານຕັ້ງຄ່າ
+* Event handler ເຂົ້າເຖິງ "snapshot" ຂອງ state ໄດ້ແນວໃດ
 
 </YouWillLearn>
 
-## Setting state triggers renders {/*setting-state-triggers-renders*/}
+## ການຕັ້ງຄ່າ state trigger ການ render {/*setting-state-triggers-renders*/}
 
-You might think of your user interface as changing directly in response to the user event like a click. In React, it works a little differently from this mental model. On the previous page, you saw that [setting state requests a re-render](/learn/render-and-commit#step-1-trigger-a-render) from React. This means that for an interface to react to the event, you need to *update the state*.
+ທ່ານອາດຄິດວ່າສ່ວນ user interaface ຂອງທ່ານປ່ຽນແປງໂດຍກົງເພື່ອຕອບສະໜອງ event ຂອງ user ເຊັ່ນການຄິກ. ໃນ React, ມັນເຮັດວຽກແຕກຕ່າງກັນຈາກ mental model ໜ້ອຍໜື່ງ. ໃນໜ້າທີ່ແລ້ວ, ທ່ານເຫັນວ່າ [state ການຕັ້ງຄ່າ request ຂອງການ render ຊໍ້າ](/learn/render-and-commit#step-1-trigger-a-render) ຈາກ React. ເຊິ່ງໝາຍຄວາມວ່າເພື່ອໃຫ້ interface ຕອບສະໜອງຕໍ່ event ໄດ້, ທ່ານຕ້ອງ *ອັບເດດ state*.
 
-In this example, when you press "send", `setIsSent(true)` tells React to re-render the UI:
+ໃນຕົວຢ່າງນີ້, ເມື່ອທ່ານກົດ "send", `setIsSent(true)` ຈະບອກ React ໃຫ້ render UI ໃໝ່:
 
 <Sandpack>
 
@@ -61,43 +61,43 @@ label, textarea { margin-bottom: 10px; display: block; }
 
 </Sandpack>
 
-Here's what happens when you click the button:
+ນີ້ແມ່ນສິ່ງທີ່ເກີດຂຶ້ນເມື່ອທ່ານຄິກປຸ່ມ:
 
-1. The `onSubmit` event handler executes.
-2. `setIsSent(true)` sets `isSent` to `true` and queues a new render.
-3. React re-renders the component according to the new `isSent` value.
+1. event hander `onSubmit` ດຳເນີນການ.
+2. `setIsSent(true)` ຕັ້ງຄ່າ `isSent` ເປັນ `true` ແລະ ຈັດຄິວການ render ໃໝ່.
+3. React ຈະ render component ໃໝ່ຕາມຄ່າ `isSent` ໃໝ່.
 
-Let's take a closer look at the relationship between state and rendering.
+ມາເບິ່ງຄວາມສຳພັນລະຫວ່າງ state ແລະ ການ render ໃຫ້ລະອຽດຍິ່ງຂຶ້ນ.
 
-## Rendering takes a snapshot in time {/*rendering-takes-a-snapshot-in-time*/}
+## ການ Render ຈັບ snapshot ທັນເວລາ {/*rendering-takes-a-snapshot-in-time*/}
 
-["Rendering"](/learn/render-and-commit#step-2-react-renders-your-components) means that React is calling your component, which is a function. The JSX you return from that function is like a snapshot of the UI in time. Its props, event handlers, and local variables were all calculated **using its state at the time of the render.**
+["ການ Render"](/learn/render-and-commit#step-2-react-renders-your-components) ແມ່ນ React ກຳລັງເອີ້ນໃຊ້ component ຂອງທ່ານ, ເຊິ່ງເປັນຟັງຊັ່ນ. JSX ທີ່ທ່ານ return ຈາກ ຟັງຊັ່ນນັ້ນເປັນເໝືອນ snapshot ຂອງ UI ໃນເວລາ. Prop ຂອງມັນ, event handler ແລະ ຕົວແປພາຍໃນທັງໝົດໄດ້ຮັບການຄຳນວນ **ໂດຍໃຊ້ status ຂອງມັນໃນເວລາ render**
 
-Unlike a photograph or a movie frame, the UI "snapshot" you return is interactive. It includes logic like event handlers that specify what happens in response to inputs. React updates the screen to match this snapshot and connects the event handlers. As a result, pressing a button will trigger the click handler from your JSX.
+UI "snapshot" ທີ່ທ່ານ return ເປັນແບບ interactive ບໍ່ຄືກັນກັບພາບຖ່າຍ ຫຼື ເຟມໜັງ. ມັນມີ logic ເຊັ່ນ event handler ທີ່ລະບຸສິ່ງທີ່ເກີດຂຶ້ນໃນການຕອບສະໜອງຕໍ່ input. React ອັບເດດໜ້າຈໍໃຫ້ກົງກັບ snapshot ນີ້ ແລະ ເຊື່ອມຕໍ່ event handler. ດ້ວຍເຫດນີ້, ການກົດປຸ່ມຈະເອີ້ນໃຊ້ click handler ຈາກ JSX ຂອງທ່ານ.
 
-When React re-renders a component:
+ເມື່ອ React ທຳການ render component ອີກຄັ້ງ:
 
-1. React calls your function again.
-2. Your function returns a new JSX snapshot.
-3. React then updates the screen to match the snapshot you've returned.
-
-<IllustrationBlock sequential>
-    <Illustration caption="React executing the function" src="/images/docs/illustrations/i_render1.png" />
-    <Illustration caption="Calculating the snapshot" src="/images/docs/illustrations/i_render2.png" />
-    <Illustration caption="Updating the DOM tree" src="/images/docs/illustrations/i_render3.png" />
-</IllustrationBlock>
-
-As a component's memory, state is not like a regular variable that disappears after your function returns. State actually "lives" in React itself--as if on a shelf!--outside of your function. When React calls your component, it gives you a snapshot of the state for that particular render. Your component returns a snapshot of the UI with a fresh set of props and event handlers in its JSX, all calculated **using the state values from that render!**
+1. React ເອີ້ນໃຊ້ຟັງຊັ່ນຂອງທ່ານອີກຄັ້ງ.
+2. ຟັງຊັ່ນຂອງທ່ານ return snaptshot JSX ໃໝ່.
+3. React ຈາກນັ້ນອັບເດດໜ້າຈໍໃຫ້ກົງກັບ snapshot ທີ່ທ່ານ return.
 
 <IllustrationBlock sequential>
-  <Illustration caption="You tell React to update the state" src="/images/docs/illustrations/i_state-snapshot1.png" />
-  <Illustration caption="React updates the state value" src="/images/docs/illustrations/i_state-snapshot2.png" />
-  <Illustration caption="React passes a snapshot of the state value into the component" src="/images/docs/illustrations/i_state-snapshot3.png" />
+    <Illustration caption="React execute ຟັງຊັ່ນ" src="/images/docs/illustrations/i_render1.png" />
+    <Illustration caption="ຄຳນວນ snapshot" src="/images/docs/illustrations/i_render2.png" />
+    <Illustration caption="ອັບເດດ DOM tree" src="/images/docs/illustrations/i_render3.png" />
 </IllustrationBlock>
 
-Here's a little experiment to show you how this works. In this example, you might expect that clicking the "+3" button would increment the counter three times because it calls `setNumber(number + 1)` three times.
+ໃນຖານະໜ່ວຍຄວາມຈຳຂອງ component, state ບໍ່ຄືກັບຕົວແປທົ່ວໄປທີ່ຫາຍໄປຫຼັງຈາກທີ່ຟັງຊັ່ນຂອງທ່ານ return. ລະບຸວ່າ "ມັນຍັງມີຢູ່" ໃນ React ເອງ--ຄືກັບວ່າຢູ່ໃນຊັ້ນວາງ!--ນອກຟັງຊັ່ນຂອງທ່ານ. ເມື່ອ React ເອີ້ນ component ຂອງທ່ານ, ມັນຈະສະແດງພາບລວມຂອງ state ສຳລັບການ render ນັ້ນ. Component ຂອງທ່ານ return snapshot ຂອງ UI ພ້ອມຊຸດ prop ແລະ event handler ໃໝ່ໃນ JSX ເຊິ່ງຄຳນວນທັງໝົດ **ໂດຍໃຊ້ຄ່າ state ຈາກການ render ນັ້ນ!**
 
-See what happens when you click the "+3" button:
+<IllustrationBlock sequential>
+  <Illustration caption="ທ່ານບອກ React ອັບເດດ state" src="/images/docs/illustrations/i_state-snapshot1.png" />
+  <Illustration caption="React ຄ່າຂອງ state" src="/images/docs/illustrations/i_state-snapshot2.png" />
+  <Illustration caption="React ສົ່ງ snapshot ຂອງຄ່າ state ໄປຍັງ component" src="/images/docs/illustrations/i_state-snapshot3.png" />
+</IllustrationBlock>
+
+ນີ້ແມ່ນການທົດລອງນ້ອຍໆເພື່ອຈະສະແດງໃຫ້ທ່ານເຫັນວ່າມັນມີການເຮັດວຽກແນວໃດ. ໃນຕົວຢ່າງນີ້, ທ່ານອາດຄາດຫວັງວ່າການຄິກປຸ່ມ "+3" ຈະເພີ່ມຕົວນັບສາມຄັ້ງເນື່ອງຈາກປຸ່ມເອິ້ນໃຊ້ `setNumber(number + 1)` ສາມຄັ້ງ. 
+
+ເບິ່ງວ່າຈະເກີດຫຍັງຂຶ້ນເມື່ອທ່ານຄິກປຸ່ມ "+3":
 
 <Sandpack>
 
@@ -127,9 +127,9 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-Notice that `number` only increments once per click!
+ສັງເກດວ່າ `number` ຈະເພີ່ມຂຶ້ນພຽງຄັ້ງດຽວຕໍ່ການຄິກ!
 
-**Setting state only changes it for the *next* render.** During the first render, `number` was `0`. This is why, in *that render's* `onClick` handler, the value of `number` is still `0` even after `setNumber(number + 1)` was called:
+**State ການຕັ້ງຕ່າຈະປ່ຽນສະເພາະການ render *ຕໍ່ໄປ* ເທົ່ານັ້ນ.** ລະຫວ່າງການ render ຄັ້ງທຳອິດ, `number` ເປັນ `0`. ນີ້ແມ່ນເຫດຜົນທີ່ໃນ event handler `onClick` ຂອງ*ຕົວ render* ຄ່າຂອງ `number` ຍັງເປັນ `0` ເຖິງວ່າຈະເອີ້ນໃຊ້ `setNumber(number + 1)` ແລ້ວກໍ່ຕາມ:
 
 ```js
 <button onClick={() => {
@@ -139,18 +139,18 @@ Notice that `number` only increments once per click!
 }}>+3</button>
 ```
 
-Here is what this button's click handler tells React to do:
+ນີ້ແມ່ນສິ່ງທີ່ click handler ຂອງປຸ່ມນີ້ບອກໃຫ້ React ເຮັດ:
 
-1. `setNumber(number + 1)`: `number` is `0` so `setNumber(0 + 1)`.
-    - React prepares to change `number` to `1` on the next render.
-2. `setNumber(number + 1)`: `number` is `0` so `setNumber(0 + 1)`.
-    - React prepares to change `number` to `1` on the next render.
-3. `setNumber(number + 1)`: `number` is `0` so `setNumber(0 + 1)`.
-    - React prepares to change `number` to `1` on the next render.
+1. `setNumber(number + 1)`: `number` ເປັນ `0` ສະນັ້ນ `setNumber(0 + 1)`.
+    - React ກຽມປ່ຽນ `number` ເປັນ `1` ໃນ render ຕໍ່ໄປ.
+2. `setNumber(number + 1)`: `number` ເປັນ `0` ສະນັ້ນ `setNumber(0 + 1)`.
+    - React ກຽມປ່ຽນ `number` ເປັນ `1` ໃນ render ຕໍ່ໄປ.
+3. `setNumber(number + 1)`: `number` ເປັນ `0` ສະນັ້ນ `setNumber(0 + 1)`.
+    - React ກຽມປ່ຽນ `number` ເປັນ `1` ໃນ render ຕໍ່ໄປ.
 
-Even though you called `setNumber(number + 1)` three times, in *this render's* event handler `number` is always `0`, so you set the state to `1` three times. This is why, after your event handler finishes, React re-renders the component with `number` equal to `1` rather than `3`.
+ເຖິງວ່າທ່ານຈະເອີ້ນໃຊ້ `setNumber(number + 1)` ສາມເທື່ອ, ແຕ່ໃນ event handler ຂອງ *ການ render* ນີ້ `number` ຈະເປັນ `0` ສະເໝີ, ທ່ານຈຶ່ງຕັ້ງຄ່າ state ເປັນ `1` ສາມຄັ້ງ. ນີ້ແມ່ນສາເຫດ, ຫຼັງຈາກ event handler ຂອງທ່ານສຳເລັດ, React ຈະ render component ອີກຄັ້ງດ້ວຍ `number` ເທົ່າກັບ `1` ແທນທີ່ຈະເປັນ `3`.
 
-You can also visualize this by mentally substituting state variables with their values in your code. Since the `number` state variable is `0` for *this render*, its event handler looks like this:
+ທ່ານສາມາດເຮັດໃຫ້ເຫັນພາບໂດຍການແທນທີ່ຕົວແປ state ດ້ວຍຄ່າໃນ code ຂອງທ່ານ. ເນື່ອງຈາກຕົວແປ state `number` ເປັນ `0` ສຳລັບ *ການ render ນີ້*, event handler ຈຶ່ງມີລັກສະນະດັ່ງນີ້: 
 
 ```js
 <button onClick={() => {
@@ -160,7 +160,7 @@ You can also visualize this by mentally substituting state variables with their 
 }}>+3</button>
 ```
 
-For the next render, `number` is `1`, so *that render's* click handler looks like this:
+ສຳລັບການ render ຕໍ່ໄປ, `number` ເປັນ `1`, ສະນັ້ນ click handler ຂອງ *render ນັ້ນ* ຈະມີລັກສະນະດັ່ງນີ້:
 
 ```js
 <button onClick={() => {
@@ -170,11 +170,11 @@ For the next render, `number` is `1`, so *that render's* click handler looks lik
 }}>+3</button>
 ```
 
-This is why clicking the button again will set the counter to `2`, then to `3` on the next click, and so on.
+ນີ້ຈຶ່ງເປັນເຫດຜົນວ່າການຄິກປຸ່ມອີກຄັ້ງຈະເຮັດໃຫ້ຕົວນັບເປັນ `2` ຈາກນັ້ນເປັນ `3` ໃນການຄິກຕໍ່ໄປ, ເປັນຕົ້ນ.
 
-## State over time {/*state-over-time*/}
+## State ເມື່ອເວລາຜ່ານໄປ {/*state-over-time*/}
 
-Well, that was fun. Try to guess what clicking this button will alert:
+ນັ້ນເປັນເລື່ອງທີ່ມ່ວນ. ລອງເດົາເບິງວ່າການຄິກປຸ່ມນີ້ຈະແຈ້ງເຕືອນຫຍັງ:
 
 <Sandpack>
 
@@ -203,14 +203,14 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-If you use the substitution method from before, you can guess that the alert shows "0":
+ຖ້າທ່ານໃຊ້ວິທີການປ່ຽນແທນກ່ອນໜ້ານີ້, ທ່ານສາມາດຄາດເດົາໄດ້ວ່າການແຈ້ງເຕືອນສະແດງ "0":
 
 ```js
 setNumber(0 + 5);
 alert(0);
 ```
 
-But what if you put a timer on the alert, so it only fires _after_ the component re-rendered? Would it say "0" or "5"? Have a guess!
+ແຕ່ຖ້າທ່ານໃຊ້ໂຕຈັບເວລາໃນການແຈ້ງເຕືອນ, ມັນຈຶ່ງເລີ່ມເຮັດວຽກສະເພາະ _ຫຼັງຈາກ_ component ທີ່ render ໃໝ່ ຈະບອກວ່າ "0" ຫຼື "5"? ລອງເດົາເບິ່ງ!
 
 <Sandpack>
 
@@ -241,7 +241,7 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-Surprised? If you use the substitution method, you can see the "snapshot" of the state passed to the alert.
+ປະຫຼາດໃຈບໍ່? ຖ້າທ່ານໃຊ້ວິທີການແທນທີ່,​ ທ່ານຈະເຫັນ "snapshot" ຂອງ state ທີ່ສົ່ງໄປຍັງການແຈ້ງເຕືອນ.
 
 ```js
 setNumber(0 + 5);
@@ -250,16 +250,16 @@ setTimeout(() => {
 }, 3000);
 ```
 
-The state stored in React may have changed by the time the alert runs, but it was scheduled using a snapshot of the state at the time the user interacted with it!
+State ທີ່ເກັບໄວ້ໃນ React ອາດມີການປ່ຽນແປງຕາມເວລາທີ່ການແຈ້ງເຕືອນເຮັດວຽກ, ແຕ່ມັນຖືກກຳນົດເວລາດ້ວຍ snapshot ຂອງ state ຕອນເວລາທີ່ຜູ້ໃຊ້ຕອບໂຕ້ກັບມັນ!
 
-**A state variable's value never changes within a render,** even if its event handler's code is asynchronous. Inside *that render's* `onClick`, the value of `number` continues to be `0` even after `setNumber(number + 5)` was called. Its value was "fixed" when React "took the snapshot" of the UI by calling your component.
+**ຄ່າຂອງຕົວແປ state ຈະບໍ່ປ່ຽນແປງພາຍໃນການ render,** ເຖິງວ່າ code ຂອງ event handler ຈະເປັນແບບ asynchronous ກໍຕາມ. ພາຍໃນ *ບ່ອນ render* `onClick` ຄ່າຂອງ `number` ຍັງເປັນ `0` ເຖິງວ່າຈະເອີ້ນ `setNumber(number + 5)` ກໍຕາມ. ຄ່າຂອງມັນ "fixed" ເມື່ອ React "ບັນທຶກ snapshot" ຂອງ UI ໂດຍເອີ້ນ component ຂອງທ່ານ.
 
-Here is an example of how that makes your event handlers less prone to timing mistakes. Below is a form that sends a message with a five-second delay. Imagine this scenario:
+ຕໍ່ໄປນີ້ຄືຕົວຢ່າງທີ່ເຮັດໃຫ້ event handler ຂອງທ່ານເກີດຂໍ້ຜິດພາດດ້ານເວລາໜ້ອຍລົງ. ດ້ານລຸ່ມນີ້ເປັນແບບຟອມທີ່ສົ່ງຂໍ້ຄວາມໂດຍມີການໜ່ວງເວລາ 5 ວິນາທີ. ຈິນຕະນາການສະຖານະການນີ້:
 
-1. You press the "Send" button, sending "Hello" to Alice.
-2. Before the five-second delay ends, you change the value of the "To" field to "Bob".
+1. ທ່ານກົດປຸ່ມ "Send" ເພື່ອສົ່ງ "Hello" ຫາ Alice.
+2. ກ່ອນທີ່ການໜ່ວງເວລາ 5ວິນາທີຈະສິ້ນສຸດລົງ, ທ່ານປ່ຽນຄ່າຂອງ field "To" ເປັນ "Bob".
 
-What do you expect the `alert` to display? Would it display, "You said Hello to Alice"? Or would it display, "You said Hello to Bob"? Make a guess based on what you know, and then try it:
+ທ່ານຄາດຫວັງໃຫ້ `alert` ສະແດງຫຍັງ? ມັນຈະສະແດງຂໍ້ຄວາມວ່າ "You said Hello to Alice"? ຫຼື ບໍ່? ຫຼື ມັນສະແດງ "You said Hello to Bob"? ລອງເດົາເບິ່ງຕາມສິ່ງທີ່ທ່ານຮູ້ແລ້ວລອງ:
 
 <Sandpack>
 
@@ -305,19 +305,19 @@ label, textarea { margin-bottom: 10px; display: block; }
 
 </Sandpack>
 
-**React keeps the state values "fixed" within one render's event handlers.** You don't need to worry whether the state has changed while the code is running.
+**React ເກັບຄ່າ state "fixed" ພາຍໃນ event handler.** ທ່ານບໍ່ຈຳເປັນຕ້ອງກັງວົນວ່າ state ຈະປ່ຽນໄປ ຫຼື ບໍ່ ໃນຂະນະທີ່ code ກຳລັງເຮັດວຽກ.
 
-But what if you wanted to read the latest state before a re-render? You'll want to use a [state updater function](/learn/queueing-a-series-of-state-updates), covered on the next page!
+ແຕ່ຖ້າທ່ານຕ້ອງການອ່ານ state ຫຼ້າສຸດກ່ອນການ render ໃໝ່ເດ? ທ່ານຈະຕ້ອງໃຊ້ [ຟັງຊັນ state updater](/learn/queueing-a-series-of-state-updates), ເຊິ່ງຈະກ່າວເຖິງໃນໜ້າຖັດໄປ!
 
 <Recap>
 
-* Setting state requests a new render.
-* React stores state outside of your component, as if on a shelf.
-* When you call `useState`, React gives you a snapshot of the state *for that render*.
-* Variables and event handlers don't "survive" re-renders. Every render has its own event handlers.
-* Every render (and functions inside it) will always "see" the snapshot of the state that React gave to *that* render.
-* You can mentally substitute state in event handlers, similarly to how you think about the rendered JSX.
-* Event handlers created in the past have the state values from the render in which they were created.
+* State ການຕັ້ງຄ່າ request ການ render ໃໝ່.
+* React ຈັດເກັບ state ພາຍນອກ component ຂອງທ່ານ, ຄືກັບວ່າຢູ່ໃນຊັ້ນວາງ.
+* ເມື່ອທ່ານເອີ້ນໃຊ້ `useState`, React ຈະສະແດງ snapshot ຂອງ state *ສຳລັບການ render ນັ້ນ*.
+* ຕົວແປ ແລະ event handler ບໍ່ "survive" ການ render ໃໝ່. ການ render ທຸກຄັ້ງຈະມີ event handler ຂອງໂຕເອງ.
+* ທຸກການ render (ແລະ ຟັງຊັ່ນພາຍໃນ) ຈະ "ເຫັນ" snapshot ຂອງ state ທີ່ React ໃຫ້ກັບການ ຳrender *ນັ້ນ* ສະເໝີ.
+* ທ່ານສາມາດແທນທີ່ state ໃນ event handler ໄດ້ ເຊັ່ນດຽວກັບວິທີທີ່ທ່ານຄິດກ່ຽວກັບ JSX ທີ່ render.
+* Event handler ທີ່ຖືກສ້າງຂຶ້ນໃນອະດີດມີຄ່າ state ຈາກການ render ທີ່ສ້າງຂຶ້ນ.
 
 </Recap>
 
@@ -325,9 +325,9 @@ But what if you wanted to read the latest state before a re-render? You'll want 
 
 <Challenges>
 
-#### Implement a traffic light {/*implement-a-traffic-light*/}
+#### Implement ໄຟສັນຍານຈາລະຈອນ {/*implement-a-traffic-light*/}
 
-Here is a crosswalk light component that toggles when the button is pressed:
+ນີ້ແມ່ນ component ໄຟທາງມ້າລາຍທີ່ຈະສະຫຼັບກັນເມື່ອກົດປຸ່ມ:
 
 <Sandpack>
 
@@ -362,13 +362,13 @@ h1 { margin-top: 20px; }
 
 </Sandpack>
 
-Add an `alert` to the click handler. When the light is green and says "Walk", clicking the button should say "Stop is next". When the light is red and says "Stop", clicking the button should say "Walk is next".
+ເພິ່ມ `alert` ໃຫ້ກັບ click handler. ເມື່ອໄຟເປັນສີ່ຂຽວ ແລະ ບອກວ່າ "Walk", ການຄິກປຸ່ມຄວນບອກວ່າ "Stop is next". ເມື່ອໄຟເປັນສີ່ແດງ ແລະ ບອກວ່າ "Stop", ການຄິກປຸ່ມຄວນບອກວ່າ "Walk is next".
 
-Does it make a difference whether you put the `alert` before or after the `setWalk` call?
+ມັນສ້າງຄວາມແຕກຕ່າງ ຫຼື ບໍ່ວ່າທ່ານຈະໃສ່ `alert` ກ່ອນ ຫຼື ຫຼັງການເອີ້ນໃຊ້ `setWalk` ຫຼື ບໍ່?
 
 <Solution>
 
-Your `alert` should look like this:
+`alert` ຂອງທ່ານຄວນມີລັກສະນະດັ່ງນີ້
 
 <Sandpack>
 
@@ -404,16 +404,17 @@ h1 { margin-top: 20px; }
 
 </Sandpack>
 
-Whether you put it before or after the `setWalk` call makes no difference. That render's value of `walk` is fixed. Calling `setWalk` will only change it for the *next* render, but will not affect the event handler from the previous render.
+ບໍ່ວ່າທ່ານຈະໃສ່ກ່ອນ ຫຼື້ ຫຼັງການເອີ້ນໃຊ້ `setWalk` ກໍບໍ່ແຕກຕ່າງກັນ. ຄ່າການ render ຂອງ `walk` ໄດ້ຮັບການແກ້ໄຂແລ້ວ. ການເອີ້ນໃຊ້ `setWalk` ຈະປ່ຽນແປງສຳລັບການ render *ຕໍ່ໄປ* ເທົ່ານັ້ນ, ແຕ່ຈະບໍ່ສົ່ງຜົນຕໍ່ event handler ຈາກການ render ກ່ອນໜ້າ.
 
-This line might seem counter-intuitive at first:
+ແຖວນີ້ອາດຈະຂັດກັບຄວາມເຊື່ອໃນຕອນທຳອິດ:
 
 ```js
 alert(walk ? 'Stop is next' : 'Walk is next');
 ```
 
-But it makes sense if you read it as: "If the traffic light shows 'Walk now', the message should say 'Stop is next.'" The `walk` variable inside your event handler matches that render's value of `walk` and does not change.
+ແຕ່ມັນສົມເຫດສົມຜົນຖ້າທ່ານອ່ານວ່າ: "ຖ້າໄຟຈາລະຈອນສະແດງ 'Walk now', ຂໍ້ຄວາມຄວນລະບຸວ່າ 'Stop is next.'" ຕົວແປ `walk` ພາຍໃນ event handler ກົງກັບຄ່າ render ຂອງ `walk` ແລະ ບໍ່ປ່ຽນແປງ.
 
+ທ່ານສາມາດກວດສອບວ່າຖືກຕ້ອງໂດຍໃຊ້ວິທີການແທນທີ່. ເມື່ອ `walk` ເປັນ `true`, ທ່ານຈະໄດ້:
 You can verify that this is correct by applying the substitution method. When `walk` is `true`, you get:
 
 ```js
@@ -428,7 +429,7 @@ You can verify that this is correct by applying the substitution method. When `w
 </h1>
 ```
 
-So clicking "Change to Stop" queues a render with `walk` set to `false`, and alerts "Stop is next".
+ດັ່ງນັ້ນການຄິກ "Change to Stop" ຈະຈັດຄິວການ render ໂດຍຕັ້ງຄ່າ `walk` ເປັນ `false`, ແລະ ແຈ້ງເຕືອນວ່າ "Stop is next".
 
 </Solution>
 
