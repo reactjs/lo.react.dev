@@ -1,23 +1,23 @@
 ---
-title: Queueing a Series of State Updates
+title: ການເຂົ້າຄິວຊຸດອັບເດດ state
 ---
 
 <Intro>
 
-Setting a state variable will queue another render. But sometimes you might want to perform multiple operations on the value before queueing the next render. To do this, it helps to understand how React batches state updates.
+ການຕັ້ງຄ່າຕົວແປ state ຈະເປັນຄິວການ render ອື່ນ. ແຕ່ບາງເທື່ອທ່ານອາດຕ້ອງການດຳເນີນການຫຼາຍຢ່າງກັບຄ່າກ່ອນຈະເຂົ້າຄິວການ render ຕໍ່ໄປ. ເພື່ອເຮັດສິ່ງນີ້, ມັນຈະຊ່ວຍໃຫ້ທ່ານເຂົ້າໃຈວ່າ React ອັບເດດ state ຂອງ batch ແນວໃດ.
 
 </Intro>
 
 <YouWillLearn>
 
-* What "batching" is and how React uses it to process multiple state updates
-* How to apply several updates to the same state variable in a row
+* "ການ batch" ແມ່ນຫຍັງ ແລະ React ໃຊ້ແນວໃດໃນການປະມວນຜົນການອັບເດດຫຼາຍ state
+* ວິທີໃຊ້ການອັບເດດຫຼາຍຢ່າງກັບຕົວແປ state ດຽວກັນໃນແຖວ
 
 </YouWillLearn>
 
-## React batches state updates {/*react-batches-state-updates*/}
+## ການອັບເດດ batch state React {/*react-batches-state-updates*/}
 
-You might expect that clicking the "+3" button will increment the counter three times because it calls `setNumber(number + 1)` three times:
+ທ່ານອາດຄາດຫວັງວ່າການຄິກປຸ່ມ "+3" ຈະເພີ່ມຕົວນັບສາມຄັ້ງເພາະມັນເອີ້ນໃຊ້ `setNumber(number + 1)` ສາມຄັ້ງ:
 
 <Sandpack>
 
@@ -47,7 +47,7 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-However, as you might recall from the previous section, [each render's state values are fixed](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time), so the value of `number` inside the first render's event handler is always `0`, no matter how many times you call `setNumber(1)`:
+ເຖິງຢ່າງໃດກໍຕາມ, ທ່ານອາດຈະຈື່ໄດ້ວ່າສ່ວນກ່ອນໜ້າ, [ຄ່າຂອງການ render ແຕ່ລະຄ່າຈະໄດ້ຮັບການແກ້ໄຂ](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time), ດັ່ງນັ້ນຄ່າຂອງ `number` ພາຍໃນ event handler ຂອງການ render ໂຕທຳອິດຈະເປັນ `0` ສະເໝີ, ບໍ່ວ່າທ່ານຈະເອີ້ນໃຊ້ `setNumber(1)` ຈັກເທື່ອກໍຕາມ:
 
 ```js
 setNumber(0 + 1);
@@ -55,21 +55,21 @@ setNumber(0 + 1);
 setNumber(0 + 1);
 ```
 
-But there is one other factor at play here. **React waits until *all* code in the event handlers has run before processing your state updates.** This is why the re-render only happens *after* all these `setNumber()` calls.
+ແຕ່ມີອີກໜຶ່ງປັດໄຈທີ່ຫຼິ້ນບ່ອນນີ້. **React ຈະລໍຖ້າຈົນກວ່າ code *ທັງໝົດ* ໃນ event handler ຈະເຮັດວຽກກ່ອນທີ່ຈະປະມວນຜົນການອັບເດດ state ຂອງທ່ານ** ນີ້ແມ່ນສາເຫດທີ່ການ render ຊໍ້າຈະເກີດຂຶ້ນ *ຫຼັງຈາກ* ການເອີ້ນໃຊ້ `setNumber()` ທັ້ງໝົດນີ້ເທົ່ານັ້ນ.
 
-This might remind you of a waiter taking an order at the restaurant. A waiter doesn't run to the kitchen at the mention of your first dish! Instead, they let you finish your order, let you make changes to it, and even take orders from other people at the table.
+ສິ່ງນີ້ອາດເຮັດໃຫ້ທ່ານຄິດເຖິງບໍລິກອນທີ່ຮັບອໍເດີທີ່ຮ້ານອາຫານ. ບໍລິກອນຈະບໍ່ແລ່ນໄປທີ່ຫ້ອງຄົວເມື່ອເວົ້າເຖິງອາຫານຈານທຳອິດຂອງທ່ານ! ແຕ່ຈະໃຫ້ທ່ານສັ່ງອາຫານໃຫ້ແລ້ວກ່ອນ ໃຫ້ທ່ານເຮັດການປ່ຽນແປງ ແລະ ແມ້ແຕ່ຮັບອໍເດີຈາກຄົນອື່ນທີ່ໂຕະ.
 
 <Illustration src="/images/docs/illustrations/i_react-batching.png"  alt="An elegant cursor at a restaurant places and order multiple times with React, playing the part of the waiter. After she calls setState() multiple times, the waiter writes down the last one she requested as her final order." />
 
-This lets you update multiple state variables--even from multiple components--without triggering too many [re-renders.](/learn/render-and-commit#re-renders-when-state-updates) But this also means that the UI won't be updated until _after_ your event handler, and any code in it, completes. This behavior, also known as **batching,** makes your React app run much faster. It also avoids dealing with confusing "half-finished" renders where only some of the variables have been updated.
+ເຊິ່ງຈະຊ່ວຍໃຫ້ທ່ານອັບເດດຕົວແປ state ຫຼາຍຕົວ--ແມ້ແຕ່ຈາກ component ຫຼາຍໂຕ--ໂດຍບໍ່ຕ້ອງ trigger [ການ renders ຊໍ້າ.](/learn/render-and-commit#re-renders-when-state-updates) ຫຼາຍເກີນໄປ. ແຕ່ນີ້ໝາຍຄວາມວ່າ UI ຈະບໍ່ໄດ້ຮັບການອັບເດດຈົນກວ່າ _ຫຼັງຈາກ_ event handler ຂອງທ່ານ, ແລະ code ໃດໆໃນນັ້ນກໍຈະສຳເລັດ. ພຶດທິກຳນີ້ເອີ້ນວ່າ **ການ batch,** ເຮັດໃຫ້ແອັບ React ຂອງທ່ານເຮັດວຽກໄວຂຶ້ນຫຼາຍ. ນອກຈາກນີ້ຍັງຫຼີກຫຼ່ຽງການຈັດການກັບການ render ແບບ "ເຄິ່ງດຽວ" ທີ່ສັບສົນເຊິ່ງມີພຽງແຕ່ຕົວແປບາງໂຕເທົ່ານັ້ນທີ່ໄດ້ຮັບການອັບເດດ. 
 
-**React does not batch across *multiple* intentional events like clicks**--each click is handled separately. Rest assured that React only does batching when it's generally safe to do. This ensures that, for example, if the first button click disables a form, the second click would not submit it again.
+**React ຈະບໍ່ batch ລະຫວ່າງ *event ຫຼາຍ event* ໂດຍເຈດຕະນາເຊັ່ນ ການຄິກ**--ການຄິກແຕ່ລະຄັ້ງຈະໄດ້ຮັບການຈັດການແຍກກັນ. ໝັ້ນໃຈໄດ້ວ່າ React ຈະເຮັດການ batch ສະເພາະເມື່ອໂດຍທົ່ວໄປແລ້ວປອດໄພເທົ່ານັ້ນ. ນີ້ເຮັດໃຫ້ໝັ້ນໃຈໄດ້ວ່າ, ຕົວຢ່າງ ຫາກການຄິກປຸ່ມທຳອິດປິດການໃຊ້ງານແບບຟອມ, ການຄິກຄັ້ງທີ່ສອງຈະບໍ່ສົ່ງອີກຄັ້ງ.
 
-## Updating the same state multiple times before the next render {/*updating-the-same-state-multiple-times-before-the-next-render*/}
+## ການອັບເດດ state ດຽວກັນຫຼາຍຄັ້ງກ່ອນການ render ຄັ້ງຕໍ່ໄປ {/*updating-the-same-state-multiple-times-before-the-next-render*/}
 
-It is an uncommon use case, but if you would like to update the same state variable multiple times before the next render, instead of passing the *next state value* like `setNumber(number + 1)`, you can pass a *function* that calculates the next state based on the previous one in the queue, like `setNumber(n => n + 1)`. It is a way to tell React to "do something with the state value" instead of just replacing it.
+ເປັນກໍລະນີການໃຊ້ງານທີ່ຜິດປົກະຕິ, ແຕ່ຖ້າທ່ານຕ້ອງການອັບເດດຕົວແປ state ດຽວກັນຫຼາຍໆຄັ້ງກ່ອນທີ່ຈະ render ຄັ້ງຕໍ່ໄປ, ແທນທີ່ຈະສົ່ງ *ຄ່າ state ຕໍ່ໄປ* ເຊັ່ນ `setNumber(number + 1)`, ທ່ານສາມາດສົ່ງ *ຟັງຊັ່ນ* ທີ່ຄຳນວນ state ຕໍ່ໄປຈາກ state ກ່ອນໜ້າໃນຄິວເຊັ່ນ `setNumber(n => n + 1)`. ເປັນວິທີທີ່ຈະບອກ React ໃຫ້ "ເຮັດບາງຢ່າງກັບຄ່າ state" ແທນທີ່ຈະແທນມັນ.
 
-Try incrementing the counter now:
+ລອງເພີ່ມຕົວນັບທັນທີ:
 
 <Sandpack>
 
@@ -99,10 +99,10 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-Here, `n => n + 1` is called an **updater function.** When you pass it to a state setter:
+ຕອນນີ້, `n => n + 1` ເອີ້ນວ່າ **ຟັງຊັ່ນ updater.** ເມື່ອທ່ານສົ່ງຕໍ່ໄປຍັງ state setter:
 
-1. React queues this function to be processed after all the other code in the event handler has run.
-2. During the next render, React goes through the queue and gives you the final updated state.
+1. React ຈັດຄິວຟັງຊັ່ນນີ້ໃຫ້ປະມວນຜົນຫຼັງຈາກທີ່ code ອື່ນໆທັງໝົດໃນ event handler ເຮັດວຽກແລ້ວ.
+2. ໃນລະຫວ່າງການ render ຄັ້ງຕໍ່ໄປ, React ຈະຜ່ານຄິວ ແລະ ແຈ້ງ state ທີ່ອັບເດດສຸດທ້າຍໃຫ້ທ່ານຮູ້.
 
 ```js
 setNumber(n => n + 1);
@@ -110,26 +110,26 @@ setNumber(n => n + 1);
 setNumber(n => n + 1);
 ```
 
-Here's how React works through these lines of code while executing the event handler:
+ນີ້ແມ່ນວິທີທີ່ Reacct ເຮັດວຽກຜ່ານແຖວ code ເຫຼົ່ານີ້ໃນຂະນະເອີ້ນໃຊ້ງານ event handler:
 
-1. `setNumber(n => n + 1)`: `n => n + 1` is a function. React adds it to a queue.
-1. `setNumber(n => n + 1)`: `n => n + 1` is a function. React adds it to a queue.
-1. `setNumber(n => n + 1)`: `n => n + 1` is a function. React adds it to a queue.
+1. `setNumber(n => n + 1)`: `n => n + 1` ແມ່ນຟັງຊັ່ນ. React ເພີ່ມລົງໃນຄິວ.
+1. `setNumber(n => n + 1)`: `n => n + 1` ແມ່ນຟັງຊັ່ນ. React ເພີ່ມລົງໃນຄິວ.
+1. `setNumber(n => n + 1)`: `n => n + 1` ແມ່ນຟັງຊັ່ນ. React ເພີ່ມລົງໃນຄິວ.
 
-When you call `useState` during the next render, React goes through the queue. The previous `number` state was `0`, so that's what React passes to the first updater function as the `n` argument. Then React takes the return value of your previous updater function and passes it to the next updater as `n`, and so on:
+ເມື່ອທ່ານເອີ້ນໃຊ້ `useState` ລະຫວ່າງການ render ຕໍ່ໄປ, React ຈະຕ້ອງຜ່ານຄິວ. State `number` ກ່ອນໜ້ານີ້ແມ່ນ `0`, ສະນັ້ນ, ນັ້ນແມ່ນສິ່ງທີ່ React ສົ່ງຜ່ານໄປຍັງຟັງຊັ່ນ updater ທຳອິດເປັນ argument `n`. ຈາກນັ້ນ React ຈະນຳຄ່າ return ຂອງຟັງຊັ່ນ updater ກ່ອນໜ້າຂອງທ່ານ ແລະ ສົ່ງຕໍ່ໄປຍັງ updater ໂຕຖັດໄປເປັນ `n` ແລະ ອື່ນໆ: 
 
-|  queued update | `n` | returns |
+| ຄິວການອັບເດດ | `n` | returns |
 |--------------|---------|-----|
 | `n => n + 1` | `0` | `0 + 1 = 1` |
 | `n => n + 1` | `1` | `1 + 1 = 2` |
 | `n => n + 1` | `2` | `2 + 1 = 3` |
 
-React stores `3` as the final result and returns it from `useState`.
+React ເກັບ `3` ເປັນຜົນລັບສຸດທ້າຍ ແລະ return ຈາກ `useState`.
 
-This is why clicking "+3" in the above example correctly increments the value by 3.
-### What happens if you update state after replacing it {/*what-happens-if-you-update-state-after-replacing-it*/}
+ນີ້ເປັນສາເຫດທີ່ການຄິກ "+3" ໃນຕົວຢ່າງດ້ານເທິງຈະເພີ່ມຄ່າທີ່ຖືກຕ້ອງເທື່ອລະ 3.
+### ຈະເກີດຫຍັງຂຶ້ນຖ້າທ່ານອັບເດດ state ຫຼັງຈາກແທນທີ່ມັນ {/*what-happens-if-you-update-state-after-replacing-it*/}
 
-What about this event handler? What do you think `number` will be in the next render?
+ແລ້ວ event handler ນີ້ເດ? ທ່ານຄິດວ່າ `number` ຈະເປັນຫຍັງໃນການ render ຕໍ່ໄປ?
 
 ```js
 <button onClick={() => {
@@ -165,29 +165,29 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-Here's what this event handler tells React to do:
+ນີ້ແມ່ນສິ່ງທີ່ event handler ບອກໃຫ້ React ເຮັດ:
 
-1. `setNumber(number + 5)`: `number` is `0`, so `setNumber(0 + 5)`. React adds *"replace with `5`"* to its queue.
-2. `setNumber(n => n + 1)`: `n => n + 1` is an updater function. React adds *that function* to its queue.
+1. `setNumber(number + 5)`: `number` ເປັນ `0`, ສະນັ້ນ `setNumber(0 + 5)`. React ເພີ່ມ *"ແທນຄ່າດ້ວຍ `5`"* ໃນຄິວຂອງມັນ.
+2. `setNumber(n => n + 1)`: `n => n + 1` ແມ່ນຟັງຊັ່ນ updater. React ເພີ່ມ *ຟັງຊັ່ນນັ້ນ* ໃນຄິວຂອງມັນ.
 
-During the next render, React goes through the state queue:
+ໃນລະຫວ່າງການ render ຕໍ່ໄປ, React ຈະຕ້ອງຜ່ານຄິວ state:
 
-|   queued update       | `n` | returns |
+|   ຄິວອັບເດດ       | `n` | returns |
 |--------------|---------|-----|
 | "replace with `5`" | `0` (unused) | `5` |
 | `n => n + 1` | `5` | `5 + 1 = 6` |
 
-React stores `6` as the final result and returns it from `useState`. 
+React ເກັບ `6` ເປັນຜົນລັບສຸດທ້າຍ ແລະ return ຈາກ `useState`.
 
 <Note>
 
-You may have noticed that `setState(5)` actually works like `setState(n => 5)`, but `n` is unused!
+ທ່ານອາດສັງເກດເຫັນວ່າ `setState(5)` ໃຊ້ງານໄດ້ແທ້ຄືກັບ `setState(n => 5)` ແຕ່ `n` ບໍ່ຖືກໃຊ້ງານ!
 
 </Note>
 
-### What happens if you replace state after updating it {/*what-happens-if-you-replace-state-after-updating-it*/}
+### ຈະເກີດຫຍັງຂຶ້ນຖ້າທ່ານແທນທີ່ state ຫຼັງຈາກອັບເດດມັນ {/*what-happens-if-you-replace-state-after-updating-it*/}
 
-Let's try one more example. What do you think `number` will be in the next render?
+ລອງອີກຕົວຢ່າງໜຶ່ງ. ທ່ານຄິດວ່າ `number` ຈະເປັນຫຍັງໃນການ render ຄັ້ງຕໍ່ໄປ?
 
 ```js
 <button onClick={() => {
@@ -225,32 +225,32 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-Here's how React works through these lines of code while executing this event handler:
+ນີ້ແມ່ນວິທີທີ່ React ເຮັດວຽກຜ່ານແຖວຂອງ code ເຫຼົ່ານີ້ໃນຂະນະທີ່ເອີ້ນໃຊ້ງານ event handler ນີ້:
 
-1. `setNumber(number + 5)`: `number` is `0`, so `setNumber(0 + 5)`. React adds *"replace with `5`"* to its queue.
-2. `setNumber(n => n + 1)`: `n => n + 1` is an updater function. React adds *that function* to its queue.
-3. `setNumber(42)`: React adds *"replace with `42`"* to its queue.
+1. `setNumber(number + 5)`: `number` ເປັນ `0`, ສະນັ້ນ `setNumber(0 + 5)`. React ເພີ່ມ *"ແທນທີ່ດ້ວຍ `5`"* ໃສ່ຄິວຂອງມັນ.
+2. `setNumber(n => n + 1)`: `n => n + 1` ເປັນຟັງຊັ່ນ updater. React ເພີ່ມ *ຟັງຊັ່ນນັ້ນ* ໃສ່ຄິວຂອງມັນ.
+3. `setNumber(42)`: React ເພີ່ມ *"ແທນທີ່ດ້ວຍ `42`"* ໃສ່ຄິວຂອງມັນ.
 
-During the next render, React goes through the state queue:
+ໃນລະຫວ່າງການ render ຕໍ່ໄປ, React ຈະຕ້ອງຜ່ານຄິວ state:
 
-|   queued update       | `n` | returns |
+|   ຄິວອັບເດດ       | `n` | returns |
 |--------------|---------|-----|
 | "replace with `5`" | `0` (unused) | `5` |
 | `n => n + 1` | `5` | `5 + 1 = 6` |
 | "replace with `42`" | `6` (unused) | `42` |
 
-Then React stores `42` as the final result and returns it from `useState`.
+ຈາກນັ້ນ React ຈະເກັບ `42` ເປັນຜົນລັບສຸດທ້າຍ ແລະ return ຈາກ `useState`.
 
-To summarize, here's how you can think of what you're passing to the `setNumber` state setter:
+ສະຫຼຸບ, ຕໍ່ໄປນີ້ແມ່ນວິທີທີ່ຄິດຂອງສິ່ງທີ່ທ່ານສົ່ງຜ່ານໄປຍັງ state setter `setNumber`:
 
-* **An updater function** (e.g. `n => n + 1`) gets added to the queue.
-* **Any other value** (e.g. number `5`) adds "replace with `5`" to the queue, ignoring what's already queued.
+* **ຟັງຊັ່ນ updater** (ເຊັ່ນ `n => n + 1`) ຈະຖືກເພີ່ມລົງໃນຄິວ.
+* **ຄ່າອື່ນໆ** (ເຊັ່ນ number `5`) ເພີ່ມ "ແທນທີ່ດ້ວຍ `5`" ໃນຄິວ, ໂດຍບໍ່ສົນໃຈສິ່ງທີ່ຢູ່ໃນຄິວແລ້ວ.
 
-After the event handler completes, React will trigger a re-render. During the re-render, React will process the queue. Updater functions run during rendering, so **updater functions must be [pure](/learn/keeping-components-pure)** and only *return* the result. Don't try to set state from inside of them or run other side effects. In Strict Mode, React will run each updater function twice (but discard the second result) to help you find mistakes.
+ຫຼັງຈາກ event handler ສຳເລັດ, React ຈະ trigger ການ render ໃໝ່. ລະຫວ່າງການ render ໃໝ່, React ຈະປະມວນຜົນຄິວ. ຟັງຊັ່ນ updater ເຮັດວຽກລະຫວ່າງການ render, ສະນັ້ນ **ຟັງຊັ່ນ updater ຕ້ອງ [pure](/learn/keeping-components-pure)** ແລະ ມີພຽງການ *return* ຜົນລັບເທົ່ານັ້ນ. ຢ່າພະຍາຍາມຕັ້ງຄ່າ state ຈາກພາຍໃນ ຫຼື ເອີ້ນໃຊ້ຜົນຂ້າງຄຽງອື່ນໆ. ໃນ Strict Mode, React ຈະເອີ້ນໃຊ້ຟັງຊັ່ນ updater  ສອງເທື່ອ (ແຕ່ປະຜົນລັບທີ່ສອງ) ເພື່ອຊ່ວຍໃຫ້ທ່ານພົບຂໍ້ຜິດພາດ.
 
-### Naming conventions {/*naming-conventions*/}
+### ກົດຂອງການຕັ້ງຊື່ {/*naming-conventions*/}
 
-It's common to name the updater function argument by the first letters of the corresponding state variable:
+ເປັນເລື່ອງປົກະຕິທີ່ຈະຕັ້ງຊື່ argument ຟັງຊັ່ນ updater ດ້ວຍຕົວອັກສອນໂຕທຳອິດຂອງຕົວແປ state ທີ່ກ່ຽວຂ້ອງ:
 
 ```js
 setEnabled(e => !e);
@@ -258,13 +258,13 @@ setLastName(ln => ln.reverse());
 setFriendCount(fc => fc * 2);
 ```
 
-If you prefer more verbose code, another common convention is to repeat the full state variable name, like `setEnabled(enabled => !enabled)`, or to use a prefix like `setEnabled(prevEnabled => !prevEnabled)`.
+ຖ້າທ່ານຕ້ອງການ code ທີ່ລະອຽດເພີ່ມເຕີມ, ຫຼັກການທົ່ວໄປອີກແບບແມ່ນການເຮັດຊໍ້າຕົວແປ state ເຕັມເຊັ່ນ `setEnabled(enabled => !enabled)` ຫຼື ໃຊ້ຄຳນຳໜ້າເຊັ່ນ `setEnabled(prevEnabled => !prevEnabled)`.
 
 <Recap>
 
-* Setting state does not change the variable in the existing render, but it requests a new render.
-* React processes state updates after event handlers have finished running. This is called batching.
-* To update some state multiple times in one event, you can use `setNumber(n => n + 1)` updater function.
+* State ການຕັ້ງຄ່າບໍ່ປ່ຽນຕົວແປໃນການ render ທີ່ມີຢູ່ ແຕ່ຮ້ອງຂໍການ render ໃໝ່.
+* ອັບເດດ state ຂະບວນການຕອບສະໜອງຫຼັງຈາກ event handler ເຮັດວຽກແລ້ວ. ສິ່ງນີ້ເອີ້ນວ່າການ batch.
+* ຫາກຕ້ອງການອັບເດດ state ຫຼາຍຄັ້ງໃນ event ດຽວ, ທ່ານສາມາດໃຊ້ຟັງຊັ່ນ updater `setNumber(n => n + 1)`.
 
 </Recap>
 
@@ -272,13 +272,13 @@ If you prefer more verbose code, another common convention is to repeat the full
 
 <Challenges>
 
-#### Fix a request counter {/*fix-a-request-counter*/}
+#### ແກ້ໄຂຕົວນັບຄຳຂໍ {/*fix-a-request-counter*/}
 
-You're working on an art marketplace app that lets the user submit multiple orders for an art item at the same time. Each time the user presses the "Buy" button, the "Pending" counter should increase by one. After three seconds, the "Pending" counter should decrease, and the "Completed" counter should increase.
+ທ່ານກຳລັງເຮັດວຽກກັບແອັບຕະຫຼາດຊື້ຂາຍງານສິລະປະທີ່ໃຫ້ຜູ້ໃຊ້ສົ່ງຄຳຊື້ຫຼາຍລາຍການສຳລັບລາຍການສິລະປະພ້ອມກັນໄດ້. ທຸກຄັ້ງທີ່ຜູ້ໃຊ້ກົດປຸ່ມ "Buy", ຕົວນັບ "Pending" ຄວນເພີ່ມຂຶ້ນເທື່ອລະໜຶ່ງ. ຫຼັງຈາກສາມວິນາທີ, ຕົວນັບ "Pending" ຄວນຫຼຸດລົງ ແລະ ຕົວນັບ "Completed" ຄວນເພີ່ມຂຶ້ນ.
 
-However, the "Pending" counter does not behave as intended. When you press "Buy", it decreases to `-1` (which should not be possible!). And if you click fast twice, both counters seem to behave unpredictably.
+ເຖິງຢ່າງໃດກໍຕາມ, ຕົວນັບ "Pending" ບໍ່ເຮັດວຽກຕາມທີ່ຕັ້ງໃຈໄວ້. ເມື່ອທ່ານກົດ "Buy", ມັນຈະຫຼຸດລົງເປັນ `-1` (ເຊິ່ງບໍ່ຄວນເປັນໄປໄດ້!). ແລະ ຖ້າທ່ານຄິກໄວສອງຄັ້ງ, ຕົວນັບທັງສອງເບິ່ງຄືຈະເຮັດວຽກຢ່າງຄາດເດົາບໍ່ໄດ້.
 
-Why does this happen? Fix both counters.
+ເກີດສິ່ງນີ້ໄດ້ແນວໃດ? ແກ້ໄຂໂຕນັບທັງສອງ.
 
 <Sandpack>
 
@@ -322,7 +322,7 @@ function delay(ms) {
 
 <Solution>
 
-Inside the `handleClick` event handler, the values of `pending` and `completed` correspond to what they were at the time of the click event. For the first render, `pending` was `0`, so `setPending(pending - 1)` becomes `setPending(-1)`, which is wrong. Since you want to *increment* or *decrement* the counters, rather than set them to a concrete value determined during the click, you can instead pass the updater functions:
+ພາຍໃນ event handler `handleClick`, ຄ່າຂອງ `pending` ແລະ `completed` ຈະສອດຄ່ອງກັບຄ່າທີ່ເກີດຂຶ້ນໃນຂະນະທີ່ເກີດ click event. ສຳລັບການ render ຄັ້ງທຳອິດ `pending` ເປັນ `0`, ສະນັ້ນ `setPending(pending - 1)` ຈຶ່ງກາຍເປັນ `setPending(-1)`, ເຊິ່ງຜິດ. ເນື່ອງຈາກທ່ານຕ້ອງການ "ເພີ່ມ" ຫຼື "ຫຼຸດ" ຕົວນັບ, ແທນທີ່ຈະຕັ້ງຄ່າໃຫ້ເປັນຄ່າທີ່ເປັນຮູບປະທຳທີ່ກຳນົດລະຫວ່າງການຄິກ, ທ່ານຈິ່ງສາມາດສົ່ງຟັງຊັ່ນ updater ແທນໄດ້:
 
 <Sandpack>
 
@@ -364,23 +364,23 @@ function delay(ms) {
 
 </Sandpack>
 
-This ensures that when you increment or decrement a counter, you do it in relation to its *latest* state rather than what the state was at the time of the click.
+ສິ່ງນີ້ເຮັດໃຫ້ໝັ້ນໃຈໄດ້ວ່າເມື່ອທ່ານເພີ່ມ ຫຼື ຫຼຸດໂຕນັບ, ທ່ານຈະເຮັດໂດຍສຳພັນກັບ state *ຫຼ້າສຸດ* ຂອງໂຕນັບແທນທີ່ຈະເປັນ state ໃນຂະນະຄິກ.
 
 </Solution>
 
-#### Implement the state queue yourself {/*implement-the-state-queue-yourself*/}
+#### Implement state ຄິວດ້ວຍໂຕທ່ານເອງ {/*implement-the-state-queue-yourself*/}
 
-In this challenge, you will reimplement a tiny part of React from scratch! It's not as hard as it sounds.
+ໃນຄວາມທ້າທາຍນີ້, ທ່ານຈະໄດ້ປັບໃຊ້ສ່ວນນ້ອຍໆຂອງ React ໃໝ່ຕັ້ງແຕ່ເລີ່ມຕົ້ນ! ມັນບໍ່ຍາກດັ່ງທີ່ຄິດ.
 
-Scroll through the sandbox preview. Notice that it shows **four test cases.** They correspond to the examples you've seen earlier on this page. Your task is to implement the `getFinalState` function so that it returns the correct result for each of those cases. If you implement it correctly, all four tests should pass.
+ເລື່ອນເບິ່ງຕົວຢ່າງ sandbox. ສັງເກດວ່າມັນສະແດງ **ກໍລະນີທົດສອບສີ່ກໍລະນີ.** ເຊິ່ງສອດຄ່ອງກັບຕົວຢ່າງທີ່ທ່ານເຫັນກ່ອນໜ້ານີ້ໃນໜ້ານີ້. ໜ້າທີ່ຂອງທ່ານແມ່ນໃຫ້ຟັງຊັ່ນ `getFinalState` ເພື່ອໃຫ້ return ຜົນລັບທີ່ຖືກຕ້ອງສຳລັບແຕ່ລະກໍລະນີເຫຼົ່ານັ້ນ. ຖ້າທ່ານໃຊ້ຢ່າງຖືກຕ້ອງ, ການທົດສອງທັງສີ່ຄວນຈະຜ່ານ.
 
-You will receive two arguments: `baseState` is the initial state (like `0`), and the `queue` is an array which contains a mix of numbers (like `5`) and updater functions (like `n => n + 1`) in the order they were added.
+ທ່ານຈະໄດ້ຮັບສອງ argument: `baseState` ຄື state ເລີ່ມຕົ້ນ (ເຊັ່ນ `0`), ແລະ `queue` ຄື array ທີ່ປະກອບດ້ວຍຕົວເລກ (ເຊັ່ນ `5`) ແລະ ຟັງຊັ່ນ updater (ເຊັ່ນ `n => n + 1`) ຕາມລຳດັບທີ່ເພີ່ມເຂົ້າມາ.
 
-Your task is to return the final state, just like the tables on this page show!
+ໜ້າທີ່ຂອງທ່ານຄື return state ສຸດທ້າຍ, ເຊັ່ນດຽວກັບຕາຕະລາງໃນໜ້ານີ້ທີ່ສະແດງ!
 
 <Hint>
 
-If you're feeling stuck, start with this code structure:
+ຖ້າທ່ານຮູ້ສຶກຕິດຂັດ, ໃຫ້ເລີ່ມຕົ້ນດ້ວຍ code structure ນີ້:
 
 ```js
 export function getFinalState(baseState, queue) {
@@ -398,7 +398,7 @@ export function getFinalState(baseState, queue) {
 }
 ```
 
-Fill out the missing lines!
+ຕື່ມແຖວທີ່ຫາຍໄປ!
 
 </Hint>
 
@@ -495,7 +495,7 @@ function TestCase({
 
 <Solution>
 
-This is the exact algorithm described on this page that React uses to calculate the final state:
+ນີ້ແມ່ນ algorithm ທີ່ແນ່ນອນເຊິ່ງອະທິບາຍໄວ້ວ່າໃນໜ້ານີ້ເຊິ່ງ React ໃຊ້ໃນການຄຳນວນ state ສຸດທ້າຍ:
 
 <Sandpack>
 
@@ -596,7 +596,7 @@ function TestCase({
 
 </Sandpack>
 
-Now you know how this part of React works!
+ຕອນນີ້ທ່ານຮູ້ແລ້ວວ່າສ່ວນນີ້ເຮັດວຽກແນວໃດ!
 
 </Solution>
 
