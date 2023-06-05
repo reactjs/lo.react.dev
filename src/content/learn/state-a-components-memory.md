@@ -1,25 +1,25 @@
 ---
-title: "State: A Component's Memory"
+title: "State: Memory ຂອງ Component"
 ---
 
 <Intro>
 
-Components often need to change what's on the screen as a result of an interaction. Typing into the form should update the input field, clicking "next" on an image carousel should change which image is displayed, clicking "buy" should put a product in the shopping cart. Components need to "remember" things: the current input value, the current image, the shopping cart. In React, this kind of component-specific memory is called *state*.
+Component ມັກຈະຕ້ອງປ່ຽນສິ່ງທີ່ຢູ່ເທິງໜ້າຈໍອັນເປັນຜົນມາຈາກການ interact. ການພິມລົງໃນ form ຄວນອັບເດດປ່ອງ input, ການຄິກ "next" ເທິງຮູບພາບຄວນປ່ຽນຮູບພາບທີ່ຈະສະແດງ, ການຄິກ "buy" ຄວນໃສ່ສິນຄ້າລົງໃນກະຕ່າສິນຄ້າ. Component ຈຳເປັນຕ້ອງ "ຈື່" ສິ່ງຕ່າງໆ: ຄ່າ input ປັດຈຸບັນ, ຮູບພາບປັດຈຸບັນ, ກະຕ່າສິນຄ້າປັດຈຸບັນ. ໃນ React, memory ສະເພາະຂອງຂອງ component ປະເພດນີ້ເອີ້ນວ່າ *state*.
 
 </Intro>
 
 <YouWillLearn>
 
-* How to add a state variable with the [`useState`](/reference/react/useState) Hook
-* What pair of values the `useState` Hook returns
-* How to add more than one state variable
-* Why state is called local
+* ວິທີເພີ່ມຕົວແປ state ດ້ວຍ Hook[`useState`](/reference/react/useState)
+* ຄ່າໃດທີ່ Hook `useState` return 
+* ວິທີເພີ່ມຕົວແປ state ຫຼາຍກວ່າໜຶ່ງໂຕ
+* ເປັນຫຍັງ state ຈຶ່ງເອີ້ນວ່າ local 
 
 </YouWillLearn>
 
-## When a regular variable isn’t enough {/*when-a-regular-variable-isnt-enough*/}
+## ເມື່ອຕົວແປທົ່ວໄປບໍ່ພຽງພໍ {/*when-a-regular-variable-isnt-enough*/}
 
-Here's a component that renders a sculpture image. Clicking the "Next" button should show the next sculpture by changing the `index` to `1`, then `2`, and so on. However, this **won't work** (you can try it!):
+ນີ້ແມ່ນ component ທີ່ render ຮູບປັ້ນ. ການຄິກປຸ່ມ "Next" ຄວນສະແດງຮູບປັ້ນຕໍ່ໄປໂດຍປ່ຽນ `index` ເປັນ `1`, ຈາກນັ້ນ `2` ແລະ ອື່ນໆ. ເຖິງຢ່າງໃດກໍຕາມ, ມັນ **ໃຊ້ບໍ່ໄດ້** (ທ່ານສາມາດລອງໄດ້!):
 
 <Sandpack>
 
@@ -151,46 +151,46 @@ button {
 
 </Sandpack>
 
-The `handleClick` event handler is updating a local variable, `index`. But two things prevent that change from being visible:
+Event handler `handleClick` ກຳລັງອັບເດດຕົວແປ local, `index`. ແຕ່ມີສອງຢ່າງທີ່ຂັດຂວາງບໍ່ໃຫ້ເຫັນການປ່ຽນແປງນັ້ນ:
 
-1. **Local variables don't persist between renders.** When React renders this component a second time, it renders it from scratch—it doesn't consider any changes to the local variables.
-2. **Changes to local variables won't trigger renders.** React doesn't realize it needs to render the component again with the new data.
+1. **ຕົວແປ local ບໍ່ຄົງຢູ່ລະຫວ່າງການ render.** ເມື່ອ React render component ນີ້ເປັນຄັ້ງທີ່ສອງ, ມັນ render ຕັ້ງແຕ່ເລີ່ມຕົ້ນ-ຈະບໍ່ສົນການປ່ຽນແປງໃດໆກັບຕົວແປ local.
+2. **ການປ່ຽນແປງຕົວແປ local ຈະບໍ່ trigger ການ render.** React ບໍ່ຮູ້ວ່າຈຳເປັນຕ້ອງ render component ອີກຄັ້ງດ້ວຍຂໍ້ມູນໃໝ່.
 
-To update a component with new data, two things need to happen:
+ໃນການອັບເດດ component ດ້ວຍຂໍ້ມູນໃໝ່, ຈຳເປັນຕ້ອງມີສອງສິ່ງ:
 
-1. **Retain** the data between renders.
-2. **Trigger** React to render the component with new data (re-rendering).
+1. **ການເກັບຮັກສາ** ຂໍ້ມູນລະຫວ່າງການ render.
+2. **ການ trigger** React ເພື່ອ render component ດ້ວຍຂໍ້ມູນໃໝ່ (ການ render ໃໝ່). 
 
-The [`useState`](/reference/react/useState) Hook provides those two things:
+Hook [`useState`](/reference/react/useState) ໃຫ້ສອງສິ່ງນີ້:
 
-1. A **state variable** to retain the data between renders.
-2. A **state setter function** to update the variable and trigger React to render the component again.
+1. **ຕົວແປ state** ເພື່ອເກັບຂໍ້ມູນລະຫວ່າງການ render.
+2. **ຟັງຊັ່ນ state setter** ເພື່ອອັບເດດຕົວແປ ແລະ trigger React ເພື່ອ Render Component ອີກຄັ້ງ.
 
-## Adding a state variable {/*adding-a-state-variable*/}
+## ການເພີ່ມຕົວແປ state {/*adding-a-state-variable*/}
 
-To add a state variable, import `useState` from React at the top of the file:
+ເພື່ອເພີ່ມຕົວແປ state, ທຳການ import `useState` from React ເທິງສຸດຂອງຟາຍ:
 
 ```js
 import { useState } from 'react';
 ```
 
-Then, replace this line:
+ຈາກນັ້ນ, ແທນຄ່າແຖວນີ້:
 
 ```js
 let index = 0;
 ```
 
-with
+ດ້ວຍ
 
 ```js
 const [index, setIndex] = useState(0);
 ```
 
-`index` is a state variable and `setIndex` is the setter function.
+`index` ແມ່ນຕົວແປ state ແລະ `setIndex` ແມ່ນຟັງຊັ່ນ setter.
 
-> The `[` and `]` syntax here is called [array destructuring](https://javascript.info/destructuring-assignment) and it lets you read values from an array. The array returned by `useState` always has exactly two items.
+> Syntax `[` ແລະ `]` ນີ້ເອີ້ນວ່າ [array destructuring](https://javascript.info/destructuring-assignment) ແລະ ມັນຊ່ວຍໃຫ້ທ່ານອ່ານຄ່າຈາກ array ໄດ້,​ array ຖືກ return ໂດຍ `useState` ຈະມີສອງລາຍການສະເໝີ.
 
-This is how they work together in `handleClick`:
+ນີ້ແມ່ນວິທີທີ່ມັນເຮັດວຽກຮ່ວມກັນໃນ `handleClick`:
 
 ```js
 function handleClick() {
@@ -198,7 +198,7 @@ function handleClick() {
 }
 ```
 
-Now clicking the "Next" button switches the current sculpture:
+ຕອນນີ້ຄິກປຸ່ມ "Next" ເພື່ອສະຫຼັບຮູບປັ້ນປັດຈຸບັນ:
 
 <Sandpack>
 
@@ -331,57 +331,57 @@ button {
 
 </Sandpack>
 
-### Meet your first Hook {/*meet-your-first-hook*/}
+### ພົບກັບ Hook ທຳອິດຂອງທ່ານ {/*meet-your-first-hook*/}
 
-In React, `useState`, as well as any other function starting with "`use`", is called a Hook.
+ໃນ React, `useState`, ລວມໄປເຖິງຟັງຊັ່ນອື່ນໆທີ່ຂຶ້ນຕົ້ນດ້ວຍ "`use`", ເອີ້ນວ່າ Hook.
 
-*Hooks* are special functions that are only available while React is [rendering](/learn/render-and-commit#step-1-trigger-a-render) (which we'll get into in more detail on the next page). They let you "hook into" different React features.
+*Hooks* ແມ່ນຟັງຊັ່ນພິເສດທີ່ໃຊ້ໄດ້ສະເພາະໃນຂະນະທີ່ React ເປັນ [ການ render](/learn/render-and-commit#step-1-trigger-a-render) (ເຊິ່ງເຮົາຈະລົງລາຍລະອຽດໃນໜ້າຕໍ່ໄປ). ມັນຊ່ວຍໃຫ້ທ່ານ "ເຊື່ອມຕໍ່" feature React ຕ່າງໆ.
 
-State is just one of those features, but you will meet the other Hooks later.
+State ເປັນພຽງໜຶ່ງໃນ feature ເຫຼົ່ານັ້ນ, ແຕ່ທ່ານຈະພົບກັບ Hook ອື່ນໆໃນພາຍຫຼັງ.
 
 <Pitfall>
 
-**Hooks—functions starting with `use`—can only be called at the top level of your components or [your own Hooks.](/learn/reusing-logic-with-custom-hooks)** You can't call Hooks inside conditions, loops, or other nested functions. Hooks are functions, but it's helpful to think of them as unconditional declarations about your component's needs. You "use" React features at the top of your component similar to how you "import" modules at the top of your file.
+**Hooks—ຟັງຊັ່ນທີ່ຂຶ້ນຕົ້ນດ້ວຍ `use`—ສາມາດເອີ້ນໃຊ້ໄດ້ທີ່ລະດັບເທິງສຸດຂອງ component ຫຼື [Hook ຂອງທ່ານ.](/learn/reusing-logic-with-custom-hooks)** ທ່ານບໍ່ສາມາດເອີ້ນໃຊ້ Hook ພາຍໃນເງື່ອນໄຂ, loop ຫຼື ຟັງຊັ່ນທີ່ຊ້ອນກັນອື່ນໆ. Hook ເປັນຟັງຊັ່ນ, ແຕ່ຄວນຄິດວ່າເປັນການປະກາດທີ່ບໍ່ມີເງື່ອນໄຂກ່ຽວກັບຄວາມຕ້ອງການຂອງ component ຂອງທ່ານ. ທ່ານ "ໃຊ້" feature React ທີ່ດ້ານເທິງສຸດຂອງ component ຄ້າຍຄືກັບວິທີທີ່ທ່ານ "import" module ດ້ານເທິງສຸດຂອງຟາຍ.
 
 </Pitfall>
 
-### Anatomy of `useState` {/*anatomy-of-usestate*/}
+### ໂຄ່ງສ້າງຂອງ `useState` {/*anatomy-of-usestate*/}
 
-When you call [`useState`](/reference/react/useState), you are telling React that you want this component to remember something:
+ເມື່ອທ່ານເອີ້ນ [`useState`](/reference/react/useState), ທ່ານກຳລັງບອກ React ວ່າທ່ານຕ້ອງການໃຫ້ component ນີ້ຈົດຈຳບາງສິ່ງ:
 
 ```js
 const [index, setIndex] = useState(0);
 ```
 
-In this case, you want React to remember `index`.
+ໃນກໍລະນີນີ້, ທ່ານຕ້ອງການໃຫ້ React ຈື່ `index`.
 
 <Note>
 
-The convention is to name this pair like `const [something, setSomething]`. You could name it anything you like, but conventions make things easier to understand across projects.
+Convention ແມ່ນການຕັ້ງຊື່ຄູ່ນີ້ວ່າ `const [something, setSomething]`. ທ່ານສາມາດຕັ້ງຊື່ຫຍັງກໍໄດ້ທີ່ທ່ານຕ້ອງການ, ແຕ່ convention ຈະເຮັດໃຫ້ທ່ານເຂົ້າໃຈໄດ້ງ່າຍຂຶ້ນໃນ project ຕ່າງໆ.
 
 </Note>
 
-The only argument to `useState` is the **initial value** of your state variable. In this example, the `index`'s initial value is set to `0` with `useState(0)`. 
+Argument ດຽວສຳລັບ `useState` ແມ່ນ **ຄ່າເລີ່ມຕົ້ນ** ຂອງຕົວແປ state ຂອງທ່ານ. ໃນຕົວຢ່າງນີ້, ຄ່າເລີ່ມຕົ້ນຂອງ `index` ຖືກກຳນົດເປັນ `0` ດ້ວຍ `useState(0)`.
 
-Every time your component renders, `useState` gives you an array containing two values:
+ທຸກຄັ້ງທີ່ component ຂອງທ່ານ render, `useState` ຈະໃຫ້ array ທີມີສອງຄ່າ:
 
-1. The **state variable** (`index`) with the value you stored.
-2. The **state setter function** (`setIndex`) which can update the state variable and trigger React to render the component again.
+1. **ຕົວແປ state** (`index`) ພ້ອມກັບຄ່າທີ່ທ່ານເກັບໄວ້.
+2. **ຟັງຊັ່ນ state setter** (`setIndex`) ເຊິ່ງສາມາດອັບເດດຕົວແປ state ແລະ trigger React ເພື່ອ render component ອີກຄັ້ງ.
 
-Here's how that happens in action:
+ນີ້ແມ່ນສິ່ງທີ່ເກີດຂຶ້ນ:
 
 ```js
 const [index, setIndex] = useState(0);
 ```
 
-1. **Your component renders the first time.** Because you passed `0` to `useState` as the initial value for `index`, it will return `[0, setIndex]`. React remembers `0` is the latest state value.
-2. **You update the state.** When a user clicks the button, it calls `setIndex(index + 1)`. `index` is `0`, so it's `setIndex(1)`. This tells React to remember `index` is `1` now and triggers another render.
-3. **Your component's second render.** React still sees `useState(0)`, but because React *remembers* that you set `index` to `1`, it returns `[1, setIndex]` instead.
-4. And so on!
+1. **Component ຂອງທ່ານ render ໃນຄັ້ງທຳອິດ.** ເນື່ອງຈາກທ່ານສົ່ງ `0` ໄປຫາ `useState` ເປັນຄ່າເລີ່ມຕົ້ນຂອງ `index`, component ຈະ return `[0, setIndex]`. React ຈື່ `0` ເປັນຄ່າ state ຫຼ້າສຸດ.
+2. **ທ່ານອັບເດດ state.** ເມື່ອຜູ້ໃຊ້ຄິກປຸ່ມ, ຈະເອີ້ນ `setIndex(index + 1)`. `index` ແມ່ນ `0`, ດັ່ງນັ້ນຈຶ່ງເປັນ `setIndex(1)`. ສິ່ງນີ້ບອກໃຫ້ React ຈື່ `index` ແມ່ນ `1` ໃນຕອນນີ້ ແລະ trigger ການ render ອື່ນ.
+3. **ການ render ຄັ້ງທີ່ສອງຂອງ component ທ່ານ.** React ຍັງເຫັນ `useState(0)`, ແຕ່ເນື່ອງຈາກ React *ຈື່* ທີ່ທ່ານຕັ້ງຄ່າ `index` ເປັນ `1`, ຈຶ່ງ return `[1, setIndex]` ແທນ.
+4. ແລະ ອື່ນໆ!
 
-## Giving a component multiple state variables {/*giving-a-component-multiple-state-variables*/}
+## ການໃຫ້ຕົວແປ state ໃນຫຼາຍ component {/*giving-a-component-multiple-state-variables*/}
 
-You can have as many state variables of as many types as you like in one component. This component has two state variables, a number `index` and a boolean `showMore` that's toggled when you click "Show details":
+ທ່ານສາມາດມີຕົວແປ state ຫຼາຍປະເພດໄດ້ເທົ່າທີ່ທ່ານຕ້ອງການໃນ component ດຽວ. Component ນີ້ມີຕົວແປ state ສອງໂຕ, ຕົວເລກ `index` ແລະ ຄ່າທີ່ເປັນຈິງ `showMore` ທີ່ຈະສະຫຼັບກັນເມື່ອທ່ານຄິກ "Show details":
 
 <Sandpack>
 
@@ -520,19 +520,19 @@ button {
 
 </Sandpack>
 
-It is a good idea to have multiple state variables if their state is unrelated, like `index` and `showMore` in this example. But if you find that you often change two state variables together, it might be easier to combine them into one. For example, if you have a form with many fields, it's more convenient to have a single state variable that holds an object than state variable per field. Read [Choosing the State Structure](/learn/choosing-the-state-structure) for more tips.
+ມັນເປັນຄວາມຄິດທີ່ດີທີ່ຈະມີຕົວແປ state ຫຼາຍໂຕຖ້າ state ຂອງຕົວແປເຫຼົ່ານັ້ນບໍ່ກ່ຽວຂ້ອງກັນເຊັ່ນ, `index` ແລະ `showMore` ໃນຕົວຢ່າງນີ້. ແຕ່ຖ້າທ່ານພົບວ່າທ່ານມັກຈະປ່ຽນຕົວແປ state ສອງໂຕພ້ອມກັນ, ມັນອາດຈະງ່ານກວ່າທີ່ຈະລວມພວກມັນເປັນຕົວແປດຽວ. ຕົວຢ່າງ, ຖ້າທ່ານມີ form ທີ່ມີຫຼາຍ field, ການມີຕົວແປ state ດຽວທີ່ທ່ານເກັບ object ຈະສະດວກກວ່າຕົວແປ state ຕໍ່ field. ອ່ານ [ການເລືອກໂຄ່ງສ້າງຂອງ State](/learn/choosing-the-state-structure) ສຳລັບເຄັດລັບເພີ່ມເຕີມ.
 
 <DeepDive>
 
-#### How does React know which state to return? {/*how-does-react-know-which-state-to-return*/}
+#### React ຮູ້ໄດ້ແນວໃດວ່າຈະ return state ໃດ? {/*how-does-react-know-which-state-to-return*/}
 
-You might have noticed that the `useState` call does not receive any information about *which* state variable it refers to. There is no "identifier" that is passed to `useState`, so how does it know which of the state variables to return? Does it rely on some magic like parsing your functions? The answer is no.
+ທ່ານອາດຈະສັງເກດເຫັນວ່າການເອີ້ນໃຊ້ `useState` ບໍ່ໄດ້ຮັບຂໍ້ມູນໃດໆກ່ຽວກັບຕົວແປ state *ເຊິ່ງ* ທີ່ອ້າງເຖິງບໍ່ມີ. "ຕົວລະບຸ" ທີ່ສົ່ງຜ່ານໄປຍັງ `useState`, ດັ່ງນັ້ນຈະຮູ້ໄດ້ແນວໃດວ່າຕົວແປ state ໃດຈະ return? ມັນອາໄສເຄັກລັບຫຍັງພິເສດເຊັ່ນການ parsing ຟັງຊັ່ນຂອງທ່ານ ຫຼຶ ບໍ່? ຄຳຕອບແມ່ນບໍ່.
 
-Instead, to enable their concise syntax, Hooks **rely on a stable call order on every render of the same component.** This works well in practice because if you follow the rule above ("only call Hooks at the top level"), Hooks will always be called in the same order. Additionally, a [linter plugin](https://www.npmjs.com/package/eslint-plugin-react-hooks) catches most mistakes.
+ເພື່ອເປິດໃຊ້ງານ syntax ທີ່ກະຊັບ Hook **ໃຊ້ຄຳສັ່ງການເອີ້ນໃຊ້ທີ່ສະຖຽນໃນທຸກການ render ຂອງ component ດຽວກັນ.** ວິທີນີ້ໃຊ້ໄດ້ດີໃນທາງປະຕິບັດເພາະຖ້າທ່ານປະຕິບັດຕາມກົດດ້ານເທິງ ("ເອີ້ນ Hook ລະດັບເທິງສຸດເທົ່ານັ້ນ"), Hook ຈະຖືກເອີ້ນຕາມລຳດັບດຽວກັນສະເໝີ. ນອກຈາກນີ້ [linter plugin](https://www.npmjs.com/package/eslint-plugin-react-hooks) ຈະຈັບຂໍ້ຜິດພາດເປັນສ່ວນໃຫຍ່.
 
-Internally, React holds an array of state pairs for every component. It also maintains the current pair index, which is set to `0` before rendering. Each time you call `useState`, React gives you the next state pair and increments the index. You can read more about this mechanism in [React Hooks: Not Magic, Just Arrays.](https://medium.com/@ryardley/react-hooks-not-magic-just-arrays-cd4f1857236e)
+ພາຍໃນ, React ມີ array ຄູ່ state ສຳລັບທຸກ component. ນອກຈາກນີ້ຍັງຮັກສາ index ຄູ່ປັດຈຸບັນເຊິ່ງຕັ້ງຄ່າເປັນ `0` ກ່ອນການ render. ທຸກຄັ້ງທີ່ທ່ານເອີ້ນໃຊ້ `useState`, React ຈະໃຫ້ຄູ່ state ຕໍ່ໄປ ແລະ ເພີ່ມ index. ທ່ານສາມາດອ່ານເພີ່ມເຕີມກ່ຽວກັບກົນໄກນີ້ໄດ້ໃນ [React Hooks: ບໍ່ວິເສດຫຍັງ, ເປັນພຽງ array.](https://medium.com/@ryardley/react-hooks-not-magic-just-arrays-cd4f1857236e)
 
-This example **doesn't use React** but it gives you an idea of how `useState` works internally:
+ຕົວຢ່າງນີ້ **ບໍ່ໄດ້ໃຊ້ React** ແຕ່ຈະຊ່ວຍໃຫ້ທ່ານເຂົ້າໃຈວ່າ `useState` ເຮັດວຽກແນວໃດພາຍໃນ:
 
 <Sandpack>
 
@@ -724,15 +724,15 @@ button { display: block; margin-bottom: 10px; }
 
 </Sandpack>
 
-You don't have to understand it to use React, but you might find this a helpful mental model.
+ທ່ານບໍ່ຈຳເປັນຕ້ອງເຂົ້າໃຈມັນເພື່ອໃຊ້ React, ແຕ່ທ່ານອາດຈະພົບວ່າສິ່ງນີ້ເປັນແບບຈຳລອງທາງຄວາມຄິດທີ່ເປັນປະໂຫຍດ.
 
 </DeepDive>
 
-## State is isolated and private {/*state-is-isolated-and-private*/}
+## State ໂດດດ່ຽວ ແລະ ເປັນ private {/*state-is-isolated-and-private*/}
 
-State is local to a component instance on the screen. In other words, **if you render the same component twice, each copy will have completely isolated state!** Changing one of them will not affect the other.
+State ເປັນແບບ local ຂອງ component instance ເທິງໜ້າຈໍ. ເວົ້າອີກແບບໜຶ່ງ, **ຖ້າທ່ານ render component ດຽວກັນສອງເທື່ອ, ແຕ່ລະ copy ຈະມີ state ແຍກຈາກກັນໂດຍສິ້ນເຊິງ!** ການປ່ຽນໜຶ່ງໃນນັ້ນຈະບໍ່ສົ່ງຜົນກະທົບຕໍ່ກັບອີກ component ໜຶ່ງ.
 
-In this example, the `Gallery` component from earlier is rendered twice with no changes to its logic. Try clicking the buttons inside each of the galleries. Notice that their state is independent:
+ໃນຕົວຢ່າງນີ້, component `Gallery` ຈາກກ່ອນໜ້ານີ້ render ສອງເທື່ອໂດຍບໍ່ມີການປ່ຽນແປງ logic. ລອງຄິກປຸ່ມໃນແຕ່ລະ gallery. ສັງເກດວ່າ state ຂອງມັນເປັນອິດສະຫຼະ:
 
 <Sandpack>
 
@@ -891,21 +891,21 @@ button {
 
 </Sandpack>
 
-This is what makes state different from regular variables that you might declare at the top of your module. State is not tied to a particular function call or a place in the code, but it's "local" to the specific place on the screen. You rendered two `<Gallery />` components, so their state is stored separately.
+ນີ້ແມ່ນສິ່ງທີ່ເຮັດໃຫ້ state ແຕກຕ່າງຈາກຕົວແປທົ່ວໄປທີ່ທ່ານອາດປະກາດໄວ້ດ້ານເທິງສຸດຂອງ module. State ບໍ່ໄດ້ເຊື່ອມໂຍງກັບການເອີ້ນໃຊ້ຟັງຊັ່ນສະເພາະ ຫຼື ຕຳແໜ່ງໃນ ocde ແຕ່ເປັນ state "local" ກັບຕຳແໜ່ງສະເພາະເທິງໜ້າຈໍ. ທ່ານ render component `<Gallery/>` ສອງລາຍການດັ່ງນັ້ນ state ຈື່ງຖືກຈັກເກັບແຍກກັນ.
 
-Also notice how the `Page` component doesn't "know" anything about the `Gallery` state or even whether it has any. Unlike props, **state is fully private to the component declaring it.** The parent component can't change it. This lets you add state to any component or remove it without impacting the rest of the components.
+ນອກຈາກນີ້ ໃຫ້ສັງເກດວ່າ component `Page` ບໍ່ "ຮູ້" ຫຍັງກ່ຽວກັບ state `Gallery` ຫຼື ວ່າມັນມີ ຫຼື ບໍ່ມີ. ເຊິ່ງແຕກຕ່າງຈາກ prop, **state ເປັນ private ໂດຍສົມບູນ ສຳລັບ component ທີ່ປະກາດ.** Parent Component ບໍ່ສາມາດປ່ຽນແປງໄດ້. ນີ້ຊ່ວຍໃຫ້ທ່ານເພີ່ມ state ໃຫ້ກັບແຕ່ລະ component ຫຼື ລຶບອອກໄດ້ໂດຍບໍ່ກະທົບກັບ component ທີ່ເຫຼືອ.
 
-What if you wanted both galleries to keep their states in sync? The right way to do it in React is to *remove* state from child components and add it to their closest shared parent. The next few pages will focus on organizing state of a single component, but we will return to this topic in [Sharing State Between Components.](/learn/sharing-state-between-components)
+ຈະເຮັດແນວໃດຖ້າທ່ານຕ້ອງການໃຫ້ທັງສອງ gallery ຮັກສາ state ໃຫ້ກົງກັນ? ວິທີທີ່ຖືກຕ້ອງໃນ React ແມ່ນ *ລຶບ* state ອອກຈາກ child component ແລະ ເພີ່ມມັນໄປຍັງ parent component ທີ່ໃກ້ຄຽງທີ່ສຸດ. ໃນໜ້າຖັດໄປທີ່ໃກ້ຈະມາຮອດຈະເນັ້ນໄປທີ່ການຈັດການ state ຂອງ component ດຽວ, ແຕ່ເຮົາກັບໄປທີ່ຫົວຂໍ້ນີ້ໃນ [ການແບ່ງປັນ State ລະຫວ່າງ Component.](/learn/sharing-state-between-components)
 
 <Recap>
 
-* Use a state variable when a component needs to "remember" some information between renders.
-* State variables are declared by calling the `useState` Hook.
-* Hooks are special functions that start with `use`. They let you "hook into" React features like state.
-* Hooks might remind you of imports: they need to be called unconditionally. Calling Hooks, including `useState`, is only valid at the top level of a component or another Hook.
-* The `useState` Hook returns a pair of values: the current state and the function to update it.
-* You can have more than one state variable. Internally, React matches them up by their order.
-* State is private to the component. If you render it in two places, each copy gets its own state.
+* ໃຊ້ຕົວແປ state ເມື່ອ component ຈຳເປັນຕ້ອງ "ຈື່" ຂໍ້ມູນາງຢ່າງລະຫວ່າງການ render.
+* ຕົວແປ state ຖືກປະກາດໂດຍການເອີ້ນໃຊ້ Hook `useState`.
+* Hook ເປັນຟັງຊັ່ນພິເສດທີ່ຂຶ້ນຕົ້ນດ້ວຍ `use`. ມັນເຮັດໃຫ້ທ່ານ "ເຊື່ອມຕໍ່" feature React ເຊັ່ນ state.
+* Hook ອາດເຕືອນທ່ານກ່ຽວກັບການ import: ພວກມັນຈຳເປັນຕ້ອງເອີ້ນໃຊ້ໂດຍບໍ່ມີເງື່ອນໄຂ. ການເອີ້ນ Hook, ປະກອບມີ `useState` ໃຊ້ໄດ້ສະເພາະລະດັບເທິງສຸດຂອງ component  ຫຼື Hook ອື່ນເທົ່ານັ້ນ.
+* Hook `useState` ຈະ return ຄ່າຄູ່ໜຶ່ງ: state ປັດຈຸບັນ ແລະ ຟັງຊັ່ນທີ່ຈະອັບເດດ.
+* ທ່ານສາມາດມີຕົວແປ state ໄດ້ຫຼາຍກວ່າໜຶ່ງໂຕ. ພາຍໃນ, React ຈະຈັບຄູ່ພວກມັນຕາມລຳດັບ.
+* State ເປັນ private ຂອງ component. ຖ້າທ່ານ render ໃນສອງບ່ອນ, ແຕ່ລະ copy ຈະໄດ້ຮັບ state ຂອງໂຕເອງ.
 
 </Recap>
 
@@ -913,11 +913,11 @@ What if you wanted both galleries to keep their states in sync? The right way to
 
 <Challenges>
 
-#### Complete the gallery {/*complete-the-gallery*/}
+#### ເຮັດ gallery ໃຫ້ແລ້ວ {/*complete-the-gallery*/}
 
-When you press "Next" on the last sculpture, the code crashes. Fix the logic to prevent the crash. You may do this by adding extra logic to event handler or by disabling the button when the action is not possible.
+ເມື່ອທ່ານກົດ "Next" ເທິງຮູບປັ້ນສຸດທ້າຍ, code ຈະພັງ. ແກ້ໄຂ logic ເພື່ອປ້ອງກັນບໍ່ໃຫ້ມີບັນຫາ. ທ່ານສາມາດເຮັດໄດ້ໂດຍການເພີ່ມ logic ພິເສດໃຫ້ກັບ event handler ຫຼື ປິດການໃຊ້ງານປຸ່ມເມື່ອບໍ່ສາມາດດຳເນີນການໄດ້.
 
-After fixing the crash, add a "Previous" button that shows the previous sculpture. It shouldn't crash on the first sculpture.
+ຫຼັງຈາກແກ້ໄຂບັນຫາແລ້ວ, ເພີ່ມປຸ່ມ "Previous" ທີ່ສະແດງຮູບປັ້ນກ່ອນໜ້າ. ມັນບໍ່ຄວນມີຂໍ້ຜິດພາດກັບຮູບປັ້ນອັນທຳອິດ. 
 
 <Sandpack>
 
@@ -1059,7 +1059,7 @@ img { width: 120px; height: 120px; }
 
 <Solution>
 
-This adds a guarding condition inside both event handlers and disables the buttons when needed:
+ສິ່ງນີ້ຈະເພີ່ມເງື່ອນໄຂການປ້ອງກັນໃນ event handler ທັງສອງ ແລະ ປິດການໃຊ້ງານປຸ່ມເມື່ອຈຳເປັນ:
 
 <Sandpack>
 
@@ -1219,13 +1219,13 @@ img { width: 120px; height: 120px; }
 
 </Sandpack>
 
-Notice how `hasPrev` and `hasNext` are used *both* for the returned JSX and inside the event handlers! This handy pattern works because event handler functions ["close over"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) any variables declared while rendering.
+ສັງເກດວ່າມີການໃຊ້ `hasPrev` ແລະ `hasNext` *ທັ້ງ* ສຳລັບ JSX ທີ່ return ແລະ ພາຍໃນ event handler ແນວໃດ! ຮູບແບບທີ່ມີປະໂຫຍດນີ້ໃຊ້ງານໄດ້ເນື່ອງຈາກຟັງຊັ່ນ event handler ເຮັດວຽກ ["ໃກ້ຊິດກັບ"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) ຕົວແປໃດໆທີ່ປະກາດຂະນະມີການ render.
 
 </Solution>
 
-#### Fix stuck form inputs {/*fix-stuck-form-inputs*/}
+#### ແກ້ໄຂ input ຂອງ form ຄ້າງ {/*fix-stuck-form-inputs*/}
 
-When you type into the input fields, nothing appears. It's like the input values are "stuck" with empty strings. The `value` of the first `<input>` is set to always match the `firstName` variable, and the `value` for the second `<input>` is set to always match the `lastName` variable. This is correct. Both inputs have `onChange` event handlers, which try to update the variables based on the latest user input (`e.target.value`). However, the variables don't seem to "remember" their values between re-renders. Fix this by using state variables instead.
+ເມື່ອທ່ານພິມລົງໃນປ່ອງ input, ຈະບໍ່ມີຫຍັງປະກົດຂຶ້ນ. ມັນຄ້າຍກັບວ່າຄ່າຂອງ input "ຄ້າງ" ດ້ວຍ string ວ່າງ. `value` ຂອງ `<input>` ທຳອິດຖືກຕັ້ງຄ່າໃຫ້ກົງກັບຕົວແປ `firstName` ສະເໝີ, ແລະ `value` ສຳລັບ `<input>` ໂຕທີ່ສອງຖືກຕັ້ງຄ່າໃຫ້ກົງກັບຕົວແປ `lastName` ສະເໝີ. ນີ້ແມ່ນຖືກຕ້ອງ, input ທັງສອງມີ event handler `onChange` ເຊິ່ງພະຍາຍາມອັບເດດຕົວແປຕາມ input ຫຼ້າສຸດຂອງຜູ້ໃຊ້ (`e.target.value`). ເຖິງຢ່າງໃດກໍຕາມ, ຕົວແປເບິ່ງຄືວ່າຈະບໍ່ "ຈື່" ຄ່າລະຫວ່າງການ render ໃໝ່. ແກ້ໄຂໂດຍການໃຊ້ຕົວແປ state ແທນ.
 
 <Sandpack>
 
@@ -1274,7 +1274,7 @@ h1 { margin-top: 10px; }
 
 <Solution>
 
-First, import `useState` from React. Then replace `firstName` and `lastName` with state variables declared by calling `useState`. Finally, replace every `firstName = ...` assignment with `setFirstName(...)`, and do the same for `lastName`. Don't forget to update `handleReset` too so that the reset button works.
+ທຳອິດ, import `useState` from React. ຈາກນັ້ນແທນທີ `firstName` ແລະ `lastName` ດ້ວຍຕົວແປ state ທີ່ປະກາດໂດຍການເອີ້ນໃຊ້ `useState`. ສຸດທ້າຍ, ແທນທີທຸກໆການຕັ້ງຄ່າ `firstName = ...` ດ້ວຍ `setFirstName(...)`, ແລະ ເຮັດຄືກັນກັບ `lastName`. ຢ່າລືມອັບເດດ `handleReset` ນຳ ເພື່ອໃຫ້ປຸ່ມ reset ເຮັດວຽກໄດ້.  
 
 <Sandpack>
 
@@ -1325,13 +1325,13 @@ h1 { margin-top: 10px; }
 
 </Solution>
 
-#### Fix a crash {/*fix-a-crash*/}
+#### ແກ້ໄຂຂໍ້ຂັດຂ້ອງ {/*fix-a-crash*/}
 
-Here is a small form that is supposed to let the user leave some feedback. When the feedback is submitted, it's supposed to display a thank-you message. However, it crashes with an error message saying "Rendered fewer hooks than expected". Can you spot the mistake and fix it?
+ນີ້ແມ່ນ form ນ້ອຍທີ່ຄວນໃຫ້ຜູ້ໃຊ້ສະແດງຄວາມຄິດເຫັນ. ເມື່ອມີການສົ່ງຄວາມຄິດເຫັນ, ມັນຄວນຈະສະແດງຂໍ້ຄວາມຂອບໃຈ. ເຖິງຢ່າງໃດກໍຕາມ, ມັນພັງໂດຍມີຂໍ້ຄວາມສະແດງຂໍ້ຜິດພາດວ່າ "Rendered fewer hooks than expected". ທ່ານເຫັນຂໍ້ຜິດພາດ ແລະ ແກ້ໄຂໄດ້ ຫຼື ບໍ່?
 
 <Hint>
 
-Are there any limitations on _where_ Hooks may be called? Does this component break any rules? Check if there are any comments disabling the linter checks--this is where the bugs often hide!
+ມີຂໍ້ຈຳກັດຫຍັງແນ່ກ່ຽວກັບ _ບ່ອນທີ່_ Hook ອາດຈະຖືກເອີ້ນໃຊ້ ຫຼື ບໍ່? Component ນີ້ຜິດກົດ ຫຼື ບໍ່? ກວດວ່າມີຄວາມຄິດເຫັນໃດທີ່ປິດການໃຊ້ງານການກວດສອບ linter ຫຼື ບໍ່--ເຊິ່ງເປັນຈຸດທີ່ bug ມັກຖືກເຊື່ອງ!
 
 </Hint>
 
@@ -1370,9 +1370,9 @@ export default function FeedbackForm() {
 
 <Solution>
 
-Hooks can only be called at the top level of the component function. Here, the first `isSent` definition follows this rule, but the `message` definition is nested in a condition.
+ສາມາດເອີ້ນໃຊ້ Hook ໄດ້ທີ່ລະດັບສູງສຸດຂອງຟັງຊັ່ນ component ເທົ່ານັ້ນ. ຕອນນີ້, ຕົວແປ `isSent` ທຳອິດເປັນໄປຕາມກົດນີ້, ແຕ່ຕົວແປ `message` ເຊື່ອງຢູ່ໃນເງື່ອນໄຂ.
 
-Move it out of the condition to fix the issue:
+ຍ້າຍອອກຈາກເງື່ອນໄຂເພື່ອແກ້ໄຂບັນຫາ:
 
 <Sandpack>
 
@@ -1407,9 +1407,9 @@ export default function FeedbackForm() {
 
 </Sandpack>
 
-Remember, Hooks must be called unconditionally and always in the same order!
+ຈື່ໄວ້ວ່າ, Hook ຕ້ອງຖືກເອີ້ນໂດຍບໍ່ມີເງື່ອນໄຂ ແລະ ຢູ່ໃນລຳດັບດຽວກັນສະເໝີ!
 
-You could also remove the unnecessary `else` branch to reduce the nesting. However, it's still important that all calls to Hooks happen *before* the first `return`.
+ທ່ານສາມາດລຶບເງື່ອນໄຂ `else` ທີ່ບໍ່ຈຳເປັນເພື່ອຫຼຸດການຊ້ອນກັນໄດ້. ເຖິງຢ່າງໃດກໍຕາມ, ການເອີ້ນໃຊ້ Hook ທັງໝົດຈະເກີດຂຶ້ນ *ກ່ອນ* ການ `return` ທຳອິດກໍຍັງເປັນສິ່ງສຳຄັນ.
 
 <Sandpack>
 
@@ -1444,19 +1444,19 @@ export default function FeedbackForm() {
 
 </Sandpack>
 
-Try moving the second `useState` call after the `if` condition and notice how this breaks it again.
+ລອງຍ້າຍການເອີ້ນໃຊ້ `useState` ຄັ້ງທີ່ສອງຫຼັງຈາກເງື່ອນໄຊ `if` ແລະ ສັງເກດວ່າສີ່ງນີ້ຈະຢຸດການເຮັດວຽກອີກຄັ້ງແນວໃດ.
 
-If your linter is [configured for React](/learn/editor-setup#linting), you should see a lint error when you make a mistake like this. If you don't see an error when you try the faulty code locally, you need to set up linting for your project. 
+ຫາກ linter ຂອງທ່ານ [ມີກຳນົດຄ່າສຳລັບ React ແລ້ວ](/learn/editor-setup#linting), ທ່ານຄວນເຫັນຂໍ້ຜິດພາດ lint ເມື່ອທ່ານເຮັດຜິດພາດແບບນີ້. ຖ້າທ່ານບໍ່ພົບຂໍ້ຜິດພາດເມື່ອທ່ານລອງຂຽນ code ທີ່ຜິດພາດໃນເຄື່ອງ, ທ່ານຕ້ອງຕັ້ງຄ່າ linting ສຳລັບ project ຂອງທ່ານ.
 
 </Solution>
 
-#### Remove unnecessary state {/*remove-unnecessary-state*/}
+#### ລຶບ state ທີ່ບໍ່ຈຳເປັນອອກ {/*remove-unnecessary-state*/}
 
-When the button is clicked, this example should ask for the user's name and then display an alert greeting them. You tried to use state to keep the name, but for some reason it always shows "Hello, !".
+ເມື່ອຄິກປຸ່ມ, ຕົວຢ່າງນີ້ຄວນຖາມຊື່ຜູ້ໃຊ້ ຈາກນັ້ນຈຶ່ງສະແດງການທັກທາຍແຈ້ງເຕືອນ. ທ່ານພະຍາຍາມໃຊ້ state ເພື່ອຄົງຊື່ໄວ້, ແຕ່ດ້ວຍເຫດຜົນບາງຢ່າງ ມັນຈະສະແດງ "Hello, !" ສະເໝີ.
 
-To fix this code, remove the unnecessary state variable. (We will discuss about [why this didn't work](/learn/state-as-a-snapshot) later.)
+ເພື່ອແກ້ໄຂບັນຫານີ້, ລຶບຕົວແປ state ທີ່ບໍ່ຈຳເປັນອອກ. (ພວກເຮົາຈະເວົ້າເຖິງ [ເປັນຫຍັງສິ່ງນີ້ບໍ່ເຮັດວຽກ](/learn/state-as-a-snapshot) ໃນພາຍຫຼັງ.)
 
-Can you explain why this state variable was unnecessary?
+ທ່ານສາມາດອະທິບາຍໄດ້ບໍ່ວ່າເປັນຫຍັງຕົວແປ state ຈຶ່ງບໍ່ຈຳເປັນ?
 
 <Sandpack>
 
@@ -1483,7 +1483,7 @@ export default function FeedbackForm() {
 
 <Solution>
 
-Here is a fixed version that uses a regular `name` variable declared in the function that needs it:
+ຕໍ່ໄປນີ້ແມ່ນເວີຊັ່ນ fixed ທີ່ໃຊ້ຕົວແປ `name` ປົກະຕິທີ່ປະກາດໃນຟັງຊັ່ນທີ່ຕ້ອງການ:
 
 <Sandpack>
 
@@ -1506,7 +1506,7 @@ export default function FeedbackForm() {
 
 </Sandpack>
 
-A state variable is only necessary to keep information between re-renders of a component. Within a single event handler, a regular variable will do fine. Don't introduce state variables when a regular variable works well.
+ຕົວແປ state ມີຄວາມຈຳເປັນໃນການເກັບຂໍ້ມູນລະຫວ່າງການ render ຊໍ້າຂອງ component. ພາຍໃນໜື່ງ event handler, ຕົວແປປົກະຕິຈະເຮັດວຽກໄດ້ດີ. ຢ່າໃຊ້ຕົວແປ state ເມື່ອຕົວແປປົກະຕິເຮັດວຽກໄດ້ດີ.
 
 </Solution>
 
