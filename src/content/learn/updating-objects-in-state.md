@@ -1,57 +1,58 @@
 ---
-title: Updating Objects in State
+title: ການອັບເດດ Object ໃນ State
 ---
 
 <Intro>
 
-State can hold any kind of JavaScript value, including objects. But you shouldn't change objects that you hold in the React state directly. Instead, when you want to update an object, you need to create a new one (or make a copy of an existing one), and then set the state to use that copy.
+State ສາມາດເກັບຄ່າ JavaScript ຊະນິດໃດກໍໄດ້, ລວມເຖິງ object. ແຕ່ທ່ານບໍ່ຄວນປ່ຽນແປງ object ທີ່ທ່ານມີຢູ່ໃນ State React ໂດຍກົງ. ເມື່ອທ່ານຕ້ອງການອັບເດດ object ທ່ານຕ້ອງສ້າງ object ໃໝ່ (ຫຼື copy object ທີ່ມີຢູ່) ຈາກນັ້ນຕັ້ງຄ່າ state ເພື່ອໃຊ້ໂຕ copy ນັ້ນ.
 
 </Intro>
 
 <YouWillLearn>
 
-- How to correctly update an object in React state
-- How to update a nested object without mutating it
-- What immutability is, and how not to break it
-- How to make object copying less repetitive with Immer
+- ວິທີອັບເດດ object ໃນ state React
+- ວິທີອັບເດດ object ທີ່ຊ້ອນກັນໂດຍບໍ່ໄດ້ mutate ມັນ
+- Immutability ແມ່ນຫຍັງ ແລະ ຈະທຳລາຍມັນໄດ້ແນວໃດ
+- ວິທີໃຫ້ການ copy object ທີ່ຊໍ້າຊ້ອນກັນໜ້ອຍລົງດ້ວຍ Immer
 
 </YouWillLearn>
 
-## What's a mutation? {/*whats-a-mutation*/}
+## Mutation ແມ່ນຫຍັງ? {/*whats-a-mutation*/}
 
-You can store any kind of JavaScript value in state.
+ທ່ານສາມາດເກັບຄ່າ JavaScript ຊະນິດໃດກໍໄດ້ໃນ state.
 
 ```js
 const [x, setX] = useState(0);
 ```
 
-So far you've been working with numbers, strings, and booleans. These kinds of JavaScript values are "immutable", meaning unchangeable or "read-only". You can trigger a re-render to _replace_ a value:
+ມາຮອດຕອນນີ້, ທ່ານໄດ້ເຮັດວຽກກ່ຽວກັບ number, string ແລະ boolean. ຄ່າ JavaScript ປະເພດນີ້ແມ່ນ "immutable", ໝາຍຄວາມວ່າບໍ່ສາມາດປ່ຽນແປງໄດ້ ຫຼື "read-only". ທ່ານສາມາດ trigger ການ render ໃໝ່ ເປັນ _ການແທນທີ_ ຄ່າ:
 
 ```js
 setX(5);
 ```
 
-The `x` state changed from `0` to `5`, but the _number `0` itself_ did not change. It's not possible to make any changes to the built-in primitive values like numbers, strings, and booleans in JavaScript.
+state `x` ປ່ຽນຈາກ `0` ເປັນ `5`, ແຕ່ _ໂຕເລກ `0` ເອງ_ ບໍ່ປ່ຽນແປງ. ເປັນໄປບໍ່ໄດ້ທີ່ຈະປ່ຽນແປງຄ່າເບື້ອງຕົ້ນທີ່ສ້າງຂຶ້ນໃນໂຕເຊັ່ນ number, string ແລະ boolean ໃນ JavaScript.
 
-Now consider an object in state:
+ຕອນນີ້ມາເບິ່ງ object ໃນ state:
+
 
 ```js
 const [position, setPosition] = useState({ x: 0, y: 0 });
 ```
 
-Technically, it is possible to change the contents of _the object itself_. **This is called a mutation:**
+ໃນດ້ານເຕັກນິກ, ສາມາດປ່ຽນເນື້ອຫາຂອງ _ໂຕ object ເອງໄດ້_ **ສິ່ງນີ້ເອີ້ນວ່າການ mutation:**
 
 ```js
 position.x = 5;
 ```
 
-However, although objects in React state are technically mutable, you should treat them **as if** they were immutable--like numbers, booleans, and strings. Instead of mutating them, you should always replace them.
+ເຖິງຢ່າງໃດກໍຕາມ, ເຖິງວ່າ object ໃນ state React ນັ້ນສາມາດ mutate ໄດ້ໃນດ້ານເຕັກນິກ, ທ່ານຄວນປະຕິບັດ **ຄືກັບວ່າ** ພວກມັນບໍ່ສາມາດ mutate ໄດ້ --ເຊັ່ນ number, boolean, ແລະ string. ແທນທີຈະໃຫ້ໃຫ້ພວກມັນສາມາດ mutate ໄດ້, ທ່ານຄວນທຳການແທນທີພວກມັນສະເໝີ.
 
-## Treat state as read-only {/*treat-state-as-read-only*/}
+## ໃຫ້ຖືວ່າ State ເປັນແບບ read-only {/*treat-state-as-read-only*/}
 
-In other words, you should **treat any JavaScript object that you put into state as read-only.**
+ເວົ້າອີກແບບໜຶ່ງ, ທ່ານຄວນ **ຖືວ່າ object JavaScript ໃດໆທີ່ທ່ານກຳນົດໃສ່ໃນ state ໃຫ້ເປັນແບບ read-only.**
 
-This example holds an object in state to represent the current pointer position. The red dot is supposed to move when you touch or move the cursor over the preview area. But the dot stays in the initial position:
+ຕົວຢ່າງນີ້ເກັບ object ໃນ state ເພື່ອສະແດງຕຳແໜ່ງ pointer ປັດຈຸບັນ. ຈຸດສີແດງຄວນຈະຍ້າຍເມື່ອທ່ານແຕະ ຫຼື ເລື່ອນ cursor ໄປເໜືອພື້ນທີ່ສະແດງຕົວຢ່າງ. ແຕ່ຈຸດນັ້ນຍັງຄົງຢູ່ໃນຕຳແໜ່ງເລີ່ມຕົ້ນ:
 
 <Sandpack>
 
@@ -94,7 +95,7 @@ body { margin: 0; padding: 0; height: 250px; }
 
 </Sandpack>
 
-The problem is with this bit of code.
+ບັນຫາແມ່ນຢູ່ໃນ code ບ່ອນນີ້.
 
 ```js
 onPointerMove={e => {
@@ -103,9 +104,9 @@ onPointerMove={e => {
 }}
 ```
 
-This code modifies the object assigned to `position` from [the previous render.](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time) But without using the state setting function, React has no idea that object has changed. So React does not do anything in response. It's like trying to change the order after you've already eaten the meal. While mutating state can work in some cases, we don't recommend it. You should treat the state value you have access to in a render as read-only.
+code ສ່ວນນີ້ແກ້ໄຂ object ໃຫ້ກັບ `ຕຳແໜ່ງ` ຈາກ [ການ render ກ່ອນໜ້າ](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time) ແຕ່ບໍ່ມີການໃຊ້ຟັງຊັ່ນການຕັ້ງຄ່າ state, React ບໍ່ຮູ້ວ່າ object ມີການປ່ຽນແປງ. ສະນັ້ນ React ຈຶ່ງບໍ່ຕອບສະໜອງໃດໆ. ມັນເໝືອນກັບການພະຍາຍາມປ່ຽນລຳດັບຫຼັງຈາກທີ່ທ່ານໄດ້ກິນເຂົ້າແລ້ວ. ເຖິງວ່າການ mutate state ຈະເຮັດວຽກ ໃນບາງກໍລະນີ, ແຕ່ເຮົາບໍ່ແນະນຳ. ທ່ານຄວນປະຕິບັດຕໍ່ຄ່າ state ທີ່ທ່ານມີສິດເຂົ້າເຖິງໃນການ render ເປັນ read-only.
 
-To actually [trigger a re-render](/learn/state-as-a-snapshot#setting-state-triggers-renders) in this case, **create a *new* object and pass it to the state setting function:**
+ຫາກຕ້ອງການ [ການ trigger ເພື່ອ render ໃໝ່](/learn/state-as-a-snapshot#setting-state-triggers-renders) ໃນກໍລະນີນີ້, **ສ້າງ object *ໃໝ່* ແລະ ສົ່ງໄປຍັງຟັງຊັ່ນການຕັ້ງຄ່າ state:**
 
 ```js
 onPointerMove={e => {
@@ -116,12 +117,12 @@ onPointerMove={e => {
 }}
 ```
 
-With `setPosition`, you're telling React:
+ດ້ວຍ `setPosition`, ທ່ານກຳລັງບອກ React:
 
-* Replace `position` with this new object
-* And render this component again
+* ແທນທີ `ຕຳແໜ່ງ` ດ້ວຍ object ໃໝ່ນີ້
+* ແລະ render component ນີ້ອີກຄັ້ງ
 
-Notice how the red dot now follows your pointer when you touch or hover over the preview area:
+ສັງເກດວ່າຕອນນີ້ຈຸດສີແດງເຄື່ອນໄຫວຕາມ cursor ຂອງທ່ານແນວໃດເມື່ອທ່ານແຕະ ຫຼື ວາງເມົ້າເໜືອພື້ນທີ່ຕົວຢ່າງ:
 
 <Sandpack>
 
@@ -168,16 +169,16 @@ body { margin: 0; padding: 0; height: 250px; }
 
 <DeepDive>
 
-#### Local mutation is fine {/*local-mutation-is-fine*/}
+#### ການ mutate ແບບ local ແມ່ນບໍ່ເປັນຫຍັງ {/*local-mutation-is-fine*/}
 
-Code like this is a problem because it modifies an *existing* object in state:
+Code ແບບນີ້ມີບັນຫາເພາະມັນແກ້ໄຂ object *ທີ່ມີຢູ່* ໃນ state:
 
 ```js
 position.x = e.clientX;
 position.y = e.clientY;
 ```
 
-But code like this is **absolutely fine** because you're mutating a fresh object you have *just created*:
+ແຕ່ code ແບບນີ້ **ໃຊ້ໄດ້ແນ່ນອນ** ເພາະວ່າທ່ານກຳລັງ mutate object ໃໝ່ທີ່ທ່ານ *ຫາກໍສ້າງຂຶ້ນ*:
 
 ```js
 const nextPosition = {};
@@ -186,7 +187,7 @@ nextPosition.y = e.clientY;
 setPosition(nextPosition);
 ```
 
-In fact, it is completely equivalent to writing this:
+ໃນຄວາມເປັນຈິງ, ມັນທຽບເທົ່າກັບການຂຽນສິ່ງນີ້:
 
 ```js
 setPosition({
@@ -195,15 +196,15 @@ setPosition({
 });
 ```
 
-Mutation is only a problem when you change *existing* objects that are already in state. Mutating an object you've just created is okay because *no other code references it yet.* Changing it isn't going to accidentally impact something that depends on it. This is called a "local mutation". You can even do local mutation [while rendering.](/learn/keeping-components-pure#local-mutation-your-components-little-secret) Very convenient and completely okay!
+ການ Mutate ຈະເປັນບັນຫາເມື່ອທ່ານປ່ຽນແປງ object *ທີ່ມີຢູ່* ໃນ state ແລ້ວ. ການ mutate object ທີ່ທ່ານຫາກໍສ້າງຂຶ້ນນັ້ນບໍ່ເປັນຫຍັງເພາະວ່າ *ຍັງບໍ່ມີ code ອື່ນອ້າງອີງເຖິງມັນເທື່ອ.* ການປ່ຽນແປງຈະບໍ່ສົ່ງຜົນກະທົບຕໍ່ບາງສິ່ງທີ່ຂຶ້ນຢູ່ກັບ object ໂດຍບໍ່ໄດ້ຕັ້ງໃຈ. ສິ່ງນີ້ເອີ້ນວ່າ "ການ mutate local". ທ່ານສາມາດ mutate local [ໃນຂະນະ render.](/learn/keeping-components-pure#local-mutation-your-components-little-secret) ສະດວກ ແລະ ດີຫຼາຍ!
 
 </DeepDive>  
 
-## Copying objects with the spread syntax {/*copying-objects-with-the-spread-syntax*/}
+## ການ copy object ດ້ວຍ spread syntax {/*copying-objects-with-the-spread-syntax*/}
 
-In the previous example, the `position` object is always created fresh from the current cursor position. But often, you will want to include *existing* data as a part of the new object you're creating. For example, you may want to update *only one* field in a form, but keep the previous values for all other fields.
+ໃນຕົວຢ່າງກ່ອນໜ້າ, object `ຕຳແໜ່ງ` ຈະຖືກສ້າງຂຶ້ນໃໝ່ຈາກຕຳແໜ່ງ cursor ປັດຈຸບັນສະເໝີ. ແຕ່ສ່ວນຫຼາຍ, ທ່ານຈະຕ້ອງລວມຂໍ້ມູນ *ທີ່ມີຢູ່* ເປັນສ່ວນໜຶ່ງຂອງ object ໃໝ່ທີ່ທ່ານກຳລັງສ້າງ. ຕົວຢ່າງ, ທ່ານອາດຈະຕ້ອງການອັບເດດ *ພຽງໜຶ່ງ field* ໃນ form, ແຕ່ເກັບຄ່າກ່ອນໜ້າສຳລັບ field ອື່ນໆທັງໝົດ.
 
-These input fields don't work because the `onChange` handlers mutate the state:
+Field input ເຫຼົ່ານີ້ໃຊ້ງານບໍ່ໄດ້ເນື່ອງຈາກ handler `onChange` ໄດ້ mutate state:
 
 <Sandpack>
 
@@ -269,13 +270,13 @@ input { margin-left: 5px; margin-bottom: 5px; }
 
 </Sandpack>
 
-For example, this line mutates the state from a past render:
+ຕົວຢ່າງ, ແຖວນີ້ໄດ້ mutate state ຈາກການ render ທີຜ່ານມາ:
 
 ```js
 person.firstName = e.target.value;
 ```
 
-The reliable way to get the behavior you're looking for is to create a new object and pass it to `setPerson`. But here, you want to also **copy the existing data into it** because only one of the fields has changed:
+ວິທີທີ່ເຊື່ອຖືໄດ້ໃນການຮັບພຶດທິກຳທີ່ທ່ານຕ້ອງການແມ່ນສ້າງ object ໃໝ່ ແລະ ສົ່ງຕໍ່ໄປຍັງ `setPerson`. ແຕ່ຕອນນີ້, ທ່ານຕ້ອງການ **copy ຂໍ້ມູນທີ່ມີຢູ່ລົງໄປນຳ** ເນື່ອງຈາກມີ field ດຽວເທົ່ານັ້ນທີ່ປ່ຽນແປງ:
 
 ```js
 setPerson({
@@ -285,7 +286,7 @@ setPerson({
 });
 ```
 
-You can use the `...` [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#spread_in_object_literals) syntax so that you don't need to copy every property separately.
+ທ່ານສາມາດໃຊ້ syntax `...` [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#spread_in_object_literals) ເພື່ອທີ່ທ່ານຈະໄດ້ບໍ່ຕ້ອງ copy ທຸກ property ແຍກກັນ.
 
 ```js
 setPerson({
@@ -294,9 +295,9 @@ setPerson({
 });
 ```
 
-Now the form works! 
+ຕອນນີ້ form ເຮັດວຽກໄດ້!
 
-Notice how you didn't declare a separate state variable for each input field. For large forms, keeping all data grouped in an object is very convenient--as long as you update it correctly!
+ສັງເກດວ່າທ່ານບໍ່ໄດ້ປະກາດຕົວແປ state ແຍກຕ່າງຫາກສຳລັບແຕ່ລະ field input. ສຳລັບ form ໃຫຍ່, ການເກັບກຸ່ມຂໍ້ມູນທັງໝົດໄວ້ໃນ object ຈະສະດວກກວ່າຫຼາຍ--ຖ້າວ່າທ່ານອັບເດດຂໍ້ມູນຢ່າງຖືກຕ້ອງ!
 
 <Sandpack>
 
@@ -371,13 +372,13 @@ input { margin-left: 5px; margin-bottom: 5px; }
 
 </Sandpack>
 
-Note that the `...` spread syntax is "shallow"--it only copies things one level deep. This makes it fast, but it also means that if you want to update a nested property, you'll have to use it more than once. 
+ຈື່ໄວ້ວ່າ syntax spread `...` ແມ່ນ "ຕື້ນ"--ເຊິ່ງຈະ copy ສະເພາະສິ່ງທີ່ຢູ່ເລິກລົງໄປລະດັບໜຶ່ງເທົ່ານັ້ນ. ສິ່ງນີ້ເຮັດໃຫ້ໄວ, ແຕ່ກໍໝາຍຄວາມວ່າຖ້າທ່ານຕ້ອງການອັບເດດ property ທີ່ຊ້ອນກັນ, ທ່ານຈະຕ້ອງໄດ້ໃຊ້ຫຼາຍກວ່າໜຶ່ງຄັ້ງ.
 
 <DeepDive>
 
-#### Using a single event handler for multiple fields {/*using-a-single-event-handler-for-multiple-fields*/}
+#### ການໃຊ້ event handler ດຽວສຳລັບຫຼາຍ field {/*using-a-single-event-handler-for-multiple-fields*/}
 
-You can also use the `[` and `]` braces inside your object definition to specify a property with dynamic name. Here is the same example, but with a single event handler instead of three different ones:
+ທ່ານຍັງສາມາດໃຊ້ວົງຂໍ `[` ແລະ `]` ພາຍໃນການປະກາດ object ເພື່ອລະບຸ property ທີ່ມີຊື່ dynamic. ນີ້ແມ່ນຕົວຢ່າງດຽວກັນ, ແຕ່ມີ event handler ດຽວແທນທີຈະມີສາມໂຕ:
 
 <Sandpack>
 
@@ -441,13 +442,13 @@ input { margin-left: 5px; margin-bottom: 5px; }
 
 </Sandpack>
 
-Here, `e.target.name` refers to the `name` property given to the `<input>` DOM element.
+ຕອນນີ້, `e.target.name` ອ້າງອີງເຖິງ property `name` ທີ່ກຳນົດໃຫ້ກັບ DOM element `<input>`.
 
 </DeepDive>
 
-## Updating a nested object {/*updating-a-nested-object*/}
+## ການອັບເດດ object ທີ່ຊ້ອນກັນ {/*updating-a-nested-object*/}
 
-Consider a nested object structure like this:
+ພິຈາລະນາໂຄ່ງສ້າງ object ທີ່ຊ້ອນກັນດັ່ງນີ້:
 
 ```js
 const [person, setPerson] = useState({
@@ -460,13 +461,13 @@ const [person, setPerson] = useState({
 });
 ```
 
-If you wanted to update `person.artwork.city`, it's clear how to do it with mutation:
+ຖ້າທ່ານຕ້ອງການອັບເດດ `person.artwork.city`, ຊັດເຈນວ່າຈະເຮັດແນວໃດກັບການ mutate: 
 
 ```js
 person.artwork.city = 'New Delhi';
 ```
 
-But in React, you treat state as immutable! In order to change `city`, you would first need to produce the new `artwork` object (pre-populated with data from the previous one), and then produce the new `person` object which points at the new `artwork`:
+ແຕ່ໃນ React, ທ່ານຖືວ່າ state ເປັນສິ່ງທີ່ mutate ບໍ່ໄດ້! ໃນການປ່ຽນແປງ `city`, ກ່ອນອື່ນທ່ານຕ້ອງສ້າງ object `artwork` ໃໝ່ (ຕື່ມຂໍ້ມູນໄວ້ລ່ວງໜ້າຈາກ object ກ່ອນໜ້າ), ແລ້ວຈຶ່ງສ້າງ object `person` ໃໝ່ເຊິ່ງ point ໄປທີ່ `artwork` ໃໝ່:
 
 ```js
 const nextArtwork = { ...person.artwork, city: 'New Delhi' };
@@ -474,7 +475,7 @@ const nextPerson = { ...person, artwork: nextArtwork };
 setPerson(nextPerson);
 ```
 
-Or, written as a single function call:
+ຫຼື, ຂຽນເປັນການເອີ້ນໃຊ້ຟັງຊັ່ນດຽວ:
 
 ```js
 setPerson({
@@ -486,7 +487,7 @@ setPerson({
 });
 ```
 
-This gets a bit wordy, but it works fine for many cases:
+ນີ້ຄ່ອນຂ້າງໃຊ້ຫຼາຍຄຳ, ແຕ່ໃຊ້ໄດ້ດີກັບຫຼາຍໆກໍລະນີ:
 
 <Sandpack>
 
@@ -596,9 +597,9 @@ img { width: 200px; height: 200px; }
 
 <DeepDive>
 
-#### Objects are not really nested {/*objects-are-not-really-nested*/}
+#### Object ບໍ່ໄດ້ຊ້ອນກັນແທ້ໆ {/*objects-are-not-really-nested*/}
 
-An object like this appears "nested" in code:
+Object ທີ່ "ຊ້ອນກັນ" ແບບນີ້ສະແດງໃນ code:
 
 ```js
 let obj = {
@@ -611,7 +612,7 @@ let obj = {
 };
 ```
 
-However, "nesting" is an inaccurate way to think about how objects behave. When the code executes, there is no such thing as a "nested" object. You are really looking at two different objects:
+ເຖິງຢ່າງໃດກໍຕາມ, "ການຊ້ອນກັນ" ເປັນວິທີທີ່ບໍ່ຖືກຕ້ອງໃນການຄິດກ່ຽວກັບພຶດທິກຳຂອງ object. ເມື່ອ code ຂອງທ່ານເຮັດວຽກ, ຈະບໍ່ມີສິ່ງທີ່ເອີ້ນວ່າ "ຊ້ອນກັນ" ຂອງ object. ທ່ານກຳລັງເບິ່ງສອງ object ທີ່ແຕກຕ່າງກັນ:
 
 ```js
 let obj1 = {
@@ -625,8 +626,7 @@ let obj2 = {
   artwork: obj1
 };
 ```
-
-The `obj1` object is not "inside" `obj2`. For example, `obj3` could "point" at `obj1` too:
+Object `obj1` ບໍ່ໄດ້ຢູ່ໃນ `obj2`. ຕົວຢ່າງ, `obj3` ຄວນ point ໄປທີ່ `obj1` ໄດ້ເຊັ່ນກັນ:
 
 ```js
 let obj1 = {
@@ -646,13 +646,13 @@ let obj3 = {
 };
 ```
 
-If you were to mutate `obj3.artwork.city`, it would affect both `obj2.artwork.city` and `obj1.city`. This is because `obj3.artwork`, `obj2.artwork`, and `obj1` are the same object. This is difficult to see when you think of objects as "nested". Instead, they are separate objects "pointing" at each other with properties.
+ຖ້າທ່ານຕ້ອງ mutate `obj3.artwork.city`, ຈະມີຜົນກັບ `obj2.artwork.city` ແລະ `obj1.city`. ເນື່ອງຈາກ `obj3.artwork`, `obj3.artwork` ແລະ `obj1` ແມ່ນເປັນ object ດຽວກັນ. ສິ່ງນີ້ຍາກທີ່ຈະເບິ່ງເຫັນເມື່ອທ່ານຄິດວ່າ object ນັ້ນ "ຊ້ອນກັນ". ແຕ່ເປັນ object ທີ່ແຍກກັນມີການ "point" ເຊິ່ງກັນ ແລະ ກັນດ້ວຍ property.
 
 </DeepDive>  
 
-### Write concise update logic with Immer {/*write-concise-update-logic-with-immer*/}
+### ການຂຽນ logic ການອັບເດດແບບຫຍໍ້ດ້ວຍ Immer {/*write-concise-update-logic-with-immer*/}
 
-If your state is deeply nested, you might want to consider [flattening it.](/learn/choosing-the-state-structure#avoid-deeply-nested-state) But, if you don't want to change your state structure, you might prefer a shortcut to nested spreads. [Immer](https://github.com/immerjs/use-immer) is a popular library that lets you write using the convenient but mutating syntax and takes care of producing the copies for you. With Immer, the code you write looks like you are "breaking the rules" and mutating an object:
+ຖ້າ state ຂອງທ່ານຊ້ອນກັນເລິກ, ທ່ານອາດຈະຕ້ອງພິຈາລະນາ [ການເຮັດໃຫ້ງ່າຍຂຶ້ນ.](/learn/choosing-the-state-structure#avoid-deeply-nested-state) ແຕ່ຖ້າທ່ານບໍ່ຕ້ອງການປ່ຽນແປງໂຄ່ງສ້າງ state ຂອງທ່ານ, ທ່ານອາດຈະຕ້ອງການທາງລັດໄປຍັງ spread ທີ່ຊ້ອນກັນ. [Immer](https://github.com/immerjs/use-immer) ແມ່ນ library ຍອດນິຍົມທີ່ໃຫ້ທ່ານຂຽນ code ໂດຍໃຊ້ syntax ທີ່ສະດວກແຕ່ mutate  ແລະ ທຳການການ copy ໃຫ້ທ່ານ. ດ້ວຍ Immer, code ທີ່ທ່ານກຳລັງ "ແຫກກົດ" ແລະ mutate object:
 
 ```js
 updatePerson(draft => {
@@ -660,22 +660,22 @@ updatePerson(draft => {
 });
 ```
 
-But unlike a regular mutation, it doesn't overwrite the past state!
+ແຕ່ແຕກຕ່າງຈາກການ mutate ທົ່ວໄປ, ມັນບໍ່ໄດ້ຂຽນທັບ state ທີ່ຜ່ານມາ!
 
 <DeepDive>
 
-#### How does Immer work? {/*how-does-immer-work*/}
+#### Immer ເຮັດວຽກແນວໃດ? {/*how-does-immer-work*/}
 
-The `draft` provided by Immer is a special type of object, called a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy), that "records" what you do with it. This is why you can mutate it freely as much as you like! Under the hood, Immer figures out which parts of the `draft` have been changed, and produces a completely new object that contains your edits.
+`draft` ທີ່ມານຳ Immer ແມ່ນ object ພິເສດ, ທີ່ເອີ້ນວ່າ [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy), ທີ່ "ບັນທຶກ" ສິ່ງທີ່ທ່ານເຮັດນຳມັນ. ນີ້ແມ່ນເຫດຜົນວ່າເປັນຫຍັງທ່ານຈຶ່ງສາມາດ mutate ມັນໄດ້ຢ່າງອິດສະຫຼະຫຼາຍຕາມໃຈທ່ານຕ້ອງການ! ເບື້ອງຫຼັງ, Immer ຈະຄຳນວນວ່າສ່ວນໃດຂອງ `draft` ມີການປ່ຽນແປງແລ້ວ,​ແລະ ສ້າງ object ໃໝ່ທັງໝົດທີ່ມີການແກ້ໄຂຂອງທ່ານ.
 
 </DeepDive>
 
-To try Immer:
+ລອງໃຊ້ Immer:
 
-1. Run `npm install use-immer` to add Immer as a dependency
-2. Then replace `import { useState } from 'react'` with `import { useImmer } from 'use-immer'`
+1. ແລ່ນ `npm install use-immer` ເພື່ອເພີ່ມ Immer ເປັນ dependency
+2. ຈາກນັ້ນແທນທີ່ `import { useState } from 'react'` ດ້ວຍ `import { useImmer } from 'use-immer'`
 
-Here is the above example converted to Immer:
+ນີ້ແມ່ນຕົວຢ່າງຂ້າງເທິງທີ່ແປງເປັນ Immer ແລ້ວ:
 
 <Sandpack>
 
@@ -788,33 +788,34 @@ img { width: 200px; height: 200px; }
 
 </Sandpack>
 
-Notice how much more concise the event handlers have become. You can mix and match `useState` and `useImmer` in a single component as much as you like. Immer is a great way to keep the update handlers concise, especially if there's nesting in your state, and copying objects leads to repetitive code.
+ສັງເກດວ່າ event handler ມີຄວາມຮັດກຸມຫຼາຍຂຶ້ນເທົ່າໃດ. ທ່ານສາມາດຜະສົມ ແລະ ຈັບຄູ່ `useState` ແລະ  `useImmer` ໃນໜຶ່ງ component ໄດ້ຫຼາຍຕາມໃຈທ່ານຕ້ອງການ. Immer ເປັນວິທີການທີ່ດີທີ່ສຸດໃນການເຮັດໃຫ້ event handler ມີຄວາມຮັດກຸມ,​ ໂດຍສະເພາະ ຖ້າມີການຊ້ອນກັນຢູ່ໃນ state ຂອງທ່ານ, ແລະ ການ copy object ທີ່ອາດນຳໄປສູ່ code ທີ່ມີຄວາມຊໍ້າຊ້ອນ.
 
 <DeepDive>
 
-#### Why is mutating state not recommended in React? {/*why-is-mutating-state-not-recommended-in-react*/}
+#### ເປັນຫຍັງຈຶ່ງບໍ່ແນະນຳໃຫ້ມີການ mutate state ໃນ React? {/*why-is-mutating-state-not-recommended-in-react*/}
 
-There are a few reasons:
+ມີບາງເຫດຜົນດັ່ງນີ້:
 
-* **Debugging:** If you use `console.log` and don't mutate state, your past logs won't get clobbered by the more recent state changes. So you can clearly see how state has changed between renders.
-* **Optimizations:** Common React [optimization strategies](/reference/react/memo) rely on skipping work if previous props or state are the same as the next ones. If you never mutate state, it is very fast to check whether there were any changes. If `prevObj === obj`, you can be sure that nothing could have changed inside of it.
-* **New Features:** The new React features we're building rely on state being [treated like a snapshot.](/learn/state-as-a-snapshot) If you're mutating past versions of state, that may prevent you from using the new features.
-* **Requirement Changes:** Some application features, like implementing Undo/Redo, showing a history of changes, or letting the user reset a form to earlier values, are easier to do when nothing is mutated. This is because you can keep past copies of state in memory, and reuse them when appropriate. If you start with a mutative approach, features like this can be difficult to add later on.
-* **Simpler Implementation:** Because React does not rely on mutation, it does not need to do anything special with your objects. It does not need to hijack their properties, always wrap them into Proxies, or do other work at initialization as many "reactive" solutions do. This is also why React lets you put any object into state--no matter how large--without additional performance or correctness pitfalls.
+* **ການ debug:** ຖ້າທ່ານໃຊ້ `console.log` ແລະ ບໍ່ mutate state, log ທີ່ຜ່ານມາຂອງທ່ານຈະບໍ່ຖືກຂັດຂວາງໂດຍການປ່ຽນແປງ state ຫຼ້າສຸດ. ສະນັ້ນທ່ານຈຶ່ງເຫັນໄດ້ຢ່າງຊັດເຈນວ່າ state ມີການປ່ຽນແປງແນວໃດໃນລະຫວ່າງການ render.
+* **ການເພີ່ມປະສິດທິພາບ:** React ທົ່ວໄປ [ກົນລະຍຸດໃນການເພີ່ມປະສິດທິພາບ](/reference/react/memo) ອາໄສການຂ້າມການເຮັດວຽກຖ້າ prop ຫຼື state ກ່ອນໜ້າຄືກັນກັບໂຕຕໍ່ໄປ. ຖ້າທ່ານຍັງບໍ່ທັນ mutate state, ການກວດສອບຢ່າງໄວວ່າມີການປ່ຽນແປງໃດໆ ຫຼື ບໍ່. ຖ້າ `prevObj === obj`, ທ່ານໝັ້ນໃຈໄດ້ວ່າຈະບໍ່ມີຫຍັງປ່ຽນແປງພາຍໃນນັ້ນ.
+* **Feature ໃໝ່:** feature React ໃໝ່ທີ່ພວກເຮົາກຳລັງສ້າງນັ້ນຂຶ້ນຢູ່ກັບ state ທີ່ [ໄດ້ຮັບການປະຕິບັດຄືກັບການ snapshot.](/learn/state-as-a-snapshot) ຖ້າທ່ານກຳລັງ mutate state ຂອງເວິຊັ່ນທີ່ຜ່ານມາ ມັນອາດຈະກັນບໍ່ໃຫ້ທ່ານໃຊ້ feature ໃໝ່.
+* **ການປ່ຽນແປງຂໍ້ກຳນົດ:** ບາງ feature ຂອງແອັບພິເຄຊັ່ນເຊັ່ນ: ການ Undo/Redo, ການສະແດງປະຫວັດຂອງການປ່ຽນແປງ, ຫຼື ການອະນຸຍາດໃຫ້ຜູ້ໃຊ້ສາມາດ reset form ເປັນຄ່າກ່ອນໜ້າ, ຈະເຮັດໄດ້ງ່າຍເມື່ອບໍ່ມີການ mutate. ນີ້ເປັນເພາະວ່າທ່ານສາມາດເກັບ copy ຂອງ state ທີ່ຜ່ານມາໄວ້ໃນ memory ແລະ ໃຊ້ຊໍ້າໄດ້ຕາມຄວາມເໝາະສົມ. ຖ້າທ່ານເລີ່ມຕົ້ນດ້ວຍວິທີການ mutate feature ແບບນີ້ອາດຈະເປັນເລື່ອງຍາກທີ່ຈະເພີ່ມໃນພາຍຫຼັງ.
+* **ການ implement ທີ່ງ່າຍກວ່າ:** ເນື່ອງຈາກ React ບໍ່ຕ້ອງອາໄສການ mutate, ຈຶ່ງບໍ່ຈຳເປັນຕ້ອງເຮັດຫຍັງພິເສດກັບ object ຂອງທ່ານ. ບໍ່ຈຳເປັນຕ້ອງເຮັດການ hijack property ຂອງມັນ, ລວມມັນໄວ້ໃນ proxy ສະເໝີ ຫຼື ວຽກອື່ນໃນການເລີ່ມຕົ້ນຄືກັນກັບວິທີແກ້ໄຂການ "reactive" ຈຳນວນຫຼາຍ. ນີ້ແມ່ນເຫດຜົນທີ່ React ໃຫ້ທ່ານໃສ່ Object ຫຍັງກະໄດ້ລົງໃນ state--ບໍ່ວ່າຈະໃຫຍ່ສໍ່າໃດ--ໂດຍບໍ່ມີຂໍ້ຜິດພາດໃນດ້ານປະສິດທິພາບ ຫຼື ຄວາມຖືກຕ້ອງເພີ່ມເຕີມ.
 
-In practice, you can often "get away" with mutating state in React, but we strongly advise you not to do that so that you can use new React features developed with this approach in mind. Future contributors and perhaps even your future self will thank you!
+ໃນທາງປະຕິບັດ, ທ່ານມັກຈະ "ຫຼົບຫຼີກ" ກັບການ mutate state ໃນ React ໄດ້, ແຕ່ເຮົາຂໍແນະນຳເປັນຢ່າງສູງໃຫ້ທ່ານບໍ່ຕ້ອງເຮັດແບບນັ້ນ ເພື່ອທີ່ທ່ານຈະສາມາດໃຊ້ feature ໃໝ່ຂອງ React ທີ່ພັດທະນາຂຶ້ນໂດຍຄຳນຶງເຖິງແນວທາງນີ້. ຜູ້ມີສ່ວນຮ່ວມໃນອະນາຄົດ ແລະ ບາງທີ່ລວມເຖິງໂຕທ່ານໃນອະນາຄົດກໍຈະຂໍຂອບໃຈ!
 
 </DeepDive>
 
 <Recap>
 
-* Treat all state in React as immutable.
-* When you store objects in state, mutating them will not trigger renders and will change the state in previous render "snapshots".
-* Instead of mutating an object, create a *new* version of it, and trigger a re-render by setting state to it.
-* You can use the `{...obj, something: 'newValue'}` object spread syntax to create copies of objects.
-* Spread syntax is shallow: it only copies one level deep.
-* To update a nested object, you need to create copies all the way up from the place you're updating.
-* To reduce repetitive copying code, use Immer.
+* ປະຕິບັດຕໍ່ state ທັງໝົດໃນ React ແບບ mutate ບໍ່ໄດ້.
+* ເມື່ອທ່ານເກັບ object ໃນ state, ການ mutate ຈະບໍ່ trigger ການ render ແລະ ຈະປ່ຽນແປງ state ໃນການ render "snapshots" ກ່ອນໜ້າ.
+* ແທນທີ່ຈະ mutate object, ໃຫ້ສ້າງເວີຊັ່ນ *ໃໝ່* ຂອງ object ນັ້ນ ແລະ trigger ການ render ໃໝ່ໂດຍການຕັ້ງຄ່າ state ໃຫ້ມັນ.
+* ທ່ານສາມາດໃຊ້ syntax object spread `{...obj, something: 'newValue'}` ເພື່ອສ້າງ copy ຂອງ object. 
+* Syntax spread ແມ່ນຕື້ນ: ມັນ copy ໄດ້ເລິກລະດັບດຽວເທົ່ານັ້ນ.
+* ເພື່ອອັບເດດ object ທີ່ມີການຊ້ອນກັນ, ທ່ານຕ້ອງໄດ້ສ້າງ copy ຈາກຕຳແໜ່ງທີ່ທ່ານກຳລັງອັບເດດທັງໝົດ.
+* ເພື່ອຫຼຸດການ copy code ຊໍ້າໆ, ໃຊ້ Immer.
+
 
 </Recap>
 
@@ -822,11 +823,11 @@ In practice, you can often "get away" with mutating state in React, but we stron
 
 <Challenges>
 
-#### Fix incorrect state updates {/*fix-incorrect-state-updates*/}
+#### ແປງການອັບເດດ state ທີ່ບໍ່ຖືກຕ້ອງ {/*fix-incorrect-state-updates*/}
 
-This form has a few bugs. Click the button that increases the score a few times. Notice that it does not increase. Then edit the first name, and notice that the score has suddenly "caught up" with your changes. Finally, edit the last name, and notice that the score has disappeared completely.
+Form ນີ້ມີບັນຫາໜ້ອຍໜຶ່ງ. ຄິກປຸ່ມເພື່ອເພີ່ມຄະແນນສອງສາມຄັ້ງ. ສັງເກດວ່າມັນຈະບໍ່ມີການເພີ່ມຂຶ້ນ. ຈາກນັ້ນແກ້ໄຂຊື່ ແລະ ສັງເກດວ່າຄະແນນນັ້ນ "ທັນ" ກັບການປ່ຽນແປງຂອງທ່ານ. ສຸດທ້າຍ, ແກ້ໄຂນາມສະກຸນ ແລະ ສັງເກດວ່າຄະແນນຫາຍໄປຢ່າງສົມບູນ.
 
-Your task is to fix all of these bugs. As you fix them, explain why each of them happens.
+ວຽກຂອງທ່ານແມ່ນແກ້ໄຂບັນຫາເຫຼົ່ານີ້ທັງໝົດ. ຂະນະທີ່ທ່ານແກ້ໄຂ, ໃຫ້ອະທິບາຍວ່າເປັນຫຍັງມັນຈຶ່ງເກີດຂຶ້ນ.
 
 <Sandpack>
 
@@ -894,7 +895,7 @@ input { margin-left: 5px; margin-bottom: 5px; }
 
 <Solution>
 
-Here is a version with both bugs fixed:
+ນີ້ແມ່ນເວີຊັ່ນທີ່ໄດ້ຮັບການແກ້ໄຂແລ້ວ:
 
 <Sandpack>
 
@@ -964,23 +965,23 @@ input { margin-left: 5px; margin-bottom: 5px; }
 
 </Sandpack>
 
-The problem with `handlePlusClick` was that it mutated the `player` object. As a result, React did not know that there's a reason to re-render, and did not update the score on the screen. This is why, when you edited the first name, the state got updated, triggering a re-render which _also_ updated the score on the screen.
+ບັນຫາຂອງ `handlePlusClick` ມັນເຮັດໃຫ້ object `player` mutate. ຍ້ອນເຫດຜົນນີ້, React ບໍ່ຮູ້ວ່າມີເຫດຜົນຫຍັງທີ່ຕ້ອງ render ໃໝ່, ແລະ ບໍ່ໄດ້ອັບເດດຄະແນນເທິງໜ້າຈໍ. ນີ້ແມ່ນເຫດຜົນ, ເມື່ອທ່ານແກ້ໄຂຊື່ state ຈະໄດ້ຮັບການອັບເດດ, trigger ການ render ໃໝ່ ເຊິ່ງ _ຍັງ_ ອັບເດດຄະແນນເທິງໜ້າຈໍ.
 
-The problem with `handleLastNameChange` was that it did not copy the existing `...player` fields into the new object. This is why the score got lost after you edited the last name.
+ບັນຫາຂອງ `handleLastNameChange` ແມ່ນບໍ່ໄດ້ copy field `...player` ໃສ່ໃນ object ໃໝ່. ນີ້ເປັນສາເຫດທີ່ຄະແນນຫາຍໄປຫຼັງຈາກທີ່ທ່ານແກ້ໄຂນາມສະກຸນ.
 
 </Solution>
 
-#### Find and fix the mutation {/*find-and-fix-the-mutation*/}
+#### ຄົ້ນຫາ ແລະ ແກ້ໄຂການ mutate {/*find-and-fix-the-mutation*/}
 
-There is a draggable box on a static background. You can change the box's color using the select input.
+ມີກ່ອງທີ່ສາມາດລາກໄດ້ເທິງພື້ນຫຼັງແບບ static. ທ່ານສາມາດປ່ຽນສີຂອງກ່ອງໄດ້ໂດຍການໃຊ້ input ທີ່ເລືອກ.
 
-But there is a bug. If you move the box first, and then change its color, the background (which isn't supposed to move!) will "jump" to the box position. But this should not happen: the `Background`'s `position` prop is set to `initialPosition`, which is `{ x: 0, y: 0 }`. Why is the background moving after the color change?
+ແຕ່ມັນຍັງມີບັນຫາ. ຖ້າທ່ານຍ້າຍກ່ອງກ່ອນ, ແລ້ວປ່ຽນສີມັນ, ພື້ນຫຼັງ (ມັນບໍ່ຄວນຍ້າຍ!) ຈະ "ຂ້າມ" ໄປຍັງຕຳແໜ່ງກ່ອງ. ສິ່ງນີ້ບໍ່ຄວນເກີດຂຶ້ນ: prop `position` ຂອງພື້ນຫຼັງຖືກຕັ້ງຄ່າເປັນຄ່າ `initialPosition`, ເຊິ່ງແມ່ນ `{ x: 0, y: 0 }`. ເປັນຫຍັງພື້ນຫຼັງຈຶ່ງເຄື່ອນທີ່ຫຼັງຈາກປ່ຽນສີ?
 
-Find the bug and fix it.
+ຄົ້ນຫາບັນຫາ ແລະ ແກ້ໄຂ
 
 <Hint>
 
-If something unexpected changes, there is a mutation. Find the mutation in `App.js` and fix it.
+ຫາກມີການປ່ຽນແປງໂດຍບໍ່ຄາດຄິດ, ສະແດງວ່າມີການ mutate. ຄົ້ນຫາການ mutate ໃນ `App.js` ແລະ ແກ້ໄຂມັນ.
 
 </Hint>
 
@@ -1130,9 +1131,9 @@ select { margin-bottom: 10px; }
 
 <Solution>
 
-The problem was in the mutation inside `handleMove`. It mutated `shape.position`, but that's the same object that `initialPosition` points at. This is why both the shape and the background move. (It's a mutation, so the change doesn't reflect on the screen until an unrelated update--the color change--triggers a re-render.)
+ບັນຫາເກີດຈາກການ mutate ພາຍໃນ `handleMove`. ມັນ mutate `shape.position`, ແຕ່ນັ້ນແມ່ນ object ດຽວກັນກັບທີ່ `initialPosition` point ໄປ. ນີ້ແມ່ນເຫດຜົນທີ່ທັງຮູບຮ່າງ ແລະ ພື້ນຫຼັງຍ້າຍ. (ເປັນການ mutate, ສະນັ້ນການປ່ຽນແປງຈະບໍ່ສະແດງເທິງໜ້າຈໍຈົນກວ່າກຈະມີການອັບເດດທີ່ບໍ່ກ່ຽວຂ້ອງກັນເຊັ່ນ--ການປ່ຽນສີ--ການ trigger ເພື່ອ render ໃໝ.່)
 
-The fix is to remove the mutation from `handleMove`, and use the spread syntax to copy the shape. Note that `+=` is a mutation, so you need to rewrite it to use a regular `+` operation.
+ການແກ້ໄຂແມ່ນລຶບການ mutate ອອກຈາກ `handleMove`, ແລະ ໃຊ້ syntax spread ເພື່ອ copy ຮູບຮ່າງ. ໝາຍເຫດ `+=` ແມ່ນການ mutate, ດັ່ງນັ້ນທ່ານຕ້ອງໄດ້ຂຽນມັນໃໝ່ເພື່ອໃຊ້ການດຳເນີນການ `+` ທົ່ວໄປ.
 
 <Sandpack>
 
@@ -1285,9 +1286,9 @@ select { margin-bottom: 10px; }
 
 </Solution>
 
-#### Update an object with Immer {/*update-an-object-with-immer*/}
+#### ການອັບເດດ Object ດ້ວຍ Immer {/*update-an-object-with-immer*/}
 
-This is the same buggy example as in the previous challenge. This time, fix the mutation by using Immer. For your convenience, `useImmer` is already imported, so you need to change the `shape` state variable to use it.
+ນີ້ແມ່ນຕົວຢ່າງແບບດຽວກັນທີ່ມີບັນຫາໃນໂຈດກ່ອນໜ້ານີ້. ຄັ້ງນີ້, ແກ້ໄຂການ mutate ໂດຍການໃຊ້ Immer. ເພື່ອຄວາມສະດວກຂອງທ່ານ, `useImmer` ແມ່ນຖືກ import ໃຫ້ແລ້ວ, ສະນັ້ນທ່ານຕ້ອງໄດ້ປ່ຽນຕົວແປ state `shape` ເພື່ອໃຊ້ງານ.
 
 <Sandpack>
 
@@ -1454,7 +1455,7 @@ select { margin-bottom: 10px; }
 
 <Solution>
 
-This is the solution rewritten with Immer. Notice how the event handlers are written in a mutating fashion, but the bug does not occur. This is because under the hood, Immer never mutates the existing objects.
+ນີ້ແມ່ນວິທີແກ້ໄຂບັນຫາທີ່ຂຽນໃໝ່ດ້ວຍ Immer. ສັງເກດວິທີການຂຽນ event handler ໃນຮູບແບບການ mutate, ແຕ່ບັນຫາບໍ່ເກີດຂຶ້ນ. ນີ້ເປັນເພາະວ່າເບື້ອງຫຼັງຂອງ Immer ແມ່ນບໍ່ເຄີຍ mutate object ທີ່ມີຢູ່ແລ້ວ.
 
 <Sandpack>
 
