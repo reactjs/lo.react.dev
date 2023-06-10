@@ -1,52 +1,52 @@
 ---
-title: Updating Arrays in State
+title: ການອັບເດດ Array ໃນ State
 ---
 
 <Intro>
 
-Arrays are mutable in JavaScript, but you should treat them as immutable when you store them in state. Just like with objects, when you want to update an array stored in state, you need to create a new one (or make a copy of an existing one), and then set state to use the new array.
+Array ແມ່ນມີການ mutate ໃນ JavaScript, ແຕ່ທ່ານຄວນຖືວ່າມັນບໍ່ມີການ mutate ເມື່ອທ່ານຈັດເກັບໄວ້ໃນ state. ຄືກັນກັບ object, ເມື່ອທ່ານຕ້ອງການອັບເດດ array ທີ່ເກັບໄວ້ໃນ state, ທ່ານຕ້ອງສ້າງ array ໃໝ່ (ຫຼື ເຮັດ copy ຂອງ array ທີ່ມີຢູ່),​ ຈາກນັ້ນຕັ້ງຄ່າ state ເພື່ອໃຊ້ array ໃໝ່.
 
 </Intro>
 
 <YouWillLearn>
 
-- How to add, remove, or change items in an array in React state
-- How to update an object inside of an array
-- How to make array copying less repetitive with Immer
+- ວິທີເພີ່ມ, ລຶບ ຫຼື ປ່ຽນແປງລາຍການໃນ array ໃນ state React
+- ວິທີອັບເດດ object ພາຍໃນ array
+- ວິທີເຮັດໃຫ້ການ copy array ທີ່ຊໍ້າຊ້ອນໃຫ້ນ້ອຍລົງດ້ວຍ Immer
 
 </YouWillLearn>
 
-## Updating arrays without mutation {/*updating-arrays-without-mutation*/}
+## ການອັບເດດ Array ໂດຍບໍ່ທຳການ mutate {/*updating-arrays-without-mutation*/}
 
-In JavaScript, arrays are just another kind of object. [Like with objects](/learn/updating-objects-in-state), **you should treat arrays in React state as read-only.** This means that you shouldn't reassign items inside an array like `arr[0] = 'bird'`, and you also shouldn't use methods that mutate the array, such as `push()` and `pop()`.
+ໃນ JavaScript, array ເປັນພຽງ object ປະເພດໜຶ່ງ. [ຄືກັນກັບ object](/learn/updating-objects-in-state), **ທ່ານຄວນຖືວ່າ array ໃນ state ເປັນ read-only.** ເຊິ່ງໝາຍຄວາມວ່າທ່ານບໍ່ຄວນກຳນົດ item ໃໝ່ພາຍໃນ array ເຊັ່ນ `arr[0] = 'bird'`, ແລະ ທ່ານບໍ່ຄວນໃຊ້ວິທີທີ່ mutate array ເຊັ່ນ: `push()` ແລະ `pop()`.
 
-Instead, every time you want to update an array, you'll want to pass a *new* array to your state setting function. To do that, you can create a new array from the original array in your state by calling its non-mutating methods like `filter()` and `map()`. Then you can set your state to the resulting new array.
+ແຕ່ທຸກຄັ້ງທີ່ທ່ານອັບເດດ array, ທ່ານຈະຕ້ອງສົ່ງ array *ໃໝ່* ໄປຍັງຟັງຊັ່ນການຕັ້ງຄ່າ state ຂອງທ່ານ. ເພື່ອເຮັດສິ່ງນີ້, ທ່ານສາມາດສ້າງ array ໃໝ່ຈາກ array ເກົ່າໃນ state ຂອງທ່ານໂດຍການເອີ້ນໃຊ້ method ທີ່ບໍ່ mutate ເຊັ່ນ: `filter()` ແລະ `map()`. ຈາກນັ້ນທ່ານສາມາດຕັ້ງຄ່າ state ຂອງທ່ານເປັນ array ໃໝ່ໄດ້.
 
-Here is a reference table of common array operations. When dealing with arrays inside React state, you will need to avoid the methods in the left column, and instead prefer the methods in the right column:
+ນີ້ແມ່ນຕາຕະລາງການອ້າງອີງຂອງການດຳເນີນການ array ທົ່ວໄປ. ເມື່ອຈັດການກັບ array ໃນ state React, ທ່ານຈະຕ້ອງຫຼີກຫຼ່ຽງ method ໃນຖັນດ້ານຊ້າຍ ແລະ ເລືອກ method ໃນຖັນດ້ານຂວາແທນ:
 
-|           | avoid (mutates the array)           | prefer (returns a new array)                                        |
+|           | ຫຼີກຫຼ່ຽງ (ການ mutate array)           | ແນະນຳ (return array ໃໝ່)                                        |
 | --------- | ----------------------------------- | ------------------------------------------------------------------- |
-| adding    | `push`, `unshift`                   | `concat`, `[...arr]` spread syntax ([example](#adding-to-an-array)) |
-| removing  | `pop`, `shift`, `splice`            | `filter`, `slice` ([example](#removing-from-an-array))              |
-| replacing | `splice`, `arr[i] = ...` assignment | `map` ([example](#replacing-items-in-an-array))                     |
-| sorting   | `reverse`, `sort`                   | copy the array first ([example](#making-other-changes-to-an-array)) |
+| ການເພີ່ມ    | `push`, `unshift`                   | `concat`, `[...arr]` spread syntax ([ຕົວຢ່າງ](#adding-to-an-array)) |
+| ການລຶບ| `pop`, `shift`, `splice`            | `filter`, `slice` ([ຕົວຢ່າງ](#removing-from-an-array))              |
+| ການແທນທີ່| `splice`, `arr[i] = ...` ການກຳນົດຄ່າ | `map` ([ຕົວຢ່າງ](#replacing-items-in-an-array))                     |
+| ການຈັດຮຽງ| `reverse`, `sort`                   | copy array ທຳອິດ ([ຕົວຢ່າງ](#making-other-changes-to-an-array)) |
 
-Alternatively, you can [use Immer](#write-concise-update-logic-with-immer) which lets you use methods from both columns.
+ອີກວິທີ,​ ທ່ານສາມາດ [ໃຊ້ Immer](#write-concise-update-logic-with-immer) ເຊິ່ງໃຫ້ທ່ານໃຊ້ method ຈາກສອງຖັນ.
 
 <Pitfall>
 
-Unfortunately, [`slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) and [`splice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) are named similarly but are very different:
+ນ່າເສຍດາຍທີ່ [`slice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) ແລະ [`splice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) ມີຊື່ຄ້າຍກັນແຕ່ວ່າຕ່າງກັນຫຼາຍ:
 
-* `slice` lets you copy an array or a part of it.
-* `splice` **mutates** the array (to insert or delete items).
+* `slice` ໃຫ້ທ່ານ copy array ຫຼື ບາງສ່ວນ.
+* `splice` ສາມາດ **mutate** array (ເພື່ອເພີ່ມ ຫຼື ລຶບ item).
 
-In React, you will be using `slice` (no `p`!) a lot more often because you don't want to mutate objects or arrays in state. [Updating Objects](/learn/updating-objects-in-state) explains what mutation is and why it's not recommended for state.
+ໃນ React, ທ່ານຈະໃຊ້ `slice` (ບໍ່ມີ `p`!) ຫຼາຍຂຶ້ນ ເພາະວ່າທ່ານບໍ່ mutate object ຫຼື array ໃນ state. [ການອັບເດດ Object](/learn/updating-objects-in-state) ອະທິບາຍວ່າການ mutate ແມ່ນຫຍັງ ແລະ ຍ້ອນຫຍັງຈື່ງບໍ່ແນະນຳໃຫ້ໃຊ້ກັບ state.
 
 </Pitfall>
 
-### Adding to an array {/*adding-to-an-array*/}
+### ການເພີ່ມໄປຍັງ array {/*adding-to-an-array*/}
 
-`push()` will mutate an array, which you don't want:
+`push()` ຈະ mutate array, ເຊິ່ງທ່ານບໍ່ໄດ້ຕ້ອງການ:
 
 <Sandpack>
 
@@ -88,7 +88,7 @@ button { margin-left: 5px; }
 
 </Sandpack>
 
-Instead, create a *new* array which contains the existing items *and* a new item at the end. There are multiple ways to do this, but the easiest one is to use the `...` [array spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#spread_in_array_literals) syntax:
+ໃຫ້ສ້າງ array *ໃໝ່* ເຊິ່ງມີ item ທີ່ມີຢູ່ *ແລະ* item ໃໝ່ຕໍ່ທ້າຍແທນ. ມີຫຼາຍວິທີໃນການເຮັດແບບນີ້, ແຕ່ວິທີທີ່ງ່າຍທີ່ສຸດແມ່ນໃຊ້ `...` syntax [spread array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#spread_in_array_literals):
 
 ```js
 setArtists( // Replace the state
@@ -99,7 +99,7 @@ setArtists( // Replace the state
 );
 ```
 
-Now it works correctly:
+ດຽວນີ້ເຮັດວຽກໄດ້ຖືກຕ້ອງ:
 
 <Sandpack>
 
@@ -141,7 +141,7 @@ button { margin-left: 5px; }
 
 </Sandpack>
 
-The array spread syntax also lets you prepend an item by placing it *before* the original `...artists`:
+Syntax spread ຂອງ array ຍັງຊ່ວຍໃຫ້ທ່ານເພີ່ມ item ໂດຍການວາງ *ກ່ອນ* ໂຕຕົ້ນສະບັບ `...artists`:
 
 ```js
 setArtists([
@@ -150,11 +150,11 @@ setArtists([
 ]);
 ```
 
-In this way, spread can do the job of both `push()` by adding to the end of an array and `unshift()` by adding to the beginning of an array. Try it in the sandbox above!
+ຍ້ອນວິທີນີ້, spread ສາມາດເຮັດວຽກຂອງທັງ `push()` ໂດຍການເພີ່ມບ່ອນທ້າຍຂອງ array ແລະ `unshift()` ໂດຍການເພີ່ມຈຸດເລີ່ມຕົ້ນຂອງ array. ລອງໃຊ້ໃນ sandbox ດ້ານເທິງ!
 
-### Removing from an array {/*removing-from-an-array*/}
+### ການລຶບອອກຈາກ array {/*removing-from-an-array*/}
 
-The easiest way to remove an item from an array is to *filter it out*. In other words, you will produce a new array that will not contain that item. To do this, use the `filter` method, for example:
+ວິທີທີ່ງ່າຍທີ່ສຸດໃນການລຶບ item ອອກຈາກ array ແມ່ນການ *filter ມັນອອກ*. ເວົ້າໄດ້ວ່າ, ທ່ານຈະສ້າງ array ໃໝ່ທີ່ບໍ່ມີ item ນັ້ນ. ໃນການເຮັດແບບນີ້, ໃຫ້ໃຊ້ວິທີ method `filter`, ຕົວຢ່າງ:
 
 <Sandpack>
 
@@ -198,7 +198,7 @@ export default function List() {
 
 </Sandpack>
 
-Click the "Delete" button a few times, and look at its click handler.
+ຄິກປຸ່ມ "Delete" ສອງສາມຄັ້ງ, ແລ້ວເບິ່ງທີ່ click handler ຂອງມັນ.
 
 ```js
 setArtists(
@@ -206,13 +206,13 @@ setArtists(
 );
 ```
 
-Here, `artists.filter(a => a.id !== artist.id)` means "create an array that consists of those `artists` whose IDs are different from `artist.id`". In other words, each artist's "Delete" button will filter _that_ artist out of the array, and then request a re-render with the resulting array. Note that `filter` does not modify the original array.
+ໃນນີ້, `artists.filter(a => a.id !== artist.id)` ໝາຍເຖິງ "ການສ້າງ array ທີ່ປະກອບມີ `artist` ເຊິ່ງມີ ID ທີ່ແຕກຕ່າງຈາກ `artist.id`". ເວົ້າໄດ້ວ່າ, ປຸ່ມ "Delete" ຂອງ artist ຈະ filter artist _ນັ້ນ_ ອອກຈາກ array, ແລະ ຈາກນັ້ນຈະມີການຮ້ອງຂໍໃຫ້ render ໃໝ່ດ້ວຍ array ທີ່ມີຄ່າໃໝ່. ສັງເກດວ່າ `filter` ບໍ່ໄດ້ແກ້ໄຂ array ເດີມ. 
 
-### Transforming an array {/*transforming-an-array*/}
+### ການແປງ array {/*transforming-an-array*/}
 
-If you want to change some or all items of the array, you can use `map()` to create a **new** array. The function you will pass to `map` can decide what to do with each item, based on its data or its index (or both).
+ຖ້າທ່ານຕ້ອງການປ່ຽນບາງ item ຫຼື ທັງໝົດຂອງ array, ທ່ານສາມາດໃຊ້ `map()` ເພື່ອສ້າງ array **ໃໝ່**. ຟັງຊັ່ນທີ່ທ່ານສົ່ງຜ່ານ `map` ສາມາດຕັດສິນໃຈໄດ້ວ່າຈະເຮັດຫຍັງແນ່ກັບແຕ່ລະ item, ໂດຍພິຈາລະນາຈາກຂໍ້ມູນ ຫຼື index ຂອງມັນເອງ (ຫຼື ທັງສອງ). 
 
-In this example, an array holds coordinates of two circles and a square. When you press the button, it moves only the circles down by 50 pixels. It does this by producing a new array of data using `map()`:
+ໃນຕົວຢ່າງນີ້, array ມີພິກັດຂອງວົງມົນສອງວົງ ແລະ ສີ່ຫຼ່ຽມຈະຕຸລັດ. ເມື່ອທ່ານກົດປຸ່ມ, ປຸ່ມຈະເລື່ອນສະເພາະວົງມົນລົງ 50pixel. ມັນເຮັດໄດ້ໂດຍການສ້າງ array ໃໝ່ໂດຍໃຊ້ `map()`:
 
 <Sandpack>
 
@@ -278,11 +278,11 @@ body { height: 300px; }
 
 </Sandpack>
 
-### Replacing items in an array {/*replacing-items-in-an-array*/}
+### ການແທນທີ item ໃນ array {/*replacing-items-in-an-array*/}
 
-It is particularly common to want to replace one or more items in an array. Assignments like `arr[0] = 'bird'` are mutating the original array, so instead you'll want to use `map` for this as well.
+ມັນເປັນເລື່ອງປົກະຕິທີ່ຈະຕ້ອງການແທນທີ່ໜຶ່ງລາຍການຂຶ້ນໄປໃນ array. ການກຳນົດເຊັ່ນ `arr[0] = 'bird'` ກຳລັງ mutate array ເດີມ, ສະນັ້ນທ່ານຄວນໃຊ້ `map` ສຳລັບສິ່ງນີ້ແທນ.
 
-To replace an item, create a new array with `map`. Inside your `map` call, you will receive the item index as the second argument. Use it to decide whether to return the original item (the first argument) or something else:
+ຫາກຕ້ອງການແທນທີ item, ໃຫ້ສ້າງ array ໃໝ່ດ້ວຍ `map`. ໃນການເອີ້ນໃຊ້ `map` ຂອງທ່ານ, ທ່ານຈະໄດ້ຮັບ index item ເປັນ argument ທີ່ສອງ. ໃຊ້ມັນເພື່ອຕັດສິນໃຈວ່າຈະ return item ດັ້ງເດີມ (argument ທຳອິດ) ຫຼື ຢ່າງອື່ນ:
 
 <Sandpack>
 
@@ -332,11 +332,11 @@ button { margin: 5px; }
 
 </Sandpack>
 
-### Inserting into an array {/*inserting-into-an-array*/}
+### ການເພີ່ມຂໍ້ມູນໃສ່ໃນ array {/*inserting-into-an-array*/}
 
-Sometimes, you may want to insert an item at a particular position that's neither at the beginning nor at the end. To do this, you can use the `...` array spread syntax together with the `slice()` method. The `slice()` method lets you cut a "slice" of the array. To insert an item, you will create an array that spreads the slice _before_ the insertion point, then the new item, and then the rest of the original array.
+ບາງເທື່ອ, ທ່ານອາດຈະຕ້ອງເພີ່ມ item ໃນຕຳແໜ່ງໃດໜຶ່ງເຊິ່ງບໍ່ແມ່ນຈຸດເລີ່ມຕົ້ນ ແລະ ຈຸດສຸດທ້າຍ. ເພື່ອເຮັດສິ່ງນີ້, ທ່ານສາມາດໃຊ້ syntax spread array `...` ຮ່ວມກັບ method `slice()`. Method `slice()` ຊ່ວຍໃຫ້ທ່ານ "ຕັດ" ບາງສ່ວນຂອງ array ໄດ້. ເພື່ອເພີ່ມ item, ທ່ານຕ້ອງສ້າງ array ທີ່ແບ່ງສ່ວນ _ກ່ອນ_ ຈຸດທີ່ຈະເພີ່ມ, ຈາກນັ້ນຈຶ່ງເພີ່ມລາຍການໃໝ່ ແລະ ສ່ວນທີ່ເຫຼືອຂອງ array ເກົ່າ.
 
-In this example, the Insert button always inserts at the index `1`:
+ໃນຕົວຢ່າງນີ້, ປຸ່ມເພີ່ມຈະເພີ່ມທີ່ index `1` ສະເໝີ:
 
 <Sandpack>
 
@@ -396,13 +396,13 @@ button { margin-left: 5px; }
 
 </Sandpack>
 
-### Making other changes to an array {/*making-other-changes-to-an-array*/}
+### ການປ່ຽນແປງອື່ນໆກັບ array {/*making-other-changes-to-an-array*/}
 
-There are some things you can't do with the spread syntax and non-mutating methods like `map()` and `filter()` alone. For example, you may want to reverse or sort an array. The JavaScript `reverse()` and `sort()` methods are mutating the original array, so you can't use them directly.
+ມີບາງສິ່ງທີ່ທ່ານບໍ່ສາມາດເຮັດໄດ້ໂດຍ syntax spread ແລະ  ວິທີການທີ່ບໍ່ເຮັດໃຫ້ມີການ mutate ເຊັ່ນ `map()` ແລະ `filter()` ພຽງຢ່າງດຽວ. ຕົວຢ່າງ, ທ່ານອາດຈະຕ້ອງການ reverse ຫຼື ຮຽງລຳດັບ array. Method JavaScriopt `reverse()` ແລະ `sort()` ກຳລັງ mutate array ເດີມ, ດັ່ງນັ້ນທ່ານຈຶ່ງບໍ່ສາມາດໃຊ້ມັນໂດຍກົງໄດ້.
 
-**However, you can copy the array first, and then make changes to it.**
+**ເຖິງຢ່າງໃດກໍຕາມ, ທ່ານສາມາດ copy array ກ່ອນ, ຈາກນັ້ນຈຶ່ງທຳການປ່ຽນແປງມັນ.**
 
-For example:
+ຕົວຢ່າງ:
 
 <Sandpack>
 
@@ -442,9 +442,9 @@ export default function List() {
 
 </Sandpack>
 
-Here, you use the `[...list]` spread syntax to create a copy of the original array first. Now that you have a copy, you can use mutating methods like `nextList.reverse()` or `nextList.sort()`, or even assign individual items with `nextList[0] = "something"`.
+ທີ່ນີ້, ທ່ານໃຊ້ syntax spread `[...list]` ເພື່ອສ້າງ copy ຂອງ array ເດີມກ່ອນ. ຕອນນີ້ທ່ານມີ copy ແລ້ວ, ທ່ານສາມາດໃຊ້ວິທີ mutate method ເຊັ່ນ: `nextList.reverse()` ຫຼື `nextList.sort()` ຫຼື ແມ້ແຕ່ກຳນົດແຕ່ລະ item ດ້ວຍ `nextList[0] = "ບາງຢ່າງ"`.
 
-However, **even if you copy an array, you can't mutate existing items _inside_ of it directly.** This is because copying is shallow--the new array will contain the same items as the original one. So if you modify an object inside the copied array, you are mutating the existing state. For example, code like this is a problem.
+ເຖິງຢ່າງໃດກໍຕາມ, **ເຖິງວ່າທ່ານຈະ copy array, ທ່ານບໍ່ສາມາດ mutate item ທີ່ມີຢູ່ _ພາຍໃນ_ ຂອງ array ໂດຍກົງໄດ້.** ເນື່ອງຈາກການ copy ນັ້ນມີລຳດັບຊັ້ນບໍ່ເລິກ--array ໃໝ່ຈະມີ item ຄືກັບຂອງເດີມ.​ ດັ່ງນັ້ນຖ້າທ່ານແກ້ໄຂ object ພາຍໃນ array ທີ່ຖືກ copy, ທ່ານກຳລັງ mutate state ທີ່ມີຢູ່. ຕົວຢ່າງ, code ແບບນີ້ທີ່ມີບັນຫາ.
 
 ```js
 const nextList = [...list];
@@ -452,15 +452,15 @@ nextList[0].seen = true; // Problem: mutates list[0]
 setList(nextList);
 ```
 
-Although `nextList` and `list` are two different arrays, **`nextList[0]` and `list[0]` point to the same object.** So by changing `nextList[0].seen`, you are also changing `list[0].seen`. This is a state mutation, which you should avoid! You can solve this issue in a similar way to [updating nested JavaScript objects](/learn/updating-objects-in-state#updating-a-nested-object)--by copying individual items you want to change instead of mutating them. Here's how.
+ເຖິງວ່າ `nextList` ແລະ `list` ຈະເປັນສອງ array ທີ່ແຕກຕ່າງກັນ, ແຕ່ **`nextList[0]` ແລະ `list[0]` ຈະ point ໄປທີ່ object ດຽວກັນ.** ສະນັ້ນ, ການປ່ຽນແປງ `nextList[0].seen` ນຳ. ນີ້ແມ່ນການ mutate state, ເຊິ່ງທ່ານຄວນຫຼີກຫຼ່ຽງ! ທ່ານສາມາດແກ້ບັນຫານີ້ໄດ້ດ້ວຍຫຼາຍວິທີທີ່ຄ້າຍຄືກັບ [ການອັບເດດ Object JavaScript ທີ່ຊ້ອນກັນ](/learn/updating-objects-in-state#updating-a-nested-object)--ໂດຍການ copy ແຕ່ລະ item ທີ່ທ່ານຕ້ອງການປ່ຽນແປງແທນການ mutate. ນີ້ແມ່ນວິທີການ.
 
-## Updating objects inside arrays {/*updating-objects-inside-arrays*/}
+## ການອັບເດດ object ພາຍໃນ array {/*updating-objects-inside-arrays*/}
 
-Objects are not _really_ located "inside" arrays. They might appear to be "inside" in code, but each object in an array is a separate value, to which the array "points". This is why you need to be careful when changing nested fields like `list[0]`. Another person's artwork list may point to the same element of the array!
+Object ບໍ່ໄດ້ຢູ່ "ພາຍໃນ" array _ແທ້_. ອາດເບິ່ງວ່າເປັນ "ພາຍໃນ" code, ແຕ່ວ່າແຕ່ລະ object ໃນ array ເປັນຄ່າທີ່ແຍກກັນ, ເຊິ່ງເປັນ array "point". ນີ້ເປັນເຫດຜົນທີ່ທ່ານຕ້ອງລະວັງເມື່ອປ່ຽນ field ທີ່ຊ້ອນກັນເຊັ່ນ `list[0]`. ລາຍການ artwork ຂອງບຸກຄົນອື່ນອາດ point ໄປທີ່ element ດຽວກັນຂອງ array!
 
-**When updating nested state, you need to create copies from the point where you want to update, and all the way up to the top level.** Let's see how this works.
+**ເມື່ອອັບເດດ state ທີ່ຊ້ອນກັນ, ທ່ານຕ້ອງສ້າງ copy ຈາກຈຸດທີ່ທ່ານຕ້ອງການອັບເດດ ແລະ ໄປຈົນເຖິງລະດັບເທິງສຸດ.** ມາເບິ່ງວິທີການເຮັດວຽກ.
 
-In this example, two separate artwork lists have the same initial state. They are supposed to be isolated, but because of a mutation, their state is accidentally shared, and checking a box in one list affects the other list:
+ໃນຕົວຢ່າງນີ້, ລາຍການ artwork ສອງລາຍການທີ່ແຍກກັນມີ state ເລີ່ມຕົ້ນຄືກັນ. ພວກມັນຄວນຖືກແຍກອອກຈາກກັນ, ແຕ່ເນື່ອງຈາກມີການ mutate, state ຂອງພວກມັນຈຶ່ງຖືກແບ່ງປັນກັນໂດຍບັງເອີນ ແລະ ການໝາຍຕິກທີ່ກ່ອງໃນລາຍການໃດໜຶ່ງຈະສົ່ງຜົນຕໍ່ອີກລາຍການໜຶ່ງ:
 
 <Sandpack>
 
@@ -540,7 +540,7 @@ function ItemList({ artworks, onToggle }) {
 
 </Sandpack>
 
-The problem is in code like this:
+ບັນຫາແມ່ນຢູ່ໃນ code ແບບນີ້:
 
 ```js
 const myNextList = [...myList];
@@ -549,9 +549,9 @@ artwork.seen = nextSeen; // Problem: mutates an existing item
 setMyList(myNextList);
 ```
 
-Although the `myNextList` array itself is new, the *items themselves* are the same as in the original `myList` array. So changing `artwork.seen` changes the *original* artwork item. That artwork item is also in `yourList`, which causes the bug. Bugs like this can be difficult to think about, but thankfully they disappear if you avoid mutating state.
+ເຖິງວ່າ array `myNextList` ຈະເປັນອັນໃໝ່, ແຕ່ໂຕ *item ເອງ* ກໍຄືກັນກັບ array `myList` ເດີມ. ສະນັ້ນການປ່ຽນແປງ `artwork.seen` ຈຶ່ງປ່ຽນ item ຂອງ artwork *ຕົ້ນສະບັບ*. item artwork ນັ້ນຢູ່ໃນ `yourList`, ເຊິ່ງເຮັດໃຫ້ເກີດຂໍ້ຜິດພາດ. ຂໍ້ຜິດພາດນີ້ອາດເປັນເລື່ອງຍາກທີ່ຈະຄິດເຖິງ, ແຕ່ໂຊກດີທີ່ມັນຫາຍໄປຫາກທ່ານຫຼີກຫຼ່ຽງການ mutate state.
 
-**You can use `map` to substitute an old item with its updated version without mutation.**
+**ທ່ານສາມາດໃຊ້ `map` ເພື່ອແທນທີ່ item ເກົ່າດ້ວຍເວີຊັ່ນທີ່ອັບເດດໂດຍບໍ່ມີການ mutate.**
 
 ```js
 setMyList(myList.map(artwork => {
@@ -565,9 +565,9 @@ setMyList(myList.map(artwork => {
 }));
 ```
 
-Here, `...` is the object spread syntax used to [create a copy of an object.](/learn/updating-objects-in-state#copying-objects-with-the-spread-syntax)
+ໃນນີ້, `...` ເປັນ syntax spread ຂອງ object ທີ່ໃຊ້ເພື່ອ [ສ້າງ copy ຂອງ object.](/learn/updating-objects-in-state#copying-objects-with-the-spread-syntax)
 
-With this approach, none of the existing state items are being mutated, and the bug is fixed:
+ດ້ວຍວິທີນີ້, item state ທີ່ມີຢູ່ຈະບໍ່ຖືກ mutate, ແຕ່ໄດ້ຮັບການແກ້ໄຂແລ້ວ:
 
 <Sandpack>
 
@@ -653,16 +653,16 @@ function ItemList({ artworks, onToggle }) {
 
 </Sandpack>
 
-In general, **you should only mutate objects that you have just created.** If you were inserting a *new* artwork, you could mutate it, but if you're dealing with something that's already in state, you need to make a copy.
+ໂດຍທົ່ວໄປແລ້ວ, **ທ່ານຄວນ mutate ສະເພາະ object ທີ່ທ່ານຫາກໍສ້າງຂຶ້ນເທົ່ານັ້ນ.** ຖ້າທ່ານກຳລັງເພີ່ມ artwork *ໃໝ່*, ທ່ານສາມາດ mutate ມັນ, ແຕ່ທ່ານກຳລັງຈັດການກັບບາງສິ່ງທີ່ມີຢູ່ແລ້ວໃນ state, ທ່ານຕ້ອງເຮັດການ copy.
 
-### Write concise update logic with Immer {/*write-concise-update-logic-with-immer*/}
+### ຂຽນ logic ການອັບເດດທີ່ເຂົ້າໃຈງ່າຍດ້ວຍ Immer {/*write-concise-update-logic-with-immer*/}
 
-Updating nested arrays without mutation can get a little bit repetitive. [Just as with objects](/learn/updating-objects-in-state#write-concise-update-logic-with-immer):
+ການອັບເດດ array ທີ່ຊ້ອນກັນໂດຍບໍ່ມີການ mutate ອາດເຮັດໃຫ້ມີການຊໍ້າກັນໜ້ອຍໜຶ່ງ. [ຄືກັນກັບ object](/learn/updating-objects-in-state#write-concise-update-logic-with-immer):
 
-- Generally, you shouldn't need to update state more than a couple of levels deep. If your state objects are very deep, you might want to [restructure them differently](/learn/choosing-the-state-structure#avoid-deeply-nested-state) so that they are flat.
-- If you don't want to change your state structure, you might prefer to use [Immer](https://github.com/immerjs/use-immer), which lets you write using the convenient but mutating syntax and takes care of producing the copies for you.
+- ໂດຍທົ່ວໄປ, ທ່ານບໍ່ຈຳເປັນຕ້ອບອັບເດດ state ຫຼາຍກວ່າສອງຫາສາມລະດັບ. ຖ້າ object state ຂອງທ່ານຢູ່ເລິກຫຼາຍ, ທ່ານອາດຈະຕ້ອງການ [restructure ມັນໃຫ້ແຕກຕ່າງອອກໄປ](/learn/choosing-the-state-structure#avoid-deeply-nested-state) ເພື່ອໃຫ້ object ເຫຼົ່ານັ້ນຮຽບງ່າຍ.
+- ຖ້າທ່ານບໍ່ຕ້ອງການປ່ຽນໂຄ່ງສ້າງ state ຂອງທ່ານ, ທ່ານອາດຈະຕ້ອງການໃຊ້ [Immer](https://github.com/immerjs/use-immer), ເຊິ່ງຊ່ວຍໃຫ້ທ່ານຂຽນໂດຍໃຊ້ syntax ທີ່ສະດວກແຕ່ມີການ mutate ແລະ ດູແລໃນການສ້າງ copy ສຳລັບທ່ານ.
 
-Here is the Art Bucket List example rewritten with Immer:
+ນີ້ແມ່ນຕົວຢ່າງ Art Bucket List ທີ່ຂຽນໃໝ່ດ້ວຍ Immer:
 
 <Sandpack>
 
@@ -763,7 +763,7 @@ function ItemList({ artworks, onToggle }) {
 
 </Sandpack>
 
-Note how with Immer, **mutation like `artwork.seen = nextSeen` is now okay:**
+ຈື່ໄວ້ວ່າ Immer, **ການ mutate ເຊັ່ນ `artwork.seen = nextSeen` ແມ່ນບໍ່ເປັນຫຍັງ:**
 
 ```js
 updateMyTodos(draft => {
@@ -772,17 +772,17 @@ updateMyTodos(draft => {
 });
 ```
 
-This is because you're not mutating the _original_ state, but you're mutating a special `draft` object provided by Immer. Similarly, you can apply mutating methods like `push()` and `pop()` to the content of the `draft`.
+ນີ້ເປັນເພາະວ່າທ່ານບໍ່ໄດ້ mutate state _ເດີມ_, ແຕ່ທ່ານກຳລັງ mutate object `draft` ພິເສດທີ່ເຮັດໂດຍ Immer. ໃນແບບດຽວກັນ, ທ່ານສາມາດໃຊ້ method mutate ເຊັ່ນ: `push()` ແລະ `pop()` ກັບເນື້ອຫາຂອງ `draft`.
 
-Behind the scenes, Immer always constructs the next state from scratch according to the changes that you've done to the `draft`. This keeps your event handlers very concise without ever mutating state.
+ເບື້ອງຫຼັງ, Immer ມັກຈະສ້າງ state ຕໍ່ໄປຕັ້ງແຕ່ເລີ່ມຕົ້ນຕາມການປ່ຽນແປງທີ່ທ່ານໄດ້ເຮັດກັບ `draft`. ສິ່ງນີ້ເຮັດໃຫ້ event handler ຂອງທ່ານຮັດກຸມຫຼາຍໂດຍບໍ່ມີການ mutate state.
 
 <Recap>
 
-- You can put arrays into state, but you can't change them.
-- Instead of mutating an array, create a *new* version of it, and update the state to it.
-- You can use the `[...arr, newItem]` array spread syntax to create arrays with new items.
-- You can use `filter()` and `map()` to create new arrays with filtered or transformed items.
-- You can use Immer to keep your code concise.
+- ທ່ານສາມາດເຮັດໃຫ້ array ເຂົ້າໄປຢູ່ໃນ state, ແຕ່ທ່ານບໍ່ສາມາດປ່ຽນແປງມັນໄດ້.
+- ແທນທີ່ຈະ mutate array, ໃຫ້ສ້າງເວີຊັ່ນ *ໃໝ່* ແລະ ອັບເດດ state ເປັນ array.
+- ທ່ານສາມາດໃຊ້ syntax spread array `[...arr, newItem]` ເພື່ອສ້າງ array ທີ່ມີລາຍການໃໝ່.
+- ທ່ານສາມາດໃຊ້ `filter()` ແລະ `map()` ເພື່ອສ້າງ array ໃໝ່ດ້ວຍ item ທີ່ filter ແລ້ວ ຫຼື ມີການປ່ຽນແປງ.
+- ທ່ານສາມາດໃຊ້ Immer ເພື່ອໃຫ້ code ຂອງທ່ານສາມາດເຂົ້າໃຈງ່າຍ.
 
 </Recap>
 
@@ -790,9 +790,9 @@ Behind the scenes, Immer always constructs the next state from scratch according
 
 <Challenges>
 
-#### Update an item in the shopping cart {/*update-an-item-in-the-shopping-cart*/}
+#### ອັບເດດ item ໃນ shopping cart {/*update-an-item-in-the-shopping-cart*/}
 
-Fill in the `handleIncreaseClick` logic so that pressing "+" increases the corresponding number:
+ເພີ່ມ logic `handleIncreaseClick` ເພື່ອໃຫ້ການກົດ "+" ເພີ່ມຈຳນວນທີ່ກ່ຽວຂ້ອງ:
 
 <Sandpack>
 
@@ -850,7 +850,7 @@ button { margin: 5px; }
 
 <Solution>
 
-You can use the `map` function to create a new array, and then use the `...` object spread syntax to create a copy of the changed object for the new array:
+ທ່ານສາມາດໃຊ້ຟັງຊັ່ນ `map` ເພື່ອສ້າງ array ໃໝ່, ແລະ ຫຼັງຈາກນັ້ນໃຊ້ syntax spread ຂອງ object `...` ເພື່ອສ້າງ copy ຂອງ object ທີ່ປ່ຽນແປງສຳລັບ array ໃໝ່:
 
 <Sandpack>
 
@@ -917,9 +917,9 @@ button { margin: 5px; }
 
 </Solution>
 
-#### Remove an item from the shopping cart {/*remove-an-item-from-the-shopping-cart*/}
+#### ລຶບ item ຈາກ shopping cart {/*remove-an-item-from-the-shopping-cart*/}
 
-This shopping cart has a working "+" button, but the "–" button doesn't do anything. You need to add an event handler to it so that pressing it decreases the `count` of the corresponding product. If you press "–" when the count is 1, the product should automatically get removed from the cart. Make sure it never shows 0.
+shopping cart ມີປຸ່ມ "+" ທີ່ເຮັດວຽກໄດ້, ແຕ່ປຸ່ມ "-" ບໍ່ເຮັດວຽກຫຍັງ. ທ່ານຕ້ອງເພີ່ມ event handler ເພື່ອໃຫ້ການກົດຫຼຸດ `count` ຂອງສິນຄ້າທີ່ກ່ຽວຂ້ອງ. ຖ້າທ່ານກົດ "-" ເມື່ອຈຳນວນເປັນ 1, ສິນຄ້າຄວນຖືກລຶບອອກຈະກະຕ່າ. ກວດສອບໃຫ້ແນ່ໃຈວ່າມັນບໍ່ເຄີຍສະແດງ 0.
 
 <Sandpack>
 
@@ -989,7 +989,7 @@ button { margin: 5px; }
 
 <Solution>
 
-You can first use `map` to produce a new array, and then `filter` to remove products with a `count` set to `0`:
+ທ່ານສາມາດໃຊ້ `map` ເພື່ອສ້າງ array ໃໝ່ກ່ອນ, ຈາກນັ້ນໃຊ້ `filter` ເພື່ອລຶບສິນຄ້າໂດຍຕັ້ງຄ່າ `count` ເປັນ `0`:
 
 <Sandpack>
 
@@ -1078,9 +1078,9 @@ button { margin: 5px; }
 
 </Solution>
 
-#### Fix the mutations using non-mutative methods {/*fix-the-mutations-using-non-mutative-methods*/}
+#### ແກ້ໄຂການ mutate ໂດຍໃຊ້ method ທີ່ບໍ່ມີການ mutate {/*fix-the-mutations-using-non-mutative-methods*/}
 
-In this example, all of the event handlers in `App.js` use mutation. As a result, editing and deleting todos doesn't work. Rewrite `handleAddTodo`, `handleChangeTodo`, and `handleDeleteTodo` to use the non-mutative methods:
+ໃນຕົວຢ່າງນີ້, event handler ທັງໝົດໃນ `App.js` ໃຊ້ການ mutate. ດ້ວຍເຫດນີ້, ການແກ້ໄຂ ແລະ ການລຶບ todo ຈຶ່ງບໍ່ເຮັດວຽກ. ຂຽນ `handleAddTodo`, `handleChangeTodo` ແລະ `handleDeleteTodo` ໃໝ່ ເພື່ອໃຊ້ method ທີ່ບໍ່ມີການ mutate:
 
 <Sandpack>
 
@@ -1243,7 +1243,7 @@ ul, li { margin: 0; padding: 0; }
 
 <Solution>
 
-In `handleAddTodo`, you can use the array spread syntax. In `handleChangeTodo`, you can create a new array with `map`. In `handleDeleteTodo`, you can create a new array with `filter`. Now the list works correctly:
+ໃນ `handlerAddTodo`, ທ່ານສາມາດໃຊ້ syntax spread ຂອງ array ໄດ້. ໃນ `handleChangeTodo`, ທ່ານສາມາດສ້າງ array ໃໝ່ດ້ວຍ `map`. ໃນ `handleDeleteTodo`, ທ່ານສາມາດສ້າງ array ໃໝ່ດ້ວຍ `filter`. ຕອນນີ້ list ເຮັດວຽກໄດ້ຢ່າງຖືກຕ້ອງ:
 
 <Sandpack>
 
@@ -1411,9 +1411,9 @@ ul, li { margin: 0; padding: 0; }
 </Solution>
 
 
-#### Fix the mutations using Immer {/*fix-the-mutations-using-immer*/}
+#### ແກ້ໄຂການ mutate ດ້ວຍການໃຊ້ Immer {/*fix-the-mutations-using-immer*/}
 
-This is the same example as in the previous challenge. This time, fix the mutations by using Immer. For your convenience, `useImmer` is already imported, so you need to change the `todos` state variable to use it.
+ນີ້ເປັນຕົວຢ່າງດຽວກັນກັບໂຈດກ່ອນໜ້າ. ຕອນນີ້, ແກ້ໄຂການ mutate ດ້ວຍການໃຊ້ Immer. ເພື່ອຄວາມສະດວກຂອງທ່ານ, `useImmer` ແມ່ນຖືກ import ແລ້ວ, ສະນັ້ນທ່ານຕ້ອງປ່ຽນຕົວແປ state `todos` ເພື່ອໃຊ້ງານ.
 
 <Sandpack>
 
@@ -1595,7 +1595,7 @@ ul, li { margin: 0; padding: 0; }
 
 <Solution>
 
-With Immer, you can write code in the mutative fashion, as long as you're only mutating parts of the `draft` that Immer gives you. Here, all mutations are performed on the `draft` so the code works:
+ດ້ວຍ Immer, ທ່ານສາມາດຂຽນ code ໃນຮູບແບບການ mutate ໄດ້, ຈົນກວ່າການ mutate ສະເພາະບາງສ່ວນຂອງ `draft` ທີ່ Immer ມອບໃຫ້ທ່ານ. ຕອນນີ້, ການ mutate ທັງໝົດຈະດຳເນີນການໃນ `draft` ເພື່ອໃຫ້ code ເຮັດວຽກ:
 
 <Sandpack>
 
@@ -1781,9 +1781,9 @@ ul, li { margin: 0; padding: 0; }
 
 </Sandpack>
 
-You can also mix and match the mutative and non-mutative approaches with Immer.
+ທ່ານສາມາດປະສົມ ແລະ ຈັບຄູ່ແນວທາງການ mutate ທີ່ໄດ້ ແລະ ການ mutate ບໍ່ໄດ້ດ້ວຍ Immer.
 
-For example, in this version `handleAddTodo` is implemented by mutating the Immer `draft`, while `handleChangeTodo` and `handleDeleteTodo` use the non-mutative `map` and `filter` methods:
+ຕົວຢ່າງ, ໃນເວີຊັ່ນນີ້ `handleAddTodo` ຖືກນຳມາໃຊ້ໂດຍການ mutate ຂອງ Immer `draft`. ໃນຂະນະທີ່ `handleChangeTodo` ແລະ `handleDeleteTodo` ໃຊ້ method `map` ແລະ `filter` ແບບບໍ່ mutate:
 
 <Sandpack>
 
@@ -1966,7 +1966,7 @@ ul, li { margin: 0; padding: 0; }
 
 </Sandpack>
 
-With Immer, you can pick the style that feels the most natural for each separate case.
+ດ້ວຍ Immer, ທ່ານສາມາດເລືອກ style ທີ່ໃຫ້ຄວາມຮູ້ສຶກເປັນທຳມະຊາດທີ່ສຸດສຳລັບແຕ່ລະກໍລະນີ.
 
 </Solution>
 
