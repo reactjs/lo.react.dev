@@ -1,30 +1,31 @@
 ---
-title: Managing State
+title: ການຈັດການ State
 ---
 
 <Intro>
 
-As your application grows, it helps to be more intentional about how your state is organized and how the data flows between your components. Redundant or duplicate state is a common source of bugs. In this chapter, you'll learn how to structure your state well, how to keep your state update logic maintainable, and how to share state between distant components.
+ເມື່ອແອັບພິເຄຊັ່ນຂອງທ່ານໃຫຍ່ຂຶ້ນ, ການມີຄວາມເອົາໃຈໃສ່ຫຼາຍຂຶ້ນກ່ຽວກັບວິທີຈັດລະບຽບ state ແລະ ວິທີການທີ່ຂໍ້ມູນຖືກສົ່ງຜ່ານລະຫວ່າງ component ຂອງທ່ານ. State ທີ່ຊໍ້າຊ້ອນ ຫຼື ຊໍ້າກັນແມ່ນແຫຼ່ງທີ່ມາຂອງຂໍ້ຜິດພາດທົ່ວໄປ. ໃນບົດນີ້, ທ່ານຈະໄດ້ຮຽນຮູ້ກ່ຽວກັບວິທີການຈັດໂຄ່ງສ້າງ state ຂອງທ່ານໃຫ້ດີ, ວິທີການຮັກສາ logic ການອັບເດດ state ໃຫ້ຄົງຢູ່ ແລະ ວິທີການແບ່ງປັນ state ລະຫວ່າງ component ທີ່ຢູ່ຫ່າງໄກ.
+
 
 </Intro>
 
 <YouWillLearn isChapter={true}>
 
-* [How to think about UI changes as state changes](/learn/reacting-to-input-with-state)
-* [How to structure state well](/learn/choosing-the-state-structure)
-* [How to "lift state up" to share it between components](/learn/sharing-state-between-components)
-* [How to control whether the state gets preserved or reset](/learn/preserving-and-resetting-state)
-* [How to consolidate complex state logic in a function](/learn/extracting-state-logic-into-a-reducer)
-* [How to pass information without "prop drilling"](/learn/passing-data-deeply-with-context)
-* [How to scale state management as your app grows](/learn/scaling-up-with-reducer-and-context)
+* [ວິທີຄິດກ່ຽວກັບການປ່ຽນແປງ UI ເມື່ອ state ປ່ຽນ](/learn/reacting-to-input-with-state)
+* [ວິທີການຈັດໂຄ່ງສ້າງ state ທີ່ດີ](/learn/choosing-the-state-structure)
+* [ວິທີ "ຍົກ state ຂຶ້ນ" ເພື່ອແບ່ງປັນລະຫວ່າງ component](/learn/sharing-state-between-components)
+* [ວິທີຄວບຄຸມວ່າ state ໃດໄດ້ຮັບການຮັກສາໄວ້ ຫຼື reset](/learn/preserving-and-resetting-state)
+* [ວິທີລວມ logic ແລະ state ທີ່ຊັບຊ້ອນໃນຟັງຊັ່ນ](/learn/extracting-state-logic-into-a-reducer)
+* [ວິທີສົ່ງຂໍ້ມູນໂດຍບໍ່ຕ້ອງ "ແກ້ໄຂ prop"](/learn/passing-data-deeply-with-context)
+* [ວິທີການ scale ການຈັດການ state ເມື່ອແອັບຂອງທ່ານໃຫຍ່ຂຶ້ນ](/learn/scaling-up-with-reducer-and-context)
 
 </YouWillLearn>
 
-## Reacting to input with state {/*reacting-to-input-with-state*/}
+## ການໂຕ້ຕອບ input ດ້ວຍ state {/*reacting-to-input-with-state*/}
 
-With React, you won't modify the UI from code directly. For example, you won't write commands like "disable the button", "enable the button", "show the success message", etc. Instead, you will describe the UI you want to see for the different visual states of your component ("initial state", "typing state", "success state"), and then trigger the state changes in response to user input. This is similar to how designers think about UI.
+ດ້ວຍ React, ທ່ານບໍ່ແກ້ໄຂ UI ຈາກ code ໂດຍກົງ. ຕົວຢ່າງ, ທ່ານບໍ່ຂຽນຄຳສັ່ງເຊັ່ນ "ປິດການໃຊ້ງານປຸ່ມ", "ເປີດການໃຊ້ງານປຸ່ມ", "ສະແດງຂໍ້ຄວາມສຳເລັດ", ແລະ ອື່ນໆ. ແຕ່ຈະອະທິບາຍ UI ທີ່ທ່ານຕ້ອງການເຫັນສຳລັບ state ຕ່າງໆຂອງ component ຂອງທ່ານແທນ ("state ເລີ່ມຕົ້ນ", "state ການພິມ", "state ສຳເລັດ") ແລ້ວ trigger ການປ່ຽນແປງ state ເພື່ອຕອບສະໜອງຕໍ່ input ຂອງຜູ້ໃຊ້. ສິ່ງນີ້ຄ້າຍກັບທີ່ນັກອອກແບບຄິດກ່ຽວກັບ UI.
 
-Here is a quiz form built using React. Note how it uses the `status` state variable to determine whether to enable or disable the submit button, and whether to show the success message instead.
+ນີ້ແມ່ນແບບທົດສອບທີ່ສ້າງໂດຍໃຊ້ React. ສັງເກດວ່າມັນໃຊ້ຕົວແປ state "status" ເພື່ອກຳນົດວ່າຈະເປີດ ຫຼື ປິດປຸ່ມສົ່ງ ຫຼື ບໍ່?, ແລະ ຈະສະແດງຂໍ້ຄວາມສະແດງຄວາມສຳເລັດແທນແນວໃດ.
 
 <Sandpack>
 
@@ -108,15 +109,15 @@ function submitForm(answer) {
 
 <LearnMore path="/learn/reacting-to-input-with-state">
 
-Read **[Reacting to Input with State](/learn/reacting-to-input-with-state)** to learn how to approach interactions with a state-driven mindset.
+ອ່ານ **[ການຕອບສະໜອງຕໍ່ການປ້ອນຂໍ້ມູນດ້ວຍ state](/learn/reacting-to-input-with-state)** ເພື່ອຮຽນຮູ້ວິທີການເຂົ້າເຖິງການໂຕ້ຕອບດ້ວຍຊຸດຄວາມຄິດທີ່ຂັບເຄື່ອນດ້ວຍ state.
 
 </LearnMore>
 
-## Choosing the state structure {/*choosing-the-state-structure*/}
+## ການເລືອກໂຄ່ງສ້າງຂອງ state {/*choosing-the-state-structure*/}
 
-Structuring state well can make a difference between a component that is pleasant to modify and debug, and one that is a constant source of bugs. The most important principle is that state shouldn't contain redundant or duplicated information. If there's unnecessary state, it's easy to forget to update it, and introduce bugs!
+ໂຄ່ງສ້າງ state ທີ່ດີສາມາດສ້າງຄວາມແຕກຕ່າງລະຫວ່າງ component ທີ່ນ່າແກ້ໄຂ ແລະ debug ກັບສ່ວນປະກອບທີ່ເປັນແຫຼ່ງທີ່ມາຂອງຂໍ້ຜິດພາດຢ່າງຕໍ່ເນື່ອງ. ຫຼັກການສຳຄັນທີ່ສຸດແມ່ນ state ບໍ່ຄວນມີຂໍ້ມູນທີ່ຊໍ້າຊ້ອນ ຫຼື ຊໍ້າກັນ. ຖ້າມີ state ທີ່ບໍ່ຈຳເປັນ, ກໍເປັນເລື່ອງງ່າຍທີ່ຈະລືມອັບເດດ ແລະ ຫາຂໍ້ຜິດພາດ!
 
-For example, this form has a **redundant** `fullName` state variable:
+ຕົວຢ່າງ, ຟອມນີ້ມີຕົວແປ state `fullName` **ທີ່ຊໍ້າຊ້ອນ**:
 
 <Sandpack>
 
@@ -169,7 +170,7 @@ label { display: block; margin-bottom: 5px; }
 
 </Sandpack>
 
-You can remove it and simplify the code by calculating `fullName` while the component is rendering:
+ທ່ານສາມາດລຶບ ແລະ ເຮັດໃຫ້ code ງ່າຍຂຶ້ນໂດຍການຄຳນວນ `fullName` ໃນຂະນະທີ່ component ກຳລັງ render:
 
 <Sandpack>
 
@@ -221,19 +222,19 @@ label { display: block; margin-bottom: 5px; }
 
 </Sandpack>
 
-This might seem like a small change, but many bugs in React apps are fixed this way.
+ມັນອາດເບິ່ງຄືມີການປ່ຽນແປງໜ້ອຍດຽວ, ແຕ່ bug ຈຳນວນຫຼາຍໃນແອັບ React ແມ່ນໄດ້ຮັບການແກ້ໄຂດ້ວຍວິທີນີ້.
 
 <LearnMore path="/learn/choosing-the-state-structure">
 
-Read **[Choosing the State Structure](/learn/choosing-the-state-structure)** to learn how to design the state shape to avoid bugs.
+ອ່ານ **[ການເລືອກໂຄ່ງສ້າງ state](/learn/choosing-the-state-structure)** ເພື່ອຮຽນຮູ້ວິທີການອອກແບບຮູບຮ່າງຂອງ state ແລະ ຫຼີກຫຼ່ຽງ bug.
 
 </LearnMore>
 
-## Sharing state between components {/*sharing-state-between-components*/}
+## ການແບ່ງປັນ state ລະຫວ່າງ component {/*sharing-state-between-components*/}
 
-Sometimes, you want the state of two components to always change together. To do it, remove state from both of them, move it to their closest common parent, and then pass it down to them via props. This is known as "lifting state up", and it's one of the most common things you will do writing React code.
+ບາງເທື່ອ, ທ່ານຕ້ອງການໃຫ້ state ຂອງສອງ component ປ່ຽນແປງພ້ອມກັນສະເໝີ. ໃນການເຮັດແບບນີ້, ໃຫ້ລຶບ state ອອກໝົດສອງ, ແລ້ວຍ້າຍໄປຫາ parent ທີ່ໃກ້ຄຽງທີ່ສຸດ ຈາກນັ້ນສົ່ງຕໍ່ໄປຫາ component ດ້ວຍ prop. ສິ່ງນີ້ເອີ້ນວ່າ "ການຍົກ state ຂຶ້ນ" ແລະ ເປັນໜຶ່ງໃນສິ່ງທີ່ພົບຫຼາຍທີ່ສຸດທີ່ທ່ານຈະຂຽນ code React.
 
-In this example, only one panel should be active at a time. To achieve this, instead of keeping the active state inside each individual panel, the parent component holds the state and specifies the props for its children.
+ໃນຕົວຢ່າງນີ້, ຄວນໃຊ້ງານພຽງໜຶ່ງ panel ໃນແຕ່ລະຄັ້ງ. ເພື່ອບັນລຸເປົ້າໝາຍ, ແທນທີ່ຈະເກັບ state ທີ່ active ໄວ້ໃນແຕ່ລະ panel, component parent ຈະເກັບ state ແລະ ລະບຸ prop ໃຫ້ແຕ່ລະ children ມັນ.
 
 <Sandpack>
 
@@ -296,15 +297,15 @@ h3, p { margin: 5px 0px; }
 
 <LearnMore path="/learn/sharing-state-between-components">
 
-Read **[Sharing State Between Components](/learn/sharing-state-between-components)** to learn how to lift state up and keep components in sync.
+ອ່ານ **[ການແບ່ງປັນ state ລະຫວ່າງ component](/learn/sharing-state-between-components)** ເພື່ອຮຽນຮູ້ກ່ຽວກັບການຍົກ state ຂຶ້ນ ແລະ ເຮັດໃຫ້ component sync ກັນ.
 
 </LearnMore>
 
-## Preserving and resetting state {/*preserving-and-resetting-state*/}
+## ການຮັກສາ ແລະ ການ reset state {/*preserving-and-resetting-state*/}
 
-When you re-render a component, React needs to decide which parts of the tree to keep (and update), and which parts to discard or re-create from scratch. In most cases, React's automatic behavior works well enough. By default, React preserves the parts of the tree that "match up" with the previously rendered component tree.
+ເມື່ອທ່ານ render component ຄືນໃໝ່, React ຈຳເປັນຕ້ອງຕັດສິນໃຈວ່າຈະເກັບສ່ວນໃດຂອງໂຄ່ງສ້າງ (ແລະ ອັບເດດ), ແລະ ສ່ວນໃດທີ່ຈະປະຖິ້ມ ຫຼື ສ້າງໃໝ່ຕັ້ງແຕ່ເລີ່ມຕົ້ນ. ໃນກໍລະນີສ່ວນໃຫຍ່, ພຶດທິກຳອັດຕະໂນມັດຂອງ React ແມ່ນເຮັດໄດ້ດີແລ້ວ. ໂດຍຄ່າເລີ່ມຕົ້ນ, React ຈະຮັກສາສ່ວນແຜນຜັງທີ່ "ຈັບຄູ່" ກັບແຜນຜັງ component ທີ່ render ໄວ້ກ່ອນໜ້າ.
 
-However, sometimes this is not what you want. In this chat app, typing a message and then switching the recipient does not reset the input. This can make the user accidentally send a message to the wrong person:
+ເຖິງຢ່າງໃດກໍຕາມ, ບາງຄັ້ງບໍ່ແມ່ນສິ່ງທີ່ທ່ານຕ້ອງການ. ໃນແອັບແຊັດນີ້, ການພິມຂໍ້ຄວາມແລ້ວສະຫຼັບຜູ້ຮັບຈະບໍ່ reset ຂໍ້ມູນທີ່ປ້ອນ. ສິ່ງນີ້ອາດຈະເຮັດໃຫ້ຜູ້ໃຊ້ສົ່ງຂໍ້ຄວາມຫາຜິດຄົນໂດຍບໍ່ໄດ້ຕັ້ງໃຈ:
 
 <Sandpack>
 
@@ -399,7 +400,7 @@ textarea {
 
 </Sandpack>
 
-React lets you override the default behavior, and *force* a component to reset its state by passing it a different `key`, like `<Chat key={email} />`. This tells React that if the recipient is different, it should be considered a *different* `Chat` component that needs to be re-created from scratch with the new data (and UI like inputs). Now switching between the recipients resets the input field--even though you render the same component.
+React ໃຫ້ທ່ານແທນທີ່ພຶດທິກຳເລີ່ມຕົ້ນ, ແລະ *ບັງຄັບ* component ເພື່ອ reset state ໂດຍສົ່ງ `key` ເຊັ່ນ `<Chat key={email} />`. ສິ່ງນີ້ບອກ React ວ່າຖ້າຫາກຜູ້ຮັບແຕກຕ່າງກັນ, ຄວນຈະພິຈາລະນາ component `Chat` *ທີ່ແຕກຕ່າງກັນ* ເຊິ່ງຈຳເປັນຕ້ອງສ້າງໃໝ່ຕັ້ງແຕ່ຕົ້ນດ້ວຍຂໍ້ມູນໃໝ່ (ແລະ UI ເຊັ່ນ input). ຕອນນີ້ການສະຫຼັບລະຫວ່າງຜູ້ຮັບຈະ reset field input--ເຖິງວ່າທ່ານຈະ render component ດຽວກັນກໍຕາມ.
 
 <Sandpack>
 
@@ -496,13 +497,13 @@ textarea {
 
 <LearnMore path="/learn/preserving-and-resetting-state">
 
-Read **[Preserving and Resetting State](/learn/preserving-and-resetting-state)** to learn the lifetime of state and how to control it.
+ອ່ານ **[ການຮັກສາ ແລະ reset State](/learn/preserving-and-resetting-state)** ເພື່ອຮຽນຮູ້ອາຍຸການໃຊ້ງານຂອງ state ແລະ ວິທີຄວບຄຸມ.
 
 </LearnMore>
 
-## Extracting state logic into a reducer {/*extracting-state-logic-into-a-reducer*/}
+## ການແຍກ logic state ເປັນ reducer {/*extracting-state-logic-into-a-reducer*/}
 
-Components with many state updates spread across many event handlers can get overwhelming. For these cases, you can consolidate all the state update logic outside your component in a single function, called "reducer". Your event handlers become concise because they only specify the user "actions". At the bottom of the file, the reducer function specifies how the state should update in response to each action!
+Component ທີ່ມີການອັບເດດ state ເປັນຈຳນວນຫຼາຍກະຈາຍໄປທົ່ວ event handler ຈຳນວນຫຼາຍສາມາດຖືກຄອບງຳໄດ້. ສຳລັບກໍລິນີນີ, ທ່ານສາມາດລວມ logic ການອັບເດດ state ທັງໝົດພາຍນອກ component ຂອງທ່ານໄວ້ໃນຟັງຊັ່ນດຽວ, ເອີ້ນວ່າ "reducer". Event handler ຂອງທ່ານຈະຮັດກຸມເນື່ອງຈາກລະບຸສະເພາະ "action" ຂອງຜູ້ໃຊ້. ດ້ານລຸ່ມຂອງຟາຍ, ຟັງຊັ່ນ reducer ຈະລະບຸວ່າ state ຄວນອັບເດດແນວໃດເພື່ອຕອບສະໜອງໃນແຕ່ລະ action! 
 
 <Sandpack>
 
@@ -693,15 +694,15 @@ ul, li { margin: 0; padding: 0; }
 
 <LearnMore path="/learn/extracting-state-logic-into-a-reducer">
 
-Read **[Extracting State Logic into a Reducer](/learn/extracting-state-logic-into-a-reducer)** to learn how to consolidate logic in the reducer function.
+ອ່ານ **[ການແຍກ logic state ລົງໃນ Reducer](/learn/extracting-state-logic-into-a-reducer)** ເພື່ອຮຽນຮູ້ວິທີລວມ logic ໃນຟັງຊັ່ນ reducer.
 
 </LearnMore>
 
-## Passing data deeply with context {/*passing-data-deeply-with-context*/}
+## ການສົ່ງຂໍ້ມູນຢ່າງເລິກເຊິງດ້ວຍ context {/*passing-data-deeply-with-context*/}
 
-Usually, you will pass information from a parent component to a child component via props. But passing props can become inconvenient if you need to pass some prop through many components, or if many components need the same information. Context lets the parent component make some information available to any component in the tree below it—no matter how deep it is—without passing it explicitly through props.
+ໂດຍປົກະຕິແລ້ວ, ທ່ານຈະສົ່ງຂໍ້ມູນຈາກ parent component ໄປຫາ child component ດ້ວຍ prop. ແຕ່ການສົ່ງ prop ອາດຈະບໍ່ສະດວກ ຖ້າທ່ານຕ້ອງສົ່ງ prop ຜ່ານຫຼາຍ component ຫຼື ຖ້າ component ຈຳນວນຫຼາຍຕ້ອງການຂໍ້ມູນ. Context ຊ່ວຍໃຫ້ parent component ໃຫ້ຂໍ້ມູນບາງຢ່າງພ້ອມໃຊ້ງານສຳລັບ component ອື່ນໆໃນແຜນຜັງທີ່ຢູ່ດ້ານລຸ່ມ-ບໍ່ວ່າຈະເລິກພຽງໃດ-ໂດຍບໍ່ຕ້ອງສົ່ງຜ່ານ prop ຢ່າງຊັດເຈນ.
 
-Here, the `Heading` component determines its heading level by "asking" the closest `Section` for its level. Each `Section` tracks its own level by asking the parent `Section` and adding one to it. Every `Section` provides information to all components below it without passing props--it does that through context.
+ທີ່ນີ້, Component `Heading` ຈະກຳນົດລະດັບຂອງຫົວເລື່ອງໂດຍ "ຖາມ" ໄປຍັງ "Section" ທີ່ໃກ້ຄຽງທີ່ສຸດສຳລັບລະດັບຂອງມັນ. ແຕ່ລະ `Section` ຕິດຕາມລະດັບຂອງໂຕເອງໂດຍຖາມ parent `Section` ແລະ ເພີ່ມໜຶ່ງເຂົ້າໄປ. ທຸກ `Section` ສະໜອງຂໍ້ມູນກັບ compoent ທັງໝົດທີ່ຢູ່ດ້ານລຸ່ມໂດຍບໍ່ຕ້ອງສົ່ງຜ່ານ prop--ມັນເຮັດຜ່ານ context.
 
 <Sandpack>
 
@@ -795,15 +796,15 @@ export const LevelContext = createContext(0);
 
 <LearnMore path="/learn/passing-data-deeply-with-context">
 
-Read **[Passing Data Deeply with Context](/learn/passing-data-deeply-with-context)** to learn about using context as an alternative to passing props.
+ອ່ານ **[ການສົ່ງຜ່ານຂໍ້ມູນຢ່າງເລິກເຊິງດ້ວຍ Context](/learn/passing-data-deeply-with-context)** ເພື່ອຮຽນຮູ້ກ່ຽວກັບການໃຊ້ context ແທນການສົ່ງຜ່ານດ້ວຍ prop.
 
 </LearnMore>
 
-## Scaling up with reducer and context {/*scaling-up-with-reducer-and-context*/}
+## ການ Scale ຂຶ້ນດ້ວຍ reducer ແລະ context {/*scaling-up-with-reducer-and-context*/}
 
-Reducers let you consolidate a component’s state update logic. Context lets you pass information deep down to other components. You can combine reducers and context together to manage state of a complex screen.
+Reducer ຊ່ວຍໃຫ້ທ່ານລວມ logic ການອັບເດດ state ຂອງ component ໄດ້. Context ເຮັດໃຫ້ທ່ານສາມາດສົ່ງຂໍ້ມູນລົງເລິກໄປຍັງ component ອື່ນໆ. ທ່ານສາມາດລວມ reducer ແລະ context ເຂົ້ານຳກັນເພື່ອຈັດການ state ຂອງໜ້າຈໍທີ່ຊັບຊ້ອນ.
 
-With this approach, a parent component with complex state manages it with a reducer. Other components anywhere deep in the tree can read its state via context. They can also dispatch actions to update that state.
+ດ້ວຍວິທີການນີ້, parent component ທີ່ມີ state ທີ່ຊັບຊ້ອນຈະຈັດການດ້ວຍ reducer. Component ອື່ນໆໃນສ່ວນເລິກຂອງ tree ສາມາດອ່ານ state ຜ່ານ context ໄດ້. ນອກຈາກນີ້ ຍັງສາມາດສົ່ງ dispatch action ເພື່ອອັບເດດ state ນັ້ນໄດ້ອີກດ້ວຍ.
 
 <Sandpack>
 
@@ -1006,12 +1007,12 @@ ul, li { margin: 0; padding: 0; }
 
 <LearnMore path="/learn/scaling-up-with-reducer-and-context">
 
-Read **[Scaling Up with Reducer and Context](/learn/scaling-up-with-reducer-and-context)** to learn how state management scales in a growing app.
+ອ່ານ **[ການ scale up ດ້ວຍ Reducer ແລະ Context](/learn/scaling-up-with-reducer-and-context)** ເພື່ອຮຽນຮູ້ກ່ຽວກັບການ scale ການຈັດການ state ໃນແອັບທີ່ກຳລັງໃຫຍ່ຂຶ້ນ.
 
 </LearnMore>
 
-## What's next? {/*whats-next*/}
+## ຕໍ່ໄປແມ່ນຫຍັງ? {/*whats-next*/}
 
-Head over to [Reacting to Input with State](/learn/reacting-to-input-with-state) to start reading this chapter page by page!
+ໄປທີ່ [ການຕ້ອງສະໜອງຕໍ່ການປ້ອນຂໍ້ມູນດ້ວຍ state](/learn/reacting-to-input-with-state) ເພື່ອເລີ່ມອ່ານບົດນີ້ເທື່ອລະໜ້າ!
 
-Or, if you're already familiar with these topics, why not read about [Escape Hatches](/learn/escape-hatches)?
+ຫຼື ຖ້າທ່ານຄຸ້ນເຄີຍກັບຫົວຂໍ້ເຫຼົ່ານີ້ແລ້ວ, ລອງອ່ານກ່ຽວກັບ [Escape Hatches](/learn/escape-hatches)?
