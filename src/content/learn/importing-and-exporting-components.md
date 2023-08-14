@@ -52,7 +52,11 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
+<<<<<<< HEAD
 ປັດຈຸບັນຟາຍເຫຼົ່ານີ້ຢູ່ໃນ **ຟາຍ root component,** ຊື່ `App.js` ໃນຕົວຢ່າງນີ້. ໃນ [ການສ້າງແອັບ React](https://create-react-app.dev/), ແອັບຂອງທ່ານຢູ່ໃນ `src/App.js`. ຂຶ້ນກັບການຕັ້ງຄ່າຂອງທ່ານ, Root component ຂອງທ່ານສາມາດເປັນຟາຍອື່ນກໍໄດ້. ຖ້າທ່ານໃຊ້ framework ທີ່ມີການກຳນົດ routing ຕາມ file-based, ເຊັ່ນ Next.js, Root component ຂອງທ່ານຈະແຕກຕ່າງກັນໄປໃນແຕ່ລະ page.
+=======
+These currently live in a **root component file,** named `App.js` in this example. Depending on your setup, your root component could be in another file, though. If you use a framework with file-based routing, such as Next.js, your root component will be different for every page.
+>>>>>>> 819518cfe32dd2db3b765410247c30feea713c77
 
 ## ການ import ແລະ export component {/*exporting-and-importing-a-component*/}
 
