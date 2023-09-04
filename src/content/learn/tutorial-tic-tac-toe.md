@@ -1174,7 +1174,11 @@ Too many re-renders. React limits the number of renders to prevent an infinite l
 
 ເມື່ອທ່ານຜ່ານ `onSquareClick={handleClick}`, ທ່ານກຳລັງສົ່ງຟັງຊັ່ນ `handleClick` ລົງເປັນ prop. ທ່ານບໍ່ໄດ້ເອີ້ນໃຊ້ມັນ! ແຕ່ຕອນນີ້ທ່ານກຳລັງ *ເອີ້ນໃຊ້* ຟັງຊັ່ນນັ້ນທັນທີ--ສັງເກດວົງເລັບໃນ `handleClick(0)` --ແລະ ນັ້ນແມ່ນສາເຫດທີ່ມັນເຮັດວຽກໄວເກີນໄປ. ທ່ານບໍ່ *ຕ້ອງການ* ເອີ້ນ `handleClick` ຈົນກວ່າຜູ້ໃຊ້ຈະຄິກ!
 
+<<<<<<< HEAD
 ທ່ານສາມາດແກ້ໄຂໂດຍການສ້າງຟັງຊັ່ນເຊັ່ນ `handleFirstSquareClick` ທີ່ເອີ້ນ `handleClick(0)`, ຟັງຊັ່ນເຊັ່ນ `handleSeconSquareClick` ທີ່ເອີ້ນ `handleClick(1)` ແລະ ອື່ນໆ. ທ່ານຈະສົ່ງຜ່ານ (ແທນທີ່ຈະເອີ້ນໃຊ້) ຟັງຊັ່ນເຫຼົ່ານີ້ລົງມາເປັນ prop ເຊັ່ນ `onSquareClick={handleFirstSquareClick}`. ນີ້ຈະແກ້ໄຂບັນຫາການ loop ທີ່ບໍ່ສິ້ນສຸດ.
+=======
+You could fix this by creating a function like `handleFirstSquareClick` that calls `handleClick(0)`, a function like `handleSecondSquareClick` that calls `handleClick(1)`, and so on. You would pass (rather than call) these functions down as props like `onSquareClick={handleFirstSquareClick}`. This would solve the infinite loop.
+>>>>>>> 722b54640ea8ef146ef59558100819a6bb31c252
 
 ເຖິງຢ່າງໃດກໍຕາມ, ການກຳນົດຟັງຊັ່ນທີ່ແຕກຕ່າງກັນ 9 ຟັງຊັ່ນ ແລະ ຕັ້ງຊື່ໃຫ້ກັບແຕ່ລະຟັງຊັ່ນນັ້ນມີລາຍລະອຽດຫຼາຍເກີນໄປ, ລອງເຮັດແບບນີ້ແທນ:
 
