@@ -211,7 +211,11 @@ function Profile() {
 
 #### Components ທັງໝົດລົງໄປ {/*components-all-the-way-down*/}
 
+<<<<<<< HEAD
 ແອັບພິເຄຊັ່ນ React ຂອງທ່ານເລີ່ມຕົ້ນດ້ວຍ "root" component. ສ່ວນຫຼາຍ, ມັນຖືກສ້າງໂດຍອັດຕະໂນມັດຕອນທ່ານສ້າງ project ໃໝ່. ຕົວຢ່າງ, ຖ້າທ່ານເຫັນ [CodeSandbox](https://codesandbox.io/) ຫຼື [ສ້າງແອັບ React](https://create-react-app.dev/), root component ຖືກປະກາດໃນ `src/App.js`. ຖ້າທ່ານໃຊ້ framework, [Next.js](https://nextjs.org/), root component ຖືກປະກາດໃນ `pages/index.js`. ໃນຕົວຢ່າງນີ້, ທ່ານໄດ້ export root component.
+=======
+Your React application begins at a "root" component. Usually, it is created automatically when you start a new project. For example, if you use [CodeSandbox](https://codesandbox.io/) or if you use the framework [Next.js](https://nextjs.org/), the root component is defined in `pages/index.js`. In these examples, you've been exporting root components.
+>>>>>>> 2390627c9cb305216e6bd56e67c6603a89e76e7f
 
 ແອັບ React ສ່ວນຫຼາຍໃຊ້ compent ທັງໝົດລົງໄປ. ນີ້ໝາຍຄວາມວ່າທ່ານບໍ່ພຽງຈະໃຊ້ຊີ້ນສ່ວນ component ທີ່ສາມາດນຳໃຊ້ໄດ້ໃໝ່ເຊັ່ນ ປຸ່ມກົດ ເທົ່ານັ້ນ, ແຕ່ສຳລັບຊີ້ນສ່ວນທີ່ໃຫຍ່ຂຶ້ນເຊັ່ນ sidebars, list ແລະ ໃນທີ່ສຸດ, ໝົດ page! Component ເປັນວິທີທີ່ສະດວກໃນການຈັດລະບຽບ code UI ແລະ markup, ເຖິງວ່າບາງ component ແມ່ນໃຊ້ໄດ້ພຽງເທື່ອດຽວ. 
 
