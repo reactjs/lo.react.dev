@@ -1086,7 +1086,11 @@ export const recipes = [{
 
 #### ລາຍການທີ່ມີໂຕຂັ້ນ {/*list-with-a-separator*/}
 
+<<<<<<< HEAD
 ຕົວຢ່າງນີ້ສະແດງ haiku ທີ່ມີຊື່ສຽງໂດຍ Katsushika Hokusai, ໂດຍແຕ່ລະແຖວຈະຢູ່ໃນແທັກ `<p>`. ວຽກຂອງທ່ານແມ່ນຕ້ອງເພີ່ມໂຕຂັ້ນ `<hr />` ລະຫວ່າງແຕ່ລະຫຍໍ້ໜ້າ. ໂຄ່ງສ້າງຜົນລັບຂອງທ່ານຄວນມີລັກສະນະນີ້:
+=======
+This example renders a famous haiku by Tachibana Hokushi, with each line wrapped in a `<p>` tag. Your job is to insert an `<hr />` separator between each paragraph. Your resulting structure should look like this:
+>>>>>>> 68f417a600c7d7b8c4131e39f8a843a856ae3909
 
 ```js
 <article>

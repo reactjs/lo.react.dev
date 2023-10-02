@@ -77,9 +77,15 @@ UI "snapshot" ທີ່ທ່ານ return ເປັນແບບ interactive ບ
 
 ເມື່ອ React ທຳການ render component ອີກຄັ້ງ:
 
+<<<<<<< HEAD
 1. React ເອີ້ນໃຊ້ຟັງຊັ່ນຂອງທ່ານອີກຄັ້ງ.
 2. ຟັງຊັ່ນຂອງທ່ານ return snaptshot JSX ໃໝ່.
 3. React ຈາກນັ້ນອັບເດດໜ້າຈໍໃຫ້ກົງກັບ snapshot ທີ່ທ່ານ return.
+=======
+1. React calls your function again.
+2. Your function returns a new JSX snapshot.
+3. React then updates the screen to match the snapshot your function returned.
+>>>>>>> 68f417a600c7d7b8c4131e39f8a843a856ae3909
 
 <IllustrationBlock sequential>
     <Illustration caption="React execute ຟັງຊັ່ນ" src="/images/docs/illustrations/i_render1.png" />
