@@ -131,6 +131,7 @@ By passing a server action to the form `action`, React can [progressively enhanc
 
 In the username request form, there might be the chance that a username is not available. `requestUsername` should tell us if it fails or not.
 
+
 To update the UI based on the result of a server action while supporting progressive enhancement, use [`useFormState`](/reference/react-dom/hooks/useFormState).
 
 ```js
@@ -213,3 +214,4 @@ export default async incrementLike() {
 ```
 
 To read a server action return value, you'll need to `await` the promise returned.
+
