@@ -362,11 +362,15 @@ export default function Square() {
 
 <ConsoleBlock level="error">
 
-/src/App.js: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment `<>...</>`?
+/src/App.js: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX Fragment `<>...</>`?
 
 </ConsoleBlock>
 
+<<<<<<< HEAD
 Component React ຕ້ອງການ return ໜຶ່ງ JSX element ແລະ ບໍ່ສາມາດສົ່ງ JSX ທີ່ຕິດພັນຫຼາຍອັນເຊັ່ນ ສອງປຸ່ມກົດ. ເພື່ອແກ້ໄຂບັນຫານີ້ທ່ານສາມາດໃຊ້ *fragments* (`<>` ແລະ `</>`) ເພື່ອລວມ JSX ທີ່ຕິດພັນຫຼາຍອັນດັ່ງນີ້:
+=======
+React components need to return a single JSX element and not multiple adjacent JSX elements like two buttons. To fix this you can use *Fragments* (`<>` and `</>`) to wrap multiple adjacent JSX elements like this:
+>>>>>>> 4f9e9a56611c7a56b9506cf0a7ca84ab409824bc
 
 ```js {3-6}
 export default function Square() {
