@@ -1149,7 +1149,11 @@ hr {
 
 <Hint>
 
+<<<<<<< HEAD
 ທ່ານຈະຕ້ອງແປງ `map` ເປັນ loop ດ້ວຍໂຕເອງ, ຫຼື ໃຊ້ fragment.
+=======
+You'll either need to convert `map` to a manual loop, or use a Fragment.
+>>>>>>> 943e3ce4e52be56bcd75b679448847302f557da1
 
 </Hint>
 
@@ -1212,7 +1216,11 @@ hr {
 
 ການໃຊ້ index ແຖວເກົ່າເປັນ `key` ບໍ່ເຮັດວຽກອີກຕໍ່ໄປເພາະວ່າແຕ່ລະໂຕຂັ້ນ ແລະ ຫຍໍ້ໜ້າແຕ່ລະໂຕຢູ່ໃນ array ດຽວກັນ. ເຖິງຢ່າງໃດກໍຕາມ, ທ່ານສາມາດກຳນົດ key ທີ່ແຕກຕ່າງກັນໃຫ້ແຕ່ລະລາຍການໄດ້ໂດຍໃຊ້ຄຳຕໍ່ທ້າຍເຊັ່ນ `key={i + '-text'}`.
 
+<<<<<<< HEAD
 ອີກວິທີໜຶ່ງ, ທ່ານສາມາດສະແດງຜົນ collection ຂອງ fragment ທີ່ປະກອບມີ `<hr />` and `<p>...</p>`. ເຖິງຢ່າງໃດກໍຕາມ, syntax `<>...</>` ບໍ່ຮອງຮັບການສົ່ງຜ່ານ key, ດັ່ງນັ້ນທ່ານຕ້ອງໄດ້ຂຽນ `<Fragment>` ຢ່າງຊັດເຈນ:
+=======
+Alternatively, you could render a collection of Fragments which contain `<hr />` and `<p>...</p>`. However, the `<>...</>` shorthand syntax doesn't support passing keys, so you'd have to write `<Fragment>` explicitly:
+>>>>>>> 943e3ce4e52be56bcd75b679448847302f557da1
 
 <Sandpack>
 
@@ -1258,7 +1266,11 @@ hr {
 
 </Sandpack>
 
+<<<<<<< HEAD
 ຈື່ໄວ້ວ່າ, fragment (ມັກຂຽນເປັນ `<> </>`) ໃຫ້ທ່ານ group JSX node ໂດຍບໍ່ຕ້ອງເພີ່ມ `<div>`!
+=======
+Remember, Fragments (often written as `<> </>`) let you group JSX nodes without adding extra `<div>`s!
+>>>>>>> 943e3ce4e52be56bcd75b679448847302f557da1
 
 </Solution>
 
