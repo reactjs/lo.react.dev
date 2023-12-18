@@ -30,7 +30,7 @@ title: 'ບົດສອນ: Tic-Tac-Toe'
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -148,7 +148,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -207,13 +207,13 @@ body {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 export default function Square() {
   return <button className="square">X</button>;
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -362,11 +362,15 @@ export default function Square() {
 
 <ConsoleBlock level="error">
 
-/src/App.js: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment `<>...</>`?
+/src/App.js: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX Fragment `<>...</>`?
 
 </ConsoleBlock>
 
+<<<<<<< HEAD
 Component React ຕ້ອງການ return ໜຶ່ງ JSX element ແລະ ບໍ່ສາມາດສົ່ງ JSX ທີ່ຕິດພັນຫຼາຍອັນເຊັ່ນ ສອງປຸ່ມກົດ. ເພື່ອແກ້ໄຂບັນຫານີ້ທ່ານສາມາດໃຊ້ *fragments* (`<>` ແລະ `</>`) ເພື່ອລວມ JSX ທີ່ຕິດພັນຫຼາຍອັນດັ່ງນີ້:
+=======
+React components need to return a single JSX element and not multiple adjacent JSX elements like two buttons. To fix this you can use *Fragments* (`<>` and `</>`) to wrap multiple adjacent JSX elements like this:
+>>>>>>> 303ecae3dd4c7b570cf18e0115b94188f6aad5a1
 
 ```js {3-6}
 export default function Square() {
@@ -456,7 +460,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -628,7 +632,7 @@ code ທີ່ອັບເດດຂອງທ່ານຄວນຄ້າຍຄື
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 function Square({ value }) {
   return <button className="square">{value}</button>;
 }
@@ -656,7 +660,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -809,7 +813,7 @@ function Square() {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square() {
@@ -852,7 +856,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -989,7 +993,7 @@ function Square({value}) {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value }) {
@@ -1020,7 +1024,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -1234,7 +1238,7 @@ code ຂອງທ່ານຄວນເປັນແບບນີ້:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -1276,7 +1280,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -1429,7 +1433,7 @@ function handleClick(i) {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({value, onSquareClick}) {
@@ -1480,7 +1484,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -1531,7 +1535,7 @@ body {
 
 ເມື່ອຜູ້ຫຼິ້ນປ່ຽນກັນຫຼິ້ນໄດ້ແລ້ວ, ທ່ານຈະຕ້ອງການສະແດງໃຫ້ເຫັນວ່າເກມຊະນະຕອນໃດ ແລະ ບໍ່ຕ້ອງປ່ຽນຜຽນກັນອີກຕໍ່ໄປ. ເພື່ອເຮັດສິ່ງນີ້ທ່ານຕ້ອງໄດ້ເພີ່ມ helper ຟັງຊັ່ນຊື່ວ່າ `calculateWinner` ທີ່ໃຊ້ array ຂອງ 9 ສີ່ຫຼ່ຽມ, ກວດຫາຜູ້ຊະນະ ແລະ return `'X'`, `'O'`, ຫຼື `null` ຕາມຄວາມເໝາະສົມ. ບໍ່ຕ້ອງກັງວົນຫຼາຍເກີນໄປກ່ຽວກັບຟັງຊັ່ນ `calculateWinner`; ມັນບໍ່ໄດ້ສະເພາະເຈາະຈົງໃນ React:
 
-```js App.js
+```js src/App.js
 export default function Board() {
   //...
 }
@@ -1601,7 +1605,7 @@ export default function Board() {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({value, onSquareClick}) {
@@ -1681,7 +1685,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -1879,7 +1883,7 @@ export default function Game() {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -1977,7 +1981,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -2094,7 +2098,7 @@ You'll fix this error in the next section.
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -2210,7 +2214,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -2326,7 +2330,7 @@ const moves = history.map((squares, move) => {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -2443,7 +2447,7 @@ function calculateWinner(squares) {
 
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -2547,7 +2551,7 @@ export default function Game() {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({value, onSquareClick}) {
@@ -2667,7 +2671,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -2757,7 +2761,7 @@ export default function Game() {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -2875,7 +2879,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }

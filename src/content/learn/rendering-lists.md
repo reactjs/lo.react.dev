@@ -159,7 +159,7 @@ return <ul>{listItems}</ul>;
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { people } from './data.js';
 import { getImageUrl } from './utils.js';
 
@@ -184,7 +184,7 @@ export default function List() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
@@ -218,7 +218,7 @@ export const people = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return (
     'https://i.imgur.com/' +
@@ -292,7 +292,7 @@ Key ຈະບອກ React ວ່າລາຍການ array ໃດທີ່ແ�
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { people } from './data.js';
 import { getImageUrl } from './utils.js';
 
@@ -314,7 +314,7 @@ export default function List() {
 }
 ```
 
-```js data.js active
+```js src/data.js active
 export const people = [{
   id: 0, // Used in JSX as a key
   name: 'Creola Katherine Johnson',
@@ -348,7 +348,7 @@ export const people = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return (
     'https://i.imgur.com/' +
@@ -448,7 +448,7 @@ Fragment ຫາຍໄປຈາກ DOM, ສະນັ້ນ, ນີ້ຈະສ້
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { people } from './data.js';
 import { getImageUrl } from './utils.js';
 
@@ -475,7 +475,7 @@ export default function List() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
@@ -509,7 +509,7 @@ export const people = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return (
     'https://i.imgur.com/' +
@@ -539,7 +539,7 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { people } from './data.js';
 import { getImageUrl } from './utils.js';
 
@@ -590,7 +590,7 @@ export default function List() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
@@ -624,7 +624,7 @@ export const people = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return (
     'https://i.imgur.com/' +
@@ -654,7 +654,7 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { people } from './data.js';
 import { getImageUrl } from './utils.js';
 
@@ -704,7 +704,7 @@ export default function List() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
@@ -738,7 +738,7 @@ export const people = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return (
     'https://i.imgur.com/' +
@@ -768,7 +768,7 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { people } from './data.js';
 import { getImageUrl } from './utils.js';
 
@@ -822,7 +822,7 @@ export default function List() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const people = [{
   id: 0,
   name: 'Creola Katherine Johnson',
@@ -856,7 +856,7 @@ export const people = [{
 }];
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person) {
   return (
     'https://i.imgur.com/' +
@@ -894,7 +894,7 @@ img { width: 100px; height: 100px; border-radius: 50%; }
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { recipes } from './data.js';
 
 export default function RecipeList() {
@@ -906,7 +906,7 @@ export default function RecipeList() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const recipes = [{
   id: 'greek-salad',
   name: 'Greek Salad',
@@ -930,7 +930,7 @@ export const recipes = [{
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { recipes } from './data.js';
 
 export default function RecipeList() {
@@ -954,7 +954,7 @@ export default function RecipeList() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const recipes = [{
   id: 'greek-salad',
   name: 'Greek Salad',
@@ -982,7 +982,7 @@ Component `RecipeList` ປະກອບມີການເອີ້ນໃຊ້ `m
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { recipes } from './data.js';
 
 export default function RecipeList() {
@@ -1006,7 +1006,7 @@ export default function RecipeList() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const recipes = [{
   id: 'greek-salad',
   name: 'Greek Salad',
@@ -1060,7 +1060,7 @@ export default function RecipeList() {
 }
 ```
 
-```js data.js
+```js src/data.js
 export const recipes = [{
   id: 'greek-salad',
   name: 'Greek Salad',
@@ -1149,7 +1149,11 @@ hr {
 
 <Hint>
 
+<<<<<<< HEAD
 ທ່ານຈະຕ້ອງແປງ `map` ເປັນ loop ດ້ວຍໂຕເອງ, ຫຼື ໃຊ້ fragment.
+=======
+You'll either need to convert `map` to a manual loop, or use a Fragment.
+>>>>>>> 303ecae3dd4c7b570cf18e0115b94188f6aad5a1
 
 </Hint>
 
@@ -1212,7 +1216,11 @@ hr {
 
 ການໃຊ້ index ແຖວເກົ່າເປັນ `key` ບໍ່ເຮັດວຽກອີກຕໍ່ໄປເພາະວ່າແຕ່ລະໂຕຂັ້ນ ແລະ ຫຍໍ້ໜ້າແຕ່ລະໂຕຢູ່ໃນ array ດຽວກັນ. ເຖິງຢ່າງໃດກໍຕາມ, ທ່ານສາມາດກຳນົດ key ທີ່ແຕກຕ່າງກັນໃຫ້ແຕ່ລະລາຍການໄດ້ໂດຍໃຊ້ຄຳຕໍ່ທ້າຍເຊັ່ນ `key={i + '-text'}`.
 
+<<<<<<< HEAD
 ອີກວິທີໜຶ່ງ, ທ່ານສາມາດສະແດງຜົນ collection ຂອງ fragment ທີ່ປະກອບມີ `<hr />` and `<p>...</p>`. ເຖິງຢ່າງໃດກໍຕາມ, syntax `<>...</>` ບໍ່ຮອງຮັບການສົ່ງຜ່ານ key, ດັ່ງນັ້ນທ່ານຕ້ອງໄດ້ຂຽນ `<Fragment>` ຢ່າງຊັດເຈນ:
+=======
+Alternatively, you could render a collection of Fragments which contain `<hr />` and `<p>...</p>`. However, the `<>...</>` shorthand syntax doesn't support passing keys, so you'd have to write `<Fragment>` explicitly:
+>>>>>>> 303ecae3dd4c7b570cf18e0115b94188f6aad5a1
 
 <Sandpack>
 
@@ -1258,7 +1266,11 @@ hr {
 
 </Sandpack>
 
+<<<<<<< HEAD
 ຈື່ໄວ້ວ່າ, fragment (ມັກຂຽນເປັນ `<> </>`) ໃຫ້ທ່ານ group JSX node ໂດຍບໍ່ຕ້ອງເພີ່ມ `<div>`!
+=======
+Remember, Fragments (often written as `<> </>`) let you group JSX nodes without adding extra `<div>`s!
+>>>>>>> 303ecae3dd4c7b570cf18e0115b94188f6aad5a1
 
 </Solution>
 
