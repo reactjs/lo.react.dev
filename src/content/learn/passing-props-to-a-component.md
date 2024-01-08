@@ -106,7 +106,7 @@ function Avatar({ person, size }) {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 function Avatar({ person, size }) {
@@ -150,7 +150,7 @@ export default function Profile() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size = 's') {
   return (
     'https://i.imgur.com/' +
@@ -275,7 +275,7 @@ function Profile(props) {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import Avatar from './Avatar.js';
 
 function Card({ children }) {
@@ -301,7 +301,7 @@ export default function Profile() {
 }
 ```
 
-```js Avatar.js
+```js src/Avatar.js
 import { getImageUrl } from './utils.js';
 
 export default function Avatar({ person, size }) {
@@ -317,7 +317,7 @@ export default function Avatar({ person, size }) {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size = 's') {
   return (
     'https://i.imgur.com/' +
@@ -362,7 +362,7 @@ Component `Clock` ດ້ານລຸ່ມຈະໄດ້ຮັບສອງ prop
 
 <Sandpack>
 
-```js Clock.js active
+```js src/Clock.js active
 export default function Clock({ color, time }) {
   return (
     <h1 style={{ color: color }}>
@@ -372,7 +372,7 @@ export default function Clock({ color, time }) {
 }
 ```
 
-```js App.js hidden
+```js src/App.js hidden
 import { useState, useEffect } from 'react';
 import Clock from './Clock.js';
 
@@ -436,7 +436,7 @@ Component `Gallery` ນີ້ມີ markup ທີ່ຄ້າຍກັນຫຼ�
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 export default function Gallery() {
@@ -496,7 +496,7 @@ export default function Gallery() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(imageId, size = 's') {
   return (
     'https://i.imgur.com/' +
@@ -537,7 +537,7 @@ li { margin: 5px; }
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 function Profile({
@@ -604,7 +604,7 @@ export default function Gallery() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(imageId, size = 's') {
   return (
     'https://i.imgur.com/' +
@@ -637,7 +637,7 @@ li { margin: 5px; }
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 function Profile({ person, imageSize = 70 }) {
@@ -701,7 +701,7 @@ export default function Gallery() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size = 's') {
   return (
     'https://i.imgur.com/' +
@@ -740,7 +740,7 @@ li { margin: 5px; }
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 function Avatar({ person, size }) {
@@ -768,7 +768,7 @@ export default function Profile() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size) {
   return (
     'https://i.imgur.com/' +
@@ -791,7 +791,7 @@ export function getImageUrl(person, size) {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 function Avatar({ person, size }) {
@@ -832,7 +832,7 @@ export default function Profile() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size) {
   return (
     'https://i.imgur.com/' +
@@ -853,7 +853,7 @@ export function getImageUrl(person, size) {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { getImageUrl } from './utils.js';
 
 const ratio = window.devicePixelRatio;
@@ -903,7 +903,7 @@ export default function Profile() {
 }
 ```
 
-```js utils.js
+```js src/utils.js
 export function getImageUrl(person, size) {
   return (
     'https://i.imgur.com/' +

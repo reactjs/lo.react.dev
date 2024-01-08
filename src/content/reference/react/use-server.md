@@ -115,11 +115,13 @@ async function requestUsername(formData) {
   // ...
 }
 
-export default App() {
-  <form action={requestUsername}>
-    <input type="text" name="username" />
-    <button type="submit">Request</button>
-  </form>
+export default function App() {
+  return (
+    <form action={requestUsername}>
+      <input type="text" name="username" />
+      <button type="submit">Request</button>
+    </form>
+  );
 }
 ```
 
@@ -152,7 +154,7 @@ export default async function requestUsername(formData) {
 // UsernameForm.js
 'use client';
 
-import {useFormState} from 'react-dom';
+import { useFormState } from 'react-dom';
 import requestUsername from './requestUsername';
 
 function UsernameForm() {
@@ -207,7 +209,7 @@ function LikeButton() {
 'use server';
 
 let likeCount = 0;
-export default async incrementLike() {
+export default async function incrementLike() {
   likeCount++;
   return likeCount;
 }
