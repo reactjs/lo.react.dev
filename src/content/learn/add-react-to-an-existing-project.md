@@ -67,7 +67,7 @@ npm install react react-dom
 </html>
 ```
 
-```js index.js active
+```js src/index.js active
 import { createRoot } from 'react-dom/client';
 
 // Clear ເນື້ອຫາ HTML ທີ່ມີຢູ່ແລ້ວ
@@ -131,7 +131,7 @@ root.render(<h1>Hello, world</h1>);
 </html>
 ```
 
-```js index.js active
+```js src/index.js active
 import { createRoot } from 'react-dom/client';
 
 function NavigationBar() {
