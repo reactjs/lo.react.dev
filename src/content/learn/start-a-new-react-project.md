@@ -24,7 +24,11 @@ title: ເລີ່ມ Project React ໃໝ່
 npx create-next-app@latest
 </TerminalBlock>
 
+<<<<<<< HEAD
 ຖ້າທ່ານຍັງໃໝ່ສຳລັບ Next.js, ເບິ່ງ [ຄູ່ມື Next.js .](https://nextjs.org/learn/foundations/about-nextjs)
+=======
+If you're new to Next.js, check out the [learn Next.js course.](https://nextjs.org/learn)
+>>>>>>> 3563d95efe8719bdae8bbd258e6ab4134753348b
 
 <<<<<<< HEAD
 Next.js ດູແລໂດຍ [Vercel](https://vercel.com/). ທ່ານສາມາດ [deploy Next.js app](https://nextjs.org/docs/deployment) ໃສ່ໃນ Node.js ຫຼື   serverless hosting, ຫຼື server ຂອງທ່ານເອງ. [Fully static Next.js apps](https://nextjs.org/docs/advanced-features/static-html-export) ສາມາດ deploy ໃສ່ໃນ static hosting ໃດກໍ່ໄດ້.
