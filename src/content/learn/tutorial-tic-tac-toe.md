@@ -30,7 +30,7 @@ title: 'ບົດສອນ: Tic-Tac-Toe'
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -148,7 +148,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -207,13 +207,13 @@ body {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 export default function Square() {
   return <button className="square">X</button>;
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -339,6 +339,7 @@ import App from './App';
 
 ແຖວທີ 1-5 ແມ່ນລວມສ່ວນທີ່ຈຳເປັນມາລວມກັນ:
 
+
 * React
 * Library React ເພື່ອສື່ສານກັບເວັບບາວເຊີ (React DOM)
 * Style ຂອງ Component ທ່ານ
@@ -460,7 +461,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -632,7 +633,7 @@ code ທີ່ອັບເດດຂອງທ່ານຄວນຄ້າຍຄື
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 function Square({ value }) {
   return <button className="square">{value}</button>;
 }
@@ -660,7 +661,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -813,7 +814,7 @@ function Square() {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square() {
@@ -856,7 +857,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -993,7 +994,7 @@ function Square({value}) {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value }) {
@@ -1024,7 +1025,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -1178,11 +1179,8 @@ Too many re-renders. React limits the number of renders to prevent an infinite l
 
 ເມື່ອທ່ານຜ່ານ `onSquareClick={handleClick}`, ທ່ານກຳລັງສົ່ງຟັງຊັ່ນ `handleClick` ລົງເປັນ prop. ທ່ານບໍ່ໄດ້ເອີ້ນໃຊ້ມັນ! ແຕ່ຕອນນີ້ທ່ານກຳລັງ *ເອີ້ນໃຊ້* ຟັງຊັ່ນນັ້ນທັນທີ--ສັງເກດວົງເລັບໃນ `handleClick(0)` --ແລະ ນັ້ນແມ່ນສາເຫດທີ່ມັນເຮັດວຽກໄວເກີນໄປ. ທ່ານບໍ່ *ຕ້ອງການ* ເອີ້ນ `handleClick` ຈົນກວ່າຜູ້ໃຊ້ຈະຄິກ!
 
-<<<<<<< HEAD
 ທ່ານສາມາດແກ້ໄຂໂດຍການສ້າງຟັງຊັ່ນເຊັ່ນ `handleFirstSquareClick` ທີ່ເອີ້ນ `handleClick(0)`, ຟັງຊັ່ນເຊັ່ນ `handleSeconSquareClick` ທີ່ເອີ້ນ `handleClick(1)` ແລະ ອື່ນໆ. ທ່ານຈະສົ່ງຜ່ານ (ແທນທີ່ຈະເອີ້ນໃຊ້) ຟັງຊັ່ນເຫຼົ່ານີ້ລົງມາເປັນ prop ເຊັ່ນ `onSquareClick={handleFirstSquareClick}`. ນີ້ຈະແກ້ໄຂບັນຫາການ loop ທີ່ບໍ່ສິ້ນສຸດ.
-=======
-You could fix this by creating a function like `handleFirstSquareClick` that calls `handleClick(0)`, a function like `handleSecondSquareClick` that calls `handleClick(1)`, and so on. You would pass (rather than call) these functions down as props like `onSquareClick={handleFirstSquareClick}`. This would solve the infinite loop.
->>>>>>> 68f417a600c7d7b8c4131e39f8a843a856ae3909
+
 
 ເຖິງຢ່າງໃດກໍຕາມ, ການກຳນົດຟັງຊັ່ນທີ່ແຕກຕ່າງກັນ 9 ຟັງຊັ່ນ ແລະ ຕັ້ງຊື່ໃຫ້ກັບແຕ່ລະຟັງຊັ່ນນັ້ນມີລາຍລະອຽດຫຼາຍເກີນໄປ, ລອງເຮັດແບບນີ້ແທນ:
 
@@ -1238,7 +1236,7 @@ code ຂອງທ່ານຄວນເປັນແບບນີ້:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -1280,7 +1278,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -1433,7 +1431,7 @@ function handleClick(i) {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({value, onSquareClick}) {
@@ -1484,7 +1482,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -1535,7 +1533,7 @@ body {
 
 ເມື່ອຜູ້ຫຼິ້ນປ່ຽນກັນຫຼິ້ນໄດ້ແລ້ວ, ທ່ານຈະຕ້ອງການສະແດງໃຫ້ເຫັນວ່າເກມຊະນະຕອນໃດ ແລະ ບໍ່ຕ້ອງປ່ຽນຜຽນກັນອີກຕໍ່ໄປ. ເພື່ອເຮັດສິ່ງນີ້ທ່ານຕ້ອງໄດ້ເພີ່ມ helper ຟັງຊັ່ນຊື່ວ່າ `calculateWinner` ທີ່ໃຊ້ array ຂອງ 9 ສີ່ຫຼ່ຽມ, ກວດຫາຜູ້ຊະນະ ແລະ return `'X'`, `'O'`, ຫຼື `null` ຕາມຄວາມເໝາະສົມ. ບໍ່ຕ້ອງກັງວົນຫຼາຍເກີນໄປກ່ຽວກັບຟັງຊັ່ນ `calculateWinner`; ມັນບໍ່ໄດ້ສະເພາະເຈາະຈົງໃນ React:
 
-```js App.js
+```js src/App.js
 export default function Board() {
   //...
 }
@@ -1605,7 +1603,7 @@ export default function Board() {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({value, onSquareClick}) {
@@ -1685,7 +1683,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -1883,7 +1881,7 @@ export default function Game() {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -1981,7 +1979,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -2084,21 +2082,11 @@ export default function Game() {
 }
 ```
 
-<<<<<<< HEAD
 ທ່ານສາມາດເບິ່ງໄດ້ວ່າ code ຂອງທ່ານຄວນເປັນແນວໃດໃນດ້ານລຸ່ມນີ້. ສັງເກດວ່າທ່ານຄວນເຫັນຂໍ້ຜິດພາດໃນ console developer tools ທີ່ບອກວ່າ: ``Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of `Game`.`` ທ່ານຈະແປງຂໍ້ຜິດພາດນີ້ໃນຫົວຂໍ້ຕໍ່ໄປ.
-=======
-You can see what your code should look like below. Note that you should see an error in the developer tools console that says: 
-
-<ConsoleBlock level="warning">
-Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of &#96;Game&#96;.
-</ConsoleBlock>
-  
-You'll fix this error in the next section.
->>>>>>> 68f417a600c7d7b8c4131e39f8a843a856ae3909
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -2214,7 +2202,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -2287,11 +2275,10 @@ body {
 <li>Alexa: 5 tasks left</li>
 ```
 
-<<<<<<< HEAD
 ນອກເໜືອຈາກການອັບເດດ count ແລ້ວ, ການອ່ານໂດຍມະນຸດອາດບອກວ່າທ່ານສະຫຼັບຄຳສັ່ງຂອງ Alexa ແລະ Ben ແລະ ເພີ່ມ Claudia ລະຫວ່າງ Alexa ແລະ Ben. ເຖິງຢ່າງໃດກໍຕາມ, React ເປັນໂປຣແກຣມຄອມພິວເຕີ ແລະ ບໍ່ສາມາດຮູ້ວ່າທ່ານຕ້ອງການຫຍັງ, ດັ່ງນັ້ນທ່ານຕ້ອງໄດ້ລະບຸ _key_ property ສຳລັບແຕ່ລະລາຍການໃນລາຍການເພື່ອແຍກຄວາມແຕກຕ່າງລະຫວ່າງແຕ່ລະລາຍການຂອງກັນ ແລະ ກັນ. ຖ້່າຂໍ້ມູນຂອງທ່ານມາຈາກຖານຂໍ້ມູນ, ID ຖານຂໍ້ມູນ Alexa, Ben ແລະ Claudia  ສາມາດໃຊ້ເປັນ key ໄດ້.
-=======
-In addition to the updated counts, a human reading this would probably say that you swapped Alexa and Ben's ordering and inserted Claudia between Alexa and Ben. However, React is a computer program and does not know what you intended, so you need to specify a _key_ property for each list item to differentiate each list item from its siblings. If your data was from a database, Alexa, Ben, and Claudia's database IDs could be used as keys.
->>>>>>> 68f417a600c7d7b8c4131e39f8a843a856ae3909
+
+
+
 
 ```js {1}
 <li key={user.id}>
@@ -2330,7 +2317,7 @@ const moves = history.map((squares, move) => {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -2447,7 +2434,7 @@ function calculateWinner(squares) {
 
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -2551,7 +2538,7 @@ export default function Game() {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({value, onSquareClick}) {
@@ -2671,7 +2658,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -2761,7 +2748,7 @@ export default function Game() {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -2879,7 +2866,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }

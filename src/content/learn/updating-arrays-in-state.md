@@ -409,7 +409,6 @@ button { margin-left: 5px; }
 ```js
 import { useState } from 'react';
 
-let nextId = 3;
 const initialList = [
   { id: 0, title: 'Big Bellies' },
   { id: 1, title: 'Lunar Landscape' },
@@ -1084,7 +1083,7 @@ button { margin: 5px; }
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import AddTodo from './AddTodo.js';
 import TaskList from './TaskList.js';
@@ -1139,7 +1138,7 @@ export default function TaskApp() {
 }
 ```
 
-```js AddTodo.js
+```js src/AddTodo.js
 import { useState } from 'react';
 
 export default function AddTodo({ onAddTodo }) {
@@ -1160,7 +1159,7 @@ export default function AddTodo({ onAddTodo }) {
 }
 ```
 
-```js TaskList.js
+```js src/TaskList.js
 import { useState } from 'react';
 
 export default function TaskList({
@@ -1247,7 +1246,7 @@ ul, li { margin: 0; padding: 0; }
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import AddTodo from './AddTodo.js';
 import TaskList from './TaskList.js';
@@ -1306,7 +1305,7 @@ export default function TaskApp() {
 }
 ```
 
-```js AddTodo.js
+```js src/AddTodo.js
 import { useState } from 'react';
 
 export default function AddTodo({ onAddTodo }) {
@@ -1327,7 +1326,7 @@ export default function AddTodo({ onAddTodo }) {
 }
 ```
 
-```js TaskList.js
+```js src/TaskList.js
 import { useState } from 'react';
 
 export default function TaskList({
@@ -1417,7 +1416,7 @@ ul, li { margin: 0; padding: 0; }
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { useImmer } from 'use-immer';
 import AddTodo from './AddTodo.js';
@@ -1473,7 +1472,7 @@ export default function TaskApp() {
 }
 ```
 
-```js AddTodo.js
+```js src/AddTodo.js
 import { useState } from 'react';
 
 export default function AddTodo({ onAddTodo }) {
@@ -1494,7 +1493,7 @@ export default function AddTodo({ onAddTodo }) {
 }
 ```
 
-```js TaskList.js
+```js src/TaskList.js
 import { useState } from 'react';
 
 export default function TaskList({
@@ -1599,7 +1598,7 @@ ul, li { margin: 0; padding: 0; }
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { useImmer } from 'use-immer';
 import AddTodo from './AddTodo.js';
@@ -1661,7 +1660,7 @@ export default function TaskApp() {
 }
 ```
 
-```js AddTodo.js
+```js src/AddTodo.js
 import { useState } from 'react';
 
 export default function AddTodo({ onAddTodo }) {
@@ -1682,7 +1681,7 @@ export default function AddTodo({ onAddTodo }) {
 }
 ```
 
-```js TaskList.js
+```js src/TaskList.js
 import { useState } from 'react';
 
 export default function TaskList({
@@ -1787,7 +1786,7 @@ ul, li { margin: 0; padding: 0; }
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 import { useImmer } from 'use-immer';
 import AddTodo from './AddTodo.js';
@@ -1846,7 +1845,7 @@ export default function TaskApp() {
 }
 ```
 
-```js AddTodo.js
+```js src/AddTodo.js
 import { useState } from 'react';
 
 export default function AddTodo({ onAddTodo }) {
@@ -1867,7 +1866,7 @@ export default function AddTodo({ onAddTodo }) {
 }
 ```
 
-```js TaskList.js
+```js src/TaskList.js
 import { useState } from 'react';
 
 export default function TaskList({
