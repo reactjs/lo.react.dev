@@ -67,12 +67,13 @@ function SendFeedback({onSubmit}: {onSubmit: () => void}) {
         {exit: isSubmitted}
       )}>
       <p className="w-full font-bold text-primary dark:text-primary-dark text-lg me-4">
+
         {isSubmitted ? 'Thank you for your feedback!' : 'Is this page useful?'}
       </p>
       {!isSubmitted && (
         <button
           aria-label="Yes"
-          className="bg-secondary-button dark:bg-secondary-button-dark rounded-lg text-primary dark:text-primary-dark px-3 me-2"
+          className="px-3 rounded-lg bg-secondary-button dark:bg-secondary-button-dark text-primary dark:text-primary-dark me-2"
           onClick={() => {
             setIsSubmitted(true);
             onSubmit();
@@ -84,7 +85,7 @@ function SendFeedback({onSubmit}: {onSubmit: () => void}) {
       {!isSubmitted && (
         <button
           aria-label="No"
-          className="bg-secondary-button dark:bg-secondary-button-dark rounded-lg text-primary dark:text-primary-dark px-3"
+          className="px-3 rounded-lg bg-secondary-button dark:bg-secondary-button-dark text-primary dark:text-primary-dark"
           onClick={() => {
             setIsSubmitted(true);
             onSubmit();

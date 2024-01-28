@@ -52,11 +52,8 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 </Sandpack>
 
-<<<<<<< HEAD
 ປັດຈຸບັນຟາຍເຫຼົ່ານີ້ຢູ່ໃນ **ຟາຍ root component,** ຊື່ `App.js` ໃນຕົວຢ່າງນີ້. ໃນ [ການສ້າງແອັບ React](https://create-react-app.dev/), ແອັບຂອງທ່ານຢູ່ໃນ `src/App.js`. ຂຶ້ນກັບການຕັ້ງຄ່າຂອງທ່ານ, Root component ຂອງທ່ານສາມາດເປັນຟາຍອື່ນກໍໄດ້. ຖ້າທ່ານໃຊ້ framework ທີ່ມີການກຳນົດ routing ຕາມ file-based, ເຊັ່ນ Next.js, Root component ຂອງທ່ານຈະແຕກຕ່າງກັນໄປໃນແຕ່ລະ page.
-=======
-These currently live in a **root component file,** named `App.js` in this example. Depending on your setup, your root component could be in another file, though. If you use a framework with file-based routing, such as Next.js, your root component will be different for every page.
->>>>>>> 68f417a600c7d7b8c4131e39f8a843a856ae3909
+
 
 ## ການ import ແລະ export component {/*exporting-and-importing-a-component*/}
 
@@ -70,12 +67,11 @@ These currently live in a **root component file,** named `App.js` in this exampl
 ທັງ `Profile` ແລະ `Gallery` ຖືກຍ້າຍອອກຈາກ `App.js` ໄປໃນຟາຍໃໝ່ຊື່ `Gallery.js`. ຕອນນີ້ທ່ານສາມາດປ່ຽນ `App.js` ເພື່ອ import `Gallery` ຈາກ `Gallery.js`:
 
 <Sandpack>
-<<<<<<< HEAD
-```js App.js
-=======
 
-```js src/App.js
->>>>>>> 6bfde58c109ec86fd6c5767421404cb679ffba9a
+
+```js App.js
+
+
 import Gallery from './Gallery.js';
 
 export default function App() {
