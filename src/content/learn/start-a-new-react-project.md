@@ -24,7 +24,11 @@ title: ເລີ່ມ Project React ໃໝ່
 npx create-next-app@latest
 </TerminalBlock>
 
+<<<<<<< HEAD
 ຖ້າທ່ານຍັງໃໝ່ສຳລັບ Next.js, ເບິ່ງ [ຄູ່ມື Next.js .](https://nextjs.org/learn/foundations/about-nextjs)
+=======
+If you're new to Next.js, check out the [learn Next.js course.](https://nextjs.org/learn)
+>>>>>>> 303ecae3dd4c7b570cf18e0115b94188f6aad5a1
 
 
 
