@@ -367,7 +367,11 @@ export default function Square() {
 
 </ConsoleBlock>
 
+<<<<<<< HEAD
 Component React ຕ້ອງການ return ໜຶ່ງ JSX element ແລະ ບໍ່ສາມາດສົ່ງ JSX ທີ່ຕິດພັນຫຼາຍອັນເຊັ່ນ ສອງປຸ່ມກົດ. ເພື່ອແກ້ໄຂບັນຫານີ້ທ່ານສາມາດໃຊ້ *fragments* (`<>` ແລະ `</>`) ເພື່ອລວມ JSX ທີ່ຕິດພັນຫຼາຍອັນດັ່ງນີ້:
+=======
+React components need to return a single JSX element and not multiple adjacent JSX elements like two buttons. To fix this you can use *Fragments* (`<>` and `</>`) to wrap multiple adjacent JSX elements like this:
+>>>>>>> af54fc873819892f6050340df236f33a18ba5fb8
 
 ```js {3-6}
 export default function Square() {

@@ -626,7 +626,11 @@ export default function PackingList() {
 
 ສັງເກດທ່ານຕ້ອງຂຽນ `importance > 0 && ...` ແທນທີ່ຈະເປັນ `importance && ...` ສະນັ້ນຫາກ `importance` ເປັນ `0`, ຜົນລັບຈະບໍ່ສະແດງ `0`!
 
+<<<<<<< HEAD
 ໃນວິທີການນີ້, ຈະໃຊ້ເງື່ອນໄຂສອງເງື່ອນໄຂແຍກກັນເພື່ອໃສ່ຊ່ອງວ່າງລະຫວ່າງຊື່ ແລະ label. ອີກວິທີໜຶ່ງ, ທ່ານສາມາດໃຊ້ fragment ທີ່ມີຊ່ອງວ່າງນຳໜ້າ: `importance > 0 && <> <i>...</i></>` ຫຼື ເພີ່ມຊ່ອງວ່າງພາຍໃນ `importance > 0 && <> <i>...</i></>`.
+=======
+In this solution, two separate conditions are used to insert a space between the name and the importance label. Alternatively, you could use a Fragment with a leading space: `importance > 0 && <> <i>...</i></>` or add a space immediately inside the `<i>`:  `importance > 0 && <i> ...</i>`.
+>>>>>>> af54fc873819892f6050340df236f33a18ba5fb8
 
 
 </Solution>
