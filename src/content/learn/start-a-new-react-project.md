@@ -24,17 +24,11 @@ title: ເລີ່ມ Project React ໃໝ່
 npx create-next-app@latest
 </TerminalBlock>
 
-<<<<<<< HEAD
 ຖ້າທ່ານຍັງໃໝ່ສຳລັບ Next.js, ເບິ່ງ [ຄູ່ມື Next.js .](https://nextjs.org/learn/foundations/about-nextjs)
-=======
-If you're new to Next.js, check out the [learn Next.js course.](https://nextjs.org/learn)
->>>>>>> af54fc873819892f6050340df236f33a18ba5fb8
 
-<<<<<<< HEAD
+
+
 Next.js ດູແລໂດຍ [Vercel](https://vercel.com/). ທ່ານສາມາດ [deploy Next.js app](https://nextjs.org/docs/deployment) ໃສ່ໃນ Node.js ຫຼື   serverless hosting, ຫຼື server ຂອງທ່ານເອງ. [Fully static Next.js apps](https://nextjs.org/docs/advanced-features/static-html-export) ສາມາດ deploy ໃສ່ໃນ static hosting ໃດກໍ່ໄດ້.
-=======
-Next.js is maintained by [Vercel](https://vercel.com/). You can [deploy a Next.js app](https://nextjs.org/docs/app/building-your-application/deploying) to any Node.js or serverless hosting, or to your own server. Next.js also supports a [static export](https://nextjs.org/docs/pages/building-your-application/deploying/static-exports) which doesn't require a server.
->>>>>>> 68f417a600c7d7b8c4131e39f8a843a856ae3909
 
 ### Remix {/*remix*/}
 
@@ -97,7 +91,7 @@ Expo ດູແລໂດຍ [Expo (ບໍລິສັດ)](https://expo.dev/about
 
 ### Next.js (App Router) {/*nextjs-app-router*/}
 
-<<<<<<< HEAD
+
 **[App Router ຂອງ Next.js](https://beta.nextjs.org/docs/getting-started) ແມ່ນການ redesign ຂອງ Next.js APIs ທີ່ມີຈຸດປະສົງເຕີມເຕັມວິໄສທັດຂອງທີ React full-stack architecture.** ມັນເຮັດທ່ານ fetch data ເປັນ asynchronous ທີ່ແລ່ນເທິງ server ຫຼື ແມ້ແຕ່ລະຫວ່າງການ build.
 
 Next.js ດູແລໂດຍ [Vercel](https://vercel.com/). ທ່ານສາມາດ [deploy a Next.js app](https://nextjs.org/docs/deployment) ໃສ່  Node.js ຫຼື serverless hosting ໃດກໍ່ໄດ້, ຫຼຶ ເຊີເວີຂອງທ່ານເອງ. Next.js ຍັງຮອງຮັບ [static export](https://beta.nextjs.org/docs/configuring/static-export) ຊື່ງບໍ່ໄດ້ຕ້ອງການເຊີເວີ.
@@ -106,11 +100,7 @@ Next.js ດູແລໂດຍ [Vercel](https://vercel.com/). ທ່ານສາ�
 App Router ຂອງ Next.js ແມ່ນ **ປັດຈຸບັນເປັນເບຕ້າ ແລະ ຍັງບໍ່ແນະນຳສຳລັບ production** (ນະ ເດືອນມີນາ 2023). ເພື່ອລອງມັນໃນ Project Next.js ທີ່ມີຢູ່ແລ້ວ, [ປະຕິບັດຕາມຄູ່ມື  incremental migration](https://beta.nextjs.org/docs/upgrade-guide#migrating-from-pages-to-app).
 
 </Pitfall>
-=======
-**[Next.js's App Router](https://nextjs.org/docs) is a redesign of the Next.js APIs aiming to fulfill the React team’s full-stack architecture vision.** It lets you fetch data in asynchronous components that run on the server or even during the build.
 
-Next.js is maintained by [Vercel](https://vercel.com/). You can [deploy a Next.js app](https://nextjs.org/docs/app/building-your-application/deploying) to any Node.js or serverless hosting, or to your own server. Next.js also supports [static export](https://nextjs.org/docs/app/building-your-application/deploying/static-exports) which doesn't require a server.
->>>>>>> 68f417a600c7d7b8c4131e39f8a843a856ae3909
 
 <DeepDive>
 
