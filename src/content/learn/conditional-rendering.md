@@ -630,6 +630,7 @@ export default function PackingList() {
 ໃນວິທີການນີ້, ຈະໃຊ້ເງື່ອນໄຂສອງເງື່ອນໄຂແຍກກັນເພື່ອໃສ່ຊ່ອງວ່າງລະຫວ່າງຊື່ ແລະ label. ອີກວິທີໜຶ່ງ, ທ່ານສາມາດໃຊ້ fragment ທີ່ມີຊ່ອງວ່າງນຳໜ້າ: `importance > 0 && <> <i>...</i></>` ຫຼື ເພີ່ມຊ່ອງວ່າງພາຍໃນ `importance > 0 && <> <i>...</i></>`.
 
 
+
 </Solution>
 
 #### Refactor ຊຸດຂອງ `? :` ເປັນ `if` ແລະ ຕົວແປ {/*refactor-a-series-of---to-if-and-variables*/}

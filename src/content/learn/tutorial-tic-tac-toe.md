@@ -372,6 +372,7 @@ Component React ຕ້ອງການ return ໜຶ່ງ JSX element ແລະ 
 
 
 
+
 ```js {3-6}
 export default function Square() {
   return (
