@@ -337,11 +337,8 @@ import './styles.css';
 import App from './App';
 ```
 
-<<<<<<< HEAD
 ແຖວທີ 1-5 ແມ່ນລວມສ່ວນທີ່ຈຳເປັນມາລວມກັນ:
-=======
-Lines 1-5 bring all the necessary pieces together: 
->>>>>>> 3563d95efe8719bdae8bbd258e6ab4134753348b
+
 
 * React
 * Library React ເພື່ອສື່ສານກັບເວັບບາວເຊີ (React DOM)
@@ -370,11 +367,7 @@ export default function Square() {
 
 </ConsoleBlock>
 
-<<<<<<< HEAD
 Component React ຕ້ອງການ return ໜຶ່ງ JSX element ແລະ ບໍ່ສາມາດສົ່ງ JSX ທີ່ຕິດພັນຫຼາຍອັນເຊັ່ນ ສອງປຸ່ມກົດ. ເພື່ອແກ້ໄຂບັນຫານີ້ທ່ານສາມາດໃຊ້ *fragments* (`<>` ແລະ `</>`) ເພື່ອລວມ JSX ທີ່ຕິດພັນຫຼາຍອັນດັ່ງນີ້:
-=======
-React components need to return a single JSX element and not multiple adjacent JSX elements like two buttons. To fix this you can use *Fragments* (`<>` and `</>`) to wrap multiple adjacent JSX elements like this:
->>>>>>> 3563d95efe8719bdae8bbd258e6ab4134753348b
 
 ```js {3-6}
 export default function Square() {
@@ -1182,11 +1175,8 @@ Too many re-renders. React limits the number of renders to prevent an infinite l
 
 ເມື່ອທ່ານຜ່ານ `onSquareClick={handleClick}`, ທ່ານກຳລັງສົ່ງຟັງຊັ່ນ `handleClick` ລົງເປັນ prop. ທ່ານບໍ່ໄດ້ເອີ້ນໃຊ້ມັນ! ແຕ່ຕອນນີ້ທ່ານກຳລັງ *ເອີ້ນໃຊ້* ຟັງຊັ່ນນັ້ນທັນທີ--ສັງເກດວົງເລັບໃນ `handleClick(0)` --ແລະ ນັ້ນແມ່ນສາເຫດທີ່ມັນເຮັດວຽກໄວເກີນໄປ. ທ່ານບໍ່ *ຕ້ອງການ* ເອີ້ນ `handleClick` ຈົນກວ່າຜູ້ໃຊ້ຈະຄິກ!
 
-<<<<<<< HEAD
 ທ່ານສາມາດແກ້ໄຂໂດຍການສ້າງຟັງຊັ່ນເຊັ່ນ `handleFirstSquareClick` ທີ່ເອີ້ນ `handleClick(0)`, ຟັງຊັ່ນເຊັ່ນ `handleSeconSquareClick` ທີ່ເອີ້ນ `handleClick(1)` ແລະ ອື່ນໆ. ທ່ານຈະສົ່ງຜ່ານ (ແທນທີ່ຈະເອີ້ນໃຊ້) ຟັງຊັ່ນເຫຼົ່ານີ້ລົງມາເປັນ prop ເຊັ່ນ `onSquareClick={handleFirstSquareClick}`. ນີ້ຈະແກ້ໄຂບັນຫາການ loop ທີ່ບໍ່ສິ້ນສຸດ.
-=======
-You could fix this by creating a function like `handleFirstSquareClick` that calls `handleClick(0)`, a function like `handleSecondSquareClick` that calls `handleClick(1)`, and so on. You would pass (rather than call) these functions down as props like `onSquareClick={handleFirstSquareClick}`. This would solve the infinite loop.
->>>>>>> 68f417a600c7d7b8c4131e39f8a843a856ae3909
+
 
 ເຖິງຢ່າງໃດກໍຕາມ, ການກຳນົດຟັງຊັ່ນທີ່ແຕກຕ່າງກັນ 9 ຟັງຊັ່ນ ແລະ ຕັ້ງຊື່ໃຫ້ກັບແຕ່ລະຟັງຊັ່ນນັ້ນມີລາຍລະອຽດຫຼາຍເກີນໄປ, ລອງເຮັດແບບນີ້ແທນ:
 
@@ -2088,17 +2078,7 @@ export default function Game() {
 }
 ```
 
-<<<<<<< HEAD
 ທ່ານສາມາດເບິ່ງໄດ້ວ່າ code ຂອງທ່ານຄວນເປັນແນວໃດໃນດ້ານລຸ່ມນີ້. ສັງເກດວ່າທ່ານຄວນເຫັນຂໍ້ຜິດພາດໃນ console developer tools ທີ່ບອກວ່າ: ``Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of `Game`.`` ທ່ານຈະແປງຂໍ້ຜິດພາດນີ້ໃນຫົວຂໍ້ຕໍ່ໄປ.
-=======
-You can see what your code should look like below. Note that you should see an error in the developer tools console that says: 
-
-<ConsoleBlock level="warning">
-Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of &#96;Game&#96;.
-</ConsoleBlock>
-  
-You'll fix this error in the next section.
->>>>>>> 68f417a600c7d7b8c4131e39f8a843a856ae3909
 
 <Sandpack>
 
@@ -2291,11 +2271,10 @@ body {
 <li>Alexa: 5 tasks left</li>
 ```
 
-<<<<<<< HEAD
 ນອກເໜືອຈາກການອັບເດດ count ແລ້ວ, ການອ່ານໂດຍມະນຸດອາດບອກວ່າທ່ານສະຫຼັບຄຳສັ່ງຂອງ Alexa ແລະ Ben ແລະ ເພີ່ມ Claudia ລະຫວ່າງ Alexa ແລະ Ben. ເຖິງຢ່າງໃດກໍຕາມ, React ເປັນໂປຣແກຣມຄອມພິວເຕີ ແລະ ບໍ່ສາມາດຮູ້ວ່າທ່ານຕ້ອງການຫຍັງ, ດັ່ງນັ້ນທ່ານຕ້ອງໄດ້ລະບຸ _key_ property ສຳລັບແຕ່ລະລາຍການໃນລາຍການເພື່ອແຍກຄວາມແຕກຕ່າງລະຫວ່າງແຕ່ລະລາຍການຂອງກັນ ແລະ ກັນ. ຖ້່າຂໍ້ມູນຂອງທ່ານມາຈາກຖານຂໍ້ມູນ, ID ຖານຂໍ້ມູນ Alexa, Ben ແລະ Claudia  ສາມາດໃຊ້ເປັນ key ໄດ້.
-=======
-In addition to the updated counts, a human reading this would probably say that you swapped Alexa and Ben's ordering and inserted Claudia between Alexa and Ben. However, React is a computer program and does not know what you intended, so you need to specify a _key_ property for each list item to differentiate each list item from its siblings. If your data was from a database, Alexa, Ben, and Claudia's database IDs could be used as keys.
->>>>>>> 68f417a600c7d7b8c4131e39f8a843a856ae3909
+
+
+
 
 ```js {1}
 <li key={user.id}>
