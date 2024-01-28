@@ -88,8 +88,13 @@ Here are supported types for server action arguments:
 * [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
 Notably, these are not supported:
+<<<<<<< HEAD
 * React elements, or [JSX](https://react.dev/learn/writing-markup-with-jsx)
 * Functions, including component functions or any other function that is not a server action
+=======
+* React elements, or [JSX](/learn/writing-markup-with-jsx)
+* Functions, including component functions or any other function that is not a Server Action
+>>>>>>> 3563d95efe8719bdae8bbd258e6ab4134753348b
 * [Classes](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Classes_in_JavaScript)
 * Objects that are instances of any class (other than the built-ins mentioned) or objects with [a null prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object#null-prototype_objects)
 * Symbols not registered globally, ex. `Symbol('my new symbol')`
@@ -115,11 +120,13 @@ async function requestUsername(formData) {
   // ...
 }
 
-export default App() {
-  <form action={requestUsername}>
-    <input type="text" name="username" />
-    <button type="submit">Request</button>
-  </form>
+export default function App() {
+  return (
+    <form action={requestUsername}>
+      <input type="text" name="username" />
+      <button type="submit">Request</button>
+    </form>
+  );
 }
 ```
 
@@ -152,7 +159,7 @@ export default async function requestUsername(formData) {
 // UsernameForm.js
 'use client';
 
-import {useFormState} from 'react-dom';
+import { useFormState } from 'react-dom';
 import requestUsername from './requestUsername';
 
 function UsernameForm() {
@@ -207,7 +214,7 @@ function LikeButton() {
 'use server';
 
 let likeCount = 0;
-export default async incrementLike() {
+export default async function incrementLike() {
   likeCount++;
   return likeCount;
 }
