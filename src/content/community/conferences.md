@@ -46,6 +46,17 @@ October 27th 2023. In-person in Verona, Italy and online (hybrid event)
 
 [Website](https://appjs.co) - [Twitter](https://twitter.com/appjsconf)
 
+
+### React Brussels 2023 {/*react-brussels-2023*/}
+October 13th 2023. In-person in Brussels, Belgium + Remote (hybrid)
+
+[Website](https://www.react.brussels/) - [Twitter](https://twitter.com/BrusselsReact)
+
+### React India 2023 {/*react-india-2023*/}
+October 5 - 7, 2023. In-person in Goa, India (hybrid event) + Oct 3 2023 - remote day
+
+[Website](https://www.reactindia.io) - [Twitter](https://x.com/react_india) - [Facebook](https://www.facebook.com/ReactJSIndia) - [Youtube](https://www.youtube.com/channel/UCaFbHCBkPvVv1bWs_jwYt3w)
+
 ### Render(ATL) 2024 🍑 {/*renderatl-2024-*/}
 June 12 - June 14, 2024. Atlanta, GA, USA
 
@@ -58,10 +69,17 @@ October 17 - 19, 2024. In-person in Goa, India (hybrid event) + Oct 15 2024 - re
 
 ## Past Conferences {/*past-conferences*/}
 
-### React Day Berlin 2023 {/*react-day-berlin-2023*/}
-December 8 & 12, 2023. In-person in Berlin, Germany + remote first interactivity (hybrid event)
 
-[Website](https://reactday.berlin) - [Twitter](https://twitter.com/reactdayberlin) - [Facebook](https://www.facebook.com/reactdayberlin/) - [Videos](https://portal.gitnation.org/events/react-day-berlin-2023)
+### RenderCon Kenya 2023 {/*rendercon-kenya-2023*/}
+September 29 - 30, 2023. Nairobi, Kenya
+
+[Website](https://rendercon.org/) - [Twitter](https://twitter.com/renderconke) - [LinkedIn](https://www.linkedin.com/company/renderconke/) - [YouTube](https://www.youtube.com/channel/UC0bCcG8gHUL4njDOpQGcMIA)
+
+
+### React Live 2023 {/*react-live-2023*/}
+September 29, 2023. Amsterdam, Netherlands
+
+[Website](https://reactlive.nl/)
 
 ### React Summit US 2023 {/*react-summit-us-2023*/}
 November 13 & 15, 2023. In-person in New York, US + remote first interactivity (hybrid event)
@@ -82,10 +100,22 @@ May 22 - 24, 2024. In-person in Kraków, Poland + remote
 
 [Website](https://appjs.co) - [Twitter](https://twitter.com/appjsconf)
 
-### Render(ATL) 2024 🍑 {/*renderatl-2024-*/}
-June 12 - June 14, 2024. Atlanta, GA, USA
 
-[Website](https://renderatl.com) - [Discord](https://www.renderatl.com/discord) - [Twitter](https://twitter.com/renderATL) - [Instagram](https://www.instagram.com/renderatl/) - [Facebook](https://www.facebook.com/renderatl/) - [LinkedIn](https://www.linkedin.com/company/renderatl) - [Podcast](https://www.renderatl.com/culture-and-code#/)
+### React Alicante 2023 {/*react-alicante-2023*/}
+September 28 - 30, 2023. Alicante, Spain
+
+[Website](https://reactalicante.es/) - [Twitter](https://twitter.com/reactalicante)
+
+
+### RedwoodJS Conference 2023 {/*redwoodjs-conference-2023*/}
+September 26 - 29, 2023. Grants Pass, Oregon + remote (hybrid event) 
+
+[Website](https://www.redwoodjsconf.com/) - [Twitter](https://twitter.com/redwoodjs)
+
+### React Native EU 2023 {/*react-native-eu-2023*/}
+September 7 & 8, 2023. Wrocław, Poland
+
+[Website](https://react-native.eu) - [Twitter](https://twitter.com/react_native_eu) - [Facebook](https://www.facebook.com/reactnativeeu)
 
 ### React Nexus 2024 {/*react-nexus-2024*/}
 July 04 & 05, 2024. Bangalore, India (In-person event)
@@ -108,6 +138,7 @@ October 13th 2023. In-person in Brussels, Belgium + Remote (hybrid)
 October 5 - 7, 2023. In-person in Goa, India (hybrid event) + Oct 3 2023 - remote day
 
 ## Past Conferences {/*past-conferences*/}
+
 
 ### React Day Berlin 2023 {/*react-day-berlin-2023*/}
 December 8 & 12, 2023. In-person in Berlin, Germany + remote first interactivity (hybrid event)

@@ -68,8 +68,6 @@ img { margin: 0 10px 10px 0; height: 90px; }
 
 <Sandpack>
 
-
-
 ```js App.js
 
 import Gallery from './Gallery.js';

@@ -28,6 +28,7 @@ npx create-next-app@latest
 ຖ້າທ່ານຍັງໃໝ່ສຳລັບ Next.js, ເບິ່ງ [ຄູ່ມື Next.js .](https://nextjs.org/learn/foundations/about-nextjs)
 
 
+
 Next.js ດູແລໂດຍ [Vercel](https://vercel.com/). ທ່ານສາມາດ [deploy Next.js app](https://nextjs.org/docs/deployment) ໃສ່ໃນ Node.js ຫຼື   serverless hosting, ຫຼື server ຂອງທ່ານເອງ. [Fully static Next.js apps](https://nextjs.org/docs/advanced-features/static-html-export) ສາມາດ deploy ໃສ່ໃນ static hosting ໃດກໍ່ໄດ້.
 
 ### Remix {/*remix*/}
