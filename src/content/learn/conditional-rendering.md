@@ -632,6 +632,7 @@ export default function PackingList() {
 In this solution, two separate conditions are used to insert a space between the name and the importance label. Alternatively, you could use a Fragment with a leading space: `importance > 0 && <> <i>...</i></>` or add a space immediately inside the `<i>`:  `importance > 0 && <i> ...</i>`.
 >>>>>>> bbb08a5a04b0221137e5d60472fc979747af2954
 
+
 </Solution>
 
 #### Refactor ຊຸດຂອງ `? :` ເປັນ `if` ແລະ ຕົວແປ {/*refactor-a-series-of---to-if-and-variables*/}
