@@ -647,7 +647,6 @@ Array ເປັນ object JavaScript ທີ່ບໍ່ແນ່ນອນອີ�
 ```js
 import { useState } from 'react';
 
-let nextId = 3;
 const initialList = [
   { id: 0, title: 'Big Bellies', seen: false },
   { id: 1, title: 'Lunar Landscape', seen: false },
@@ -715,7 +714,6 @@ function ItemList({ artworks, onToggle }) {
 import { useState } from 'react';
 import { useImmer } from 'use-immer';
 
-let nextId = 3;
 const initialList = [
   { id: 0, title: 'Big Bellies', seen: false },
   { id: 1, title: 'Lunar Landscape', seen: false },
