@@ -484,12 +484,26 @@ function FilterableProductTable({ products }) {
 
 ພາຍໃນ `SearchBar`, ທ່ານຈະເພີ່ມ `onChange` event handler ແລະ ຕັ້ງຄ່າ parent state ຈາກຕົວຈັດການເຫຼົ່ານີ້:
 
-```js {5}
-<input 
-  type="text" 
-  value={filterText} 
-  placeholder="Search..." 
-  onChange={(e) => onFilterTextChange(e.target.value)} />
+```js {4,5,13,19}
+function SearchBar({
+  filterText,
+  inStockOnly,
+  onFilterTextChange,
+  onInStockOnlyChange
+}) {
+  return (
+    <form>
+      <input
+        type="text"
+        value={filterText}
+        placeholder="Search..."
+        onChange={(e) => onFilterTextChange(e.target.value)}
+      />
+      <label>
+        <input
+          type="checkbox"
+          checked={inStockOnly}
+          onChange={(e) => onInStockOnlyChange(e.target.checked)}
 ```
 
 ຕອນນີ້ແອັບພິເຄຊັ່ນເຮັດວຽກໄດ້ຢ່າງສົມບູນແບບ!

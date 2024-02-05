@@ -4,21 +4,52 @@ title: ເລີ່ມ Project React ໃໝ່
 
 <Intro>
 
+<<<<<<< HEAD
 ຖ້າທ່ານຕ້ອງການສ້າງແອັບ ຫຼື ເວັບໄຊໃໝ່ທັງໝົດດ້ວຍ React, ພວກເຮົາຂໍແນະນຳໃຫ້ເລືອກໜຶ່ງໃນ Framework ທີ່ຂັບເຄື່ອນດ້ວຍ React ທີ່ໄດ້ຮັບຄວາມນິຍົມໃນຊຸມຊົມ. Framework ສະໜອງຄຸນສົມບັດທີ່ຫຼາຍແອັບ ແລະ ເວັບຕ້ອງການທີ່ສຸດ, ລວມມີ routing, data fetching ແລະ generate HTML.
+=======
+If you want to build a new app or a new website fully with React, we recommend picking one of the React-powered frameworks popular in the community.
+>>>>>>> 2372ecf920ac4cda7c900f9ac7f9c0cd4284f281
 
 </Intro>
 
-<Note>
 
+<<<<<<< HEAD
 **ທ່ານຕ້ອງໄດ້ຕິດຕັ້ງ [Node.js](https://nodejs.org/en/) ສຳລັບ local development.** ທ່ານ *ຍັງສາມາດ* ເລືອກໃຊ້ Node.js ໃນ production, ແຕ່ທ່ານບໍ່ຈຳເປັນເລືອກ. Framework React ສ່ວນຫຼາຍຮອງຮັບການ export ເປັນ static HTML/CSS/JS ໂຟນເດີ.
+=======
+You can use React without a framework, however we’ve found that most apps and sites eventually build solutions to common problems such as code-splitting, routing, data fetching, and generating HTML. These problems are common to all UI libraries, not just React.
+>>>>>>> 2372ecf920ac4cda7c900f9ac7f9c0cd4284f281
 
-</Note>
+By starting with a framework, you can get started with React quickly, and avoid essentially building your own framework later.
+
+<DeepDive>
+
+#### Can I use React without a framework? {/*can-i-use-react-without-a-framework*/}
+
+You can definitely use React without a framework--that's how you'd [use React for a part of your page.](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page) **However, if you're building a new app or a site fully with React, we recommend using a framework.**
+
+Here's why.
+
+Even if you don't need routing or data fetching at first, you'll likely want to add some libraries for them. As your JavaScript bundle grows with every new feature, you might have to figure out how to split code for every route individually. As your data fetching needs get more complex, you are likely to encounter server-client network waterfalls that make your app feel very slow. As your audience includes more users with poor network conditions and low-end devices, you might need to generate HTML from your components to display content early--either on the server, or during the build time. Changing your setup to run some of your code on the server or during the build can be very tricky.
+
+**These problems are not React-specific. This is why Svelte has SvelteKit, Vue has Nuxt, and so on.** To solve these problems on your own, you'll need to integrate your bundler with your router and with your data fetching library. It's not hard to get an initial setup working, but there are a lot of subtleties involved in making an app that loads quickly even as it grows over time. You'll want to send down the minimal amount of app code but do so in a single client–server roundtrip, in parallel with any data required for the page. You'll likely want the page to be interactive before your JavaScript code even runs, to support progressive enhancement. You may want to generate a folder of fully static HTML files for your marketing pages that can be hosted anywhere and still work with JavaScript disabled. Building these capabilities yourself takes real work.
+
+**React frameworks on this page solve problems like these by default, with no extra work from your side.** They let you start very lean and then scale your app with your needs. Each React framework has a community, so finding answers to questions and upgrading tooling is easier. Frameworks also give structure to your code, helping you and others retain context and skills between different projects. Conversely, with a custom setup it's easier to get stuck on unsupported dependency versions, and you'll essentially end up creating your own framework—albeit one with no community or upgrade path (and if it's anything like the ones we've made in the past, more haphazardly designed).
+
+If your app has unusual constraints not served well by these frameworks, or you prefer to solve these problems yourself, you can roll your own custom setup with React. Grab `react` and `react-dom` from npm, set up your custom build process with a bundler like [Vite](https://vitejs.dev/) or [Parcel](https://parceljs.org/), and add other tools as you need them for routing, static generation or server-side rendering, and more.
+
+</DeepDive>
 
 ## Framework React ລະດັບ Production {/*production-grade-react-frameworks*/}
 
-### Next.js {/*nextjs*/}
+These frameworks support all the features you need to deploy and scale your app in production and are working towards supporting our [full-stack architecture vision](#which-features-make-up-the-react-teams-full-stack-architecture-vision). All of the frameworks we recommend are open source with active communities for support, and can be deployed to your own server or a hosting provider. If you’re a framework author interested in being included on this list, [please let us know](https://github.com/reactjs/react.dev/issues/new?assignees=&labels=type%3A+framework&projects=&template=3-framework.yml&title=%5BFramework%5D%3A+).
 
+<<<<<<< HEAD
 [Next.js](https://nextjs.org/) ເປັນ full-stack framework React.** ມັນໃຊ້ປະໂຫຍດໄດ້ຫຼາຍ ແລະ ໃຫ້ທ່ານສ້າງແອັບ React ໄດ້ທຸກຂະໜາດ ຕັ້ງແຕ່ static blog ໄປຈົນເຖິງແອັບພິເຄຊັ່ນທີ່ມີຄວາມຊັບຊ້ອນ. ເພື່ອສ້າງ Project Next.js ໃໝ່ມ ແລ່ນນີ້ໃນ terminal:
+=======
+### Next.js {/*nextjs-pages-router*/}
+
+**[Next.js' Pages Router](https://nextjs.org/) is a full-stack React framework.** It's versatile and lets you create React apps of any size--from a mostly static blog to a complex dynamic application. To create a new Next.js project, run in your terminal:
+>>>>>>> 2372ecf920ac4cda7c900f9ac7f9c0cd4284f281
 
 <TerminalBlock>
 npx create-next-app@latest
@@ -68,6 +99,7 @@ npx create-expo-app
 
 Expo ດູແລໂດຍ [Expo (ບໍລິສັດ)](https://expo.dev/about). ສ້າງແອັບດ້ວຍ Expo ແມ່ນຟຣີ, ແລະ ທ່ານສາມາດສົ່ງຂຶ້ນ Google ແລະ Apple store ໄດ້ໂດຍບໍ່ມີຂໍ້ຈຳກັດ. ນອກຈາກນີ້ Expo ຍັງໃຫ້ບໍລິການ cloud ແບບຊຳລະເງິນທີ່ສາມາດເລືອກໄດ້.
 
+<<<<<<< HEAD
 <DeepDive>
 
 #### ຂ້ອຍສາມາດໃຊ້ react ໂດຍບໍ່ມີframework ໄດ້ບໍ່? {/*can-i-use-react-without-a-framework*/}
@@ -85,6 +117,8 @@ Expo ດູແລໂດຍ [Expo (ບໍລິສັດ)](https://expo.dev/about
 ຫາກທ່ານຍັງບໍ່ໝັ້ນໃຈ, ຫຼື ແອັບຂອງທ່ານມີຂໍ້ຈຳກັດທີ່ຜິດປົກະຕິເຊິ່ງ Framework ເຫຼົ່ານີ້ເຮັດວຽກບໍ່ໄດ້ດີ ແລະ ທ່ານຕ້ອງການຕັ້ງຄ່າແບບກຳນົດເອງ, ເຮົາຢຸດທ່ານບໍ່ໄດ້--ເຮັດໄປໂລດ! ເອົາ `react` ແລະ `react-dom` ຈາກ npm, ຕັ້ງຄ່າແບບກຳນົດເອງຂອງທ່ານດ້ວຍ bundler ເຊັ່ນ [Vite](https://vitejs.dev/) ຫຼື [Parcel](https://parceljs.org/), ແລະ ເຄື່ອງມືອື່ນໆທີ່ທ່ານຕ້ອງການສຳລັບ routing, static generation ຫຼື server-side rendering ແລະ ອື່ນໆ.
 </DeepDive>
 
+=======
+>>>>>>> 2372ecf920ac4cda7c900f9ac7f9c0cd4284f281
 ## Bleeding-edge React frameworks {/*bleeding-edge-react-frameworks*/}
 
 ໃນຂະນະທີ່ພວກເຮົາໄດ້ສຳຫຼວດຫາວິທີການປັບປຸງ React, ພວກເຮົາຄົ້ນພົບວ່າການ integrate ຢ່າງໃກ້ຊິດກັບ Framework(ໂດຍສະເພາະ, ກັບ routing, bundling, ແລະ server technologies) ແມ່ນໂອກາດທີ່ໃຫຍ່ຫຼວງທີ່ຈະຊ່ວຍໃຫ້ຜູ້ໃຊ້ React ເຮັດແອັບທີ່ດີໄດ້. ທີມ Next.js ໄດ້ຕົກລົງທີ່ຈະຮ່ວມມືກັບພວກເຮົາໃນການຄົ້ນຄວ້າ, ພັດທະນາ, integrating, ແລະ ການທົດສອບຄຸນສົມບັດ Framework-agnostic bleeding-ege React ເຊັ່ນ [React Server Components.](/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components)
