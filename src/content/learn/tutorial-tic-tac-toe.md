@@ -264,11 +264,19 @@ body {
 
 ທ່ານຍັງສາມາດເຮັດຕາມບົດສອນນີ້ໂດຍໃຊ້ local development environment ຂອງທ່ານ. ເພື່ອປະຕິບັດ, ທ່ານຕ້ອງ:
 
+<<<<<<< HEAD
 1. ຕິດຕັ້ງ [Node.js](https://nodejs.org/en/)
 1. ຢູ່ໃນແທັບ CodeSandbox ທີ່ທ່ານເປີດກ່ອນໜ້ານີ້, ກົດປຸ່ມເບື້ອງຊ້າຍເທິງເພື່ອເປີດເມນູ, ຫຼັງຈາກນັ້ນ ເລືອກ  **File > Export to ZIP** ໃນເມນູນັ້ນເພື່ອດາວໂຫຼດ archive ໃນເຄື່ອງ
 1. Unzip archive ຟາຍ, ຈາກນັ້ນເປີດ ແລະ `cd` ເຂົ້າໄປໃນ directory ທີ່ທ່ານ unzip.
 1. ຕິດຕັ້ງ dependencies ດ້ວຍ `npm install`
 1. ແລ່ນ `npm start` ເພື່ອເລີ່ມ local server ແລະ ປະຕິບັດຕາມຄຳແນະນຳເພື່ອເບິ່ງ code ທີ່ເຮັດວຽກໃນບາວເຊີ
+=======
+1. Install [Node.js](https://nodejs.org/en/)
+1. In the CodeSandbox tab you opened earlier, press the top-left corner button to open the menu, and then choose **Download Sandbox** in that menu to download an archive of the files locally
+1. Unzip the archive, then open a terminal and `cd` to the directory you unzipped
+1. Install the dependencies with `npm install`
+1. Run `npm start` to start a local server and follow the prompts to view the code running in a browser
+>>>>>>> 2372ecf920ac4cda7c900f9ac7f9c0cd4284f281
 
 ຖ້າທ່ານຕິດບັນຫາ, ຢ່າປ່ອຍໃຫ້ມັນຢຸດທ່ານ! ເຮັດຢູ່ອອນໄລແທນ ແລະ ລອງຕັ້ງຄ່າໃນເຄື່ອງອີກພາຍຫຼັງ.
 
