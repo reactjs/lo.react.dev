@@ -43,9 +43,15 @@ Instead of individually marking functions with `'use server'`, you can add the d
 * `'use server'` can only be used in server-side files. The resulting server actions can be passed to Client Components through props. See supported [types for serialization](#serializable-parameters-and-return-values).
 * To import a server action from [client code](/reference/react/use-client), the directive must be used on a module level.
 * Because the underlying network calls are always asynchronous, `'use server'` can only be used on async functions.
+<<<<<<< HEAD
 * Always treat arguments to server actions as untrusted input and authorize any mutations. See [security considerations](#security).
 * Server actions should be called in a [transition](/reference/react/useTransition). Server actions passed to [`<form action>`](/reference/react-dom/components/form#props) or [`formAction`](/reference/react-dom/components/input#props) will automatically be called in a transition.
 * Server actions are designed for mutations that update server-side state; they are not recommended for data fetching. Accordingly, frameworks implementing server actions typically process one action at a time and do not have a way to cache the return value.
+=======
+* Always treat arguments to Server Actions as untrusted input and authorize any mutations. See [security considerations](#security).
+* Server Actions should be called in a [Transition](/reference/react/useTransition). Server Actions passed to [`<form action>`](/reference/react-dom/components/form#props) or [`formAction`](/reference/react-dom/components/input#props) will automatically be called in a transition.
+* Server Actions are designed for mutations that update server-side state; they are not recommended for data fetching. Accordingly, frameworks implementing Server Actions typically process one action at a time and do not have a way to cache the return value.
+>>>>>>> 97489434323b0c4cce78588cd0f48e3808e0eba4
 
 ### Security considerations {/*security*/}
 
@@ -183,7 +189,11 @@ Note that like most Hooks, `useFormState` can only be called in <CodeStep step={
 
 Server actions are exposed server endpoints and can be called anywhere in client code.
 
+<<<<<<< HEAD
 When using a server action outside of a [form](/reference/react-dom/components/form), call the server action in a [transition](/reference/react/useTransition), which allows you to display a loading indicator, show [optimistic state updates](/reference/react/useOptimistic), and handle unexpected errors. Forms will automatically wrap server actions in transitions.
+=======
+When using a Server Action outside of a [form](/reference/react-dom/components/form), call the Server Action in a [Transition](/reference/react/useTransition), which allows you to display a loading indicator, show [optimistic state updates](/reference/react/useOptimistic), and handle unexpected errors. Forms will automatically wrap Server Actions in transitions.
+>>>>>>> 97489434323b0c4cce78588cd0f48e3808e0eba4
 
 ```js {9-12}
 import incrementLike from './actions';
