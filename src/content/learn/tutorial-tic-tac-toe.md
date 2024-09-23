@@ -2929,4 +2929,8 @@ body {
 1. ເມື່ອມີ່ຜູ້ຊະນະ, highlight ສາມ ສີ່ຫຼ່ຽມທີ່ເຮັດໃຫ້ເກີດການຊະນະ (ແລະ ເມື່ອບໍ່ມີໃຜຊະນະ, ໃຫ້ສະແດງຂໍ້ຄວາມກ່ຽວກັບຜົນສະເໝີ).
 1. ສະແດງຕໍແໜ່ງສຳລັບການເຄື່ອນໄຫວແຕ່ລະຄັ້ງໃນຮູບແບບ (ແຖວ, ຖັນ) ໃນລາຍການປະຫວັດການເຄື່ອນໄຫວ.
 
+<<<<<<< HEAD
 ຕະຫຼອດບົດສອນນີ້, ທ່ານໄດ້ສຳພັດກັບແນວຄິດຂອງ React ປະກອບມີ element, component, prop ແລະ state. ຕອນນີ້ທ່ານໄດ້ເຫັນວ່າແນວຄິດເຫຼົ່ານີ້ເຮັດວຽກແນວໃດເມື່ອສ້າງເກມ, ເບິ່ງ [ຄິດແບບ React](/learn/thinking-in-react) ເພື່ອເບິ່ງວ່າແນວຄິດດຽວກັນຂອງ React ເຮັດວຽກແນວໃດເມື່ອສ້າງ UI ຂອງແອັບ.
+=======
+Throughout this tutorial, you've touched on React concepts including elements, components, props, and state. Now that you've seen how these concepts work when building a game, check out [Thinking in React](/learn/thinking-in-react) to see how the same React concepts work when building an app's UI.
+>>>>>>> c003ac4eb130fca70b88cf3a1b80ce5f76c51ae3
