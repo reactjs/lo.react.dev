@@ -58,6 +58,7 @@ position.x = 5;
 
 ```js
 import { useState } from 'react';
+
 export default function MovingDot() {
   const [position, setPosition] = useState({
     x: 0,
@@ -128,6 +129,7 @@ onPointerMove={e => {
 
 ```js
 import { useState } from 'react';
+
 export default function MovingDot() {
   const [position, setPosition] = useState({
     x: 0,
@@ -378,7 +380,11 @@ input { margin-left: 5px; margin-bottom: 5px; }
 
 #### ການໃຊ້ event handler ດຽວສຳລັບຫຼາຍ field {/*using-a-single-event-handler-for-multiple-fields*/}
 
+<<<<<<< HEAD
 ທ່ານຍັງສາມາດໃຊ້ວົງຂໍ `[` ແລະ `]` ພາຍໃນການປະກາດ object ເພື່ອລະບຸ property ທີ່ມີຊື່ dynamic. ນີ້ແມ່ນຕົວຢ່າງດຽວກັນ, ແຕ່ມີ event handler ດຽວແທນທີຈະມີສາມໂຕ:
+=======
+You can also use the `[` and `]` braces inside your object definition to specify a property with a dynamic name. Here is the same example, but with a single event handler instead of three different ones:
+>>>>>>> 9467bc58868e66c53ca9385c8531dcf7b02178c2
 
 <Sandpack>
 
