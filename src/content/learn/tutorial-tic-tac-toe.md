@@ -1147,7 +1147,11 @@ export default function Board() {
 
 <Note>
 
+<<<<<<< HEAD
 JavaScript ຮອງຮັບ [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) ເຊິ່ງໝາຍເຖິງຟັງຊັ່ນພາຍໃນ (ເຊັ່ນ `handleClick`) ມີສິດເຂົ້າເຖິງຕົວແປ ແລະ ຟັງຊັ່ນທີ່ກຳນົດໃນຟັງຊັ່ນພາຍນອກ (ເຊັ່ນ `Board`). ຟັງຊັ່ນ `handleClick` ສາມາດອ່ານ state `squares` ແລະ ເອີ້ນໃຊ້ method `setSquares` ໄດ້ ເພາະວ່າທັງສອງຖືກກຳນົດໄວ້ພາຍໃນຟັງຊັ່ນ `Board`.
+=======
+JavaScript supports [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) which means an inner function (e.g. `handleClick`) has access to variables and functions defined in an outer function (e.g. `Board`). The `handleClick` function can read the `squares` state and call the `setSquares` method because they are both defined inside of the `Board` function.
+>>>>>>> 69edd845b9a654c6ac9ed68da19d5b42897e636e
 
 </Note>
 
@@ -2929,4 +2933,8 @@ body {
 1. ເມື່ອມີ່ຜູ້ຊະນະ, highlight ສາມ ສີ່ຫຼ່ຽມທີ່ເຮັດໃຫ້ເກີດການຊະນະ (ແລະ ເມື່ອບໍ່ມີໃຜຊະນະ, ໃຫ້ສະແດງຂໍ້ຄວາມກ່ຽວກັບຜົນສະເໝີ).
 1. ສະແດງຕໍແໜ່ງສຳລັບການເຄື່ອນໄຫວແຕ່ລະຄັ້ງໃນຮູບແບບ (ແຖວ, ຖັນ) ໃນລາຍການປະຫວັດການເຄື່ອນໄຫວ.
 
+<<<<<<< HEAD
 ຕະຫຼອດບົດສອນນີ້, ທ່ານໄດ້ສຳພັດກັບແນວຄິດຂອງ React ປະກອບມີ element, component, prop ແລະ state. ຕອນນີ້ທ່ານໄດ້ເຫັນວ່າແນວຄິດເຫຼົ່ານີ້ເຮັດວຽກແນວໃດເມື່ອສ້າງເກມ, ເບິ່ງ [ຄິດແບບ React](/learn/thinking-in-react) ເພື່ອເບິ່ງວ່າແນວຄິດດຽວກັນຂອງ React ເຮັດວຽກແນວໃດເມື່ອສ້າງ UI ຂອງແອັບ.
+=======
+Throughout this tutorial, you've touched on React concepts including elements, components, props, and state. Now that you've seen how these concepts work when building a game, check out [Thinking in React](/learn/thinking-in-react) to see how the same React concepts work when building an app's UI.
+>>>>>>> 69edd845b9a654c6ac9ed68da19d5b42897e636e
