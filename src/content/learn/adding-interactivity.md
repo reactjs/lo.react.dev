@@ -265,7 +265,11 @@ setCount(count + 1); // Request a re-render with 1
 console.log(count);  // Still 0!
 ```
 
+<<<<<<< HEAD
 ລັກສະນະການເຮັດວຽກນີ້ຊ່ວຍໃຫ້ທ່ານຫຼີກຫຼ່ຽງ bug ໜ້ອຍໜຶ່ງ. ນີ້ແມ່ນແອັບແຊັດນ້ອຍ. ລອງເດົາເບິ່ງວ່າຈະເກີດຫຍັງຂຶ້ນຖ້າທ່ານກົດ "Send" ໃນຕອນທຳອິດ ແລະ *ຈາກນັ້ນ* ປ່ຽນຜູ້ຮັບເປັນ Bob. ຊື່ຂອງໃຜຈະປະກົດໃນ `alert` ໃນອີກຫ້າວິນາທີຕໍ່ມາ?
+=======
+This behavior helps you avoid subtle bugs. Here is a little chat app. Try to guess what happens if you press "Send" first and *then* change the recipient to Bob. Whose name will appear in the `alert` five seconds later?
+>>>>>>> 3b02f828ff2a4f9d2846f077e442b8a405e2eb04
 
 <Sandpack>
 
