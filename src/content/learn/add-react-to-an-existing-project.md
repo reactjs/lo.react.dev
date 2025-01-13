@@ -20,9 +20,15 @@ title: ເພີ່ມ React ໃສ່ Project ທີ່ມີຢູ່ແລ້
 
 ນີ້ແມ່ນວິທີການທີ່ເຮົາແນະນຳໃນການຕັ້ງຄ່າ:
 
+<<<<<<< HEAD
 1. **ສ້າງສ່ວນ React ຂອງແອັບທ່ານ** ໂດຍໃຊ້ໜຶ່ງໃນ [React-based frameworks](/learn/start-a-new-react-project).
 2. **ກຳນົດ `/some-app` ເປັນ *base path*** ໃນການຕັ້ງຄ່າ framework ຂອງທ່ານ (ນີ້ແມ່ນວິທີການ: [Next.js](https://nextjs.org/docs/api-reference/next.config.js/basepath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
 3. **ຕັ້ງຄ່າ server ຂອງທ່ານ ຫຼື proxy** ເພື່ອໃຫ້ request ທັງໝົດພາຍໃຕ້ `/some-app/` ນັ້ນ handle ໂດຍ React app ຂອງທ່ານ.
+=======
+1. **Build the React part of your app** using one of the [React-based frameworks](/learn/start-a-new-react-project).
+2. **Specify `/some-app` as the *base path*** in your framework's configuration (here's how: [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
+3. **Configure your server or a proxy** so that all requests under `/some-app/` are handled by your React app.
+>>>>>>> 9000e6e003854846c4ce5027703b5ce6f81aad80
 
 ນີ້ເຮັດໃຫ້ໝັ້ນໃຈໄດ້ວ່າສ່ວນຂອງ React ຂອງແອັບທ່ານ [ຮັບຜົນປະໂຫຍດຈາກ best practices ທີ່ສຸດ](/learn/start-a-new-react-project#can-i-use-react-without-a-framework) ທີ່ຢູ່ໃນ framework ເຫຼົ່ານັ້ນ.
 
