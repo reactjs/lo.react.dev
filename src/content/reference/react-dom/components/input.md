@@ -32,6 +32,7 @@ To display an input, render the [built-in browser `<input>`](https://developer.m
 
 `<input>` supports all [common element props.](/reference/react-dom/components/common#props)
 
+<<<<<<< HEAD
 <Canary>
 
 
@@ -40,6 +41,9 @@ React's extensions to the `formAction` prop are currently only available in Reac
 </Canary>
 
 [`formAction`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formaction): A string or function. Overrides the parent `<form action>` for `type="submit"` and `type="image"`. When a URL is passed to `action` the form will behave like a standard HTML form. When a function is passed to `formAction` the function will handle the form submission. See [`<form action>`](/reference/react-dom/components/form#props).
+=======
+- [`formAction`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formaction): A string or function. Overrides the parent `<form action>` for `type="submit"` and `type="image"`. When a URL is passed to `action` the form will behave like a standard HTML form. When a function is passed to `formAction` the function will handle the form submission. See [`<form action>`](/reference/react-dom/components/form#props).
+>>>>>>> b22cbc3fed310b39c99fdd0f01621ac1903d1e8e
 
 You can [make an input controlled](#controlling-an-input-with-a-state-variable) by passing one of these props:
 
