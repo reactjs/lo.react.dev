@@ -37,7 +37,11 @@ export default function App() {
 
 ທ່ານສາມາດແກ້ໄຂໄດ້ໂດຍກົງ ຫຼື ເປີດໃນແຖບໃໝ່ໂດຍການກົດປຸ່ມ "Fork" ທີ່ຢູ່ດ້ານຂວາທາງເທິງ.
 
+<<<<<<< HEAD
 ຫຼາຍໜ້າໃນ ເອກະສານ React ມີ sandbox ແບບນີ້. ນອກຈາກໃນເອກະສານ React ແລ້ວ, ຍັງມີອອນໄລ sandbox ອີກຫຼາກຫຼາຍທີ່ສະໜັບສະໜູນ React ຕົວຢ່າງ: [CodeSandbox](https://codesandbox.io/s/new), [StackBlitz](https://stackblitz.com/fork/react), ຫຼື [CodePen.](https://codepen.io/pen?&editors=0010&layout=left&prefill_data_id=3f4569d1-1b11-4bce-bd46-89090eed5ddb)
+=======
+Most pages in the React documentation contain sandboxes like this. Outside of the React documentation, there are many online sandboxes that support React: for example, [CodeSandbox](https://codesandbox.io/s/new), [StackBlitz](https://stackblitz.com/fork/react), or [CodePen.](https://codepen.io/pen?template=QWYVwWN)
+>>>>>>> 91614a51a1be9078777bc337ba83fc62e606cc14
 
 ### ລອງ React ໃນເຄື່ອງ {/*try-react-locally*/}
 
