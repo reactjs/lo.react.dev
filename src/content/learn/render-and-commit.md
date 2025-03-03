@@ -72,7 +72,7 @@ export default function Image() {
 ເມື່ອ component ຂອງທ່ານໄດ້ຮັບການ render ທຳອິດແລ້ວ, ທ່ານສາມາດ trigger ການ render ເພີ່ມເຕີມໄດ້ໂດຍການອັບເດດ state ດ້ວຍ [ຟັງຊັ່ນ `set`.](/reference/react/useState#setstate) ການອັບເດດ state ຂອງ component ຈະຈັດການຄິວການ render ໂດຍອັດຕະໂນມັດ. (ຈິນຕະນາການວ່າແຂກໃນຮ້ານອາຫານສັ່ງຊາ, ຂອງຫວານ ແລະ ສິ່ງຕ່າງໆ ຫຼັງຈາກສັ່ງອາຫານເທື່ອທຳອິດ, ຂຶ້ນຢູ່ກັບລະດັບຂອງຄວາມກະຫາຍ ຫຼື ຄວາມຫິວ.)
 
 <IllustrationBlock sequential>
-  <Illustration caption="State update..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. They patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
+  <Illustration caption="State update..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. The patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
   <Illustration caption="...triggers..." alt="React returns to the Component Kitchen and tells the Card Chef they need a pink Card." src="/images/docs/illustrations/i_rerender2.png" />
   <Illustration caption="...render!" alt="The Card Chef gives React the pink Card." src="/images/docs/illustrations/i_rerender3.png" />
 </IllustrationBlock>
@@ -86,7 +86,11 @@ export default function Image() {
 
 ຂະບວນການນີ້ເປັນແບບເອີ້ນຊໍ້າ: ຖ້າ component ທີ່ອັບເດດ return component ອື່ນ, React ຈະ render component _ນັ້ນ_ ຕໍ່ໄປ, ແລະ ຖ້າ component ນັ້ນ return ບາງຢ່າງ, ມັນຈະ render component _ນັ້ນ_ ຕໍ່ໄປ, ແລະ ອື່ນໆ. ຂະບວນການຈະດຳເນີນຕໍ່ໄປຈົນກວ່າຈະບໍ່ມີ component ທີ່ຊ້ອນກັນອີກຕໍ່ໄປ ແລະ React ຮູ້ວ່າແມ່ນຫຍັງຈະສະແດງເທິງໜ້າຈໍ.
 
+<<<<<<< HEAD
 ໃນຕົວຢ່າງຕໍ່ໄປນີ້, React ຈະເອີ້ນໃຊ້ `Gallery()` ແລະ `Image()` ຫຼາຍຄັ້ງ:
+=======
+In the following example, React will call `Gallery()` and `Image()` several times:
+>>>>>>> 6326e7b1b9fa2a7e36a555792e2f1b97cfcf2669
 
 <Sandpack>
 
@@ -150,10 +154,17 @@ img { margin: 0 10px 10px 0; }
 
 ## ຂັ້ນຕອນທີ 3: React commit ການປ່ຽນແປງກັບ DOM {/*step-3-react-commits-changes-to-the-dom*/}
 
+<<<<<<< HEAD
 ຫຼັງຈາກການ render (ການເອີ້ນໃຊ້) component ຂອງທ່ານ, React ຈະແກ້ໄຂ DOM.
 
 * **ສຳລັບການ render ເລີ່ມຕົ້ນ,** React ຈະໃຊ້ [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild)  DOM API ເພື່ອວາງ DOM node ທັງໝົດ ມັນຖືກສ້າງຂຶ້ນເທິງໜ້າຈໍ.
 * **ສຳລັບການ render ໃໝ່,** React ຈະໃຊ້ການດຳເນີນການທີ່ຈຳເປັນໜ້ອຍທີ່ສຸດ (ຄຳນວນຂະນະ render!) ເພື່ອເຮັດໃຫ້ DOM ກົງກັບ output ການ render ຫຼ້າສຸດ.
+=======
+After rendering (calling) your components, React will modify the DOM.
+
+* **For the initial render,** React will use the [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) DOM API to put all the DOM nodes it has created on screen.
+* **For re-renders,** React will apply the minimal necessary operations (calculated while rendering!) to make the DOM match the latest rendering output.
+>>>>>>> 6326e7b1b9fa2a7e36a555792e2f1b97cfcf2669
 
 **React ຈະປ່ຽນ DOM node ກໍຕໍ່ເມື່ອມີຄວາມແຕກຕ່າງລະຫວ່າງການ render ເທົ່ານັ້ນ.** ຕົວຢ່າງ, ນີ້ແມ່ນ component ທີ່ render ໃໝ່ດ້ວຍ prop ແຕກຕ່າງທີ່ຖືກສົ່ງຜ່ານມາຈາກ parent ທຸກໆວິນາທີ. ສັງເກດວິທີທີ່ທ່ານສາມາດເພີ່ມຂໍ້ຄວາມລົງໃນ `<input>`, ອັບເດດ `value` ຂອງມັນ, ແຕ່ຂໍ້ຄວາມຈະບໍ່ຫາຍໄປເມື່ອ component ມີການ render ໃໝ່:
 

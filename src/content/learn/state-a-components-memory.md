@@ -1452,7 +1452,11 @@ export default function FeedbackForm() {
 
 #### ລຶບ state ທີ່ບໍ່ຈຳເປັນອອກ {/*remove-unnecessary-state*/}
 
+<<<<<<< HEAD
 ເມື່ອຄິກປຸ່ມ, ຕົວຢ່າງນີ້ຄວນຖາມຊື່ຜູ້ໃຊ້ ຈາກນັ້ນຈຶ່ງສະແດງການທັກທາຍແຈ້ງເຕືອນ. ທ່ານພະຍາຍາມໃຊ້ state ເພື່ອຄົງຊື່ໄວ້, ແຕ່ດ້ວຍເຫດຜົນບາງຢ່າງ ມັນຈະສະແດງ "Hello, !" ສະເໝີ.
+=======
+When the button is clicked, this example should ask for the user's name and then display an alert greeting them. You tried to use state to keep the name, but for some reason the first time it shows "Hello, !", and then "Hello, [name]!" with the previous input every time after.
+>>>>>>> 6326e7b1b9fa2a7e36a555792e2f1b97cfcf2669
 
 ເພື່ອແກ້ໄຂບັນຫານີ້, ລຶບຕົວແປ state ທີ່ບໍ່ຈຳເປັນອອກ. (ພວກເຮົາຈະເວົ້າເຖິງ [ເປັນຫຍັງສິ່ງນີ້ບໍ່ເຮັດວຽກ](/learn/state-as-a-snapshot) ໃນພາຍຫຼັງ.)
 
