@@ -304,7 +304,11 @@ export default function Square() {
 }
 ```
 
+<<<<<<< HEAD
 ສ່ວນຂອງ _browser_ ຄວນສະແດງສີ່ຫຼ່ຽມພ້ອມເຄື່ອງໝາຍ X ແບບນີ້:
+=======
+The _browser_ section should be displaying a square with an X in it like this:
+>>>>>>> 55986965fbf69c2584040039c9586a01bd54eba7
 
 ![x-filled square](../images/tutorial/x-filled-square.png)
 
@@ -1147,7 +1151,11 @@ export default function Board() {
 
 <Note>
 
+<<<<<<< HEAD
 JavaScript ຮອງຮັບ [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) ເຊິ່ງໝາຍເຖິງຟັງຊັ່ນພາຍໃນ (ເຊັ່ນ `handleClick`) ມີສິດເຂົ້າເຖິງຕົວແປ ແລະ ຟັງຊັ່ນທີ່ກຳນົດໃນຟັງຊັ່ນພາຍນອກ (ເຊັ່ນ `Board`). ຟັງຊັ່ນ `handleClick` ສາມາດອ່ານ state `squares` ແລະ ເອີ້ນໃຊ້ method `setSquares` ໄດ້ ເພາະວ່າທັງສອງຖືກກຳນົດໄວ້ພາຍໃນຟັງຊັ່ນ `Board`.
+=======
+JavaScript supports [closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures) which means an inner function (e.g. `handleClick`) has access to variables and functions defined in an outer function (e.g. `Board`). The `handleClick` function can read the `squares` state and call the `setSquares` method because they are both defined inside of the `Board` function.
+>>>>>>> 55986965fbf69c2584040039c9586a01bd54eba7
 
 </Note>
 
@@ -1341,7 +1349,11 @@ body {
 2. `handleClick` ໃຊ້ argument (`0`) ເພື່ອອັບເດດ element ທຳອິດຂອງ array `squares` ຈາກ `null` ເປັນ `X`.
 3. state `squares` ຂອງ component `Board` ໄດ້ຮັບການອັບເດດ, ດັ່ງນັ້ນ `Board` ແລະ children ຂອງມັນຈະ render ໃໝ່. ສິ່ງນີ້ເຮັດໃຫ້ prop `value` ຂອງ component `Square` ທີ່ມີ index `0` ປ່ຽນຈາກ `null` ເປັນ `X`.
 
+<<<<<<< HEAD
 ໃນຕອນທ້າຍຜູ້ໃຊ້ຈະເຫັນວ່າປ່ອງດ້ານເທິງເບື້ອງຊ້າຍປ່ຽນຈາກວ່າງເປັນມີ `X` ຫຼັງຈາກກົດ.
+=======
+In the end the user sees that the upper left square has changed from empty to having an `X` after clicking it.
+>>>>>>> 55986965fbf69c2584040039c9586a01bd54eba7
 
 <Note>
 
@@ -1423,7 +1435,11 @@ export default function Board() {
 
 `X` ຖືກຂຽນທັບດ້ວຍ `O`! ເຖິງວ່າສິ່ງນີ້ຈະເພີ່ມຈຸດປ່ຽນທີ່ນ່າສົນໃຈໃຫ້ກັບເກມ, ແຕ່ເຮົາຈະຍຶດກົດດັ່ງເດີມສຳລັບຕອນນີ້.
 
+<<<<<<< HEAD
 ເມື່ອທ່ານເຮັດເຄື່ອງໝາຍດ້ວຍ `X` ຫຼື `O` ທ່ານຈະບໍ່ໄດ້ກວດສອບກ່ອນເພື່ອໃຫ້ຮູ້ວ່າສີ່ຫຼ່ຽມນັ້ນມີຄ່າ `X` ຫຼື `O` ຢູ່ແລ້ວ. ທ່ານສາມາດແກ້ໄຂໂດຍການ *return ກ່ອນ*. ທ່ານຈະກວດສອບວ່າສີ່ຫຼ່ຽມມີ `X` ຫຼື `O` ຢູ່ແລ້ວ. ຖ້າວ່າສີ່ຫຼ່ຽມມີແລ້ວ, ທ່ານຈະ `return` ດ້ວຍຟັງຊັ່ນ `handleClick` ກ່ອນ--ກ່ອນທີ່ລະບົບຈະພະຍາຍາມອັບເດດ state ຂອງ board.
+=======
+When you mark a square with an `X` or an `O` you aren't first checking to see if the square already has an `X` or `O` value. You can fix this by *returning early*. You'll check to see if the square already has an `X` or an `O`. If the square is already filled, you will `return` in the `handleClick` function early--before it tries to update the board state.
+>>>>>>> 55986965fbf69c2584040039c9586a01bd54eba7
 
 ```js {2,3,4}
 function handleClick(i) {
@@ -1573,7 +1589,11 @@ function calculateWinner(squares) {
 
 </Note>
 
+<<<<<<< HEAD
 ທ່ານຈະເອີ້ນໃຊ້ `calculateWinner(squares)` ໃນຟັງຊັ່ນ `handleClick` ຂອງ component `Board` ເພື່ອກວດສອບວ່າຜູ້ຫຼິ້ນຊະນະ ຫຼື ບໍ່. ທ່ານສາມາດດຳເນີນການກວດສອບນີ້ໄປພ້ອມກັບກວດສອບວ່າຜູ້ໃຊ້ຄິກປ່ອງສີ່ຫຼ່ຽມທີ່ມີ `X` ຫຼື `O` ຢູ່ແລ້ວ ຫຼື ບໍ່. ເຮົາຕ້ອງການ return ກ່ອນໃນສອງກໍລະນີ:
+=======
+You will call `calculateWinner(squares)` in the `Board` component's `handleClick` function to check if a player has won. You can perform this check at the same time you check if a user has clicked a square that already has an `X` or an `O`. We'd like to return early in both cases:
+>>>>>>> 55986965fbf69c2584040039c9586a01bd54eba7
 
 ```js {2}
 function handleClick(i) {
@@ -2258,7 +2278,11 @@ body {
 
 </Sandpack>
 
+<<<<<<< HEAD
 ເມື່ອທ່ານ iterate ຜ່ານ array `history` ພາຍໃນຟັງຊັ່ນທີ່ທ່ານສົ່ງຜ່ານໄປຍັງ `map`, argument `squares` ຈະຜ່ານແຕ່ລະ element ຂອງ `history`, ແລະ argument `move` ຈະຜ່ານແຕ່ລະ index: `0`, `1`, `2`, …. (ໃນກໍລະນີສ່ວນຫຼາຍ, ທ່ານຕ້ອງໃຊ້ array element ແທ້, ແຕ່ຫາກຕ້ອງການ render ລາຍການການເຄື່ອນໄຫວທ່ານຈະຕ້ອງໃຊ້ index ເທົ່ານັ້ນ.)
+=======
+As you iterate through the `history` array inside the function you passed to `map`, the `squares` argument goes through each element of `history`, and the `move` argument goes through each array index: `0`, `1`, `2`, …. (In most cases, you'd need the actual array elements, but to render a list of moves you will only need indexes.)
+>>>>>>> 55986965fbf69c2584040039c9586a01bd54eba7
 
 ສຳລັບການເຄື່ອນໄຫວແຕ່ລະຄັ້ງໃນປະຫວັດຂອງເກມ tic-tac-toe, ທ່ານສ້າງລາຍການ `<li>` ເຊິ່ງມີປຸ່ມ `<button>`. ປຸ່ມມີ່ `onClick` handler ເຊິ່ງຈະເອີ້ນຟັງຊັ່ນທີ່ເອີ້ນວ່າ `jumpTo` (ທີ່ທ່ານຍັງບໍ່ທັນໄດ້ implement ເທື່ອ).
 
@@ -2929,4 +2953,8 @@ body {
 1. ເມື່ອມີ່ຜູ້ຊະນະ, highlight ສາມ ສີ່ຫຼ່ຽມທີ່ເຮັດໃຫ້ເກີດການຊະນະ (ແລະ ເມື່ອບໍ່ມີໃຜຊະນະ, ໃຫ້ສະແດງຂໍ້ຄວາມກ່ຽວກັບຜົນສະເໝີ).
 1. ສະແດງຕໍແໜ່ງສຳລັບການເຄື່ອນໄຫວແຕ່ລະຄັ້ງໃນຮູບແບບ (ແຖວ, ຖັນ) ໃນລາຍການປະຫວັດການເຄື່ອນໄຫວ.
 
+<<<<<<< HEAD
 ຕະຫຼອດບົດສອນນີ້, ທ່ານໄດ້ສຳພັດກັບແນວຄິດຂອງ React ປະກອບມີ element, component, prop ແລະ state. ຕອນນີ້ທ່ານໄດ້ເຫັນວ່າແນວຄິດເຫຼົ່ານີ້ເຮັດວຽກແນວໃດເມື່ອສ້າງເກມ, ເບິ່ງ [ຄິດແບບ React](/learn/thinking-in-react) ເພື່ອເບິ່ງວ່າແນວຄິດດຽວກັນຂອງ React ເຮັດວຽກແນວໃດເມື່ອສ້າງ UI ຂອງແອັບ.
+=======
+Throughout this tutorial, you've touched on React concepts including elements, components, props, and state. Now that you've seen how these concepts work when building a game, check out [Thinking in React](/learn/thinking-in-react) to see how the same React concepts work when building an app's UI.
+>>>>>>> 55986965fbf69c2584040039c9586a01bd54eba7
