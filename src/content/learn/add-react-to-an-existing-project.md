@@ -20,11 +20,19 @@ title: ເພີ່ມ React ໃສ່ Project ທີ່ມີຢູ່ແລ້
 
 ນີ້ແມ່ນວິທີການທີ່ເຮົາແນະນຳໃນການຕັ້ງຄ່າ:
 
+<<<<<<< HEAD
 1. **ສ້າງສ່ວນ React ຂອງແອັບທ່ານ** ໂດຍໃຊ້ໜຶ່ງໃນ [React-based frameworks](/learn/start-a-new-react-project).
 2. **ກຳນົດ `/some-app` ເປັນ *base path*** ໃນການຕັ້ງຄ່າ framework ຂອງທ່ານ (ນີ້ແມ່ນວິທີການ: [Next.js](https://nextjs.org/docs/api-reference/next.config.js/basepath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
 3. **ຕັ້ງຄ່າ server ຂອງທ່ານ ຫຼື proxy** ເພື່ອໃຫ້ request ທັງໝົດພາຍໃຕ້ `/some-app/` ນັ້ນ handle ໂດຍ React app ຂອງທ່ານ.
 
 ນີ້ເຮັດໃຫ້ໝັ້ນໃຈໄດ້ວ່າສ່ວນຂອງ React ຂອງແອັບທ່ານ [ຮັບຜົນປະໂຫຍດຈາກ best practices ທີ່ສຸດ](/learn/start-a-new-react-project#can-i-use-react-without-a-framework) ທີ່ຢູ່ໃນ framework ເຫຼົ່ານັ້ນ.
+=======
+1. **Build the React part of your app** using one of the [React-based frameworks](/learn/creating-a-react-app).
+2. **Specify `/some-app` as the *base path*** in your framework's configuration (here's how: [Next.js](https://nextjs.org/docs/app/api-reference/config/next-config-js/basePath), [Gatsby](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)).
+3. **Configure your server or a proxy** so that all requests under `/some-app/` are handled by your React app.
+
+This ensures the React part of your app can [benefit from the best practices](/learn/creating-a-react-app#full-stack-frameworks) baked into those frameworks.
+>>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
 
 Framework ທີ່ໃຊ້ React ຈຳນວນຫຼາຍເປັນ full-stack ແລະ ເຮັດໃຫ້ React app ຂອງທ່ານໃຊ້ປະໂຫຍດຈາກ server. ເຖິງຢ່າງໃດກໍຕາມ, ທ່ານສາມາດໃຊ້ວິທີການດຽວກັນໄດ້ບໍ່ວ່າທ່ານຈະບໍ່ສາມາດ ຫຼື ບໍ່ຕ້ອງການທີ່ຈະແລ່ນ JavaScript ເທິງ server. ໃນກໍລະນີນີ້, serve HTML/CSS/JS export([`next export` output](https://nextjs.org/docs/advanced-features/static-html-export) ສຳລັບ Next.js, ຄ່າເລີ່ມຕົ້ນສຳລັບ Gatsby) ທີ່ `/some-app` ແທນ.
 
@@ -45,7 +53,11 @@ Framework ທີ່ໃຊ້ React ຈຳນວນຫຼາຍເປັນ full-
 
 * **ຖ້າແອັບຂອງທ່ານແມ່ນໄດ້ແຍກເປັນແຕ່ລະຟາຍຢູ່ແລ້ວ ໃຊ້`import` statements,** ລອງໃຊ້ການຕັ້ງຄ່າທີ່ທ່ານມີຢູ່ແລ້ວ. ກວດສອບວ່າການຂຽນ `<div />` ໃນ JS code ຂອງທ່ານກໍ່ໃຫ້ເກີດບັນຫາທາງ syntax ຫຼື ບໍ່?. ຖ້າມັນເກີດບັນຫາໂດຍ syntax, ທ່ານອາດຈະຕ້ອງການ [ປ່ຽນ JavaScript code ຂອງທ່ານ ດ້ວຍ Babel](https://babeljs.io/setup), ແລະ ເປີດ [Babel React preset](https://babeljs.io/docs/babel-preset-react) ເພື່ດໃຊ້ JSX.
 
+<<<<<<< HEAD
 * **ຖ້າແອັບຂອງທ່ານບໍ່ມີການຕັ້ງຄ່າທີ່ມີຢູ່ແລ້ວສຳລັບ compile JavaScript module,,** ຕັ້ງຄ່າດ້ວຍ[Vite](https://vitejs.devl). Vite community ເບິ່ງແຍງ [ການ integrations ກັບ backend frameworks ຢ່າງຫຼວງຫຼາຍ](https://github.com/vitejs/awesome-vite#integrations-with-backends), ລວມໄປເຖິງ Rails, Django, ແລະ Laravel. ຖ້າວ່າ backend framework ຂອງທ່ານບໍ່ມີໃນລາຍການ, [ປະຕິບັດຕາມຄູ່ມືນີ້](https://vitejs.dev/guide/backend-integration.html) ເພື່ດintegrate Vite builds ກັບກັບ backend ຂອງທ່ານດ້ວຍຕົນເອງ.
+=======
+* **If your app doesn't have an existing setup for compiling JavaScript modules,** set it up with [Vite](https://vite.dev/). The Vite community maintains [many integrations with backend frameworks](https://github.com/vitejs/awesome-vite#integrations-with-backends), including Rails, Django, and Laravel. If your backend framework is not listed, [follow this guide](https://vite.dev/guide/backend-integration.html) to manually integrate Vite builds with your backend.
+>>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
 
 ເພື່ອກວດວ່າການຕັ້ງຄ່າຂອງທ່ານເຮັດວຽກໄດ້, ແລ່ນ command ນີ້ໃນ project folder ຂອງທ່ານ:
 
@@ -57,12 +69,13 @@ npm install react react-dom
 
 <Sandpack>
 
-```html index.html hidden
+```html public/index.html hidden
 <!DOCTYPE html>
 <html>
   <head><title>My app</title></head>
   <body>
     <!-- Your existing page content (in this example, it gets replaced) -->
+    <div id="root"></div>
   </body>
 </html>
 ```
@@ -84,7 +97,11 @@ root.render(<h1>Hello, world</h1>);
 
 <Note>
 
+<<<<<<< HEAD
 Integrating a modular JavaScript environment ເຂົ້າໃນ project ທີ່ມີຢູ່ແລ້ວໃນຄັ້ງທຳອິດອາດເຮັດໃຫ້ຮູ້ສຶກຢ້ານ ແຕ່ກະຄຸ້ມຄ່າ! ຫາກທ່ານຕິດບັນຫາ, ລອງໃຊ້ [community resources](/community) ຫຼຶ [Vite Chat](https://chat.vitejs.dev/).
+=======
+Integrating a modular JavaScript environment into an existing project for the first time can feel intimidating, but it's worth it! If you get stuck, try our [community resources](/community) or the [Vite Chat](https://chat.vite.dev/).
+>>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
 
 </Note>
 
@@ -119,7 +136,7 @@ root.render(<h1>Hello, world</h1>);
 
 <Sandpack>
 
-```html index.html
+```html public/index.html
 <!DOCTYPE html>
 <html>
   <head><title>My app</title></head>
@@ -148,7 +165,11 @@ root.render(<NavigationBar />);
 
 ສັງເກດວ່າເນື້ອຫາ original HTML content ຈາກ `index.html` ນັ້ນຖືກຮັກສາໄວ້ແນວໃດ, ແຕ່ຕອນນີ້ component `NavigationBar` ຂອງທ່ານຈະປະກົດໃນ `<nav id="navigation">` ຈາກ HTML ຂອງທ່ານ. ອ່ານ[ເອກະສານການນຳໃຊ້ `createRoot`](/reference/react-dom/client/createRoot#rendering-a-page-partially-built-with-react) ເພື່ອຮຽນຮູ້ເພີມເຕີມກ່ຽວກັບການ render React component ພາຍໃນໜ້າ HTML ທີ່ມີຢູ່ແລ້ວ.
 
+<<<<<<< HEAD
 ເມື່ອທ່ານເອົາ React ມາໃຊ້ໃນ project ທີ່ມີຢູ່ແລ້ວຂອງທ່ານ. ມັນເປັນເລື່ອງປົກະຕິທີ່ຈະເລີ່ມຕົ້ນດ້ວຍ interactive components ນ້ອຍໆ (ເຊັ່ນ ປຸ່ມ), ຈາກນັ້ນຄ່ອຍໆ "ເລື່ອນຂຶ້ນໄປ" ຈົນກວ່າໝົດ page ຂອງທ່ານສ້າງດ້ວຍ React. ຖ້າຫານທ່ານເຄີຍຮອດຈຸດນັ້ນ, ພວກເຮົາຂໍແນະນຳໃຫ້ຍ້າຍໄປຍັງ [React framework](/learn/start-a-new-react-project) ທັນທີເພື່ອຮັບປະໂຫຍດສູງສຸດຈາກ React. 
+=======
+When you adopt React in an existing project, it's common to start with small interactive components (like buttons), and then gradually keep "moving upwards" until eventually your entire page is built with React. If you ever reach that point, we recommend migrating to [a React framework](/learn/creating-a-react-app) right after to get the most out of React.
+>>>>>>> d52b3ec734077fd56f012fc2b30a67928d14cc73
 
 ## ການໃຊ້ React Native ໃນແອັບໂທລະສັບ native ທີ່ມີຢູ່ແລ້ວ {/*using-react-native-in-an-existing-native-mobile-app*/}
 
