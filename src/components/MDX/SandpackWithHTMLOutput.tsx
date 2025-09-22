@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import {Children, memo} from 'react';
 import InlineCode from './InlineCode';
 import Sandpack from './Sandpack';
@@ -20,7 +27,7 @@ export default function ShowRenderedHTML({children}) {
         {formatHTML(markup)}
       </pre>
     </>
-  );  
+  );
 }`;
 
 const formatHTML = `
@@ -77,8 +84,8 @@ export default memo(function SandpackWithHTMLOutput(
 ) {
   const children = [
     ...Children.toArray(props.children),
-    createFile('ShowRenderedHTML.js', ShowRenderedHTML),
-    createFile('formatHTML.js hidden', formatHTML),
+    createFile('src/ShowRenderedHTML.js', ShowRenderedHTML),
+    createFile('src/formatHTML.js hidden', formatHTML),
     createFile('package.json hidden', packageJSON),
   ];
   return <Sandpack {...props}>{children}</Sandpack>;
