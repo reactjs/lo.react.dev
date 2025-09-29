@@ -4,7 +4,11 @@ title: ເລີ່ມຕົ້ນຢ່າງໄວ
 
 <Intro>
 
+<<<<<<< HEAD
 ຍິນດີຕ້ອນຮັບສູ່ເອກະສານ React! ໜ້ານີ້ຈະໃຫ້ຂໍ້ມູນເບື້ອງຕົ້ນກ່ຽວກັບ 80% ຂອງແນວຄິດ React ທີ່ທ່ານຈະນຳໃຊ້ໃນຊີວິດປະຈຳວັນ.
+=======
+Welcome to the React documentation! This page will give you an introduction to 80% of the React concepts that you will use on a daily basis.
+>>>>>>> 49c2d26722fb1b5865ce0221a4cadc71b615e4cf
 
 </Intro>
 
