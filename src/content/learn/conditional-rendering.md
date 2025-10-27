@@ -52,13 +52,17 @@ export default function PackingList() {
 
 </Sandpack>
 
+<<<<<<< HEAD
 ສັງເກດວ່າມີ component `Item` ບາງໂຕມີ prop `isPacked` ເປັນ `true` ແທນທີ່ຈະເປັນ `false`. ທ່ານຕ້ອງການເພີ່ມເຄື່ອງໝາຍຕິກ (✔) ລົງໃນລາຍການທີ່ຖືກແພັກຖ້າ `isPacked={true}`.
+=======
+Notice that some of the `Item` components have their `isPacked` prop set to `true` instead of `false`. You want to add a checkmark (✅) to packed items if `isPacked={true}`.
+>>>>>>> 2c7798dcc51fbd07ebe41f49e5ded4839a029f72
 
 ທ່ານສາມາດຂຽນເປັນ [`if`/`else` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else) ດັ່ງນີ້:
 
 ```js
 if (isPacked) {
-  return <li className="item">{name} ✔</li>;
+  return <li className="item">{name} ✅</li>;
 }
 return <li className="item">{name}</li>;
 ```
@@ -70,7 +74,7 @@ return <li className="item">{name}</li>;
 ```js
 function Item({ name, isPacked }) {
   if (isPacked) {
-    return <li className="item">{name} ✔</li>;
+    return <li className="item">{name} ✅</li>;
   }
   return <li className="item">{name}</li>;
 }
@@ -159,7 +163,7 @@ export default function PackingList() {
 ໃນຕົວຢ່າງກ່ອນໜ້ານີ້, ທ່ານໄດ້ຄວບຄຸມ (ຖ້າມີ!) JSX tree ທີ່ return ໂດຍ component. ທ່ານອາດຈະສັງເກດເຫັນການສະແດງຜົນທີ່ຊໍ້າກັນ:
 
 ```js
-<li className="item">{name} ✔</li>
+<li className="item">{name} ✅</li>
 ```
 
 ຄ້າຍຄືກັບ
@@ -172,7 +176,7 @@ export default function PackingList() {
 
 ```js
 if (isPacked) {
-  return <li className="item">{name} ✔</li>;
+  return <li className="item">{name} ✅</li>;
 }
 return <li className="item">{name}</li>;
 ```
@@ -187,7 +191,7 @@ JavaScript ມີ syntax ທີ່ກະຊັບສຳລັບຂຽນ expres
 
 ```js
 if (isPacked) {
-  return <li className="item">{name} ✔</li>;
+  return <li className="item">{name} ✅</li>;
 }
 return <li className="item">{name}</li>;
 ```
@@ -197,12 +201,16 @@ return <li className="item">{name}</li>;
 ```js
 return (
   <li className="item">
-    {isPacked ? name + ' ✔' : name}
+    {isPacked ? name + ' ✅' : name}
   </li>
 );
 ```
 
+<<<<<<< HEAD
 ທ່ານສາມາດອ່ານເປັນ *"ຖ້າ `isPacked` ເປັນ true, ຈາກນັ້ນ (`?`) ສະແດງ `name + ' ✔'`, ຖ້າບໍ່ດັ່ງນັ້ນ (`:`) ສະແດງ `name`"*.
+=======
+You can read it as *"if `isPacked` is true, then (`?`) render `name + ' ✅'`, otherwise (`:`) render `name`"*.
+>>>>>>> 2c7798dcc51fbd07ebe41f49e5ded4839a029f72
 
 <DeepDive>
 
@@ -222,7 +230,7 @@ function Item({ name, isPacked }) {
     <li className="item">
       {isPacked ? (
         <del>
-          {name + ' ✔'}
+          {name + ' ✅'}
         </del>
       ) : (
         name
@@ -265,7 +273,7 @@ export default function PackingList() {
 ```js
 return (
   <li className="item">
-    {name} {isPacked && '✔'}
+    {name} {isPacked && '✅'}
   </li>
 );
 ```
@@ -280,7 +288,7 @@ return (
 function Item({ name, isPacked }) {
   return (
     <li className="item">
-      {name} {isPacked && '✔'}
+      {name} {isPacked && '✅'}
     </li>
   );
 }
@@ -337,7 +345,7 @@ let itemContent = name;
 
 ```js
 if (isPacked) {
-  itemContent = name + " ✔";
+  itemContent = name + " ✅";
 }
 ```
 
@@ -357,7 +365,7 @@ if (isPacked) {
 function Item({ name, isPacked }) {
   let itemContent = name;
   if (isPacked) {
-    itemContent = name + " ✔";
+    itemContent = name + " ✅";
   }
   return (
     <li className="item">
@@ -401,7 +409,7 @@ function Item({ name, isPacked }) {
   if (isPacked) {
     itemContent = (
       <del>
-        {name + " ✔"}
+        {name + " ✅"}
       </del>
     );
   }
@@ -464,7 +472,7 @@ export default function PackingList() {
 function Item({ name, isPacked }) {
   return (
     <li className="item">
-      {name} {isPacked && '✔'}
+      {name} {isPacked && '✅'}
     </li>
   );
 }
@@ -502,7 +510,7 @@ export default function PackingList() {
 function Item({ name, isPacked }) {
   return (
     <li className="item">
-      {name} {isPacked ? '✔' : '❌'}
+      {name} {isPacked ? '✅' : '❌'}
     </li>
   );
 }
