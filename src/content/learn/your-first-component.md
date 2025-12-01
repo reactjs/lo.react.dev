@@ -219,7 +219,11 @@ Your React application begins at a "root" component. Usually, it is created auto
 
 ແອັບ React ສ່ວນຫຼາຍໃຊ້ compent ທັງໝົດລົງໄປ. ນີ້ໝາຍຄວາມວ່າທ່ານບໍ່ພຽງຈະໃຊ້ຊີ້ນສ່ວນ component ທີ່ສາມາດນຳໃຊ້ໄດ້ໃໝ່ເຊັ່ນ ປຸ່ມກົດ ເທົ່ານັ້ນ, ແຕ່ສຳລັບຊີ້ນສ່ວນທີ່ໃຫຍ່ຂຶ້ນເຊັ່ນ sidebars, list ແລະ ໃນທີ່ສຸດ, ໝົດ page! Component ເປັນວິທີທີ່ສະດວກໃນການຈັດລະບຽບ code UI ແລະ markup, ເຖິງວ່າບາງ component ແມ່ນໃຊ້ໄດ້ພຽງເທື່ອດຽວ. 
 
+<<<<<<< HEAD
 [React-based frameworks](/learn/start-a-new-react-project) ກ້າວໄປອີກຂັ້ນ. ແທນທີ່ຈະໃຊ້ຟາຍ HTML ເປົ່າ ແລະ ປ່ອຍໃຫ້ React "ເຂົ້າຄວບຄຸມ" ຈັດການ page ດ້ວຍ JavaScript, ມັນ *ຍັງ* ສ້າງ HTML ໂດຍອັດຕະໂນມັດຈາກ Component React. ສິ່ງນີ້ເຮັດໃຫ້ແອັບຂອງທ່ານສະແດງບາງເນື້ອຫາກ່ອນທີ່ code JavaScript ຈະໂຫຼດ.
+=======
+[React-based frameworks](/learn/creating-a-react-app) take this a step further. Instead of using an empty HTML file and letting React "take over" managing the page with JavaScript, they *also* generate the HTML automatically from your React components. This allows your app to show some content before the JavaScript code loads.
+>>>>>>> 2534424ec6c433cc2c811d5a0bd5a65b75efa5f0
 
 ເຖິງວ່າ, ຫຼາຍເວັບໄຊຈະໃຊ້ React ເພື່ອ [ເພີ່ມ interactivity ໃສ່ HTML pages ທີ່ມີຢູ່ແລ້ວ.](/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page) ພວກເຂົາມີຫຼາຍ root components ແທນທີ່ຈະມີພຽງອັນດຽວສຳລັບໝົດ page. ທ່ານສາມາດໃຊ້ຫຼາຍ ຫຼື ໜ້ອຍຕາມທີ່ທ່ານຕ້ອງການ.
 
