@@ -30,8 +30,9 @@ To display an input, render the [built-in browser `<input>`](https://developer.m
 
 #### Props {/*props*/}
 
-`<input>` supports all [common element props.](/reference/react-dom/components/common#props)
+`<input>` supports all [common element props.](/reference/react-dom/components/common#common-props)
 
+<<<<<<< HEAD
 <Canary>
 
 
@@ -40,6 +41,9 @@ React's extensions to the `formAction` prop are currently only available in Reac
 </Canary>
 
 [`formAction`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formaction): A string or function. Overrides the parent `<form action>` for `type="submit"` and `type="image"`. When a URL is passed to `action` the form will behave like a standard HTML form. When a function is passed to `formAction` the function will handle the form submission. See [`<form action>`](/reference/react-dom/components/form#props).
+=======
+- [`formAction`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#formaction): A string or function. Overrides the parent `<form action>` for `type="submit"` and `type="image"`. When a URL is passed to `action` the form will behave like a standard HTML form. When a function is passed to `formAction` the function will handle the form submission. See [`<form action>`](/reference/react-dom/components/form#props).
+>>>>>>> 55a317d40781a0054a05a9f6c443ae0bd71f7d7e
 
 You can [make an input controlled](#controlling-an-input-with-a-state-variable) by passing one of these props:
 
@@ -304,7 +308,7 @@ Give a `name` to every `<input>`, for example `<input name="firstName" defaultVa
 
 <Pitfall>
 
-By default, *any* `<button>` inside a `<form>` will submit it. This can be surprising! If you have your own custom `Button` React component, consider returning [`<button type="button">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/button) instead of `<button>`. Then, to be explicit, use `<button type="submit">` for buttons that *are* supposed to submit the form.
+By default, a `<button>` inside a `<form>` without a `type` attribute will submit it. This can be surprising! If you have your own custom `Button` React component, consider using [`<button type="button">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) instead of `<button>` (with no type). Then, to be explicit, use `<button type="submit">` for buttons that *are* supposed to submit the form.
 
 </Pitfall>
 
