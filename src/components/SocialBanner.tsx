@@ -1,17 +1,15 @@
 /**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * Copyright (c) Facebook, Inc. and its affiliates.
  *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
  */
 
 import {useRef, useEffect} from 'react';
 import cn from 'classnames';
 import {ExternalLink} from './ExternalLink';
 
-const bannerText = 'Join us for React Conf on Oct 7-8.';
-const bannerLink = 'https://conf.react.dev/';
-const bannerLinkText = 'Learn more.';
+const bannerText = 'Support Ukraine 🇺🇦';
+const bannerLink = 'https://opensource.fb.com/support-ukraine';
+const bannerLinkText = 'Help Provide Humanitarian Aid to Ukraine';
 
 export default function SocialBanner() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -41,7 +39,9 @@ export default function SocialBanner() {
       <ExternalLink
         className="ms-0 sm:ms-1 text-link dark:text-link-dark hover:underline"
         href={bannerLink}>
+        <div className="inline sm:hidden">🇺🇦 </div>
         {bannerLinkText}
+        <span className="hidden sm:inline">.</span>
       </ExternalLink>
     </div>
   );

@@ -7,7 +7,7 @@ title: renderToStaticMarkup
 `renderToStaticMarkup` renders a non-interactive React tree to an HTML string.
 
 ```js
-const html = renderToStaticMarkup(reactNode, options?)
+const html = renderToStaticMarkup(reactNode)
 ```
 
 </Intro>
@@ -18,7 +18,7 @@ const html = renderToStaticMarkup(reactNode, options?)
 
 ## Reference {/*reference*/}
 
-### `renderToStaticMarkup(reactNode, options?)` {/*rendertostaticmarkup*/}
+### `renderToStaticMarkup(reactNode)` {/*rendertostaticmarkup*/}
 
 On the server, call `renderToStaticMarkup` to render your app to HTML.
 

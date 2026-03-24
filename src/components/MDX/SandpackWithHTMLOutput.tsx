@@ -1,13 +1,6 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 import {Children, memo} from 'react';
 import InlineCode from './InlineCode';
-import {SandpackClient} from './Sandpack';
+import Sandpack from './Sandpack';
 
 const ShowRenderedHTML = `
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -27,7 +20,7 @@ export default function ShowRenderedHTML({children}) {
         {formatHTML(markup)}
       </pre>
     </>
-  );
+  );  
 }`;
 
 const formatHTML = `
@@ -56,8 +49,8 @@ export default function formatHTML(markup) {
 const packageJSON = `
 {
   "dependencies": {
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1",
+    "react": "18.3.0-canary-6db7f4209-20231021",
+    "react-dom": "18.3.0-canary-6db7f4209-20231021",
     "react-scripts": "^5.0.0",
     "html-format": "^1.1.2"
   },
@@ -80,13 +73,13 @@ function createFile(meta: string, source: string) {
 }
 
 export default memo(function SandpackWithHTMLOutput(
-  props: React.ComponentProps<typeof SandpackClient>
+  props: React.ComponentProps<typeof Sandpack>
 ) {
   const children = [
     ...Children.toArray(props.children),
-    createFile('src/ShowRenderedHTML.js', ShowRenderedHTML),
-    createFile('src/formatHTML.js hidden', formatHTML),
+    createFile('ShowRenderedHTML.js', ShowRenderedHTML),
+    createFile('formatHTML.js hidden', formatHTML),
     createFile('package.json hidden', packageJSON),
   ];
-  return <SandpackClient {...props}>{children}</SandpackClient>;
+  return <Sandpack {...props}>{children}</Sandpack>;
 });

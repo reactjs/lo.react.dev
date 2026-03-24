@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 /*
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
@@ -24,8 +17,7 @@ import {
   useSandpackNavigation,
 } from '@codesandbox/sandpack-react/unstyled';
 import {OpenInCodeSandboxButton} from './OpenInCodeSandboxButton';
-import {ReloadButton} from './ReloadButton';
-import {ClearButton} from './ClearButton';
+import {ResetButton} from './ResetButton';
 import {DownloadButton} from './DownloadButton';
 import {IconChevron} from '../../Icon/IconChevron';
 import {Listbox} from '@headlessui/react';
@@ -48,13 +40,7 @@ const getFileName = (filePath: string): string => {
   return filePath.slice(lastIndexOfSlash + 1);
 };
 
-export function NavigationBar({
-  providedFiles,
-  showOpenInCodeSandbox = true,
-}: {
-  providedFiles: Array<string>;
-  showOpenInCodeSandbox?: boolean;
-}) {
+export function NavigationBar({providedFiles}: {providedFiles: Array<string>}) {
   const {sandpack} = useSandpack();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const tabsRef = useRef<HTMLDivElement | null>(null);
@@ -109,7 +95,7 @@ export function NavigationBar({
     // Note: in a real useEvent, onContainerResize would be omitted.
   }, [isMultiFile, onContainerResize]);
 
-  const handleClear = () => {
+  const handleReset = () => {
     /**
      * resetAllFiles must come first, otherwise
      * the previous content will appear for a second
@@ -117,22 +103,19 @@ export function NavigationBar({
      *
      * Plus, it should only prompt if there's any file changes
      */
-    if (sandpack.editorState === 'dirty' && confirm('Clear all your edits?')) {
+    if (
+      sandpack.editorState === 'dirty' &&
+      confirm('Reset all your edits too?')
+    ) {
       sandpack.resetAllFiles();
     }
-    refresh();
-  };
 
-  const handleReload = () => {
     refresh();
   };
 
   return (
     <div className="bg-wash dark:bg-card-dark flex justify-between items-center relative z-10 border-b border-border dark:border-border-dark rounded-t-lg text-lg">
-      {/* If Prettier reformats this block, the two @ts-ignore directives will no longer be adjacent to the problematic lines, causing TypeScript errors */}
-      {/* prettier-ignore */}
       <div className="flex-1 grow min-w-0 px-4 lg:px-6">
-        {/* @ts-ignore: the Listbox type from '@headlessui/react' is incompatible with JSX in React 19 */}
         <Listbox value={activeFile} onChange={setActiveFile}>
           <div ref={containerRef}>
             <div className="relative overflow-hidden">
@@ -146,10 +129,8 @@ export function NavigationBar({
                   'w-[fit-content]',
                   showDropdown ? 'invisible' : ''
                 )}>
-                {/* @ts-ignore: the FileTabs type from '@codesandbox/sandpack-react/unstyled' is incompatible with JSX in React 19 */}
                 <FileTabs />
               </div>
-              {/* @ts-ignore: the Listbox type from '@headlessui/react' is incompatible with JSX in React 19 */}
               <Listbox.Button as={Fragment}>
                 {({open}) => (
                   // If tabs don't fit, display the dropdown instead.
@@ -179,10 +160,10 @@ export function NavigationBar({
               </Listbox.Button>
             </div>
           </div>
-          {/* @ts-ignore: the Listbox type from '@headlessui/react' is incompatible with JSX in React 19 */}
-          {isMultiFile && showDropdown && (<Listbox.Options className="absolute mt-0.5 bg-card dark:bg-card-dark px-2 inset-x-0 mx-0 rounded-b-lg border-1 border-border dark:border-border-dark rounded-sm shadow-md">
-              {/* @ts-ignore: the Listbox type from '@headlessui/react' is incompatible with JSX in React 19 */}
-              {visibleFiles.map((filePath: string) => (<Listbox.Option key={filePath} value={filePath} as={Fragment}>
+          {isMultiFile && showDropdown && (
+            <Listbox.Options className="absolute mt-0.5 bg-card dark:bg-card-dark px-2 inset-x-0 mx-0 rounded-b-lg border-1 border-border dark:border-border-dark rounded-sm shadow-md">
+              {visibleFiles.map((filePath: string) => (
+                <Listbox.Option key={filePath} value={filePath} as={Fragment}>
                   {({active}) => (
                     <li
                       className={cn(
@@ -202,9 +183,8 @@ export function NavigationBar({
         className="px-3 flex items-center justify-end text-start"
         translate="yes">
         <DownloadButton providedFiles={providedFiles} />
-        <ReloadButton onReload={handleReload} />
-        <ClearButton onClear={handleClear} />
-        {showOpenInCodeSandbox && <OpenInCodeSandboxButton />}
+        <ResetButton onReset={handleReset} />
+        <OpenInCodeSandboxButton />
         {activeFile.endsWith('.tsx') && (
           <OpenInTypeScriptPlaygroundButton
             content={sandpack.files[activeFile]?.code || ''}

@@ -1,14 +1,7 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 export const template = {
   '/src/index.js': {
     hidden: true,
-    code: `import { StrictMode } from "react";
+    code: `import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./styles.css";
 
@@ -35,8 +28,8 @@ root.render(
           eject: 'react-scripts eject',
         },
         dependencies: {
-          react: '^19.2.1',
-          'react-dom': '^19.2.1',
+          react: '^18.0.0',
+          'react-dom': '^18.0.0',
           'react-scripts': '^5.0.0',
         },
       },

@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 /*
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
@@ -13,7 +6,6 @@ import * as React from 'react';
 import Head from 'next/head';
 import {withRouter, Router} from 'next/router';
 import {siteConfig} from '../siteConfig';
-import {finishedTranslations} from 'utils/finishedTranslations';
 
 export interface SeoProps {
   title: string;
@@ -26,8 +18,17 @@ export interface SeoProps {
   searchOrder?: number;
 }
 
-// If you are a maintainer of a language fork,
-// deployedTranslations has been moved to src/utils/finishedTranslations.ts.
+const deployedTranslations = [
+  'en',
+  'zh-hans',
+  'es',
+  'fr',
+  'ja',
+  'tr',
+  // We'll add more languages when they have enough content.
+  // Please DO NOT edit this list without a discussion in the reactjs/react.dev repo.
+  // It must be the same between all translations.
+];
 
 function getDomain(languageCode: string): string {
   const subdomain = languageCode === 'en' ? '' : languageCode + '.';
@@ -70,7 +71,7 @@ export const Seo = withRouter(
           href={canonicalUrl.replace(siteDomain, getDomain('en'))}
           hrefLang="x-default"
         />
-        {finishedTranslations.map((languageCode) => (
+        {deployedTranslations.map((languageCode) => (
           <link
             key={'alt-' + languageCode}
             rel="alternate"
@@ -131,14 +132,7 @@ export const Seo = withRouter(
         )}
         <link
           rel="preload"
-          href="https://react.dev/fonts/Source-Code-Pro-Regular.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="https://react.dev/fonts/Source-Code-Pro-Bold.woff2"
+          href="/fonts/Source-Code-Pro-Regular.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"

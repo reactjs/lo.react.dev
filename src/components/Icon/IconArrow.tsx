@@ -1,20 +1,12 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 /*
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
 
 import {memo} from 'react';
 import cn from 'classnames';
-import type {SVGProps} from 'react';
 
 export const IconArrow = memo<
-  SVGProps<SVGSVGElement> & {
+  JSX.IntrinsicElements['svg'] & {
     /**
      * The direction the arrow should point.
      * `start` and `end` are relative to the current locale.
