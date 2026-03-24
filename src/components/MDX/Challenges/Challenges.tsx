@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 /*
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
@@ -47,10 +40,7 @@ const parseChallengeContents = (
   let challenge: Partial<ChallengeContents> = {};
   let content: React.ReactElement[] = [];
   Children.forEach(children, (child) => {
-    const {props, type} = child as React.ReactElement<{
-      children?: string;
-      id?: string;
-    }>;
+    const {props, type} = child;
     switch ((type as any).mdxName) {
       case 'Solution': {
         challenge.solution = child;

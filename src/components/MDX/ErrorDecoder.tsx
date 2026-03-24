@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 import {useEffect, useState} from 'react';
 import {useErrorDecoderParams} from '../ErrorDecoderContext';
 import cn from 'classnames';
@@ -18,7 +11,7 @@ function replaceArgs(
   return msg.replace(/%s/g, function () {
     const arg = argList[argIdx++];
     // arg can be an empty string: ?args[0]=&args[1]=count
-    return arg === undefined ? replacer : arg;
+    return arg === undefined || arg === '' ? replacer : arg;
   });
 }
 
@@ -76,7 +69,7 @@ function parseQueryString(search: string): Array<string | undefined> {
 }
 
 export default function ErrorDecoder() {
-  const {errorMessage, errorCode} = useErrorDecoderParams();
+  const {errorMessage} = useErrorDecoderParams();
   /** error messages that contain %s require reading location.search */
   const hasParams = errorMessage?.includes('%s');
   const [message, setMessage] = useState<React.ReactNode | null>(() =>
@@ -89,28 +82,23 @@ export default function ErrorDecoder() {
     if (errorMessage == null || !hasParams) {
       return;
     }
-    const args = parseQueryString(window.location.search);
-    let message = errorMessage;
-    if (errorCode === '418') {
-      // Hydration errors have a %s for the diff, but we don't add that to the args for security reasons.
-      message = message.replace(/%s$/, '');
 
-      // Before React 19.1, the error message didn't have an arg, and was always HTML.
-      if (args.length === 0) {
-        args.push('HTML');
-      } else if (args.length === 1 && args[0] === '') {
-        args[0] = 'HTML';
-      }
-    }
-
-    setMessage(urlify(replaceArgs(message, args, '[missing argument]')));
+    setMessage(
+      urlify(
+        replaceArgs(
+          errorMessage,
+          parseQueryString(window.location.search),
+          '[missing argument]'
+        )
+      )
+    );
     setIsReady(true);
-  }, [errorCode, hasParams, errorMessage]);
+  }, [hasParams, errorMessage]);
 
   return (
     <code
       className={cn(
-        'whitespace-pre-line block bg-red-100 text-red-600 py-4 px-6 mt-5 rounded-lg',
+        'block bg-red-100 text-red-600 py-4 px-6 mt-5 rounded-lg',
         isReady ? 'opacity-100' : 'opacity-0'
       )}>
       <b>{message}</b>

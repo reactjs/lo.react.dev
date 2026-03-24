@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 /*
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
@@ -24,14 +17,7 @@ export function CodeDiagram({children, flip = false}: CodeDiagramProps) {
   });
   const content = Children.toArray(children).map((child: any) => {
     if (child.type?.mdxName === 'pre') {
-      return (
-        <CodeBlock
-          key={child.key}
-          {...child.props}
-          noMargin={true}
-          noMarkers={true}
-        />
-      );
+      return <CodeBlock {...child.props} noMargin={true} noMarkers={true} />;
     } else if (child.type === 'img') {
       return null;
     } else {

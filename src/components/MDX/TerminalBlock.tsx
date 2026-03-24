@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 /*
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
@@ -38,11 +31,9 @@ function TerminalBlock({level = 'info', children}: TerminalBlockProps) {
     message = children;
   } else if (
     isValidElement(children) &&
-    typeof (children as React.ReactElement<{children: string}>).props
-      .children === 'string'
+    typeof children.props.children === 'string'
   ) {
-    message = (children as React.ReactElement<{children: string}>).props
-      .children;
+    message = children.props.children;
   } else {
     throw Error('Expected TerminalBlock children to be a plain string.');
   }
@@ -79,15 +70,13 @@ function TerminalBlock({level = 'info', children}: TerminalBlockProps) {
           </div>
         </div>
       </div>
-      <pre
-        className="px-8 pt-4 pb-6 text-primary-dark dark:text-primary-dark font-mono text-code whitespace-pre overflow-x-auto"
+      <div
+        className="px-8 pt-4 pb-6 text-primary-dark dark:text-primary-dark font-mono text-code whitespace-pre overflow-x-scroll"
         translate="no"
         dir="ltr">
-        <code>
-          <LevelText type={level} />
-          {message}
-        </code>
-      </pre>
+        <LevelText type={level} />
+        {message}
+      </div>
     </div>
   );
 }

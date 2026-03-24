@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 /*
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
@@ -296,7 +289,7 @@ function getSyntaxHighlight(theme: any): HighlightStyle {
 
 function getLineDecorators(
   code: string,
-  meta?: string
+  meta: string
 ): Array<{
   line: number;
   className: string;
@@ -316,7 +309,7 @@ function getLineDecorators(
 
 function getInlineDecorators(
   code: string,
-  meta?: string
+  meta: string
 ): Array<{
   step: number;
   line: number;
@@ -343,7 +336,6 @@ function getInlineDecorators(
             line.step === 3,
           'bg-green-40 border-green-40 text-green-60 dark:text-green-30':
             line.step === 4,
-          // TODO: Some codeblocks use up to 6 steps.
         }
       ),
     })

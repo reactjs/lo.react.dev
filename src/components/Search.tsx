@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 /*
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
@@ -16,8 +9,6 @@ import {lazy, useEffect} from 'react';
 import * as React from 'react';
 import {createPortal} from 'react-dom';
 import {siteConfig} from 'siteConfig';
-import type {ComponentType, PropsWithChildren} from 'react';
-import type {DocSearchModalProps} from '@docsearch/react/modal';
 
 export interface SearchProps {
   appId?: string;
@@ -92,10 +83,9 @@ const options = {
 };
 
 const DocSearchModal: any = lazy(() =>
+  // @ts-ignore
   import('@docsearch/react/modal').then((mod) => ({
-    default: mod.DocSearchModal as ComponentType<
-      PropsWithChildren<DocSearchModalProps>
-    >,
+    default: mod.DocSearchModal,
   }))
 );
 
@@ -104,17 +94,7 @@ export function Search({
   onOpen,
   onClose,
   searchParameters = {
-    hitsPerPage: 30,
-    attributesToHighlight: [
-      'hierarchy.lvl0',
-      'hierarchy.lvl1',
-      'hierarchy.lvl2',
-      'hierarchy.lvl3',
-      'hierarchy.lvl4',
-      'hierarchy.lvl5',
-      'hierarchy.lvl6',
-      'content',
-    ],
+    hitsPerPage: 5,
   },
 }: SearchProps) {
   useDocSearchKeyboardEvents({isOpen, onOpen, onClose});
@@ -130,6 +110,7 @@ export function Search({
         createPortal(
           <DocSearchModal
             {...options}
+            initialScrollY={window.scrollY}
             searchParameters={searchParameters}
             onClose={onClose}
             navigator={{

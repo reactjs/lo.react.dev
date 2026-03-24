@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 /*
  * Copyright (c) Facebook, Inc. and its affiliates.
  */
@@ -16,7 +9,6 @@ import * as React from 'react';
 import cn from 'classnames';
 import {IconNavArrow} from 'components/Icon/IconNavArrow';
 import {IconCanary} from 'components/Icon/IconCanary';
-import {IconExperimental} from 'components/Icon/IconExperimental';
 import Link from 'next/link';
 
 interface SidebarLinkProps {
@@ -24,7 +16,7 @@ interface SidebarLinkProps {
   selected?: boolean;
   title: string;
   level: number;
-  version?: 'canary' | 'major' | 'experimental' | 'rc';
+  canary?: boolean;
   icon?: React.ReactNode;
   isExpanded?: boolean;
   hideArrow?: boolean;
@@ -35,7 +27,7 @@ export function SidebarLink({
   href,
   selected = false,
   title,
-  version,
+  canary,
   level,
   isExpanded,
   hideArrow,
@@ -83,29 +75,10 @@ export function SidebarLink({
       {/* This here needs to be refactored ofc */}
       <div>
         {title}{' '}
-        {version === 'major' && (
-          <span
-            title="- This feature is available in React 19 beta and the React canary channel"
-            className={`text-xs px-1 ms-1 rounded bg-gray-10 dark:bg-gray-40 dark:bg-opacity-20 text-gray-40 dark:text-gray-40`}>
-            React 19
-          </span>
-        )}
-        {version === 'canary' && (
+        {canary && (
           <IconCanary
-            title=" - This feature is available in the latest Canary version of React"
-            className="ms-1 text-gray-30 dark:text-gray-60 inline-block w-3.5 h-3.5 align-[-3px]"
-          />
-        )}
-        {version === 'experimental' && (
-          <IconExperimental
-            title=" - This feature is available in the latest Experimental version of React"
-            className="ms-1 text-gray-30 dark:text-gray-60 inline-block w-3.5 h-3.5 align-[-3px]"
-          />
-        )}
-        {version === 'rc' && (
-          <IconCanary
-            title=" - This feature is available in the latest RC version"
-            className="ms-1 text-gray-30 dark:text-gray-60 inline-block w-3.5 h-3.5 align-[-3px]"
+            title=" - This feature is available in the latest Canary"
+            className="ms-2 text-gray-30 dark:text-gray-60 inline-block w-4 h-4 align-[-3px]"
           />
         )}
       </div>

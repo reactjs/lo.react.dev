@@ -546,7 +546,7 @@ Event handler ບໍ່ຈຳເປັນຕ້ອງ [pure](/learn/keeping-comp
 
 <Sandpack>
 
-```js {expectedErrors: {'react-compiler': [5, 7]}}
+```js
 export default function LightSwitch() {
   function handleClick() {
     let bodyStyle = document.body.style;
