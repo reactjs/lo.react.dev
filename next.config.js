@@ -12,7 +12,35 @@ const nextConfig = {
     // TODO: Remove after https://github.com/vercel/next.js/issues/49355 is fixed
     appDir: false,
     scrollRestoration: true,
+<<<<<<< HEAD
     legacyBrowsers: false,
+=======
+    reactCompiler: true,
+  },
+  async rewrites() {
+    return {
+      beforeFiles: [
+        // Explicit .md extension also serves markdown
+        {
+          source: '/:path*.md',
+          destination: '/api/md/:path*',
+        },
+        // Serve markdown when Accept header prefers text/markdown
+        // Useful for LLM agents - https://www.skeptrune.com/posts/use-the-accept-header-to-serve-markdown-instead-of-html-to-llms/
+        {
+          source: '/:path((?!llms\\.txt|api/md).*)',
+          has: [
+            {
+              type: 'header',
+              key: 'accept',
+              value: '(.*text/markdown.*)',
+            },
+          ],
+          destination: '/api/md/:path*',
+        },
+      ],
+    };
+>>>>>>> 1207ee36e1c7e3f2737d8f1022015473ffa99adf
   },
   env: {},
   webpack: (config, {dev, isServer, ...options}) => {
