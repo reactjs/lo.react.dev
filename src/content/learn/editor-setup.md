@@ -32,7 +32,11 @@ Some editors come with these features built in, but others might require adding 
 
 ### Linting {/*linting*/}
 
+<<<<<<< HEAD
 Code linters ຄົ້ນຫາບັນຫາໃນ code ຂອງທ່ານໃນຂະນະທີ່ທ່ານກຳລັງຂຽນ, ຊ່ວຍທ່ານແກ້ໄຂໄດ້ແຕ່ເນີ້ນໆ. [ESLint](https://eslint.org/) ແມ່ນໄດ້ຮັບຄວາມນິຍົມ, ເປັນ open source linter ສຳລັບ JavaScript. 
+=======
+Code linters find problems in your code as you write, helping you fix them early. [ESLint](https://eslint.org/) is a popular, open source linter for JavaScript.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 * [ຕິດຕັ້ງ ESLintr ພ້ອມກັບຄຳແນະນຳການຕັ້ງຄ່າສຳລັບ React](https://www.npmjs.com/package/eslint-config-react-app) (ໃຫ້ແນ່ໃຈວ່າທ່ານໄດ້ [ຕິດຕັ້ງ Node ແລ້ວ!](https://nodejs.org/en/download/current/))
 * [Integrate ESLint ໃນ VSCode ກັບ extension ທາງການ](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)

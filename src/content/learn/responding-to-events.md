@@ -169,7 +169,11 @@ button { margin-right: 10px; }
 
 ### ການສົ່ງ event handlers ເປັນ props {/*passing-event-handlers-as-props*/}
 
+<<<<<<< HEAD
 ຫຼາຍເທື່ອທີ່ທ່ານຕ້ອງການໃຫ້ parent component ລະບຸ child event handler. ຂຶ້ນຢູ່ກັບປຸ່ມ: ຂຶ້ນຢູ່ກັບວ່າທ່ານໃຊ້ component `Button` ບ່ອນໃດ, ທ່ານອາດຈ້ອງ execute ຟັງຊັ່ນອື່ນ ບາງເທື່ອຟັງຊັ່ນໜຶ່ງຫຼິ້ນວີດີໂອ ແລະ ອີກຟັງຊັ່ນໜໜຶ່ງອັບໂຫຼດຮູບພາບ.
+=======
+Often you'll want the parent component to specify a child's event handler. Consider buttons: depending on where you're using a `Button` component, you might want to execute a different function—perhaps one plays a movie and another uploads an image.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 ເພື່ອເຮັດສິ່ງນີ້, ໃຫ້ສົ່ງ prop ທີ່ component ໄດ້ຮັບຈາກ parent ເປັນ event handler ດັ່ງນີ້:
 
@@ -312,12 +316,21 @@ button { margin-right: 10px; }
 
 </Sandpack>
 
+<<<<<<< HEAD
 ສັງເກດວ່າ component `App` ບໍ່ຈຳເປັນຕ້ອງຮູ້ວ່າ *ສິ່ງທີ່* `Toolbar` ຈະເຮັດຫຍັງກັບ `onPlayMovie` ຫຼື `onUploadImage`. ນັ້ນແມ່ນລາຍລະອຽດການ implementation ຂອງ `Toolbar`. ໃນນີ້, `Toolbar` ສົ່ງຜ່ານ `onClick` handler ໄປຍັງ `Button` ຂອງມັນ, ແຕ່ພາຍຫຼັງຍັງສາມາດ trigger ເທິງທາງລັດຄີບອດ. ການຕັ້ງຊື່ prop ຕາມການ interaction ສະເພາະແອັບເຊັ່ນ `onPlayMovie` ຊ່ວຍໃຫ້ທ່ານປ່ຽນວິທີໃຊ້ງານໃນພາຍຫຼັງໄດ້ຢ່າງຍືດຫຍຸ່ນ.
   
 <Note>
 
 ກວດສອບວ່າທ່ານໃຊ້ແທັກ HTML ທີ່ເໝາະສົມສຳລັບ event handler. ຕົວຢ່າງ, ເພື່ອຈັດການຄິກ, ໃຊ້ [`<button onClick={handleClick}>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) ແທນ `<div onClick={handleClick}>`. ການໃຊ້ບາວເຊີແທ້ `<button>` ເປີດໃຊ້ງານລັກສະນະການເຮັດວຽກຂອງ built-in browser ເຊັ່ນການນຳທາງດ້ວຍຄີບອດ. ຖ້າທ່ານບໍ່ມັກ style ບາວເຊີເລີ່ມຕົ້ນຂອງປຸ່ມ ແລະ ຕ້ອງການເຮັດໃຫ້ມັນຄືລີ້ງ ຫຼື UI element, ທ່ານສາມາດເຮັດໄດ້ດ້ວຍ CSS. [ຮຽນຮູ້ເພີມເຕີມກ່ຽວກັບການຂຽນ accessible markup.](https://developer.mozilla.org/en-US/docs/Learn/Accessibility/HTML)
   
+=======
+Notice how the `App` component does not need to know *what* `Toolbar` will do with `onPlayMovie` or `onUploadImage`. That's an implementation detail of the `Toolbar`. Here, `Toolbar` passes them down as `onClick` handlers to its `Button`s, but it could later also trigger them on a keyboard shortcut. Naming props after app-specific interactions like `onPlayMovie` gives you the flexibility to change how they're used later.
+
+<Note>
+
+Make sure that you use the appropriate HTML tags for your event handlers. For example, to handle clicks, use [`<button onClick={handleClick}>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) instead of `<div onClick={handleClick}>`. Using a real browser `<button>` enables built-in browser behaviors like keyboard navigation. If you don't like the default browser styling of a button and want to make it look more like a link or a different UI element, you can achieve it with CSS. [Learn more about writing accessible markup.](https://developer.mozilla.org/en-US/docs/Learn/Accessibility/HTML)
+
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 </Note>
 
 ## ການເຜີຍແຜ່ Event {/*event-propagation*/}
@@ -411,12 +424,21 @@ button { margin: 5px; }
 
 ເມື່ອທ່ານຄິກທີ່ປຸ່ມ:
 
+<<<<<<< HEAD
 1. React ເອີ້ນໃຊ້ `onClick` handler ທີ່ສົ່ງຜ່ານໄປຍັງ `<button>`.
 2. Handler, ຖືກກຳນົດໃນ `Button`, ເຮັດສິ່ງຕໍ່ໄປນີ້:
    * ເອີ້ນ `e.stopPropagation()`, ເພື່ອປ້ອງກັນບໍ່ໃຫ້ event ເດືອດອີກຕໍ່ໄປ.
    * ເອີ້ນໃຊ້ຟັງຊັ່ນ `onClick`, ເຊິ່ງເປັນ prop ທີ່ສົ່ງຜ່ານຈາກ component `Toolbar`
 3. ຟັງຊັ່ນນັ້ນເຊິ່ງກຳນົດໄວ້ໃນ component `Toolbar`, ສະແດງການແຈ້ງເຕືອນຂອງປຸ່ມເອງ.
 4. ເນື່ອງຈາກການເຜີດແຜ່ຢຸດລົງ, `onClick` handler ຂອງ parent `<div>` ຈຶ່ງ *ບໍ່* ເຮັດວຽກ.
+=======
+1. React calls the `onClick` handler passed to `<button>`.
+2. That handler, defined in `Button`, does the following:
+   * Calls `e.stopPropagation()`, preventing the event from bubbling further.
+   * Calls the `onClick` function, which is a prop passed from the `Toolbar` component.
+3. That function, defined in the `Toolbar` component, displays the button's own alert.
+4. Since the propagation was stopped, the parent `<div>`'s `onClick` handler does *not* run.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 ຈາກຜົນຂອງ `e.stopPropagation()`, ຕອນນີ້ການຄິກທີ່ປຸ່ມຈະສະແດງພຽງການແຈ້ງເຕືອນດຽວ (ຈາກ `<button>`) ແທນທີ່ຈະເປັນສອງປຸ່ມ (ຈາກ `<botton>` ແລະ parent toobar `<div>`). ການຄິກປຸ່ມບໍ່ຄືກັບການຄິກ toolbar ຮອບໆ, ສະນັ້ນການຢຸດເຜີຍແຜ່ຈິງເໝາະສົມສຳລັບ UI ນີ້.
 
@@ -433,11 +455,19 @@ button { margin: 5px; }
 </div>
 ```
 
+<<<<<<< HEAD
 ແຕ່ລະ event ເຜີຍແຜ່ໃນສາມຂັ້ນຕອນ:
 
 1. ມັນເຄື່ອນລົງມາ, ໂດຍການເອີ້ນ `onClickCapture` handler.
 2. ມັນແລ່ນ `onClick` handler ຂອງ element ການຄິກ.
 3. ມັນເຄື່ອນທີ່ຂຶ້ນທາງເທິງ, ເອີ້ນ `onClick` handler ທັງໝົດ.
+=======
+Each event propagates in three phases:
+
+1. It travels down, calling all `onClickCapture` handlers.
+2. It runs the clicked element's `onClick` handler.
+3. It travels upwards, calling all `onClick` handlers.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 Event Capture ມີປະໂຫຍດສຳລັບ code ເຊັ່ນ router ຫຼື ການວິເຄາະ, ແຕ່ທ່ານອາດບໍ່ແມ່ນ event ເຫຼົ່ານັ້ນໃນ code ຂອງແອັບ.
 

@@ -56,7 +56,7 @@ root.render(<Image />);
 export default function Image() {
   return (
     <img
-      src="https://i.imgur.com/ZF6s192.jpg"
+      src="https://react.dev/images/docs/scientists/ZF6s192.jpg"
       alt="'Floralis Genérica' by Eduardo Catalano: a gigantic metallic flower sculpture with reflective petals"
     />
   );
@@ -105,7 +105,7 @@ export default function Gallery() {
 function Image() {
   return (
     <img
-      src="https://i.imgur.com/ZF6s192.jpg"
+      src="https://react.dev/images/docs/scientists/ZF6s192.jpg"
       alt="'Floralis Genérica' by Eduardo Catalano: a gigantic metallic flower sculpture with reflective petals"
     />
   );
@@ -126,8 +126,13 @@ img { margin: 0 10px 10px 0; }
 
 </Sandpack>
 
+<<<<<<< HEAD
 * **ລະຫວ່າງການ render ເລີ່ມຕົ້ນ,** React ຈະ [ສ້າງ DOM nodes](https://developer.mozilla.org/docs/Web/API/Document/createElement) ສຳລັບ `<section>`, `<h1>`, ແລະ ສາມແທັກ `<img>`.
 * **ລະຫວ່າງການ render ໃໝ່,** React ຈະຄຳນວນວ່າ property ໃດຂອງພວກມັນ (ຖ້າມີ) ມີການປ່ຽນແປງຕັ້ງແຕ່ການ render ຄັ້ງກ່ອນ. ມັນຈະບໍ່ເຮັດຫຍັງກັບຂໍ້ມູນນັ້ນຈົນກວ່າຈະເຖິງຂັ້ນຕອນຕໍ່ໄປ, ຂັ້ນຕອນການ commit.
+=======
+* **During the initial render,** React will [create the DOM nodes](https://developer.mozilla.org/docs/Web/API/Document/createElement) for `<section>`, `<h1>`, and three `<img>` tags.
+* **During a re-render,** React will calculate which of their properties, if any, have changed since the previous render. It won't do anything with that information until the next step, the commit phase.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 <Pitfall>
 
