@@ -61,6 +61,17 @@ function App() {
 }
 ```
 
+<<<<<<< HEAD
+=======
+<Note>
+
+Starting in React 19, you can render `<SomeContext>` as a provider.
+
+In older versions of React, use `<SomeContext.Provider>`.
+
+</Note>
+
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 #### Props {/*provider-props*/}
 
 * `value`: The value that you want to pass to all the components reading this context inside this provider, no matter how deep. The context value can be of any type. A component calling [`useContext(SomeContext)`](/reference/react/useContext) inside of the provider receives the `value` of the innermost corresponding context provider above it.

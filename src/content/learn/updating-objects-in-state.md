@@ -198,7 +198,7 @@ setPosition({
 
 ການ Mutate ຈະເປັນບັນຫາເມື່ອທ່ານປ່ຽນແປງ object *ທີ່ມີຢູ່* ໃນ state ແລ້ວ. ການ mutate object ທີ່ທ່ານຫາກໍສ້າງຂຶ້ນນັ້ນບໍ່ເປັນຫຍັງເພາະວ່າ *ຍັງບໍ່ມີ code ອື່ນອ້າງອີງເຖິງມັນເທື່ອ.* ການປ່ຽນແປງຈະບໍ່ສົ່ງຜົນກະທົບຕໍ່ບາງສິ່ງທີ່ຂຶ້ນຢູ່ກັບ object ໂດຍບໍ່ໄດ້ຕັ້ງໃຈ. ສິ່ງນີ້ເອີ້ນວ່າ "ການ mutate local". ທ່ານສາມາດ mutate local [ໃນຂະນະ render.](/learn/keeping-components-pure#local-mutation-your-components-little-secret) ສະດວກ ແລະ ດີຫຼາຍ!
 
-</DeepDive>  
+</DeepDive>
 
 ## ການ copy object ດ້ວຍ spread syntax {/*copying-objects-with-the-spread-syntax*/}
 
@@ -295,7 +295,11 @@ setPerson({
 });
 ```
 
+<<<<<<< HEAD
 ຕອນນີ້ form ເຮັດວຽກໄດ້!
+=======
+Now the form works!
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 ສັງເກດວ່າທ່ານບໍ່ໄດ້ປະກາດຕົວແປ state ແຍກຕ່າງຫາກສຳລັບແຕ່ລະ field input. ສຳລັບ form ໃຫຍ່, ການເກັບກຸ່ມຂໍ້ມູນທັງໝົດໄວ້ໃນ object ຈະສະດວກກວ່າຫຼາຍ--ຖ້າວ່າທ່ານອັບເດດຂໍ້ມູນຢ່າງຖືກຕ້ອງ!
 
@@ -372,7 +376,11 @@ input { margin-left: 5px; margin-bottom: 5px; }
 
 </Sandpack>
 
+<<<<<<< HEAD
 ຈື່ໄວ້ວ່າ syntax spread `...` ແມ່ນ "ຕື້ນ"--ເຊິ່ງຈະ copy ສະເພາະສິ່ງທີ່ຢູ່ເລິກລົງໄປລະດັບໜຶ່ງເທົ່ານັ້ນ. ສິ່ງນີ້ເຮັດໃຫ້ໄວ, ແຕ່ກໍໝາຍຄວາມວ່າຖ້າທ່ານຕ້ອງການອັບເດດ property ທີ່ຊ້ອນກັນ, ທ່ານຈະຕ້ອງໄດ້ໃຊ້ຫຼາຍກວ່າໜຶ່ງຄັ້ງ.
+=======
+Note that the `...` spread syntax is "shallow"--it only copies things one level deep. This makes it fast, but it also means that if you want to update a nested property, you'll have to use it more than once.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 <DeepDive>
 
@@ -456,7 +464,7 @@ const [person, setPerson] = useState({
   artwork: {
     title: 'Blue Nana',
     city: 'Hamburg',
-    image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+    image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
   }
 });
 ```
@@ -500,7 +508,7 @@ export default function Form() {
     artwork: {
       title: 'Blue Nana',
       city: 'Hamburg',
-      image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+      image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
     }
   });
 
@@ -578,8 +586,8 @@ export default function Form() {
         <br />
         (located in {person.artwork.city})
       </p>
-      <img 
-        src={person.artwork.image} 
+      <img
+        src={person.artwork.image}
         alt={person.artwork.title}
       />
     </>
@@ -607,7 +615,7 @@ let obj = {
   artwork: {
     title: 'Blue Nana',
     city: 'Hamburg',
-    image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+    image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
   }
 };
 ```
@@ -618,7 +626,7 @@ let obj = {
 let obj1 = {
   title: 'Blue Nana',
   city: 'Hamburg',
-  image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+  image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
 };
 
 let obj2 = {
@@ -632,7 +640,7 @@ Object `obj1` ບໍ່ໄດ້ຢູ່ໃນ `obj2`. ຕົວຢ່າງ, `
 let obj1 = {
   title: 'Blue Nana',
   city: 'Hamburg',
-  image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+  image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
 };
 
 let obj2 = {
@@ -648,7 +656,7 @@ let obj3 = {
 
 ຖ້າທ່ານຕ້ອງ mutate `obj3.artwork.city`, ຈະມີຜົນກັບ `obj2.artwork.city` ແລະ `obj1.city`. ເນື່ອງຈາກ `obj3.artwork`, `obj3.artwork` ແລະ `obj1` ແມ່ນເປັນ object ດຽວກັນ. ສິ່ງນີ້ຍາກທີ່ຈະເບິ່ງເຫັນເມື່ອທ່ານຄິດວ່າ object ນັ້ນ "ຊ້ອນກັນ". ແຕ່ເປັນ object ທີ່ແຍກກັນມີການ "point" ເຊິ່ງກັນ ແລະ ກັນດ້ວຍ property.
 
-</DeepDive>  
+</DeepDive>
 
 ### ການຂຽນ logic ການອັບເດດແບບຫຍໍ້ດ້ວຍ Immer {/*write-concise-update-logic-with-immer*/}
 
@@ -688,7 +696,7 @@ export default function Form() {
     artwork: {
       title: 'Blue Nana',
       city: 'Hamburg',
-      image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+      image: 'https://react.dev/images/docs/scientists/Sd1AgUOm.jpg',
     }
   });
 
@@ -753,8 +761,8 @@ export default function Form() {
         <br />
         (located in {person.artwork.city})
       </p>
-      <img 
-        src={person.artwork.image} 
+      <img
+        src={person.artwork.image}
         alt={person.artwork.title}
       />
     </>

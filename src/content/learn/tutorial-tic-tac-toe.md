@@ -345,8 +345,12 @@ import './styles.css';
 import App from './App';
 ```
 
+<<<<<<< HEAD
 ແຖວທີ 1-5 ແມ່ນລວມສ່ວນທີ່ຈຳເປັນມາລວມກັນ:
 
+=======
+Lines 1-5 bring all the necessary pieces together:
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 * React
 * Library React ເພື່ອສື່ສານກັບເວັບບາວເຊີ (React DOM)
@@ -565,7 +569,11 @@ export default function Board() {
 }
 ```
 
+<<<<<<< HEAD
 ສັງເກດເຫັນຄວາມແຕກຕ່າງຂອງບາວເຊີ `div` component `Board` ແລະ `Square` ຕ້ອງເລີ່ມຕົ້ນດ້ວຍໂຕພິມໃຫຍ່.
+=======
+Note how unlike the browser `div`s, your own components `Board` and `Square` must start with a capital letter.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 ມາເບິ່ງ:
 
@@ -1108,7 +1116,11 @@ function Square({ value, onSquareClick }) {
 }
 ```
 
+<<<<<<< HEAD
 ຕອນນີ້ທ່ານຈະເຊື່ອມຕໍ່ prop `onSquareClick` ໃສ່ຟັງຊັ່ນໃນ component `Board` ທີ່ທ່ານໃສ່ຊື່ວ່າ `handleClick`. ໃນການເຊື່ອມຕໍ່ `onSquareClick` ກັບ `handleClick` ທ່ານຈະຕ້ອງສົ່ງຜ່ານຟັງຊັນໄປຫາ prop `onSquareClick` ຂອງ component `Square` ທຳອິດ:
+=======
+Now you'll connect the `onSquareClick` prop to a function in the `Board` component that you'll name `handleClick`. To connect `onSquareClick` to `handleClick` you'll pass a function to the `onSquareClick` prop of the first `Square` component:
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 ```js {7}
 export default function Board() {
@@ -2090,7 +2102,17 @@ export default function Game() {
 }
 ```
 
+<<<<<<< HEAD
 ທ່ານສາມາດເບິ່ງໄດ້ວ່າ code ຂອງທ່ານຄວນເປັນແນວໃດໃນດ້ານລຸ່ມນີ້. ສັງເກດວ່າທ່ານຄວນເຫັນຂໍ້ຜິດພາດໃນ console developer tools ທີ່ບອກວ່າ: ``Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of `Game`.`` ທ່ານຈະແປງຂໍ້ຜິດພາດນີ້ໃນຫົວຂໍ້ຕໍ່ໄປ.
+=======
+You can see what your code should look like below. Note that you should see an error in the developer tools console that says:
+
+<ConsoleBlock level="warning">
+Warning: Each child in an array or iterator should have a unique "key" prop. Check the render method of &#96;Game&#96;.
+</ConsoleBlock>
+
+You'll fix this error in the next section.
+>>>>>>> abe931a8cb3aee3e8b15ef7e187214789164162a
 
 <Sandpack>
 
