@@ -56,8 +56,108 @@ function AppContainer() {
 
 #### Returns {/*returns*/}
 
+<<<<<<< HEAD
 * `optimisticState`: The resulting optimistic state. It is equal to `state` unless an action is pending, in which case it is equal to the value returned by `updateFn`.
 * `addOptimistic`: `addOptimistic` is the dispatching function to call when you have an optimistic update. It takes one argument, `optimisticValue`, of any type and will call the `updateFn` with `state` and `optimisticValue`.
+=======
+`useOptimistic` returns an array with exactly two values:
+
+1. `optimisticState`: The current optimistic state. It is equal to `value` unless an Action is pending, in which case it is equal to the state returned by `reducer` (or the value passed to the set function if no `reducer` was provided).
+2. The [`set` function](#setoptimistic) that lets you update the optimistic state to a different value inside an Action.
+
+---
+
+### `set` functions, like `setOptimistic(optimisticState)` {/*setoptimistic*/}
+
+The `set` function returned by `useOptimistic` lets you update the state for the duration of an [Action](reference/react/useTransition#functions-called-in-starttransition-are-called-actions). You can pass the next state directly, or a function that calculates it from the previous state:
+
+```js
+const [optimisticLike, setOptimisticLike] = useOptimistic(false);
+const [optimisticSubs, setOptimisticSubs] = useOptimistic(subs);
+
+function handleClick() {
+  startTransition(async () => {
+    setOptimisticLike(true);
+    setOptimisticSubs(a => a + 1);
+    await saveChanges();
+  });
+}
+```
+
+#### Parameters {/*setoptimistic-parameters*/}
+
+* `optimisticState`: The value that you want the optimistic state to be during an [Action](reference/react/useTransition#functions-called-in-starttransition-are-called-actions). If you provided a `reducer` to `useOptimistic`, this value will be passed as the second argument to your reducer. It can be a value of any type.
+    * If you pass a function as `optimisticState`, it will be treated as an _updater function_. It must be pure, should take the pending state as its only argument, and should return the next optimistic state. React will put your updater function in a queue and re-render your component. During the next render, React will calculate the next state by applying the queued updaters to the previous state similar to [`useState` updaters](/reference/react/useState#setstate-parameters).
+
+#### Returns {/*setoptimistic-returns*/}
+
+`set` functions do not have a return value.
+
+#### Caveats {/*setoptimistic-caveats*/}
+
+* The `set` function must be called inside an [Action](reference/react/useTransition#functions-called-in-starttransition-are-called-actions). If you call the setter outside an Action, [React will show a warning](#an-optimistic-state-update-occurred-outside-a-transition-or-action) and the optimistic state will briefly render.
+
+<DeepDive>
+
+#### How optimistic state works {/*how-optimistic-state-works*/}
+
+`useOptimistic` lets you show a temporary value while an Action is in progress:
+
+```js
+const [value, setValue] = useState('a');
+const [optimistic, setOptimistic] = useOptimistic(value);
+
+startTransition(async () => {
+  setOptimistic('b');
+  const newValue = await saveChanges('b');
+  setValue(newValue);
+});
+```
+
+When the setter is called inside an Action, `useOptimistic` will trigger a re-render to show that state while the Action is in progress. Otherwise, the `value` passed to `useOptimistic` is returned.
+
+This state is called the "optimistic" because it is used to immediately present the user with the result of performing an Action, even though the Action actually takes time to complete.
+
+**How the update flows**
+
+1. **Update immediately**: When `setOptimistic('b')` is called, React immediately renders with `'b'`.
+
+2. **(Optional) await in Action**: If you await in the Action, React continues showing `'b'`.
+
+3. **Transition scheduled**: `setValue(newValue)` schedules an update to the real state.
+
+4. **(Optional) wait for Suspense**: If `newValue` suspends, React continues showing `'b'`.
+
+5. **Single render commit**: Finally, the `newValue` commits for `value` and `optimistic`.
+
+There's no extra render to "clear" the optimistic state. The optimistic and real state converge in the same render when the Transition completes.
+
+<Note>
+
+#### Optimistic state is temporary {/*optimistic-state-is-temporary*/}
+
+Optimistic state only renders while an Action is in progress, otherwise `value` is rendered.
+
+If `saveChanges` returned `'c'`, then both `value` and `optimistic` will be `'c'`, not `'b'`.
+
+</Note>
+
+**How the final state is determined**
+
+The `value` argument to `useOptimistic` determines what displays after the Action finishes. How this works depends on the pattern you use:
+
+- **Hardcoded values** like `useOptimistic(false)`: After the Action, `state` is still `false`, so the UI shows `false`. This is useful for pending states where you always start from `false`.
+
+- **Props or state passed in** like `useOptimistic(isLiked)`: If the parent updates `isLiked` during the Action, the new value is used after the Action completes. This is how the UI reflects the result of the Action.
+
+- **Reducer pattern** like `useOptimistic(items, fn)`: If `items` changes while the Action is pending, React re-runs your `reducer` with the new `items` to recalculate the state. This keeps your optimistic additions on top of the latest data.
+
+**What happens when the Action fails**
+
+If the Action throws an error, the Transition still ends, and React renders with whatever `value` currently is. Since the parent typically only updates `value` on success, a failure means `value` hasn't changed, so the UI shows what it showed before the optimistic update. You can catch the error to show a message to the user.
+
+</DeepDive>
+>>>>>>> 8bb31acb86bf68fa33d97dd0f1b834dfa71e2b1a
 
 ---
 
