@@ -330,7 +330,19 @@ export default function TopNav({
                 </div>
                 <div className="flex">
                   <Link
+<<<<<<< HEAD
                     href="https://github.com/facebook/react/releases"
+=======
+                    href="/community/translations"
+                    aria-label="Translations"
+                    className="active:scale-95 transition-transform flex w-12 h-12 rounded-full items-center justify-center hover:bg-primary/5 hover:dark:bg-primary-dark/5 outline-link">
+                    {languageIcon}
+                  </Link>
+                </div>
+                <div className="flex">
+                  <Link
+                    href="https://github.com/react/react/releases"
+>>>>>>> 7b6c3ceb9dd97249e9dce4a8a94e61aed6424698
                     target="_blank"
                     rel="noreferrer noopener"
                     aria-label="Open on GitHub"
