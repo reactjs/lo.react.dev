@@ -922,19 +922,32 @@ body {
 
 ### React Developer Tools {/*react-developer-tools*/}
 
+<<<<<<< HEAD
 React DevTools ຊ່ວຍໃຫ້ທ່ານກວດ prop ແລະ state ຂອງ Component React ຂອງທ່ານ. ທ່ານສາມາດຫາແທັບ React DevTools ໃນດ້ານລຸ່ມຂອງສ່ວນ _browser_ ໃນ CodeSandbox:
+=======
+React Developer Tools let you check the props and the state of your React components. It is available as a [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/), and [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil) browser extension.
+>>>>>>> c7d6b700038c63d1aaf2c649af1aefe01ebbacac
 
-![React DevTools in CodeSandbox](../images/tutorial/codesandbox-devtools.png)
+After you install it, a new *Components* tab will appear in your browser Developer Tools for sites using React. If you're following along in CodeSandbox, you'd need to first open your sandbox preview in a new tab:
 
+<<<<<<< HEAD
 ເພື່ອກວດແຕ່ລະ component ເທິງໜ້າຈໍ, ໃຊ້ປຸ່ມທີ່ຢູ່ມຸມຊ້າຍດ້ານເທິງຂອງ React DevTools:
+=======
+![opening in new tab](../images/tutorial/sandbox-new-tab.png)
+>>>>>>> c7d6b700038c63d1aaf2c649af1aefe01ebbacac
 
-![Selecting components on the page with React DevTools](../images/tutorial/devtools-select.gif)
+Then, on the preview page, open your browser's DevTools and find the *Components* tab:
 
-<Note>
+![components tab](../images/tutorial/components-tab.png)
 
+<<<<<<< HEAD
 ສຳລັບ local development, React DevTools ແມ່ນມີໃນ browser extension [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/), ແລະ [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil). ຕິດຕັ້ງມັນ, ແລະ ແທັບ *Components*  ຈະສະແດງໃນ browser Developer Tools ສຳລັບໜ້າທີ່ໃຊ້ React.
+=======
+To inspect a particular component on the screen, use the button in the top left corner of the Components tab:
 
-</Note>
+![inspecting with devtools](../images/tutorial/devtools-inspect.gif)
+>>>>>>> c7d6b700038c63d1aaf2c649af1aefe01ebbacac
+
 
 ## ເຮັດເກມໃຫ້ແລ້ວ {/*completing-the-game*/}
 
