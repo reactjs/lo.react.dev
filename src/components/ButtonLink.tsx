@@ -26,7 +26,12 @@ function ButtonLink({
     className,
     'active:scale-[.98] transition-transform inline-flex font-bold items-center outline-none focus:outline-none focus-visible:outline focus-visible:outline-link focus:outline-offset-2 focus-visible:dark:focus:outline-link-dark leading-snug',
     {
+<<<<<<< HEAD
       'bg-link text-white hover:bg-opacity-80': type === 'primary',
+=======
+      'bg-link text-white dark:bg-brand-dark dark:text-gray-90 hover:bg-opacity-80':
+        type === 'primary',
+>>>>>>> 12d692da47e77cdc558b928fcfbaf4e71c6d0cec
       'text-primary dark:text-primary-dark shadow-secondary-button-stroke dark:shadow-secondary-button-stroke-dark hover:bg-gray-40/5 active:bg-gray-40/10 hover:dark:bg-gray-60/5 active:dark:bg-gray-60/10':
         type === 'secondary',
       'text-lg py-3 rounded-full px-4 sm:px-6': size === 'lg',
