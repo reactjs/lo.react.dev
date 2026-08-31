@@ -263,6 +263,14 @@ export default function ContactTab() {
 ```css
 button { margin-right: 10px }
 b { display: inline-block; margin-right: 10px; }
+<<<<<<< HEAD
+=======
+.pending { color: #777; }
+.items {
+  max-height: 300px;
+  overflow: auto;
+}
+>>>>>>> 7c36f7ac329fe3cf2e11222edce9a535158c2cab
 ```
 
 </Sandpack>
@@ -701,6 +709,10 @@ export default function ContactTab() {
 button { margin-right: 10px }
 b { display: inline-block; margin-right: 10px; }
 .pending { color: #777; }
+.items {
+  max-height: 300px;
+  overflow: auto;
+}
 ```
 
 </Sandpack>

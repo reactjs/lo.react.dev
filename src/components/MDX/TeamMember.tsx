@@ -15,12 +15,48 @@ interface TeamMemberProps {
   name: string;
   title: string;
   permalink: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   photo: string;
   twitter?: string;
   threads?: string;
   github?: string;
   personal?: string;
+  // Comma-separated list of working groups. Suffix a group with `*` to mark
+  // that the member represents it on the Leadership Council, e.g. "Fiber*, DOM".
+  group?: string;
+}
+
+function GroupBadges({group}: {group: string}) {
+  const groups = group
+    .split(',')
+    .map((g) => g.trim())
+    .filter(Boolean);
+  if (groups.length === 0) {
+    return null;
+  }
+  return (
+    <div className="flex flex-row flex-wrap gap-2 my-3">
+      {groups.map((g) => {
+        const isLead = g.endsWith('*');
+        const label = isLead ? g.slice(0, -1).trim() : g;
+        return (
+          <span
+            key={g}
+            className="inline-flex items-center rounded-full bg-blue-10 dark:bg-gray-80 text-link dark:text-link-dark px-3 py-1 text-sm font-medium whitespace-nowrap">
+            {label}
+            {isLead && (
+              <span
+                className="ps-1 text-yellow-50"
+                aria-label="Leadership Council"
+                title="Leadership Council">
+                ★
+              </span>
+            )}
+          </span>
+        );
+      })}
+    </div>
+  );
 }
 
 // TODO: good alt text for images/links
@@ -34,7 +70,9 @@ export function TeamMember({
   twitter,
   threads,
   personal,
+  group,
 }: TeamMemberProps) {
+<<<<<<< HEAD
   if (name == null || title == null || permalink == null || children == null) {
     throw new Error(
       'Expected name, title, permalink, and children for ' + name ??
@@ -42,6 +80,11 @@ export function TeamMember({
         permalink ??
         'unknown'
     );
+=======
+  if (name == null || title == null || permalink == null) {
+    const identifier = name ?? title ?? permalink ?? 'unknown';
+    throw new Error(`Expected name, title, and permalink for ${identifier}`);
+>>>>>>> 7c36f7ac329fe3cf2e11222edce9a535158c2cab
   }
   return (
     <div className="pb-6 sm:pb-10">
@@ -61,6 +104,7 @@ export function TeamMember({
             {name}
           </H3>
           {title && <div>{title}</div>}
+          {group && <GroupBadges group={group} />}
           {children}
           <div className="sm:flex sm:flex-row flex-wrap">
             {twitter && (
