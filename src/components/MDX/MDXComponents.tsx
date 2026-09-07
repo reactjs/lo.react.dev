@@ -28,7 +28,7 @@ import YouWillLearnCard from './YouWillLearnCard';
 import {Challenges, Hint, Solution} from './Challenges';
 import {IconNavArrow} from '../Icon/IconNavArrow';
 import ButtonLink from 'components/ButtonLink';
-import {TocContext} from './TocContext';
+import {TocContext, IsInTocContext} from './TocContext';
 import type {Toc, TocItem} from './TocContext';
 import {TeamMember} from './TeamMember';
 
@@ -94,10 +94,102 @@ const Canary = ({children}: {children: React.ReactNode}) => (
   <ExpandableCallout type="canary">{children}</ExpandableCallout>
 );
 
+<<<<<<< HEAD
 const Blockquote = ({
   children,
   ...props
 }: JSX.IntrinsicElements['blockquote']) => {
+=======
+const RC = ({children}: {children: React.ReactNode}) => (
+  <ExpandableCallout type="rc">{children}</ExpandableCallout>
+);
+
+const Experimental = ({children}: {children: React.ReactNode}) => (
+  <ExpandableCallout type="experimental">{children}</ExpandableCallout>
+);
+
+const NextMajor = ({children}: {children: React.ReactNode}) => (
+  <ExpandableCallout type="major">{children}</ExpandableCallout>
+);
+
+const RSC = ({children}: {children: React.ReactNode}) => (
+  <ExpandableCallout type="rsc">{children}</ExpandableCallout>
+);
+
+const CanaryBadge = ({title}: {title: string}) => {
+  const isInToc = useContext(IsInTocContext);
+  if (isInToc) {
+    return (
+      <IconCanary
+        size="s"
+        title={title}
+        className="inline me-1 mb-0.5 text-gray-60 dark:text-gray-10"
+      />
+    );
+  }
+  return (
+    <span
+      title={title}
+      className={
+        'text-base font-display px-1 py-0.5 font-bold bg-gray-10 dark:bg-gray-60 text-gray-60 dark:text-gray-10 rounded'
+      }>
+      <IconCanary
+        size="s"
+        className={'inline me-1 mb-0.5 text-sm text-gray-60 dark:text-gray-10'}
+      />
+      Canary only
+    </span>
+  );
+};
+
+const ExperimentalBadge = ({title}: {title: string}) => {
+  const isInToc = useContext(IsInTocContext);
+  if (isInToc) {
+    return (
+      <IconExperimental
+        size="s"
+        title={title}
+        className="inline me-1 mb-0.5 text-gray-60 dark:text-gray-10"
+      />
+    );
+  }
+  return (
+    <span
+      title={title}
+      className={
+        'text-base font-display px-1 py-0.5 font-bold bg-gray-10 dark:bg-gray-60 text-gray-60 dark:text-gray-10 rounded'
+      }>
+      <IconExperimental
+        size="s"
+        className={'inline me-1 mb-0.5 text-sm text-gray-60 dark:text-gray-10'}
+      />
+      Experimental only
+    </span>
+  );
+};
+
+const NextMajorBadge = ({title}: {title: string}) => (
+  <span
+    title={title}
+    className={
+      'text-base font-display px-2 py-0.5 font-bold bg-blue-10 dark:bg-blue-60 text-gray-60 dark:text-gray-10 rounded'
+    }>
+    React 19
+  </span>
+);
+
+const RSCBadge = ({title}: {title: string}) => (
+  <span
+    title={title}
+    className={
+      'text-base font-display px-2 py-0.5 font-bold bg-blue-10 dark:bg-blue-50 text-gray-60 dark:text-gray-10 rounded'
+    }>
+    RSC
+  </span>
+);
+
+const Blockquote = ({children, ...props}: HTMLAttributes<HTMLQuoteElement>) => {
+>>>>>>> f3d9794fc31f4a3faf7e863984d37f4ae86b3290
   return (
     <blockquote
       className="mdx-blockquote py-4 px-8 my-8 shadow-inner-border dark:shadow-inner-border-dark bg-highlight dark:bg-highlight-dark bg-opacity-50 rounded-2xl leading-6 flex relative"
@@ -349,7 +441,11 @@ function InlineToc() {
   if (root.children.length < 2) {
     return null;
   }
-  return <InlineTocItem items={root.children} />;
+  return (
+    <IsInTocContext.Provider value={true}>
+      <InlineTocItem items={root.children} />
+    </IsInTocContext.Provider>
+  );
 }
 
 function InlineTocItem({items}: {items: Array<NestedTocNode>}) {
