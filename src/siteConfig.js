@@ -3,6 +3,10 @@
  */
 
 exports.siteConfig = {
+<<<<<<< HEAD
+=======
+  version: '19.3',
+>>>>>>> b011783fcc7a39da9eefd4274147a1444860a12b
   // --------------------------------------
   // Translations should replace these lines:
   languageCode: 'en',
@@ -10,7 +14,7 @@ exports.siteConfig = {
   isRTL: false,
   // --------------------------------------
   copyright: `Copyright © ${new Date().getFullYear()} Facebook Inc. All Rights Reserved.`,
-  repoUrl: 'https://github.com/facebook/react',
+  repoUrl: 'https://github.com/react/react',
   twitterUrl: 'https://twitter.com/reactjs',
   algolia: {
     appId: '1FCF9AYYAT',
