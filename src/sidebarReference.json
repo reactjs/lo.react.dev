@@ -105,6 +105,17 @@
         {
           "title": "<Suspense>",
           "path": "/reference/react/Suspense"
+<<<<<<< HEAD
+=======
+        },
+        {
+          "title": "<Activity>",
+          "path": "/reference/react/Activity"
+        },
+        {
+          "title": "<ViewTransition>",
+          "path": "/reference/react/ViewTransition"
+>>>>>>> b011783fcc7a39da9eefd4274147a1444860a12b
         }
       ]
     },
@@ -113,6 +124,17 @@
       "path": "/reference/react/apis",
       "routes": [
         {
+<<<<<<< HEAD
+=======
+          "title": "act",
+          "path": "/reference/react/act"
+        },
+        {
+          "title": "addTransitionType",
+          "path": "/reference/react/addTransitionType"
+        },
+        {
+>>>>>>> b011783fcc7a39da9eefd4274147a1444860a12b
           "title": "cache",
           "path": "/reference/react/cache",
           "canary": true
@@ -250,6 +272,10 @@
       "title": "APIs",
       "path": "/reference/react-dom",
       "routes": [
+        {
+          "title": "browser",
+          "path": "/reference/react-dom/browser"
+        },
         {
           "title": "createPortal",
           "path": "/reference/react-dom/createPortal"

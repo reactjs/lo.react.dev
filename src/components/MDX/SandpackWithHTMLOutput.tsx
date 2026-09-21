@@ -49,8 +49,13 @@ export default function formatHTML(markup) {
 const packageJSON = `
 {
   "dependencies": {
+<<<<<<< HEAD
     "react": "18.3.0-canary-6db7f4209-20231021",
     "react-dom": "18.3.0-canary-6db7f4209-20231021",
+=======
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+>>>>>>> b011783fcc7a39da9eefd4274147a1444860a12b
     "react-scripts": "^5.0.0",
     "html-format": "^1.1.2"
   },
