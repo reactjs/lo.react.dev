@@ -90,7 +90,11 @@ With a transition, your UI stays responsive in the middle of a re-render. For ex
 
 <Note>
 
+<<<<<<< HEAD
 `startTransition` is very similar to [`useTransition`](/reference/react/useTransition), except that it does not provide the `isPending` flag to track whether a transition is ongoing. You can call `startTransition` when `useTransition` is not available. For example, `startTransition` works outside components, such as from a data library.
+=======
+`startTransition` is very similar to [`useTransition`](/reference/react/useTransition), except that it does not provide the `isPending` flag to track whether a Transition is ongoing. The standalone function is also not associated with a component, so if the function passed to it throws an error or returns a rejected Promise, React reports the error with [`reportError`](https://developer.mozilla.org/en-US/docs/Web/API/Window/reportError). You can call `startTransition` when `useTransition` is not available. For example, `startTransition` works outside components, such as from a data library.
+>>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
 
 [Learn about transitions and see examples on the `useTransition` page.](/reference/react/useTransition)
 

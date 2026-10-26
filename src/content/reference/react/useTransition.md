@@ -263,6 +263,14 @@ export default function ContactTab() {
 ```css
 button { margin-right: 10px }
 b { display: inline-block; margin-right: 10px; }
+<<<<<<< HEAD
+=======
+.pending { color: #777; }
+.items {
+  max-height: 300px;
+  overflow: auto;
+}
+>>>>>>> ae5e48074d4f73f1e349eda2a66841f9a959023e
 ```
 
 </Sandpack>
@@ -701,6 +709,10 @@ export default function ContactTab() {
 button { margin-right: 10px }
 b { display: inline-block; margin-right: 10px; }
 .pending { color: #777; }
+.items {
+  max-height: 300px;
+  overflow: auto;
+}
 ```
 
 </Sandpack>
@@ -1509,7 +1521,7 @@ Error Boundary for useTransition is currently only available in React's canary a
 
 </Canary>
 
-If a function passed to `startTransition` throws an error, you can display an error to your user with an [error boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary). To use an error boundary, wrap the component where you are calling the `useTransition` in an error boundary. Once the function passed to `startTransition` errors, the fallback for the error boundary will be displayed.
+If a function passed to `startTransition` throws an error or returns a rejected Promise, you can display an error to your user with an [error boundary](/reference/react/Component#catching-rendering-errors-with-an-error-boundary). To use an error boundary, wrap the component where you are calling the `useTransition` in an error boundary. Once the function passed to `startTransition` errors, the fallback for the error boundary will be displayed.
 
 <Sandpack>
 
@@ -1681,7 +1693,11 @@ startTransition(() => {
 
 ### I want to call `useTransition` from outside a component {/*i-want-to-call-usetransition-from-outside-a-component*/}
 
-You can't call `useTransition` outside a component because it's a Hook. In this case, use the standalone [`startTransition`](/reference/react/startTransition) method instead. It works the same way, but it doesn't provide the `isPending` indicator.
+You can't call `useTransition` outside a component because it's a Hook. In this
+case, the standalone [`startTransition`](/reference/react/startTransition)
+function can mark state updates as Transitions. It does not provide the
+`isPending` flag. Because the standalone function is not associated with a
+component, an Error Boundary cannot handle errors from its Transition.
 
 ---
 
