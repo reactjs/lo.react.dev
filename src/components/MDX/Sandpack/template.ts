@@ -28,8 +28,13 @@ root.render(
           eject: 'react-scripts eject',
         },
         dependencies: {
+<<<<<<< HEAD
           react: '^18.0.0',
           'react-dom': '^18.0.0',
+=======
+          react: '19.3.0-canary-f1f7ed2a-20260904',
+          'react-dom': '19.3.0-canary-f1f7ed2a-20260904',
+>>>>>>> 0821e7d9428a6c58c922765b891bbffba9ed6249
           'react-scripts': '^5.0.0',
         },
       },
