@@ -15,15 +15,51 @@ interface TeamMemberProps {
   name: string;
   title: string;
   permalink: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   photo: string;
   twitter?: string;
   threads?: string;
   github?: string;
   personal?: string;
+  // Comma-separated list of working groups. Suffix a group with `*` to mark
+  // that the member represents it on the Leadership Council, e.g. "Fiber*, DOM".
+  group?: string;
 }
 
-// TODO: good alt text for images/links
+function GroupBadges({group}: {group: string}) {
+  const groups = group
+    .split(',')
+    .map((g) => g.trim())
+    .filter(Boolean);
+  if (groups.length === 0) {
+    return null;
+  }
+  return (
+    <div className="flex flex-row flex-wrap gap-2 my-3">
+      {groups.map((g) => {
+        const isLead = g.endsWith('*');
+        const label = isLead ? g.slice(0, -1).trim() : g;
+        return (
+          <span
+            key={g}
+            className="inline-flex items-center rounded-full bg-blue-10 dark:bg-gray-80 text-link dark:text-link-dark px-3 py-1 text-sm font-medium whitespace-nowrap">
+            {label}
+            {isLead && (
+              <span
+                className="ps-1 text-yellow-50"
+                aria-label="Leadership Council"
+                title="Leadership Council">
+                ★
+              </span>
+            )}
+          </span>
+        );
+      })}
+    </div>
+  );
+}
+
+// TODO: good alt text for images
 export function TeamMember({
   name,
   title,
@@ -34,7 +70,9 @@ export function TeamMember({
   twitter,
   threads,
   personal,
+  group,
 }: TeamMemberProps) {
+<<<<<<< HEAD
   if (name == null || title == null || permalink == null || children == null) {
     throw new Error(
       'Expected name, title, permalink, and children for ' + name ??
@@ -42,6 +80,11 @@ export function TeamMember({
         permalink ??
         'unknown'
     );
+=======
+  if (name == null || title == null || permalink == null) {
+    const identifier = name ?? title ?? permalink ?? 'unknown';
+    throw new Error(`Expected name, title, and permalink for ${identifier}`);
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
   }
   return (
     <div className="pb-6 sm:pb-10">
@@ -61,6 +104,7 @@ export function TeamMember({
             {name}
           </H3>
           {title && <div>{title}</div>}
+          {group && <GroupBadges group={group} />}
           {children}
           <div className="sm:flex sm:flex-row flex-wrap">
             {twitter && (
@@ -68,8 +112,13 @@ export function TeamMember({
                 <ExternalLink
                   aria-label="React on Twitter"
                   href={`https://twitter.com/${twitter}`}
+<<<<<<< HEAD
                   className="hover:text-primary dark:text-primary-dark flex flex-row items-center">
                   <IconTwitter className="pe-1" />
+=======
+                  className="hover:text-primary hover:underline dark:text-primary-dark flex flex-row items-center">
+                  <IconTwitter className="pe-1" aria-hidden="true" />
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
                   {twitter}
                 </ExternalLink>
               </div>
@@ -80,27 +129,51 @@ export function TeamMember({
                   aria-label="React on Threads"
                   href={`https://threads.net/${threads}`}
                   className="hover:text-primary hover:underline dark:text-primary-dark flex flex-row items-center">
-                  <IconThreads className="pe-1" />
+                  <IconThreads className="pe-1" aria-hidden="true" />
                   {threads}
                 </ExternalLink>
               </div>
             )}
+<<<<<<< HEAD
+=======
+            {bsky && (
+              <div className="me-4">
+                <ExternalLink
+                  aria-label={`${name} on Bluesky`}
+                  href={`https://bsky.app/profile/${bsky}`}
+                  className="hover:text-primary hover:underline dark:text-primary-dark flex flex-row items-center">
+                  <IconBsky className="pe-1" aria-hidden="true" />
+                  {bsky}
+                </ExternalLink>
+              </div>
+            )}
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
             {github && (
               <div className="me-4">
                 <ExternalLink
-                  aria-label="GitHub Profile"
+                  aria-label={`${name} on GitHub`}
                   href={`https://github.com/${github}`}
+<<<<<<< HEAD
                   className="hover:text-primary dark:text-primary-dark flex flex-row items-center">
                   <IconGitHub className="pe-1" /> {github}
+=======
+                  className="hover:text-primary hover:underline dark:text-primary-dark flex flex-row items-center">
+                  <IconGitHub className="pe-1" aria-hidden="true" /> {github}
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
                 </ExternalLink>
               </div>
             )}
             {personal && (
               <ExternalLink
-                aria-label="Personal Site"
+                aria-label={`${name}'s personal website`}
                 href={`https://${personal}`}
+<<<<<<< HEAD
                 className="hover:text-primary dark:text-primary-dark flex flex-row items-center">
                 <IconLink className="pe-1" /> {personal}
+=======
+                className="hover:text-primary hover:underline dark:text-primary-dark flex flex-row items-center">
+                <IconLink className="pe-1" aria-hidden="true" /> {personal}
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
               </ExternalLink>
             )}
           </div>
