@@ -6,7 +6,11 @@ canary: true
 
 <Canary>
 
+<<<<<<< HEAD:src/content/reference/react/use-server.md
 `'use server'` is needed only if you're [using React Server Components](/learn/start-a-new-react-project#bleeding-edge-react-frameworks) or building a library compatible with them.
+=======
+`'use server'` is for use with [React Server Components](/reference/rsc/server-components).
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3:src/content/reference/rsc/use-server.md
 
 </Canary>
 
@@ -145,7 +149,7 @@ To update the UI based on the result of a server action while supporting progres
 // requestUsername.js
 'use server';
 
-export default async function requestUsername(formData) {
+export default async function requestUsername(prevState, formData) {
   const username = formData.get('username');
   if (canRequest(username)) {
     // ...
@@ -185,7 +189,7 @@ Server actions are exposed server endpoints and can be called anywhere in client
 
 When using a server action outside of a [form](/reference/react-dom/components/form), call the server action in a [transition](/reference/react/useTransition), which allows you to display a loading indicator, show [optimistic state updates](/reference/react/useOptimistic), and handle unexpected errors. Forms will automatically wrap server actions in transitions.
 
-```js {9-12}
+```js {9-14}
 import incrementLike from './actions';
 import { useState, useTransition } from 'react';
 
@@ -196,14 +200,16 @@ function LikeButton() {
   const onClick = () => {
     startTransition(async () => {
       const currentCount = await incrementLike();
-      setLikeCount(currentCount);
+      startTransition(() => {
+        setLikeCount(currentCount);
+      });
     });
   };
 
   return (
     <>
       <p>Total Likes: {likeCount}</p>
-      <button onClick={onClick} disabled={isPending}>Like</button>;
+      <button onClick={onClick} disabled={isPending}>Like</button>
     </>
   );
 }

@@ -922,19 +922,32 @@ body {
 
 ### React Developer Tools {/*react-developer-tools*/}
 
+<<<<<<< HEAD
 React DevTools ຊ່ວຍໃຫ້ທ່ານກວດ prop ແລະ state ຂອງ Component React ຂອງທ່ານ. ທ່ານສາມາດຫາແທັບ React DevTools ໃນດ້ານລຸ່ມຂອງສ່ວນ _browser_ ໃນ CodeSandbox:
+=======
+React Developer Tools let you check the props and the state of your React components. It is available as a [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/), and [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil) browser extension.
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
-![React DevTools in CodeSandbox](../images/tutorial/codesandbox-devtools.png)
+After you install it, a new *Components* tab will appear in your browser Developer Tools for sites using React. If you're following along in CodeSandbox, you'd need to first open your sandbox preview in a new tab:
 
+<<<<<<< HEAD
 ເພື່ອກວດແຕ່ລະ component ເທິງໜ້າຈໍ, ໃຊ້ປຸ່ມທີ່ຢູ່ມຸມຊ້າຍດ້ານເທິງຂອງ React DevTools:
+=======
+![opening in new tab](../images/tutorial/sandbox-new-tab.png)
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
-![Selecting components on the page with React DevTools](../images/tutorial/devtools-select.gif)
+Then, on the preview page, open your browser's DevTools and find the *Components* tab:
 
-<Note>
+![components tab](../images/tutorial/components-tab.png)
 
+<<<<<<< HEAD
 ສຳລັບ local development, React DevTools ແມ່ນມີໃນ browser extension [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en), [Firefox](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/), ແລະ [Edge](https://microsoftedge.microsoft.com/addons/detail/react-developer-tools/gpphkfbcpidddadnkolkpfckpihlkkil). ຕິດຕັ້ງມັນ, ແລະ ແທັບ *Components*  ຈະສະແດງໃນ browser Developer Tools ສຳລັບໜ້າທີ່ໃຊ້ React.
+=======
+To inspect a particular component on the screen, use the button in the top left corner of the Components tab:
 
-</Note>
+![inspecting with devtools](../images/tutorial/devtools-inspect.gif)
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
+
 
 ## ເຮັດເກມໃຫ້ແລ້ວ {/*completing-the-game*/}
 
@@ -1163,7 +1176,11 @@ JavaScript ຮອງຮັບ [closures](https://developer.mozilla.org/en-US/doc
 
 </Note>
 
+<<<<<<< HEAD
 ຕອນນີ້ທ່ານສາມາດເພີ່ມ X ລົງໃນກະດານໄດ້... ແຕ່ສະເພາະສີ່ຫຼ່ຽມດ້ານເທິງເບື້ອງຊ້າຍເທົ່ານັ້ນ. ຟັງຊັ່ນ `handleClick` ຂອງທ່ານໄດ້ຮັບການ hard code ເພື່ອອັບເດດ index ສຳລັບປ່ອງສີ່ຫຼ່ຽມດ້ານເທິງເບື້ອງຊ້າຍ (`0`). ມາອັບເດດ `handleClick` ເພື່ອໃຫ້ສາມາດອັບເດດສີ່ຫຼ່ຽມໃດກໍໄດ້. ເພີ່ມ argument `i` ໃຫ້ກັບຟັງຊັ່ນ `handleClick` ທີ່ຮັບ index ຂອງສີ່ຫຼ່ຽມເພື່ອອັບເດດ:
+=======
+Now you can add X's to the board...  but only to the upper left square. Your `handleClick` function is hardcoded to update the index for the upper left square (`0`). Let's update `handleClick` to be able to update any square. Add a parameter `i` to the `handleClick` function that takes the index of the square to update:
+>>>>>>> f5fa1e82edacdf8c6bfc4dfd9cf52029a96d5fd3
 
 ```js {4,6}
 export default function Board() {
