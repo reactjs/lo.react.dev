@@ -11,9 +11,10 @@ jobs:
   lint:
     runs-on: ubuntu-latest
 
-    name: Lint on node 20.x and ubuntu-latest
+    name: Lint on node 24.x and ubuntu-latest
 
     steps:
+<<<<<<< HEAD
       - uses: actions/checkout@v1
       - name: Use Node.js 20.x
         uses: actions/setup-node@v3
@@ -22,6 +23,24 @@ jobs:
 
       - name: Install deps and build (with cache)
         uses: bahmutov/npm-install@v1.8.32
+=======
+      - uses: actions/checkout@v4
+      - name: Use Node.js 24.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
+          cache: yarn
+          cache-dependency-path: yarn.lock
+
+      - name: Restore cached node_modules
+        uses: actions/cache@v4
+        with:
+          path: '**/node_modules'
+          key: node_modules-24-${{ runner.arch }}-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+
+      - name: Install deps
+        run: yarn install --frozen-lockfile
+>>>>>>> 46a54e0592729712b7640308b53268e84fdc7c9f
 
       - name: Lint codebase
         run: yarn ci-check

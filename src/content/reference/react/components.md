@@ -16,6 +16,11 @@ React exposes a few built-in components that you can use in your JSX.
 * [`<Profiler>`](/reference/react/Profiler) lets you measure rendering performance of a React tree programmatically.
 * [`<Suspense>`](/reference/react/Suspense) lets you display a fallback while the child components are loading.
 * [`<StrictMode>`](/reference/react/StrictMode) enables extra development-only checks that help you find bugs early.
+<<<<<<< HEAD
+=======
+* [`<Activity>`](/reference/react/Activity) lets you hide and restore the UI and internal state of its children.
+* [`<ViewTransition>`](/reference/react/ViewTransition) lets you animate a component tree with Transitions and Suspense.
+>>>>>>> 46a54e0592729712b7640308b53268e84fdc7c9f
 
 ---
 
