@@ -36,3 +36,19 @@ yarn-error.log*
 
 # external fonts
 public/fonts/**/Optimistic_*.woff2
+<<<<<<< HEAD
+=======
+
+# rss
+public/rss.xml
+
+# claude local settings
+.claude/*.local.*
+.claude/react/
+
+# worktrees
+.worktrees/
+
+# Generated OG images (scripts/generateOgImages.mjs)
+public/images/og/
+>>>>>>> 46a54e0592729712b7640308b53268e84fdc7c9f
