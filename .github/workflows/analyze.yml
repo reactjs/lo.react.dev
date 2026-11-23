@@ -16,10 +16,25 @@ jobs:
       - name: Set up node
         uses: actions/setup-node@v1
         with:
+<<<<<<< HEAD
           node-version: '20.x'
 
       - name: Install dependencies
         uses: bahmutov/npm-install@v1.7.10
+=======
+          node-version: '24.x'
+          cache: yarn
+          cache-dependency-path: yarn.lock
+
+      - name: Restore cached node_modules
+        uses: actions/cache@v4
+        with:
+          path: '**/node_modules'
+          key: node_modules-24-${{ runner.arch }}-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+
+      - name: Install deps
+        run: yarn install --frozen-lockfile
+>>>>>>> 46a54e0592729712b7640308b53268e84fdc7c9f
 
       - name: Restore next build
         uses: actions/cache@v2

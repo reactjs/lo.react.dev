@@ -336,7 +336,11 @@ function MyButton() {
 }
 ```
 
+<<<<<<< HEAD
 React ຈະ call component function ຂອງທ່ານອີກເທື່ອໜຶ່ງ. ເທື່ອນີ້, `count` ຈະມີຄ່າເປັນ `1`. ແລະ ຈະມີຄ່າເປັນ `2`. ແລະ ອື່ນໆ.
+=======
+Calling `setCount` tells React to call your component function again. This is called a *re-render*. This time, `count` will be `1`. Then it will be `2`. And so on.
+>>>>>>> 46a54e0592729712b7640308b53268e84fdc7c9f
 
 ຖ້າທ່ານ render component ດຽວກັນຫຼາຍໆເທື່ອ, ແຕ່ລະອັນກໍຈະມີ state ຂອງໃຜລາວ. ຄິກແຕ່ລະປຸ່ມແຍກກັນ:
 
